@@ -1,22 +1,59 @@
 import React, { PureComponent } from 'react';
-import { Text, View, Button } from 'react-native';
-import ROUTES from 'rx/constants/routes';
+import { Text, View, Button, TextInput, StyleSheet } from 'react-native';
+import ROUTES from 'px/constants/routes';
 
 export default class EnterAddress extends PureComponent {
+  placeholder = '123 Main St. New Haven, CT, 06512';
+  state = {
+    address: '',
+  };
+
+  updateAddress = (address) => {
+    this.setState({ address });
+  }
+
   goToApp = () => {
-    this.props.navigation.navigate(ROUTES.ENTER_ADDRESS);
+    const address = this.state.address.trim();
+    if (!address) return;
+    this.props.navigation.navigate(ROUTES.APP);
   }
 
   render() {
+    const { address } = this.state;
+
     return (
-      <View>
+      <View style={styles.enterAddressPage}>
         <Text>
           enter address
         </Text>
-        <Button onPress={this.goToApp}>
-          go
-        </Button>
+        <TextInput
+          style={styles.addressInput}
+          onChangeText={this.updateAddress}
+          placeholder={this.placeholder}
+          value={address}
+          onSubmitEditing={this.goToApp}
+        />
+        <Button onPress={this.goToApp} title='go' />
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  enterAddressPage: {
+    height: '100%',
+    paddingRight: 10,
+    paddingLeft: 10,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  addressInput: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    width: '100%',
+    paddingLeft: 10,
+    paddingRight: 10,
+  }
+});
