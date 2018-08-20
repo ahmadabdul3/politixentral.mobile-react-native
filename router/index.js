@@ -1,16 +1,16 @@
 import React, { PureComponent } from 'react';
 import { createSwitchNavigator } from 'react-navigation';
+import EnterAddress from 'px/pages/enter-address';
+import App from 'px/pages/app';
+import LOCAL_STORAGE from 'px/constants/local-storage';
+import ROUTES from'px/constants/routes';
 import {
   Text,
   View,
   ActivityIndicator,
   AsyncStorage,
   StatusBar,
-  StyleSheet,
 } from 'react-native';
-import EnterAddress from 'px/pages/enter-address';
-import LOCAL_STORAGE from 'px/constants/local-storage';
-import ROUTES from'px/constants/routes';
 
 export default class Router extends PureComponent {
     render() {
@@ -29,24 +29,14 @@ export default class Router extends PureComponent {
     }
 }
 
-function App() {
-  return (
-    <View style={styles.app}>
-      <Text>
-        The app
-      </Text>
-    </View>
-  );
-}
-
 class LoadingScreen extends PureComponent {
   constructor(props) {
     super(props);
-    this._checkAddressPresence();
+    this.checkAddressPresence();
   }
 
   // Fetch the token from storage then navigate to our appropriate place
-  _checkAddressPresence = async () => {
+  checkAddressPresence = async () => {
     const address = await AsyncStorage.getItem(LOCAL_STORAGE.ADDRESS);
 
     // This will switch to the App screen or Auth screen and this loading
@@ -66,9 +56,3 @@ class LoadingScreen extends PureComponent {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  app: {
-    paddingTop: 30,
-  },
-});

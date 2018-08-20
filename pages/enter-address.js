@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
-import { Text, View, Button, TextInput, StyleSheet } from 'react-native';
+import { Text, View, Button, TextInput, StyleSheet, AsyncStorage } from 'react-native';
 import ROUTES from 'px/constants/routes';
+import LOCAL_STORAGE from 'px/constants/local-storage';
+
 
 export default class EnterAddress extends PureComponent {
   placeholder = '123 Main St. New Haven, CT, 06512';
@@ -12,9 +14,10 @@ export default class EnterAddress extends PureComponent {
     this.setState({ address });
   }
 
-  goToApp = () => {
+  goToApp = async () => {
     const address = this.state.address.trim();
     if (!address) return;
+    await AsyncStorage.setItem(LOCAL_STORAGE.ADDRESS, address);
     this.props.navigation.navigate(ROUTES.APP);
   }
 
