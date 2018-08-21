@@ -1,35 +1,14 @@
 import React, { PureComponent } from 'react';
 import { createMaterialTopTabNavigator } from 'react-navigation';
+import City from 'px/pages/city';
 import {
   Text,
   View,
   StyleSheet,
 } from 'react-native';
 
-class City extends PureComponent {
-  name = 'city';
-
-  componentDidMount() {
-    console.log(this.name);
-  }
-
-  render() {
-    return (
-      <View style={styles.screen}>
-        <Text>
-          { this.name }
-        </Text>
-      </View>
-    );
-  }
-}
-
 class Ward extends PureComponent {
   name = 'ward';
-
-  componentDidMount() {
-    console.log(this.name);
-  }
 
   render() {
     return (
@@ -44,10 +23,6 @@ class Ward extends PureComponent {
 
 class Alder extends PureComponent {
   name = 'alder';
-
-  componentDidMount() {
-    console.log(this.name);
-  }
 
   render() {
     return (

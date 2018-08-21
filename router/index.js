@@ -21,7 +21,7 @@ export default class Router extends PureComponent {
           EnterAddress: EnterAddress,
         },
         {
-          initialRouteName: 'EnterAddress',
+          initialRouteName: 'Loading',
         }
       );
 
@@ -48,7 +48,7 @@ class LoadingScreen extends PureComponent {
   // Render any loading content that you like here
   render() {
     return (
-      <View style={styles.container}>
+      <View>
         <Text> Loading </Text>
         <ActivityIndicator />
         <StatusBar barStyle="default" />
