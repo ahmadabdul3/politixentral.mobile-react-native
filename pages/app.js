@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
-import { createMaterialTopTabNavigator } from 'react-navigation';
+import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import City from 'px/pages/city';
+import colors from 'px/styles/colors';
 import {
   Text,
   View,
@@ -35,7 +36,7 @@ class Alder extends PureComponent {
   }
 }
 
-export default createMaterialTopTabNavigator({
+export default createMaterialBottomTabNavigator({
   City: {
     screen: City,
   },
@@ -48,6 +49,11 @@ export default createMaterialTopTabNavigator({
 }, {
   tabBarPosition: 'bottom',
   lazy: true,
+  activeTintColor: 'white',
+  inactiveTintColor: colors.logoGreenLight,
+  barStyle: {
+    backgroundColor: colors.logoGreen,
+  },
 });
 
 const styles = StyleSheet.create({
