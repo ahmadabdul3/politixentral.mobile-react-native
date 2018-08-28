@@ -48,7 +48,8 @@ export default class ScaledImage extends PureComponent {
       <Image
         source={{ uri: this.props.uri }}
         style={{ width, height }}
-        resizeMode='cover' />
+        resizeMode='cover'
+      />
     );
   }
 }

@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 30,
     left: standardSpacingSize,
-    color: 'white',
+    color: 'black',
     fontSize: 30,
   },
   cityHome: {

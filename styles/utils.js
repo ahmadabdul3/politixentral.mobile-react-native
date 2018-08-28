@@ -11,3 +11,9 @@ export const verticalSpacing = {
   paddingTop: standardSpacingSize,
   paddingBottom: standardSpacingSize,
 };
+
+export const screen = {
+  display: 'flex',
+  paddingTop: standardSpacingSize,
+  height: '100%',
+};

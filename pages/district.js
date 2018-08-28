@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import ScaledImage from 'px/components/scaled-image';
-import cityStyles from 'px/styles/pages/city';
+import cityStyles from 'px/styles/pages/district';
 import colors from 'px/styles/colors';
 import EventCard from 'px/components/event-card';
 import Demographic from 'px/components/demographic';
@@ -11,13 +11,13 @@ import {
   ScrollView,
 } from 'react-native';
 
-export default class City extends PureComponent {
-  name = 'New Haven';
+export default class District extends PureComponent {
+  name = 'Ward 8';
 
   render() {
     // const cityUrl = 'https://c1.staticflickr.com/4/3718/10819859084_6a7ed932a0_b.jpg';
     // const cityUrl = 'https://a1.r9cdn.net/rimg/dimg/ec/ed/84fcf3f7-city-14151-54f1cc6c.jpg?crop=true&width=1440&height=557&xhint=1736&yhint=2468';
-    const cityUrl = 'https://pbs.twimg.com/media/DguTMjfX0AAHaZP.jpg';
+    const cityUrl = 'https://pre00.deviantart.net/8392/th/pre/i/2018/240/d/4/new_haven_wards_by_duxfox-dclefw1.png';
 
     return (
       <View style={cityStyles.screen}>
@@ -48,18 +48,13 @@ class CityHome extends PureComponent {
       <ScrollView style={cityStyles.cityHome}>
         <View style={cityStyles.demographics}>
           <View style={cityStyles.demographicsRow}>
-            <Demographic label='Population' value='258,000' />
-            <Demographic label='Districts' value='13' />
-          </View>
-          <View style={cityStyles.demographicsRow}>
-            <Demographic label='Economic Class' value='Middle' />
-            <Demographic label='Political Party' value='Democratic' />
+            <Demographic label='Population' value='48,000' />
+            <Demographic label='Economic Class' value='Upper-Middle' />
           </View>
         </View>
         <Text style={cityStyles.cityDescription}>
-          { this.name } is located in consectetur adipiscing elit,
-          sed do eiusmod tempor incididunt ut labore et dolore magna
-          aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+          { this.name } is part of ut enim ad minim veniam,
+          consectetur adipiscing elit, quis nostrud exercitation
           ullamco laboris nisi ut aliquip ex ea commodo consequat
         </Text>
       </ScrollView>
