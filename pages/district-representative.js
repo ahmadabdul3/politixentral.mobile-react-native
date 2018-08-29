@@ -43,7 +43,6 @@ export default class DistrictRepresentative extends PureComponent {
         <ScrollView>
           <InitiativeSummary title='Pave roads' />
           <InitiativeSummary title='Increase something' />
-          <InitiativeSummary title='Other initiative' />
         </ScrollView>
       </View>
     );
