@@ -5,7 +5,7 @@ import {
   standardSpacingSize,
 } from 'px/styles/utils';
 
-const cardStyles = {
+ export const cardStyles = {
   ...horizontalSpacing,
   ...verticalSpacing,
   marginTop: 10,

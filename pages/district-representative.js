@@ -1,9 +1,12 @@
 import React, { PureComponent } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
 import districtRepStyles from 'px/styles/pages/district-representative';
 import ShadowView from 'px/components/shadow-view';
 import EventCard from 'px/components/event-card';
 import Demographic from 'px/components/demographic';
+import InitiativeSummary from 'px/components/initiative-summary';
+import {
+  View, Text, StyleSheet, Image, ScrollView
+} from 'react-native';
 
 export default class DistrictRepresentative extends PureComponent {
   name = 'Alder';
@@ -32,11 +35,16 @@ export default class DistrictRepresentative extends PureComponent {
             <Demographic label='City' value='New Haven' white />
             <Demographic label='Ward' value='8' white />
           </View>
-          <RepAbout />
         </View>
+        <RepAbout />
         <Text style={districtRepStyles.bodyTitle}>
           Initiatives
         </Text>
+        <ScrollView>
+          <InitiativeSummary title='Pave roads' />
+          <InitiativeSummary title='Increase something' />
+          <InitiativeSummary title='Other initiative' />
+        </ScrollView>
       </View>
     );
   }
@@ -48,9 +56,7 @@ class RepAbout extends PureComponent {
 
     return (
       <View style={districtRepStyles.repAbout}>
-        <Text style={districtRepStyles.aboutDescription}>
-          { desc }
-        </Text>
+        <EventCard title='About' description={desc} />
       </View>
     );
   }

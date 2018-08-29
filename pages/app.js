@@ -6,14 +6,14 @@ import DistrictRepresentative from 'px/pages/district-representative';
 import colors from 'px/styles/colors';
 
 export default createMaterialBottomTabNavigator({
-  Alder: {
-    screen: DistrictRepresentative,
-  },
   City: {
     screen: City,
   },
   District: {
     screen: District,
+  },
+  Alder: {
+    screen: DistrictRepresentative,
   },
 }, {
   tabBarPosition: 'bottom',

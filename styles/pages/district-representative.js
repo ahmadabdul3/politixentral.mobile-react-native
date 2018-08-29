@@ -11,7 +11,8 @@ const styles = StyleSheet.create({
   screen,
   header: {
     paddingTop: 40,
-    backgroundColor: colors.logoGreen,
+    paddingBottom: 60,
+    backgroundColor: colors.logoGreenDark,
     minHeight: 50,
     alignItems: 'center',
   },
@@ -21,7 +22,7 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     borderWidth: 5,
-    borderColor: colors.logoGreenDark,
+    borderColor: colors.logoGreenDarker,
     borderRadius: 100,
     overflow: 'hidden',
   },
@@ -38,26 +39,20 @@ const styles = StyleSheet.create({
   },
   headerDemographics: {
     flexDirection: 'row',
-    width: '60%',
+    width: 200,
     marginTop: 5,
     justifyContent: 'space-around',
-    marginRight: -70,
+    marginRight: -55,
   },
   repAbout: {
-    ...horizontalSpacing,
-    ...verticalSpacing,
-    paddingTop: 5,
-    paddingBottom: 40,
-    marginTop: 20,
-    backgroundColor: colors.logoGreenDark,
-  },
-  aboutDescription: {
-    marginTop: 10,
-    lineHeight: 20,
-    color: 'white',
+    marginTop: -50,
   },
   bodyTitle: {
-
+    ...horizontalSpacing,
+    ...verticalSpacing,
+    paddingBottom: 10,
+    fontWeight: 'bold',
+    color: colors.textColor,
   }
 });
 
