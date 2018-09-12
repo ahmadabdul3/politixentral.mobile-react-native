@@ -11,7 +11,7 @@ import {
   marginTop: 10,
   marginRight: 5,
   marginLeft: 5,
-  borderRadius: 3,
+  borderRadius: 5,
   backgroundColor: 'white',
   minHeight: 20,
 };

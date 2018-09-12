@@ -13,7 +13,6 @@ const value = {
 const styles = StyleSheet.create({
   demographic: {
     width: '50%',
-    marginTop: 5,
     display: 'flex',
     flexDirection: 'row',
   },

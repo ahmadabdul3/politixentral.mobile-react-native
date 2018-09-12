@@ -10,8 +10,8 @@ import {
 const styles = StyleSheet.create({
   screen,
   header: {
-    paddingTop: 40,
-    paddingBottom: 60,
+    paddingTop: 30,
+    paddingBottom: 30,
     backgroundColor: colors.logoGreenDark,
     minHeight: 50,
     alignItems: 'center',
@@ -19,33 +19,43 @@ const styles = StyleSheet.create({
   repImage: {
     flexGrow: 0,
     flexShrink: 0,
-    width: 100,
-    height: 100,
+    width: 80,
+    height: 80,
     borderWidth: 5,
-    borderColor: colors.logoGreenDarker,
+    borderColor: colors.brandPurpleDark,
     borderRadius: 100,
     overflow: 'hidden',
   },
   repName: {
-    marginTop: 10,
-    fontSize: 19,
+    marginTop: 5,
+    fontSize: 17,
     fontWeight: 'bold',
     color: 'white',
   },
   repDescription: {
     color: 'white',
-    marginTop: 3,
+    marginTop: 2,
     fontSize: 12,
   },
   headerDemographics: {
+    alignItems: 'center',
+    width: '100%',
+    marginTop: 10,
+  },
+  headerDemographicsSeperator: {
+    width: 300,
+    height: 0.5,
+    marginBottom: 15,
+    marginTop: 7,
+    backgroundColor: 'white',
+  },
+  headerDemographicsRow: {
     flexDirection: 'row',
-    width: 200,
-    marginTop: 5,
-    justifyContent: 'space-around',
-    marginRight: -55,
+    justifyContent: 'space-between',
+    width: 250,
   },
   repAbout: {
-    marginTop: -50,
+    // marginTop: -50,
   },
   bodyTitle: {
     ...horizontalSpacing,
@@ -53,7 +63,25 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     fontWeight: 'bold',
     color: colors.textColor,
-  }
+  },
+  tabSection: {
+
+  },
+  sectionTitle: {
+    color: colors.logoGreenDark,
+    fontWeight: 'bold',
+    fontSize: 17,
+  },
+  educationSection: {
+    ...horizontalSpacing,
+    ...verticalSpacing,
+  },
+  educationField: {
+
+  },
+  education: {
+
+  },
 });
 
 export default styles;
