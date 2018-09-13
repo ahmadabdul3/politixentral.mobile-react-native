@@ -7,7 +7,7 @@ import {
   standardSpacingSize,
 } from 'px/styles/utils';
 
-const initiativeStatusText = {
+const projectStatusText = {
   fontSize: 9,
   fontWeight: 'bold',
 };
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     ...horizontalSpacing,
     fontWeight: 'bold',
-    color: colors.logoGreen,
+    color: colors.logoGreenDark,
   },
   statementBody: {
     ...horizontalSpacing,
@@ -30,45 +30,80 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     color: colors.textColor,
   },
-  initiativeList: {
+  projects: {
     marginTop: 10,
   },
-  initiative: {
+  project: {
     ...horizontalSpacing,
     ...verticalSpacing,
     position: 'relative',
     borderBottomWidth: 1,
     borderBottomColor: '#eee',
   },
-  initiativeHeader: {
+  projectHeader: {
     flexDirection: 'row',
   },
-  initiativeTitle: {
+  projectTitle: {
     flexGrow: 1,
     flexShrink: 1,
   },
-  initiativeTitleText: {
-    color: colors.textColorLight,
+  projectTitleText: {
+    color: colors.textColor,
     fontWeight: 'bold',
     fontSize: 12,
   },
-  initiativeStatus: {
+  projectStatus: {
     marginLeft: 10,
     flexShrink: 0,
     flexGrow: 0,
   },
-  initiativeStatusComplete: {
-    ...initiativeStatusText,
+  projectStatusComplete: {
+    ...projectStatusText,
     color: colors.logoGreen,
   },
-  initiativeStatusNotStarted: {
-    ...initiativeStatusText,
+  projectStatusNotStarted: {
+    ...projectStatusText,
     color: colors.red,
   },
-  initiativeStatusInProgress: {
-    ...initiativeStatusText,
+  projectStatusInProgress: {
+    ...projectStatusText,
     color: colors.orange,
   },
+  projectDescription: {
+    color: colors.textColor,
+    marginTop: 5,
+    fontSize: 12,
+  },
+  projectFooter: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
+    marginTop: 10,
+  },
+  projectFeedback: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+  },
+  labelValueLabel: {
+    fontSize: 9,
+    fontWeight: 'bold',
+    color: colors.textColorLight,
+  },
+  labelValueValue: {
+    paddingLeft: 10,
+    fontSize: 10,
+    color: colors.textColorLight,
+  },
+  feedback: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginLeft: 20,
+  },
+  feedbackNumber: {
+    fontSize: 12,
+    color: colors.textColorLighter,
+    fontWeight: 'bold',
+  }
 });
 
 export default styles;

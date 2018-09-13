@@ -3,15 +3,16 @@ import { View, Text, ScrollView } from 'react-native';
 import EventCard from 'px/components/event-card';
 
 export default class Activity extends PureComponent {
+  get feed() {
+    return getData().map((item, key) => {
+      const { title, description } = item;
+      return <EventCard key={key} title={title} description={description} />;
+    });
+  }
   render() {
     return (
       <ScrollView>
-        {
-          getData().map((item, key) => {
-            const { item, description } = item;
-            return <EventCard key={key} title={title} description={description} />;
-          }
-        }
+        { this.feed }
       </ScrollView>
     );
   }
@@ -20,28 +21,32 @@ export default class Activity extends PureComponent {
 function getData() {
   return [
     {
-      title: 'One',
-      description: 'One'
+      title: 'consectetur adipiscing elit',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit,\
+      sed do eiusmod tempor incididunt ut'
     },
     {
-      title: 'Two',
-      description: 'two'
+      title: 'tempor incididunt',
+      description: 'dolor sit amet, consectetur adipiscing elit,\
+      sed do eiusmod tempor'
     },
     {
-      title: '',
-      description: ''
+      title: 'sit amet',
+      description: 'ipsum dolor sit amet, consectetur adipiscing elit,\
+      sed do eiusmod tempor incididunt ut'
     },
     {
-      title: '',
-      description: ''
+      title: 'sed do',
+      description: 'consectetur adipiscing elit ipsum dolor sit amet'
     },
     {
-      title: '',
-      description: ''
+      title: 'consectetur elit',
+      description: 'sit amet, consectetur adipiscing elit,\
+      sed do eiusmod incididunt ut'
     },
     {
-      title: '',
-      description: ''
+      title: 'eiusmod tempor',
+      description: 'elit, sed do eiusmod tempor incididunt ut sit amet, consectetur adipiscing'
     },
   ];
 }
