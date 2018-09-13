@@ -65,7 +65,7 @@ class ProjectSummary extends PureComponent {
   render() {
     return (
       <View style={styles.project}>
-        <ProjectHeader status={this.status} />
+        <ProjectHeader title={this.props.title} status={this.status} />
         <Text style={styles.projectDescription}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit,
           sed do eiusmod tempor incididunt ut.
