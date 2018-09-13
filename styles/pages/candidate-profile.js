@@ -33,9 +33,10 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   repDescription: {
-    color: 'white',
+    color: colors.brandPurpleLighter,
     marginTop: 2,
-    fontSize: 12,
+    fontSize: 10,
+    fontWeight: 'bold',
   },
   headerDemographics: {
     alignItems: 'center',
@@ -72,12 +73,20 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 17,
   },
-  educationSection: {
+  aboutSection: {
     ...horizontalSpacing,
     ...verticalSpacing,
   },
+  aboutSectionChildren: {
+    ...horizontalSpacing,
+  },
+  educationInfo: {
+    marginTop: 10,
+  },
+  educationFieldDegree: {
+  },
   educationField: {
-
+    fontWeight: 'bold',
   },
   education: {
 
