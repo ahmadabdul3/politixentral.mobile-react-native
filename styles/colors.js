@@ -7,6 +7,7 @@ const colors = {
   brandPurple: '#5E27E8',
   brandPurpleDark: '#4A1FB8',
   brandPurpleLight: '#8064E8',
+  brandPurpleLight2: '#B39EFF',
   brandPurpleLighter: '#C3B3FF',
   brandPurpleLightest: '#E5DEFF',
   logoGreen: '#18C99D',

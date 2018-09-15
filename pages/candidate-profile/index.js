@@ -27,7 +27,7 @@ const RepTabs = createMaterialTopTabNavigator({
   Initiatives: {
     screen: Initiatives
   },
-  Activity: {
+  Feed: {
     screen: Activity
   },
   About: {
@@ -35,13 +35,15 @@ const RepTabs = createMaterialTopTabNavigator({
   },
 }, {
   tabBarOptions: {
-    activeTintColor: colors.textColor,
-    inactiveTintColor: colors.textColorLight,
+    // activeTintColor: colors.textColor,
+    // inactiveTintColor: colors.textColorLight,
+    activeTintColor: 'white',
+    inactiveTintColor: colors.brandPurpleLight2,
     style: {
-      backgroundColor: 'white',
+      backgroundColor: colors.brandPurple,
     },
     indicatorStyle: {
-      backgroundColor: colors.brandPurple,
+      backgroundColor: 'white',
     }
   }
 });

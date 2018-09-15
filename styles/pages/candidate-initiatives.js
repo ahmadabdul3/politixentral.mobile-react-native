@@ -16,29 +16,27 @@ const styles = StyleSheet.create({
   mainView: {
     backgroundColor: 'white',
   },
-  missionStatement: {
-    ...verticalSpacing,
-  },
   sectionTitle: {
     ...horizontalSpacing,
     fontWeight: 'bold',
     color: colors.logoGreenDark,
-  },
-  statementBody: {
-    ...horizontalSpacing,
-    marginTop: 10,
-    lineHeight: 20,
-    color: colors.textColor,
   },
   projects: {
     marginTop: 10,
   },
   project: {
     ...horizontalSpacing,
-    ...verticalSpacing,
+    paddingTop: 25,
+    paddingBottom: 30,
+    backgroundColor: 'white',
     position: 'relative',
-    borderBottomWidth: 1,
-    borderBottomColor: '#eee',
+    // borderBottomWidth: 1,
+    // borderBottomColor: '#F5F6F7',
+    // borderRadius: 5,
+    // marginTop: 10,
+    // marginBottom: 5,
+    // marginRight: 15,
+    // marginLeft: 15,
   },
   projectHeader: {
     flexDirection: 'row',
@@ -74,6 +72,11 @@ const styles = StyleSheet.create({
     marginTop: 5,
     fontSize: 12,
   },
+  projectMetadata: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 3,
+  },
   projectFooter: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -83,6 +86,7 @@ const styles = StyleSheet.create({
   projectFeedback: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
+    marginTop: 5,
   },
   labelValueLabel: {
     fontSize: 9,

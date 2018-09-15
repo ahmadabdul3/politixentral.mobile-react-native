@@ -10,21 +10,32 @@ import {
 const styles = StyleSheet.create({
   screen,
   header: {
+    paddingRight: 30,
+    paddingLeft: 30,
     paddingTop: 30,
     paddingBottom: 30,
     backgroundColor: colors.logoGreenDark,
     minHeight: 50,
     alignItems: 'center',
   },
+  headerBio: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
   repImage: {
     flexGrow: 0,
     flexShrink: 0,
-    width: 80,
-    height: 80,
+    width: 70,
+    height: 70,
     borderWidth: 5,
     borderColor: colors.brandPurpleDark,
     borderRadius: 100,
     overflow: 'hidden',
+  },
+  headerBioText: {
+    flexGrow: 1,
+    flexShrink: 1,
+    marginLeft: 20,
   },
   repName: {
     marginTop: 5,
@@ -34,26 +45,33 @@ const styles = StyleSheet.create({
   },
   repDescription: {
     color: colors.brandPurpleLighter,
-    marginTop: 2,
-    fontSize: 10,
+    marginTop: 5,
+    fontSize: 11,
     fontWeight: 'bold',
   },
   headerDemographics: {
     alignItems: 'center',
     width: '100%',
-    marginTop: 10,
+    marginTop: 15,
   },
-  headerDemographicsSeperator: {
-    width: 300,
-    height: 0.5,
-    marginBottom: 15,
-    marginTop: 7,
-    backgroundColor: 'white',
-  },
+  // headerDemographicsSeperator: {
+  //   width: '100%',
+  //   height: 0.5,
+  //   marginBottom: 15,
+  //   marginTop: 7,
+  //   backgroundColor: 'white',
+  // },
   headerDemographicsRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: 250,
+  },
+  missionStatement: {
+    marginTop: 24,
+  },
+  statementBody: {
+    fontSize: 13,
+    lineHeight: 18,
+    color: 'white',
   },
   repAbout: {
     // marginTop: -50,

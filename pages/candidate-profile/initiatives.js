@@ -1,33 +1,16 @@
 import React, { PureComponent } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import styles from 'px/styles/pages/candidate-initiatives';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import colors from 'px/styles/colors';
+import ShadowView from 'px/components/shadow-view';
 
 export default class Initiatives extends PureComponent {
   render() {
     return (
       <ScrollView style={styles.mainView}>
-        <MissionStatement />
         <Projects />
       </ScrollView>
-    );
-  }
-}
-
-class MissionStatement extends PureComponent {
-  render() {
-    return (
-      <View style={styles.missionStatement}>
-        <Text style={styles.sectionTitle}>
-          {`mission  statement`.toUpperCase()}
-        </Text>
-        <Text style={styles.statementBody}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-          sed do eiusmod tempor incididunt ut labore et dolore magna
-          aliqua. Ut enim ad minim veniam.
-        </Text>
-      </View>
     );
   }
 }
@@ -66,14 +49,8 @@ class ProjectSummary extends PureComponent {
     return (
       <View style={styles.project}>
         <ProjectHeader title={this.props.title} status={this.status} />
-        <Text style={styles.projectDescription}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-          sed do eiusmod tempor incididunt ut.
-        </Text>
-        <View style={styles.projectFooter}>
-          <ProjectMetadata />
-          <ProjectFeedback />
-        </View>
+        <ProjectMetadata />
+        <ProjectFeedback />
       </View>
     );
   }
@@ -99,8 +76,10 @@ class ProjectMetadata extends PureComponent {
     return (
       <View style={styles.projectMetadata}>
         <LabelValue label='budget' value='$50,000' />
-        <LabelValue label='start' value='09/10/18' />
-        <LabelValue label='end' value='04/01/20' />
+        {
+          // <LabelValue label='start' value='09/10/18' />
+          // <LabelValue label='end' value='04/01/20' />
+        }
       </View>
     );
   }
@@ -110,6 +89,9 @@ class ProjectFeedback extends PureComponent {
   render() {
     return (
       <View style={styles.projectFeedback}>
+        <Feedback number={57}>
+          <MaterialIcons name="comment" size={14} color={colors.textColorLighter} />
+        </Feedback>
         <Feedback number={300}>
           <Ionicons name="md-thumbs-up" size={14} color={colors.brandPurple} />
         </Feedback>
