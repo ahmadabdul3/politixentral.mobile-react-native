@@ -1,3 +1,9 @@
+
+http://jsfiddle.net/n5u2wwjg/189877/ - react jsfiddle project
+1. update each person's name
+2. clear out 'add person' input at the top after clicking the 'add person' button
+
+
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 
 Below you'll find information about performing common tasks. The most recent version of this guide is available [here](https://github.com/react-community/create-react-native-app/blob/master/react-native-scripts/template/README.md).
