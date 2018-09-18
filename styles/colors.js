@@ -10,13 +10,15 @@ const colors = {
   brandPurpleLight2: '#B39EFF',
   brandPurpleLighter: '#C3B3FF',
   brandPurpleLightest: '#E5DEFF',
-  logoGreen: '#18C99D',
+  // logoGreen: '#18C99D',
+  logoGreen: '#36D9A5',
   logoGreenSaturated: '#00BD8E',
   logoGreenLight: '#88F7DC',
   logoGreenDark: '#08A880',
   logoGreenDarker: '#008765',
   orange: '#FA8A39',
   red: '#F5336E',
+  newGreen: '#36D9A5',
 };
 
 export default colors;

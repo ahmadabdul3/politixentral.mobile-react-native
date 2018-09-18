@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text, Image, ScrollView } from 'react-native';
 import styles from 'px/styles/pages/candidate-initiatives';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import colors from 'px/styles/colors';
@@ -9,8 +9,46 @@ export default class Initiatives extends PureComponent {
   render() {
     return (
       <ScrollView style={styles.mainView}>
+        <WhatStandFor />
         <Projects />
       </ScrollView>
+    );
+  }
+}
+
+class WhatStandFor extends PureComponent {
+  render() {
+    return (
+      <View style={styles.whatStandFor}>
+        <Text style={styles.sectionTitle}>
+          {`what i stand for`.toUpperCase()}
+        </Text>
+        <View style={styles.initiativesWrapper}>
+          <Initiative title='increase safety' image='https://pre00.deviantart.net/7aae/th/pre/i/2018/261/a/4/screen_shot_2018_09_18_at_1_14_49_pm_by_duxfox-dcn66hn.png' />
+          <Initiative title='reduce taxes' image='https://pre00.deviantart.net/7b89/th/pre/i/2018/261/9/5/screen_shot_2018_09_18_at_1_15_29_pm_by_duxfox-dcn66hh.png' />
+          <Initiative title='better education' image='https://pre00.deviantart.net/7aa9/th/pre/i/2018/261/f/7/screen_shot_2018_09_18_at_1_14_08_pm_by_duxfox-dcn66hu.png' />
+        </View>
+      </View>
+    );
+  }
+}
+
+class Initiative extends PureComponent {
+  render() {
+    const { title, image } = this.props;
+    return (
+      <View style={styles.initiative}>
+        <View style={styles.initiativeImage}>
+          <Image
+            source={{ uri: image }}
+            style={{ width: 35, height: 35, overflow: 'hidden' }}
+            resizeMode='cover'
+          />
+        </View>
+        <Text style={styles.initiativeTitle}>
+          { title.toUpperCase() }
+        </Text>
+      </View>
     );
   }
 }

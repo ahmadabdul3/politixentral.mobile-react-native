@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     paddingLeft: 30,
     paddingTop: 30,
     paddingBottom: 30,
-    backgroundColor: colors.logoGreenDark,
+    backgroundColor: colors.logoGreen,
     minHeight: 50,
     alignItems: 'center',
   },
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
 
   },
   sectionTitle: {
-    color: colors.logoGreenDark,
+    color: colors.logoGreen,
     fontWeight: 'bold',
     fontSize: 17,
   },

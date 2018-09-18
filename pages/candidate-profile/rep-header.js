@@ -24,8 +24,8 @@ export default class RepHeader extends PureComponent {
 
 class HeaderBio extends PureComponent {
   render() {
-    const personImage = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQk0-hgCk5RZ2_ZYfEGmGaa2kq3i-Wh-FZJVHbHXrBueWDFkdt0';
-
+    // const personImage = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQk0-hgCk5RZ2_ZYfEGmGaa2kq3i-Wh-FZJVHbHXrBueWDFkdt0';
+    const personImage = 'https://orig00.deviantart.net/819f/f/2018/261/e/9/screen_shot_2018_09_18_at_12_42_15_pm_by_duxfox-dcn63uc.png';
     return (
       <View style={styles.headerBio}>
         <ShadowView style={styles.repImage}>
@@ -37,7 +37,7 @@ class HeaderBio extends PureComponent {
         </ShadowView>
         <View style={styles.headerBioText}>
           <Text style={styles.repName}>
-            Aaron Greenberg
+            David Reyes
           </Text>
           <Text style={styles.repDescription}>
             {`Alderman`.toUpperCase()}
