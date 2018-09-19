@@ -52,8 +52,9 @@ const styles = StyleSheet.create({
     marginTop: 70,
   },
   project: {
-    ...horizontalSpacing,
-    paddingTop: 25,
+    marginRight: standardSpacingSize,
+    marginLeft: standardSpacingSize,
+    paddingTop: 30,
     paddingBottom: 30,
     backgroundColor: 'white',
     position: 'relative',

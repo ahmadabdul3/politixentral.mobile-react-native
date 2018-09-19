@@ -1,6 +1,6 @@
 
 
-export const standardSpacingSize = 25;
+export const standardSpacingSize = 23;
 
 export const horizontalSpacing = {
   paddingRight: standardSpacingSize,
@@ -14,6 +14,6 @@ export const verticalSpacing = {
 
 export const screen = {
   display: 'flex',
-  paddingTop: standardSpacingSize,
+  // paddingTop: standardSpacingSize,
   height: '100%',
 };
