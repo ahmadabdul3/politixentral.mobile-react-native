@@ -1,6 +1,6 @@
 
 
-export const standardSpacingSize = 20;
+export const standardSpacingSize = 25;
 
 export const horizontalSpacing = {
   paddingRight: standardSpacingSize,

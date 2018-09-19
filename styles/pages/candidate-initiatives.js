@@ -7,11 +7,6 @@ import {
   standardSpacingSize,
 } from 'px/styles/utils';
 
-const projectStatusText = {
-  fontSize: 9,
-  fontWeight: 'bold',
-};
-
 const styles = StyleSheet.create({
   mainView: {
     backgroundColor: 'white',
@@ -19,14 +14,15 @@ const styles = StyleSheet.create({
   sectionTitle: {
     ...horizontalSpacing,
     fontWeight: 'bold',
-    color: colors.logoGreen,
+    color: colors.textColor,
+    fontSize: 16,
   },
   whatStandFor: {
-    marginTop: 20,
+    marginTop: 30,
   },
   initiativesWrapper: {
     ...horizontalSpacing,
-    marginTop: 20,
+    marginTop: 30,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
@@ -41,8 +37,8 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     justifyContent: 'center',
     alignItems: 'center',
-    borderWidth: 3,
-    borderColor: '#ddd',
+    borderWidth: 1,
+    borderColor: '#ccc',
   },
   initiativeTitle: {
     marginTop: 10,
@@ -53,7 +49,7 @@ const styles = StyleSheet.create({
     color: colors.textColor,
   },
   projects: {
-    marginTop: 30,
+    marginTop: 70,
   },
   project: {
     ...horizontalSpacing,
@@ -77,7 +73,7 @@ const styles = StyleSheet.create({
     flexShrink: 1,
   },
   projectTitleText: {
-    color: colors.textColor,
+    color: colors.primary,
     fontWeight: 'bold',
     fontSize: 12,
   },
@@ -85,18 +81,14 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     flexShrink: 0,
     flexGrow: 0,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
-  projectStatusComplete: {
-    ...projectStatusText,
-    color: colors.logoGreen,
-  },
-  projectStatusNotStarted: {
-    ...projectStatusText,
-    color: colors.red,
-  },
-  projectStatusInProgress: {
-    ...projectStatusText,
-    color: colors.orange,
+  projectStatusText: {
+    fontSize: 9,
+    fontWeight: 'bold',
+    color: colors.textColorLighter,
+    marginRight: 10,
   },
   projectDescription: {
     color: colors.textColor,

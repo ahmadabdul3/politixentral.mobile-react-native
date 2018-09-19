@@ -1,7 +1,14 @@
 import React, { PureComponent } from 'react';
 import { View, Text, Image, ScrollView } from 'react-native';
 import styles from 'px/styles/pages/candidate-initiatives';
-import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import {
+  Ionicons,
+  FontAwesome,
+  MaterialIcons,
+  MaterialCommunityIcons,
+  Foundation,
+  Feather,
+} from '@expo/vector-icons';
 import colors from 'px/styles/colors';
 import ShadowView from 'px/components/shadow-view';
 
@@ -24,26 +31,56 @@ class WhatStandFor extends PureComponent {
           {`what i stand for`.toUpperCase()}
         </Text>
         <View style={styles.initiativesWrapper}>
-          <Initiative title='increase safety' image='https://pre00.deviantart.net/7aae/th/pre/i/2018/261/a/4/screen_shot_2018_09_18_at_1_14_49_pm_by_duxfox-dcn66hn.png' />
-          <Initiative title='reduce taxes' image='https://pre00.deviantart.net/7b89/th/pre/i/2018/261/9/5/screen_shot_2018_09_18_at_1_15_29_pm_by_duxfox-dcn66hh.png' />
-          <Initiative title='better education' image='https://pre00.deviantart.net/7aa9/th/pre/i/2018/261/f/7/screen_shot_2018_09_18_at_1_14_08_pm_by_duxfox-dcn66hu.png' />
+          <Initiative
+            title='increase safety'
+            image={
+              <MaterialCommunityIcons
+                name="shield-half-full" size={35} color={colors.secondary}
+                style={{ marginTop: 5, marginLeft: 3 }}
+              />
+            }
+          />
+          <Initiative
+            title='reduce taxes'
+            image={
+              <MaterialIcons
+                name='money-off' size={35} color={colors.secondary}
+                style={{ marginTop: 5, marginLeft: 3 }}
+              />
+            }
+          />
+          <Initiative
+            title='better education'
+            image={
+              <Foundation
+                name='book-bookmark' size={35} color={colors.secondary}
+                style={{ marginTop: 5, marginLeft: 3 }}
+              />
+            }
+          />
         </View>
       </View>
     );
   }
 }
 
+// initiative image urls
+// https://pre00.deviantart.net/7aae/th/pre/i/2018/261/a/4/screen_shot_2018_09_18_at_1_14_49_pm_by_duxfox-dcn66hn.png' />
+// https://pre00.deviantart.net/7b89/th/pre/i/2018/261/9/5/screen_shot_2018_09_18_at_1_15_29_pm_by_duxfox-dcn66hh.png' />
+// https://pre00.deviantart.net/7aa9/th/pre/i/2018/261/f/7/screen_shot_2018_09_18_at_1_14_08_pm_by_duxfox-dcn66hu.png' />
+// initiative image
+// <Image
+//   source={{ uri: image }}
+//   style={{ width: 35, height: 35, overflow: 'hidden' }}
+//   resizeMode='cover'
+// />
 class Initiative extends PureComponent {
   render() {
     const { title, image } = this.props;
     return (
       <View style={styles.initiative}>
         <View style={styles.initiativeImage}>
-          <Image
-            source={{ uri: image }}
-            style={{ width: 35, height: 35, overflow: 'hidden' }}
-            resizeMode='cover'
-          />
+          { image }
         </View>
         <Text style={styles.initiativeTitle}>
           { title.toUpperCase() }
@@ -64,7 +101,7 @@ class Projects extends PureComponent {
     return (
       <View style={styles.projects}>
         <Text style={styles.sectionTitle}>
-          {`top projects`.toUpperCase()}
+          {`projects`.toUpperCase()}
         </Text>
         <ProjectSummary title='Building New Sidewalks' status={status.complete} />
         <ProjectSummary title='Improving Lighting' status={status.notStarted} />
@@ -175,6 +212,11 @@ class ProjectStatusComplete extends PureComponent {
       <ProjectStatus
         statusText={status.complete}
         styles='projectStatusComplete'
+        icon={
+          <Feather
+            name="check-circle" size={12}
+            color={colors.accent} />
+        }
       />
     );
   }
@@ -186,6 +228,11 @@ class ProjectStatusInProgress extends PureComponent {
       <ProjectStatus
         statusText={status.inProgress}
         styles='projectStatusInProgress'
+        icon={
+          <FontAwesome
+            name="hourglass-half" size={9}
+            color={colors.orange} />
+        }
       />
     );
   }
@@ -197,6 +244,11 @@ class ProjectStatusNotStarted extends PureComponent {
       <ProjectStatus
         statusText={status.notStarted}
         styles='projectStatusNotStarted'
+        icon={
+          <Feather
+            name="x-circle" size={13}
+            color={colors.red} />
+        }
       />
     );
   }
@@ -204,11 +256,14 @@ class ProjectStatusNotStarted extends PureComponent {
 
 class ProjectStatus extends PureComponent {
   render() {
+    const { icon, statusText } = this.props;
+
     return (
       <View style={styles.projectStatus}>
-        <Text style={styles[this.props.styles]}>
-          { this.props.statusText.toUpperCase() }
+        <Text style={styles.projectStatusText}>
+          { statusText.toUpperCase() }
         </Text>
+        { icon }
       </View>
     );
   }
