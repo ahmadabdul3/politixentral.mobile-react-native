@@ -8,6 +8,7 @@ import {
   MaterialCommunityIcons,
   Foundation,
   Feather,
+  Entypo,
 } from '@expo/vector-icons';
 import colors from 'px/styles/colors';
 import ShadowView from 'px/components/shadow-view';
@@ -229,8 +230,8 @@ class ProjectStatusInProgress extends PureComponent {
         statusText={status.inProgress}
         styles='projectStatusInProgress'
         icon={
-          <FontAwesome
-            name="hourglass-half" size={9}
+          <Entypo
+            name="hour-glass" size={12}
             color={colors.orange} />
         }
       />
@@ -246,7 +247,7 @@ class ProjectStatusNotStarted extends PureComponent {
         styles='projectStatusNotStarted'
         icon={
           <Feather
-            name="x-circle" size={13}
+            name="x-circle" size={12}
             color={colors.red} />
         }
       />
