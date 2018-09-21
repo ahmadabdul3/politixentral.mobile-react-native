@@ -46,7 +46,7 @@ class WhatStandFor extends PureComponent {
             image={
               <MaterialIcons
                 name='money-off' size={35} color={colors.secondary}
-                style={{ marginTop: 5, marginLeft: 3 }}
+                style={{ marginTop: 5, marginLeft: 1 }}
               />
             }
           />
