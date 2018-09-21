@@ -7,15 +7,19 @@ import {
   standardSpacingSize,
 } from 'px/styles/utils';
 
+export const sectionTitle = {
+  ...horizontalSpacing,
+  fontWeight: 'bold',
+  color: colors.textColor,
+  fontSize: 16,
+};
+
 const styles = StyleSheet.create({
   mainView: {
     backgroundColor: 'white',
   },
   sectionTitle: {
-    ...horizontalSpacing,
-    fontWeight: 'bold',
-    color: colors.textColor,
-    fontSize: 16,
+    ...sectionTitle,
   },
   whatStandFor: {
     marginTop: 30,
@@ -38,10 +42,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: colors.primary,
   },
   initiativeTitle: {
-    marginTop: 10,
+    marginTop: 15,
     textAlign: 'center',
     fontSize: 12,
     fontWeight: 'bold',
@@ -59,7 +63,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     position: 'relative',
     borderBottomWidth: 1,
-    borderBottomColor: '#F5F6F7',
+    borderBottomColor: colors.lighterGray,
     // borderRadius: 5,
     // marginTop: 10,
     // marginBottom: 5,

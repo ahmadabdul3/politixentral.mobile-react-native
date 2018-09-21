@@ -12,7 +12,7 @@ export default class RepHeader extends PureComponent {
   render() {
     return (
       <LinearGradient
-        colors={[ colors.brandPurpleDark, colors.brandPurple ]}
+        colors={[ colors.primary, colors.primaryDark ]}
         style={styles.header}
       >
         <HeaderBio />

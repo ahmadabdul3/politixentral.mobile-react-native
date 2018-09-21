@@ -28,8 +28,8 @@ const styles = StyleSheet.create({
     width: 70,
     height: 70,
     borderWidth: 5,
-    borderColor: colors.brandPurpleDark,
-    borderRadius: 100,
+    borderColor: colors.primaryDark,
+    borderRadius: 80,
     overflow: 'hidden',
   },
   headerBioText: {

@@ -8,7 +8,7 @@ import {
  export const cardStyles = {
   ...horizontalSpacing,
   ...verticalSpacing,
-  marginTop: 10,
+  marginTop: 15,
   marginRight: 5,
   marginLeft: 5,
   borderRadius: 5,

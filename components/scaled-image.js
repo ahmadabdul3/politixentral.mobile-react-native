@@ -14,10 +14,6 @@ export default class ScaledImage extends PureComponent {
     height: 0,
   };
 
-  constructor(props) {
-    super(props);
-  }
-
   getHeight({ imageHeight, windowWidth, imageWidth }) {
     const { maxHeight } = this.props;
     let height = imageHeight * (windowWidth * 0.97 / imageWidth);

@@ -8,8 +8,11 @@ const base = {
 
 const colors = {
   primary: base.primary,
+  primaryDark: base.primaryDark,
   secondary: base.secondary,
   accent: base.accent,
+  lightestGray: '#F5F6F7',
+  lighterGray: '#EDF0F2',
   textColor: '#24292e',
   textColorLight: '#535B63',
   textColorLighter: '#86919C',

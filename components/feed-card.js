@@ -3,8 +3,9 @@ import cardStyles from 'px/styles/components/card';
 import styles from 'px/styles/components/feed-card';
 import colors from 'px/styles/colors';
 import ShadowView from 'px/components/shadow-view';
+import ScaledImage from 'px/components/scaled-image';
 import socialMediaSources from 'px/constants/social-media-sources';
-import { Text, View } from 'react-native';
+import { Text, View, Image } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 
 export default class FeedCard extends PureComponent {
@@ -19,22 +20,43 @@ export default class FeedCard extends PureComponent {
     }
   }
 
+  get media() {
+    const { media } = this.props;
+    if (!media) return;
+
+    return <ScaledImage uri={media} maxHeight={200} />;
+  }
+
   render() {
     const {
       title,
       description,
       lastInSequence,
+      date,
     } = this.props;
 
-    const style = lastInSequence ? cardStyles.cardLast : cardStyles.card;
+    const style = lastInSequence ? styles.feedCardLast : styles.feedCard;
 
     return (
       <ShadowView style={style}>
-        <View style={styles.socialMediaSourceIcon}>
-          { this.socialMediaSourceIcon }
+        <View style={styles.feedCardMediaContainer}>
+          { this.media }
         </View>
-        <Text style={styles.title}>{ title }</Text>
-        <Text style={styles.description}>{ description }</Text>
+        <View style={styles.feedCardText}>
+          <View style={styles.socialMediaSourceIcon}>
+            { this.socialMediaSourceIcon }
+          </View>
+          <Text style={styles.date}>{ date }</Text>
+          <Text style={styles.title}>{ title }</Text>
+          <Text style={styles.description}>{ description }...</Text>
+          <View style={styles.learnMoreSection}>
+            <View style={styles.learnMoreButton}>
+              <Text style={styles.learnMoreText}>
+                {'continue reading'.toUpperCase()}
+              </Text>
+            </View>
+          </View>
+        </View>
       </ShadowView>
     );
   }
