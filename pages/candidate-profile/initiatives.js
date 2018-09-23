@@ -53,7 +53,7 @@ class WhatStandFor extends PureComponent {
             }
           />
           <Initiative
-            title='better education'
+            title='improve education'
             image={
               <Image
                 source={{ uri: 'https://pre00.deviantart.net/7aa9/th/pre/i/2018/261/f/7/screen_shot_2018_09_18_at_1_14_08_pm_by_duxfox-dcn66hu.png' }}
@@ -123,6 +123,7 @@ class Projects extends PureComponent {
 
       return (
         <ProjectSummary
+          key={index}
           title={title}
           status={status}
           firstInSequence={firstInSequence}
