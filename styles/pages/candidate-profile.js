@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     width: 70,
     height: 70,
     borderWidth: 5,
-    borderColor: colors.primaryDark,
+    borderColor: colors.linkedin,
     borderRadius: 80,
     overflow: 'hidden',
   },
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     marginLeft: 20,
   },
   repName: {
-    marginTop: 5,
+    // marginTop: 5,
     fontSize: 17,
     fontWeight: 'bold',
     color: 'white',
