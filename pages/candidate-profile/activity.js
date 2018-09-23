@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import FeedCard from 'px/components/feed-card';
 import socialMediaSources from 'px/constants/social-media-sources';
-import { sectionTitle } from 'px/styles/pages/candidate-initiatives';
 import styles from 'px/styles/pages/candidate-feed';
 
 export default class Activity extends PureComponent {
@@ -11,6 +10,7 @@ export default class Activity extends PureComponent {
     return data.map((item, index) => {
       const { date, title, media, description, socialMediaSource } = item;
       const lastInSequence = index === (data.length - 1);
+      const firstInSequence = index === 0;
       return (
         <FeedCard
           key={index}
@@ -20,6 +20,7 @@ export default class Activity extends PureComponent {
           description={description}
           socialMediaSource={socialMediaSource}
           lastInSequence={lastInSequence}
+          firstInSequence={firstInSequence}
         />
       );
     });
@@ -27,7 +28,7 @@ export default class Activity extends PureComponent {
   render() {
     return (
       <ScrollView style={styles.mainView}>
-        <Text style={{ ...sectionTitle, marginTop: 30 }}>
+        <Text style={styles.newsAndActivityTitle}>
           {`news and activity`.toUpperCase()}
         </Text>
         <View style={styles.candidateFeed}>

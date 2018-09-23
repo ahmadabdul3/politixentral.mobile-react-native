@@ -28,6 +28,10 @@ const styles = StyleSheet.create({
   feedCard: {
     ...feedCardShared,
   },
+  feedCardFirst: {
+    ...feedCardShared,
+    marginTop: 0,
+  },
   feedCardLast: {
     ...feedCardShared,
     marginBottom: 20,
@@ -49,11 +53,9 @@ const styles = StyleSheet.create({
     flexShrink: 1,
   },
   socialMediaSourceIcon: {
-    // position: 'absolute',
-    // top: 4,
-    // right: 6,
     flexDirection: 'row',
     alignItems: 'center',
+    marginLeft: 1,
   },
   socialMediaSourceIconLabel: {
     fontWeight: 'bold',
@@ -62,13 +64,13 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   date: {
-    marginTop: 15,
+    marginTop: 20,
     color: colors.textColorLightest,
     fontSize: 11,
     fontWeight: 'bold',
   },
   title: {
-    marginTop: 5,
+    marginTop: 7,
     fontWeight: 'bold',
     color: colors.primary,
     fontSize: 16,

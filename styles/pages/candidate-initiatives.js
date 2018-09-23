@@ -1,5 +1,7 @@
 import { StyleSheet } from 'react-native';
 import colors from 'px/styles/colors';
+import { sectionTitle } from 'px/styles/typography';
+import { section } from 'px/styles/sectioning';
 import {
   screen,
   horizontalSpacing,
@@ -7,11 +9,16 @@ import {
   standardSpacingSize,
 } from 'px/styles/utils';
 
-export const sectionTitle = {
-  ...horizontalSpacing,
-  fontWeight: 'bold',
-  color: colors.textColor,
-  fontSize: 20,
+const projectShared = {
+  ...verticalSpacing,
+  // - using margins instead of horizontalSpacing
+  //   so that the border bottom doesn't go all the way across
+  marginRight: standardSpacingSize,
+  marginLeft: standardSpacingSize,
+  backgroundColor: 'white',
+  position: 'relative',
+  borderBottomWidth: 1,
+  borderBottomColor: colors.lighterGray,
 };
 
 const styles = StyleSheet.create({
@@ -22,11 +29,10 @@ const styles = StyleSheet.create({
     ...sectionTitle,
   },
   whatStandFor: {
-    marginTop: 30,
+    ...section,
   },
   initiativesWrapper: {
     ...horizontalSpacing,
-    marginTop: 30,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
@@ -53,22 +59,19 @@ const styles = StyleSheet.create({
     color: colors.textColor,
   },
   projects: {
-    marginTop: 70,
+    ...section,
   },
   project: {
-    marginRight: standardSpacingSize,
-    marginLeft: standardSpacingSize,
-    paddingTop: 30,
-    paddingBottom: 30,
-    backgroundColor: 'white',
-    position: 'relative',
-    borderBottomWidth: 1,
-    borderBottomColor: colors.lighterGray,
-    // borderRadius: 5,
-    // marginTop: 10,
-    // marginBottom: 5,
-    // marginRight: 15,
-    // marginLeft: 15,
+    ...projectShared,
+  },
+  projectFirst: {
+    ...projectShared,
+    paddingTop: 0,
+  },
+  projectLast: {
+    ...projectShared,
+    paddingBottom: 0,
+    borderBottomWidth: 0,
   },
   projectHeader: {
     flexDirection: 'row',

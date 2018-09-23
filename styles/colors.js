@@ -33,6 +33,12 @@ const colors = {
   orange: '#FA8A39',
   red: '#F5336E',
   newGreen: '#36D9A5',
+
+  // social media
+  facebook: '#3B5998',
+  twitter: '#1fa1f3',
+  linkedin: '#0176b5',
+
 };
 
 export default colors;

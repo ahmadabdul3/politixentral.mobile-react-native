@@ -98,18 +98,44 @@ const status = {
 };
 
 class Projects extends PureComponent {
+  get projects() {
+    const projects = getProjects();
+
+    return projects.map((proj, index) => {
+      const firstInSequence = index === 0;
+      const lastInSequence = index === (projects.length - 1);
+      const title = proj.title;
+      const status = proj.status;
+
+      return (
+        <ProjectSummary
+          title={title}
+          status={status}
+          firstInSequence={firstInSequence}
+          lastInSequence={lastInSequence}
+        />
+      );
+    })
+  }
+
   render() {
     return (
       <View style={styles.projects}>
         <Text style={styles.sectionTitle}>
           {`projects`.toUpperCase()}
         </Text>
-        <ProjectSummary title='Building New Sidewalks' status={status.complete} />
-        <ProjectSummary title='Improving Lighting' status={status.notStarted} />
-        <ProjectSummary title='Reducing Crime' status={status.inProgress} />
+        { this.projects }
       </View>
     );
   }
+}
+
+function getProjects() {
+  return [
+    { title: 'Building New Sidewalks', status: status.complete },
+    { title: 'Improving Lighting', status: status.notStarted },
+    { title: 'Reducing Crime', status: status.inProgress },
+  ];
 }
 
 class ProjectSummary extends PureComponent {
@@ -121,10 +147,19 @@ class ProjectSummary extends PureComponent {
     }
   }
 
+  get style() {
+    const { firstInSequence, lastInSequence } = this.props;
+    if (firstInSequence) return styles.projectFirst;
+    if (lastInSequence) return styles.projectLast;
+    return styles.project;
+  }
+
   render() {
+    const { title } = this.props;
+
     return (
-      <View style={styles.project}>
-        <ProjectHeader title={this.props.title} status={this.status} />
+      <View style={this.style}>
+        <ProjectHeader title={title} status={this.status} />
         <ProjectMetadata />
         <ProjectFeedback />
       </View>

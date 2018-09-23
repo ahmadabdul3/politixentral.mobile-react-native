@@ -27,18 +27,23 @@ export default class FeedCard extends PureComponent {
     return <ScaledImage uri={media} maxHeight={140} maxWidth={150} />;
   }
 
+  get style() {
+    const { lastInSequence, firstInSequence } = this.props;
+
+    if (firstInSequence) return styles.feedCardFirst;
+    if (lastInSequence) return styles.feedCardLast;
+    return styles.feedCard;
+  }
+
   render() {
     const {
       title,
       description,
-      lastInSequence,
       date,
     } = this.props;
 
-    const style = lastInSequence ? styles.feedCardLast : styles.feedCard;
-
     return (
-      <View style={style}>
+      <View style={this.style}>
         <View style={styles.feedCardText}>
           { this.socialMediaSourceIcon }
           <Text style={styles.title}>{ title }</Text>
@@ -90,7 +95,7 @@ class TwitterIcon extends PureComponent {
           <FontAwesome
             name='twitter'
             size={iconSize}
-            color={colors.textColorLighter}
+            color={colors.twitter}
           />
         }
       />
@@ -107,7 +112,7 @@ class FacebookIcon extends PureComponent {
           <FontAwesome
             name='facebook-square'
             size={iconSize}
-            color={colors.textColorLighter}
+            color={colors.facebook}
           />
         }
       />
@@ -124,7 +129,7 @@ class LinkedinIcon extends PureComponent {
           <FontAwesome
             name='linkedin-square'
             size={iconSize}
-            color={colors.textColorLighter}
+            color={colors.linkedin}
           />
         }
       />
