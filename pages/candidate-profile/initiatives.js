@@ -35,27 +35,30 @@ class WhatStandFor extends PureComponent {
           <Initiative
             title='increase safety'
             image={
-              <MaterialCommunityIcons
-                name="shield-half-full" size={35} color={colors.secondary}
-                style={{ marginTop: 5, marginLeft: 3 }}
+              <Image
+                source={{ uri: 'https://pre00.deviantart.net/7aae/th/pre/i/2018/261/a/4/screen_shot_2018_09_18_at_1_14_49_pm_by_duxfox-dcn66hn.png' }}
+                style={{ width: 35, height: 35, overflow: 'hidden' }}
+                resizeMode='cover'
               />
             }
           />
           <Initiative
             title='reduce taxes'
             image={
-              <MaterialIcons
-                name='money-off' size={35} color={colors.secondary}
-                style={{ marginTop: 5, marginLeft: 1 }}
+              <Image
+                source={{ uri: 'https://pre00.deviantart.net/7b89/th/pre/i/2018/261/9/5/screen_shot_2018_09_18_at_1_15_29_pm_by_duxfox-dcn66hh.png' }}
+                style={{ width: 35, height: 35, overflow: 'hidden' }}
+                resizeMode='cover'
               />
             }
           />
           <Initiative
             title='better education'
             image={
-              <Foundation
-                name='book-bookmark' size={35} color={colors.secondary}
-                style={{ marginTop: 5, marginLeft: 3 }}
+              <Image
+                source={{ uri: 'https://pre00.deviantart.net/7aa9/th/pre/i/2018/261/f/7/screen_shot_2018_09_18_at_1_14_08_pm_by_duxfox-dcn66hu.png' }}
+                style={{ width: 35, height: 35, overflow: 'hidden' }}
+                resizeMode='cover'
               />
             }
           />
@@ -65,16 +68,27 @@ class WhatStandFor extends PureComponent {
   }
 }
 
+// <MaterialCommunityIcons
+//   name="shield-half-full" size={35} color={colors.secondary}
+//   style={{ marginTop: 5, marginLeft: 3 }}
+// />
+
+// <MaterialIcons
+//   name='money-off' size={35} color={colors.secondary}
+//   style={{ marginTop: 5, marginLeft: 1 }}
+// />
+
+// <Foundation
+//   name='book-bookmark' size={35} color={colors.secondary}
+//   style={{ marginTop: 5, marginLeft: 3 }}
+// />
+
 // initiative image urls
 // https://pre00.deviantart.net/7aae/th/pre/i/2018/261/a/4/screen_shot_2018_09_18_at_1_14_49_pm_by_duxfox-dcn66hn.png' />
 // https://pre00.deviantart.net/7b89/th/pre/i/2018/261/9/5/screen_shot_2018_09_18_at_1_15_29_pm_by_duxfox-dcn66hh.png' />
 // https://pre00.deviantart.net/7aa9/th/pre/i/2018/261/f/7/screen_shot_2018_09_18_at_1_14_08_pm_by_duxfox-dcn66hu.png' />
 // initiative image
-// <Image
-//   source={{ uri: image }}
-//   style={{ width: 35, height: 35, overflow: 'hidden' }}
-//   resizeMode='cover'
-// />
+
 class Initiative extends PureComponent {
   render() {
     const { title, image } = this.props;
