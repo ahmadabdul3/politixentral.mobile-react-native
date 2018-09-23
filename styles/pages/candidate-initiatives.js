@@ -11,7 +11,7 @@ export const sectionTitle = {
   ...horizontalSpacing,
   fontWeight: 'bold',
   color: colors.textColor,
-  fontSize: 16,
+  fontSize: 20,
 };
 
 const styles = StyleSheet.create({
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 12,
     fontWeight: 'bold',
-    lineHeight: 16,
+    lineHeight: 15,
     color: colors.textColor,
   },
   projects: {
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
   projectTitleText: {
     color: colors.primary,
     fontWeight: 'bold',
-    fontSize: 12,
+    fontSize: 14,
   },
   projectStatus: {
     marginLeft: 10,
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
   projectFeedback: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
-    marginTop: 5,
+    marginTop: 15,
   },
   labelValueLabel: {
     fontSize: 9,

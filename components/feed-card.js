@@ -24,7 +24,7 @@ export default class FeedCard extends PureComponent {
     const { media } = this.props;
     if (!media) return;
 
-    return <ScaledImage uri={media} maxHeight={200} />;
+    return <ScaledImage uri={media} maxHeight={140} maxWidth={150} />;
   }
 
   render() {
@@ -38,39 +38,61 @@ export default class FeedCard extends PureComponent {
     const style = lastInSequence ? styles.feedCardLast : styles.feedCard;
 
     return (
-      <ShadowView style={style}>
-        <View style={styles.feedCardMediaContainer}>
-          { this.media }
-        </View>
+      <View style={style}>
         <View style={styles.feedCardText}>
-          <View style={styles.socialMediaSourceIcon}>
-            { this.socialMediaSourceIcon }
-          </View>
-          <Text style={styles.date}>{ date }</Text>
+          { this.socialMediaSourceIcon }
           <Text style={styles.title}>{ title }</Text>
-          <Text style={styles.description}>{ description }...</Text>
-          <View style={styles.learnMoreSection}>
-            <View style={styles.learnMoreButton}>
-              <Text style={styles.learnMoreText}>
-                {'continue reading'.toUpperCase()}
-              </Text>
-            </View>
+          <Text style={styles.date}>{ date }</Text>
+        </View>
+        <View style={styles.feedCardMediaSection}>
+          <View style={styles.feedCardMediaContainer}>
+            { this.media }
           </View>
         </View>
-      </ShadowView>
+      </View>
     );
   }
 }
 
-const iconSize = 20;
+// <Text style={styles.description}>{ description }...</Text>
+
+// <View style={styles.learnMoreSection}>
+//   <View style={styles.learnMoreButton}>
+//     <Text style={styles.learnMoreText}>
+//       {'continue reading'.toUpperCase()}
+//     </Text>
+//   </View>
+// </View>
+
+const iconSize = 12;
+
+class SocialIcon extends PureComponent {
+  render() {
+    const { icon, label } = this.props;
+
+    return (
+      <View style={styles.socialMediaSourceIcon}>
+        { icon }
+        <Text style={styles.socialMediaSourceIconLabel}>
+          {label.toUpperCase()}
+        </Text>
+      </View>
+    );
+  }
+}
 
 class TwitterIcon extends PureComponent {
   render() {
     return (
-      <FontAwesome
-        name='twitter'
-        size={iconSize}
-        color={colors.textColorLighter}
+      <SocialIcon
+        label='twitter'
+        icon={
+          <FontAwesome
+            name='twitter'
+            size={iconSize}
+            color={colors.textColorLighter}
+          />
+        }
       />
     );
   }
@@ -79,10 +101,15 @@ class TwitterIcon extends PureComponent {
 class FacebookIcon extends PureComponent {
   render() {
     return (
-      <FontAwesome
-        name='facebook-square'
-        size={iconSize}
-        color={colors.textColorLighter}
+      <SocialIcon
+        label='facebook'
+        icon={
+          <FontAwesome
+            name='facebook-square'
+            size={iconSize}
+            color={colors.textColorLighter}
+          />
+        }
       />
     );
   }
@@ -91,10 +118,15 @@ class FacebookIcon extends PureComponent {
 class LinkedinIcon extends PureComponent {
   render() {
     return (
-      <FontAwesome
-        name='linkedin-square'
-        size={iconSize}
-        color={colors.textColorLighter}
+      <SocialIcon
+        label='linkedin'
+        icon={
+          <FontAwesome
+            name='linkedin-square'
+            size={iconSize}
+            color={colors.textColorLighter}
+          />
+        }
       />
     );
   }
@@ -103,10 +135,15 @@ class LinkedinIcon extends PureComponent {
 class InstagramIcon extends PureComponent {
   render() {
     return (
-      <FontAwesome
-        name='instagram'
-        size={iconSize}
-        color={colors.textColorLighter}
+      <SocialIcon
+        label='instagram'
+        icon={
+          <FontAwesome
+            name='instagram'
+            size={iconSize}
+            color={colors.textColorLighter}
+          />
+        }
       />
     );
   }

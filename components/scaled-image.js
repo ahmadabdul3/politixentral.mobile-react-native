@@ -16,22 +16,28 @@ export default class ScaledImage extends PureComponent {
 
   getHeight({ imageHeight, windowWidth, imageWidth }) {
     const { maxHeight } = this.props;
-    let height = imageHeight * (windowWidth * 0.97 / imageWidth);
     if (maxHeight && imageHeight > maxHeight) return maxHeight;
+
+    let height = imageHeight * (windowWidth * 0.97 / imageWidth);
     return height;
   }
 
-  componentWillMount() {
-    const { uri, fullWidth } = this.props;
+  getWidth() {
+    const { maxWidth, fullWidth } = this.props;
+    if (maxWidth) return maxWidth;
+
     const windowWidth = Dimensions.get('window').width;
+    if (fullWidth) return windowWidth;
+    return windowWidth * 0.97;
+  }
+
+  componentWillMount() {
+    const { uri } = this.props;
 
     Image.getSize(uri, (imageWidth, imageHeight) => {
-      let width = '';
-
-      if (fullWidth) width = windowWidth;
-      else width = windowWidth * 0.97;
-
+      const windowWidth = Dimensions.get('window').width;
       const height = this.getHeight({ imageHeight, windowWidth, imageWidth });
+      const width = this.getWidth();
 
       this.setState({ width, height });
     });
