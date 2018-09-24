@@ -10,10 +10,61 @@ export default class About extends PureComponent {
   render() {
     return (
       <ScrollView style={styles.mainView}>
+        <Experience />
         <Education />
       </ScrollView>
     );
   }
+}
+
+class Experience extends PureComponent {
+  get experiences() {
+    const education = getExperience();
+    return education.map((item, index) => {
+      const firstInSequence = index === 0;
+      const lastInSequence = index === (education.length - 1);
+
+      return (
+        <EducationSummary
+          key={index}
+          degree={item.degree}
+          fieldOfStudy={item.fieldOfStudy}
+          school={item.school}
+          location={item.location}
+          date={item.date}
+          firstInSequence={firstInSequence}
+          lastInSequence={lastInSequence}
+        />
+      );
+    });
+  }
+
+  render() {
+    return (
+      <Section title='Experience'>
+        { this.experiences }
+      </Section>
+    );
+  }
+}
+
+function getExperience() {
+  return [
+    {
+      degree: '',
+      fieldOfStudy: 'Business Account Manager',
+      school: 'Verizon',
+      location: 'Norwalk CT',
+      date: 'jun 2014 - mar 2018',
+    },
+    {
+      degree: '',
+      fieldOfStudy: 'Marketing Operations Coordinator',
+      school: 'Verizon',
+      location: 'Meriden CT',
+      date: 'feb 2012 - may 2014',
+    },
+  ];
 }
 
 class Education extends PureComponent {
@@ -30,6 +81,7 @@ class Education extends PureComponent {
           fieldOfStudy={item.fieldOfStudy}
           school={item.school}
           location={item.location}
+          date={item.date}
           firstInSequence={firstInSequence}
           lastInSequence={lastInSequence}
         />
@@ -56,31 +108,34 @@ class EducationSummary extends PureComponent {
   }
 
   render() {
-    const { degree, fieldOfStudy, school, location } = this.props;
+    const { degree, fieldOfStudy, school, location, date } = this.props;
 
     return (
       <View style={this.style}>
-        <View style={styles.educationSummaryLeft}>
+        <Text style={styles.educationSummaryDate}>
+          { date.toUpperCase() }
+        </Text>
+        <Text style={styles.educationFieldDegree}>
+          <Text style={styles.educationField}>
+            { fieldOfStudy }
+          </Text>
+          <Text style={styles.degree}>
+            { degree ?  ` - ${degree}` : '' }
+          </Text>
+        </Text>
+        <View style={styles.schoolAndLocation}>
           <Text style={styles.school}>
             { school.toUpperCase() }
           </Text>
-          <Text style={styles.educationFieldDegree}>
-            <Text style={styles.educationField}>
-              { fieldOfStudy } -
+          <View style={styles.location}>
+            <Text style={styles.educationSummaryLocation}>
+              { location }
             </Text>
-            <Text style={styles.degree}>
-              {` ${degree}`}
-            </Text>
-          </Text>
-        </View>
-        <View style={styles.educationSummaryRight}>
-          <Text style={styles.educationSummaryLocation}>
-            { location }
-          </Text>
-          <Entypo
-            name='location' size={14} color={colors.secondary}
-            style={{ marginLeft: 10 }}
-          />
+            <Entypo
+              name='location' size={14} color={colors.accent}
+              style={{ marginLeft: 10 }}
+            />
+          </View>
         </View>
       </View>
     );
@@ -94,12 +149,14 @@ function getEducation() {
       fieldOfStudy: 'Business Administration',
       school: 'Sacred Heart University',
       location: 'Fairfield CT',
+      date: 'may 2011',
     },
     {
       degree: 'BS',
       fieldOfStudy: 'Business Administration',
       school: 'Mitchell College',
       location: 'New London CT',
+      date: 'may 2008',
     },
   ];
 }
@@ -107,7 +164,7 @@ function getEducation() {
 class Section extends PureComponent {
   render() {
     return (
-      <View style={styles.aboutSection}>
+      <View style={styles.section}>
         <Text style={styles.sectionTitle}>
           { this.props.title.toUpperCase() }
         </Text>

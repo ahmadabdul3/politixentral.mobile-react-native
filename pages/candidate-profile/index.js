@@ -24,14 +24,14 @@ export default class CandidateProfile extends PureComponent {
 
 
 const RepTabs = createMaterialTopTabNavigator({
-  About: {
-    screen: About
-  },
   Initiatives: {
     screen: Initiatives
   },
   Feed: {
     screen: Activity
+  },
+  About: {
+    screen: About
   },
 }, {
   tabBarOptions: {

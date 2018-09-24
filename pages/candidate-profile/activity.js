@@ -49,14 +49,14 @@ function getData() {
       description: 'The Hill ward’s Democratic Committee Monday evening endorsed David Reyes to serve as alder, putting him on the Democratic line ballot for the general election ballot'
     },
     {
-      date: 'June 25, 2017 - 5:30pm',
+      date: 'Jun 25, 2017 - 5:30pm',
       title: '3 New Haven alders to seek re-election - 1 newcomer announced in the Hill',
       socialMediaSource: socialMediaSources.facebook,
       media: 'https://trello-attachments.s3.amazonaws.com/59b7df995a24fcd6afbda9ef/5ba269d6cdb46d6256210fe9/872ee7e6309a468a73d8ad5299f1ab55/920x920.jpg',
       description: 'NEW HAVEN >> Three incumbents and one new candidate for aldermanic seats in the Hill officially kicked off their campaigns at Trowbridge Square Sunday'
     },
     {
-      date: 'November 23, 2016 - 6:09pm',
+      date: 'Nov 23, 2016 - 6:09pm',
       title: 'New Haven Hill South Management Team buys more than $2,000 in clothing for children',
       socialMediaSource: socialMediaSources.linkedin,
       media: 'https://trello-attachments.s3.amazonaws.com/59b7df995a24fcd6afbda9ef/5ba269d6cdb46d6256210fe9/f8e0501296cc10b79077cb8819035cef/920x920.jpg',
