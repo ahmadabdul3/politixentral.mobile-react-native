@@ -37,7 +37,7 @@ class WhatStandFor extends PureComponent {
             image={
               <Image
                 source={{ uri: 'https://pre00.deviantart.net/7aae/th/pre/i/2018/261/a/4/screen_shot_2018_09_18_at_1_14_49_pm_by_duxfox-dcn66hn.png' }}
-                style={{ width: 35, height: 35, overflow: 'hidden' }}
+                style={{ width: 40, height: 50, overflow: 'hidden' }}
                 resizeMode='cover'
               />
             }
@@ -47,7 +47,7 @@ class WhatStandFor extends PureComponent {
             image={
               <Image
                 source={{ uri: 'https://pre00.deviantart.net/7b89/th/pre/i/2018/261/9/5/screen_shot_2018_09_18_at_1_15_29_pm_by_duxfox-dcn66hh.png' }}
-                style={{ width: 35, height: 35, overflow: 'hidden' }}
+                style={{ width: 40, height: 40, overflow: 'hidden' }}
                 resizeMode='cover'
               />
             }
@@ -57,7 +57,7 @@ class WhatStandFor extends PureComponent {
             image={
               <Image
                 source={{ uri: 'https://pre00.deviantart.net/7aa9/th/pre/i/2018/261/f/7/screen_shot_2018_09_18_at_1_14_08_pm_by_duxfox-dcn66hu.png' }}
-                style={{ width: 35, height: 35, overflow: 'hidden' }}
+                style={{ width: 45, height: 45, overflow: 'hidden' }}
                 resizeMode='cover'
               />
             }

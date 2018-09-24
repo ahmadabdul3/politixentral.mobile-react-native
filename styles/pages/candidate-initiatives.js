@@ -41,13 +41,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   initiativeImage: {
-    width: 60,
-    height: 60,
-    borderRadius: 60,
+    width: 70,
+    height: 70,
+    borderRadius: 70,
     overflow: 'hidden',
     justifyContent: 'center',
     alignItems: 'center',
-    borderWidth: 1,
+    borderWidth: StyleSheet.hairlineWidth,
     borderColor: colors.textColorLightest,
   },
   initiativeTitle: {
