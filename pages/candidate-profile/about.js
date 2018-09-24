@@ -132,7 +132,7 @@ class EducationSummary extends PureComponent {
               { location }
             </Text>
             <Entypo
-              name='location' size={14} color={colors.accent}
+              name='location' size={12} color={colors.accent}
               style={{ marginLeft: 10 }}
             />
           </View>
