@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
   projectTitleText: {
     color: colors.primary,
     fontWeight: 'bold',
-    fontSize: 14,
+    fontSize: 16,
   },
   projectStatus: {
     marginLeft: 10,
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
   projectDescription: {
     color: colors.textColor,
     marginTop: 5,
-    fontSize: 12,
+    fontSize: 14,
   },
   projectMetadata: {
     flexDirection: 'row',
