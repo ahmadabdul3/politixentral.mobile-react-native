@@ -83,12 +83,6 @@ class WhatStandFor extends PureComponent {
 //   style={{ marginTop: 5, marginLeft: 3 }}
 // />
 
-// initiative image urls
-// https://pre00.deviantart.net/7aae/th/pre/i/2018/261/a/4/screen_shot_2018_09_18_at_1_14_49_pm_by_duxfox-dcn66hn.png' />
-// https://pre00.deviantart.net/7b89/th/pre/i/2018/261/9/5/screen_shot_2018_09_18_at_1_15_29_pm_by_duxfox-dcn66hh.png' />
-// https://pre00.deviantart.net/7aa9/th/pre/i/2018/261/f/7/screen_shot_2018_09_18_at_1_14_08_pm_by_duxfox-dcn66hu.png' />
-// initiative image
-
 class Initiative extends PureComponent {
   render() {
     const { title, image } = this.props;

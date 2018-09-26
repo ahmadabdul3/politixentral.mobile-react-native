@@ -7,6 +7,7 @@ const base = {
 };
 
 const colors = {
+  // brand
   primary: base.primary,
   primaryDark: base.primaryDark,
   secondary: base.secondary,
@@ -15,7 +16,7 @@ const colors = {
   lighterGray: '#EDF0F2',
   textColor: '#24292e',
   textColorLight: '#535B63',
-  textColorLighter: '#86919C',
+  textColorLighter: '#a9b0cd',
   textColorLightest: '#B3BEC9',
   brandBlueOffPurple: '#7570FF',
   brandPurple: base.primary,
@@ -24,15 +25,11 @@ const colors = {
   brandPurpleLight2: '#B39EFF',
   brandPurpleLighter: '#C3B3FF',
   brandPurpleLightest: '#E5DEFF',
-  // logoGreen: '#18C99D',
-  logoGreen: base.accent,
-  logoGreenSaturated: '#00BD8E',
-  logoGreenLight: '#88F7DC',
-  logoGreenDark: '#08A880',
-  logoGreenDarker: '#008765',
   orange: '#FA8A39',
   red: '#F5336E',
-  newGreen: '#36D9A5',
+  yellow: '#f7cf00',
+  backgroundGray: '#f3f4f8',
+  backgroundGrayDark: '#e3e5ec',
 
   // social media
   facebook: '#3B5998',
