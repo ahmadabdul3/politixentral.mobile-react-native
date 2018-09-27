@@ -36,7 +36,7 @@ const RepTabs = createMaterialTopTabNavigator({
 }, {
   tabBarOptions: {
     activeTintColor: 'white',
-    inactiveTintColor: colors.brandPurpleLight2,
+    inactiveTintColor: colors.brandPurpleLight,
     style: {
       backgroundColor: colors.primaryDark,
     },

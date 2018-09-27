@@ -15,15 +15,15 @@ const projectShared = {
   //   so that the border bottom doesn't go all the way across
   marginRight: standardSpacingSize,
   marginLeft: standardSpacingSize,
-  backgroundColor: 'white',
+  // backgroundColor: 'white',
   position: 'relative',
-  borderBottomWidth: 1,
-  borderBottomColor: colors.lighterGray,
+  borderBottomWidth: StyleSheet.hairlineWidth,
+  borderBottomColor: colors.backgroundGrayDarker,
 };
 
 const styles = StyleSheet.create({
   mainView: {
-    backgroundColor: 'white',
+    backgroundColor: colors.backgroundGray,
   },
   sectionTitle: {
     ...sectionTitle,
@@ -48,7 +48,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: StyleSheet.hairlineWidth,
-    borderColor: colors.textColorLightest,
+    borderColor: colors.backgroundGrayDarker,
+    backgroundColor: 'white',
   },
   initiativeTitle: {
     marginTop: 15,
@@ -101,7 +102,7 @@ const styles = StyleSheet.create({
   projectDescription: {
     color: colors.textColor,
     marginTop: 5,
-    fontSize: 14,
+    fontSize: 12,
   },
   projectMetadata: {
     flexDirection: 'row',

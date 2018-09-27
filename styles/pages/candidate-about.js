@@ -14,13 +14,13 @@ const educationSummary = {
   marginLeft: standardSpacingSize,
   marginTop: 15,
   paddingTop: 25,
-  borderTopWidth: 1,
-  borderTopColor: colors.lightestGray,
+  borderTopWidth: StyleSheet.hairlineWidth,
+  borderTopColor: colors.backgroundGrayDarker,
 };
 
 const styles = StyleSheet.create({
   mainView: {
-    backgroundColor: 'white',
+    backgroundColor: colors.backgroundGray,
   },
   sectionTitle: {
     ...sectionTitle,
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   },
   school: {
     fontWeight: 'bold',
-    color: colors.textColorLightest,
+    color: colors.textColorLighter,
     fontSize: 12,
   },
   educationFieldDegree: {

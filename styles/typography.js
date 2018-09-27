@@ -10,7 +10,7 @@ export const sectionTitle = {
   ...horizontalSpacing,
   ...verticalSpacing,
   paddingBottom: 30,
-  fontWeight: 'bold',
+  fontWeight: '800',
   color: colors.textColor,
   fontSize: 20,
 };
@@ -19,7 +19,7 @@ export const pageTitle = {
   ...horizontalSpacing,
   paddingTop: 60,
   paddingBottom: 60,
-  fontWeight: 'bold',
+  fontWeight: '900',
   color: colors.primary,
   fontSize: 30,
 };

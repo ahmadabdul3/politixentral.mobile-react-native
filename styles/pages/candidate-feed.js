@@ -11,7 +11,7 @@ import {
 
 const styles = StyleSheet.create({
   mainView: {
-    backgroundColor: 'white',
+    backgroundColor: colors.backgroundGray,
   },
   candidateFeed: {
     ...section,

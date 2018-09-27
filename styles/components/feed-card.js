@@ -12,6 +12,7 @@ const borderRadius = 10;
 
 const feedCardShared = {
   ...cardStyles,
+  backgroundColor: 'transparent',
   borderRadius: 0,
   position: 'relative',
   paddingTop: 0,
@@ -60,12 +61,12 @@ const styles = StyleSheet.create({
   socialMediaSourceIconLabel: {
     fontWeight: 'bold',
     fontSize: 10,
-    color: colors.textColorLighter,
+    color: colors.textColorLight,
     marginLeft: 10,
   },
   date: {
     marginTop: 20,
-    color: colors.textColorLightest,
+    color: colors.textColorLighter,
     fontSize: 11,
     fontWeight: 'bold',
   },

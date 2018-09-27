@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { LinearGradient } from 'expo';
-import { Text, View, ScrollView } from 'react-native';
+import { Text, View, ScrollView, Image } from 'react-native';
 import styles from 'px/styles/pages/races';
 
 export default class Races extends PureComponent {
@@ -14,11 +14,11 @@ export default class Races extends PureComponent {
           See who's running for office in the places that matter to you
         </Text>
         <Section title='alderman' subtitle='ward'>
-          <CandidateCard name='First Last' label='some label' party={CandidateCard.party.democratic} />
-          <CandidateCard name='First Last' label='some label' party={CandidateCard.party.republican} />
-          <CandidateCard name='First Last' label='some label' party={CandidateCard.party.independent} />
-          <CandidateCard name='First Last' label='some label' party={CandidateCard.party.democratic} />
-          <CandidateCard name='First Last' label='some label' party={CandidateCard.party.democratic} />
+          <CandidateCard name='Abdul Ahmad' label='some label' party={CandidateCard.party.democratic} />
+          <CandidateCard name='William Ruiz' label='some label' party={CandidateCard.party.republican} />
+          <CandidateCard name='David Reyes' label='some label' party={CandidateCard.party.independent} />
+          <CandidateCard name='Joon Hoon Lee' label='some label' party={CandidateCard.party.democratic} />
+          <CandidateCard name='John Josef' label='some label' party={CandidateCard.party.democratic} />
         </Section>
         <Section title='mayor' subtitle='city'>
           <CandidateCard name='First Last' label='some label' party={CandidateCard.party.democratic} />
@@ -75,10 +75,17 @@ class CandidateCard extends PureComponent {
 
   render() {
     const { name, label } = this.props;
+    personImage = 'https://orig00.deviantart.net/819f/f/2018/261/e/9/screen_shot_2018_09_18_at_12_42_15_pm_by_duxfox-dcn63uc.png';
 
     return (
       <View style={styles.candidateCard}>
-        <View style={this.imageBoxClass} />
+        <View style={this.imageBoxClass} >
+          <Image
+            source={{ uri: personImage }}
+            style={{ width: '100%', height: '100%' }}
+            resizeMode='cover'
+          />
+        </View>
         <Text style={styles.candidateName}>
           { name }
         </Text>
