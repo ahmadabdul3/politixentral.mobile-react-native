@@ -12,7 +12,7 @@ export const sectionTitle = {
   paddingBottom: 30,
   fontWeight: '800',
   color: colors.textColor,
-  fontSize: 20,
+  fontSize: 22,
 };
 
 export const pageTitle = {

@@ -1,31 +1,37 @@
 import React, { PureComponent } from 'react';
 import { LinearGradient } from 'expo';
 import { Text, View, ScrollView, Image } from 'react-native';
+import { SimpleLineIcons } from '@expo/vector-icons';
+import ShadowView from 'px/components/shadow-view';
+
+import colors from 'px/styles/colors';
 import styles from 'px/styles/pages/races';
 
 export default class Races extends PureComponent {
   render() {
     return (
-      <ScrollView style={styles.screen}>
-        <Text style={styles.pageTitle}>
-          { 'races'.toUpperCase() }
-        </Text>
-        <Text style={styles.pageSubtitle}>
-          See who's running for office in the places that matter to you
-        </Text>
-        <Section title='alderman' subtitle='ward'>
-          <CandidateCard name='Abdul Ahmad' label='some label' party={CandidateCard.party.democratic} />
-          <CandidateCard name='William Ruiz' label='some label' party={CandidateCard.party.republican} />
-          <CandidateCard name='David Reyes' label='some label' party={CandidateCard.party.independent} />
-          <CandidateCard name='Joon Hoon Lee' label='some label' party={CandidateCard.party.democratic} />
-          <CandidateCard name='John Josef' label='some label' party={CandidateCard.party.democratic} />
-        </Section>
-        <Section title='mayor' subtitle='city'>
-          <CandidateCard name='First Last' label='some label' party={CandidateCard.party.democratic} />
-          <CandidateCard name='First Last' label='some label' party={CandidateCard.party.democratic} />
-          <CandidateCard name='First Last' label='some label' party={CandidateCard.party.republican} />
-        </Section>
-      </ScrollView>
+      <View style={styles.screen}>
+        <View style={styles.pageHeader}>
+          <Text style={styles.pageTitle}>
+            { 'races'.toUpperCase() }
+          </Text>
+          <Text style={styles.pageSubtitle}>
+            See who's running for office in the places that matter to you
+          </Text>
+        </View>
+        <ScrollView style={styles.pageContent}>
+          <RaceOverview
+            position='alderman'
+            area='ward'
+            currentOfficialName='David Reyes'
+          />
+          <RaceOverview
+            position='mayor'
+            area='city'
+            currentOfficialName='Tony Harp'
+          />
+        </ScrollView>
+      </View>
     );
   }
 }
@@ -52,6 +58,113 @@ class Section extends PureComponent {
         </View>
         <View style={styles.sectionContent}>
           { children }
+        </View>
+      </View>
+    );
+  }
+}
+
+class RaceOverview extends PureComponent {
+  render() {
+    const { position, area, currentOfficialName } = this.props;
+    return (
+      <ShadowView style={styles.raceOverview}>
+        <View style={styles.raceOverviewTop}>
+          <RaceOverviewHeader position={position} area={area} />
+          <RaceOverviewDetails />
+          <RaceOverviewCandidates />
+        </View>
+        <RaceOverviewCurrentOfficial
+          position={position}
+          currentOfficialName={currentOfficialName}
+        />
+        <View style={styles.seeDetailsLink}>
+          <Text style={styles.seeDetailsLinkText}>
+            { `see full race details`.toUpperCase() }
+          </Text>
+          <SimpleLineIcons name="arrow-right-circle" size={15} color={colors.accent} />
+        </View>
+      </ShadowView>
+    );
+  }
+}
+
+class RaceOverviewHeader extends PureComponent {
+  render() {
+    const { position, area } = this.props;
+
+    return (
+      <View style={styles.raceOverviewHeader}>
+        <Text>
+          <Text style={styles.raceOverviewTitle}>
+            { position.toUpperCase() }
+          </Text>
+          <Text style={styles.raceOverviewTitleSecondary}>
+            { `   |  ${area}`.toUpperCase() }
+          </Text>
+        </Text>
+      </View>
+    );
+  }
+}
+
+class RaceOverviewDetails extends PureComponent {
+  render() {
+    return (
+      <View style={styles.raceOverviewDetails}>
+        <Text style={styles.detail}>
+          <Text style={styles.detailLabel}>
+            { 'election day'.toUpperCase() }
+          </Text>
+          <Text style={styles.detailValue}>
+            { '   jun 5, 2018'.toUpperCase() }
+          </Text>
+        </Text>
+        <Text style={styles.detail}>
+          <Text style={styles.detailLabel}>
+            { 'number of candidates'.toUpperCase() }
+          </Text>
+          <Text style={styles.detailValue}>
+            { '   4' }
+          </Text>
+        </Text>
+      </View>
+    );
+  }
+}
+
+class RaceOverviewCandidates extends PureComponent {
+  render() {
+    return (
+      <View style={styles.raceOverviewCandidates}>
+        <View style={styles.raceOverviewCandidate} />
+        <View style={styles.raceOverviewCandidate} />
+        <View style={styles.raceOverviewCandidate} />
+        <View style={styles.raceOverviewCandidate} />
+      </View>
+    );
+  }
+}
+
+class RaceOverviewCurrentOfficial extends PureComponent {
+  render() {
+    const { position, currentOfficialName } = this.props;
+
+    return (
+      <View style={styles.raceOverviewCurrentOfficial}>
+        <Text style={styles.currentOfficialHeader}>
+          { `current ${position}`.toUpperCase() }
+        </Text>
+        <View style={styles.currentOfficialSummary}>
+          <View style={styles.currentOfficialImage} />
+          <View style={styles.currentOfficialDetails}>
+            <Text style={styles.currentOfficialName}>
+              { currentOfficialName }
+            </Text>
+            <Text style={styles.currentOfficialLabel}>
+              { 'detail label'.toUpperCase() }
+            </Text>
+          </View>
         </View>
       </View>
     );
