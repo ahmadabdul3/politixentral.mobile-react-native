@@ -6,6 +6,7 @@ import CandidateProfile from 'px/pages/candidate-profile';
 import colors from 'px/styles/colors';
 import { Ionicons, MaterialIcons, Foundation, FontAwesome } from '@expo/vector-icons';
 import Races from 'px/pages/races';
+import Candidates from 'px/pages/candidates';
 
 console.disableYellowBox = true;
 
@@ -28,8 +29,8 @@ export default createMaterialBottomTabNavigator({
   //     },
   //   },
   // },
-  Alder: {
-    screen: CandidateProfile,
+  Officials: {
+    screen: Candidates,
     navigationOptions: {
       tabBarIcon: ({ tintColor, focused }) => {
         const color = focused ? colors.brandPurple : colors.textColorLighter;
@@ -37,6 +38,15 @@ export default createMaterialBottomTabNavigator({
       },
     },
   },
+  // Alder: {
+  //   screen: CandidateProfile,
+  //   navigationOptions: {
+  //     tabBarIcon: ({ tintColor, focused }) => {
+  //       const color = focused ? colors.brandPurple : colors.textColorLighter;
+  //       return <MaterialIcons name="person-outline" size={22} color={color} />;
+  //     },
+  //   },
+  // },
   Races: {
     screen: Races,
     navigationOptions: {

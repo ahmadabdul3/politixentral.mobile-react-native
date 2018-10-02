@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   header: {
     paddingRight: 30,
     paddingLeft: 30,
-    paddingTop: 50,
+    paddingTop: 80,
     paddingBottom: 30,
     backgroundColor: colors.logoGreen,
     minHeight: 50,
