@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { LinearGradient } from 'expo';
-import { Text, View, ScrollView, Image, Button } from 'react-native';
+import { Text, View, ScrollView, Image, TouchableHighlight } from 'react-native';
 import { SimpleLineIcons } from '@expo/vector-icons';
 import ShadowView from 'px/components/shadow-view';
 import { createStackNavigator } from 'react-navigation';
@@ -13,7 +13,7 @@ import styles from 'px/styles/pages/candidates';
 class Candidates extends PureComponent {
   render() {
     return (
-      <ScrollView>
+      <ScrollView style={{ paddingTop: 60 }}>
         <CandidateSummary pro={this.props}/>
       </ScrollView>
     );
@@ -27,12 +27,16 @@ class CandidateSummary extends PureComponent {
 
   render() {
     return (
-      <View style={styles.candidateSummary}>
-        <Button
+      <View style={styles.candidateSummaryBox}>
+        <TouchableHighlight
           onPress={this.goToProfile}
-          title="See alder profile"
-          color={colors.primary}
-        />
+          style={styles.candidateSummary}
+          underlayColor={colors.backgroundGrayDarker}
+        >
+          <Text>
+            Alder
+          </Text>
+        </TouchableHighlight>
       </View>
     );
   }
@@ -41,6 +45,10 @@ class CandidateSummary extends PureComponent {
 const nav = createStackNavigator({
   Officials: {
     screen: Candidates,
+    navigationOptions: () => ({
+      headerTransparent: true,
+      headerTintColor: 'white',
+    }),
   },
   Alder: {
     screen: CandidateProfile,

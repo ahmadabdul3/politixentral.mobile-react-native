@@ -9,20 +9,6 @@ import Activity from './activity';
 import Initiatives from './initiatives';
 
 
-export default class CandidateProfile extends PureComponent {
-  name = 'Alder';
-
-  render() {
-    return (
-      <View style={candidateProfileStyles.screen}>
-        <RepHeader />
-        <RepTabs />
-      </View>
-    );
-  }
-}
-
-
 const RepTabs = createMaterialTopTabNavigator({
   Initiatives: {
     screen: Initiatives
@@ -45,3 +31,17 @@ const RepTabs = createMaterialTopTabNavigator({
     }
   }
 });
+
+export default class CandidateProfile extends PureComponent {
+  static router = RepTabs.router;
+  name = 'Alder';
+
+  render() {
+    return (
+      <View style={candidateProfileStyles.screen}>
+        <RepHeader />
+        <RepTabs navigation={this.props.navigation} />
+      </View>
+    );
+  }
+}
