@@ -5,6 +5,7 @@ import { SimpleLineIcons } from '@expo/vector-icons';
 import ShadowView from 'px/components/shadow-view';
 import { createStackNavigator } from 'react-navigation';
 import CandidateProfile from 'px/pages/candidate-profile';
+import AnimatedHeaderScroll from 'px/components/animated-header-scroll';
 
 import colors from 'px/styles/colors';
 import styles from 'px/styles/pages/candidates';
@@ -13,39 +14,46 @@ import styles from 'px/styles/pages/candidates';
 class Candidates extends PureComponent {
   render() {
     return (
-      <View style={styles.screen}>
-        <View style={styles.pageHeader}>
-          <Text style={styles.pageTitle}>
-            { 'officials'.toUpperCase() }
-          </Text>
-          <Text style={styles.pageSubtitle}>
-            See who's currently in office in the places that matter to you
-          </Text>
-        </View>
-        <ScrollView>
-          <CandidateSummary
-            nav={this.props}
-            title='alderman'
-            area='ward'
-            officialName='David Reyes'
-            officialLabel='ward 8'
-          />
-          <CandidateSummary
-            nav={this.props}
-            title='mayor'
-            area='city'
-            officialName='Toni Harp'
-            officialLabel='new haven'
-          />
-          <CandidateSummary
-            nav={this.props}
-            title='representative'
-            area='state'
-            officialName='Al Paolillo'
-            officialLabel='connecticut'
-          />
-        </ScrollView>
-      </View>
+      <AnimatedHeaderScroll
+        title='my officials'
+        subtitle='here are the elected individuals that currently hold office in your city and state'
+      >
+        <CandidateSummary
+          nav={this.props}
+          title='alderman'
+          area='ward'
+          officialName='David Reyes'
+          officialLabel='ward 8'
+        />
+        <CandidateSummary
+          nav={this.props}
+          title='mayor'
+          area='city'
+          officialName='Toni Harp'
+          officialLabel='new haven'
+        />
+        <CandidateSummary
+          nav={this.props}
+          title='treasurer'
+          area='city'
+          officialName='Someone Else'
+          officialLabel='new haven'
+        />
+        <CandidateSummary
+          nav={this.props}
+          title='othertitle'
+          area='city'
+          officialName='Another Person'
+          officialLabel='new haven'
+        />
+        <CandidateSummary
+          nav={this.props}
+          title='representative'
+          area='state'
+          officialName='Al Paolillo'
+          officialLabel='connecticut'
+        />
+      </AnimatedHeaderScroll>
     );
   }
 }

@@ -3,6 +3,7 @@ import { LinearGradient } from 'expo';
 import { Text, View, ScrollView, Image } from 'react-native';
 import { SimpleLineIcons } from '@expo/vector-icons';
 import ShadowView from 'px/components/shadow-view';
+import AnimatedHeaderScroll from 'px/components/animated-header-scroll';
 
 import colors from 'px/styles/colors';
 import styles from 'px/styles/pages/races';
@@ -10,28 +11,26 @@ import styles from 'px/styles/pages/races';
 export default class Races extends PureComponent {
   render() {
     return (
-      <View style={styles.screen}>
-        <View style={styles.pageHeader}>
-          <Text style={styles.pageTitle}>
-            { 'races'.toUpperCase() }
-          </Text>
-          <Text style={styles.pageSubtitle}>
-            See who's running for office in the places that matter to you
-          </Text>
-        </View>
-        <ScrollView style={styles.pageContent}>
-          <RaceOverview
-            position='alderman'
-            area='ward'
-            currentOfficialName='David Reyes'
-          />
-          <RaceOverview
-            position='mayor'
-            area='city'
-            currentOfficialName='Tony Harp'
-          />
-        </ScrollView>
-      </View>
+      <AnimatedHeaderScroll
+        title='races'
+        subtitle="See who's running for office in the places that matter to you"
+      >
+      <RaceOverview
+        position='alderman'
+        area='ward'
+        currentOfficialName='David Reyes'
+      />
+      <RaceOverview
+        position='mayor'
+        area='city'
+        currentOfficialName='Tony Harp'
+      />
+      <RaceOverview
+        position='representative'
+        area='state'
+        currentOfficialName='Al Paolillo'
+      />
+    </AnimatedHeaderScroll>
     );
   }
 }

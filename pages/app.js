@@ -7,6 +7,7 @@ import colors from 'px/styles/colors';
 import { Ionicons, MaterialIcons, Foundation, FontAwesome } from '@expo/vector-icons';
 import Races from 'px/pages/races';
 import Candidates from 'px/pages/candidates';
+import Animation from 'px/components/animated-header-scroll';
 
 console.disableYellowBox = true;
 
