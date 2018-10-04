@@ -11,10 +11,26 @@ import {
 
 
 const styles = {
+  screen: {
+    ...screen,
+    backgroundColor: colors.backgroundGray,
+  },
+  pageHeader: {
+    backgroundColor: colors.backgroundGrayLight,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.backgroundGrayDark,
+  },
+  pageTitle: {
+    ...pageTitle,
+  },
+  pageSubtitle: {
+    ...pageSubtitle,
+    marginBottom: 40,
+  },
   candidateSummaryBox: {
     marginRight: standardSpacingSize * 0.5,
     marginLeft: standardSpacingSize * 0.5,
-    marginTop: 10,
+    marginTop: 20,
     marginBottom: 10,
   },
   candidateSummary: {
@@ -37,9 +53,29 @@ const styles = {
 
   candidateSummaryBody: {
     ...horizontalSpacing,
-    ...verticalSpacing,
+    marginTop: standardSpacingSize,
     flexDirection: 'row',
     alignItems: 'center',
+  },
+
+  viewFullProfile: {
+    ...horizontalSpacing,
+    marginTop: 15,
+    paddingTop: 5,
+    paddingBottom: 5,
+    backgroundColor: colors.backgroundGrayLight,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    borderBottomRightRadius: 5,
+    borderBottomLeftRadius: 5,
+  },
+
+  viewFullProfileText: {
+    fontSize: 10,
+    color: colors.accent,
+    fontWeight: 'bold',
+    marginRight: 10,
   },
 
   currentOfficialImage: {

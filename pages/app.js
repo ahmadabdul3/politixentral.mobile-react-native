@@ -33,7 +33,7 @@ export default createMaterialBottomTabNavigator({
     screen: Candidates,
     navigationOptions: {
       tabBarIcon: ({ tintColor, focused }) => {
-        const color = focused ? colors.brandPurple : colors.textColorLighter;
+        const color = focused ? 'white' : colors.brandPurpleLight;
         return <Ionicons name="ios-people" size={22} color={color} />;
       },
     },
@@ -42,7 +42,7 @@ export default createMaterialBottomTabNavigator({
     screen: Races,
     navigationOptions: {
       tabBarIcon: ({ tintColor, focused }) => {
-        const color = focused ? colors.brandPurple : colors.textColorLighter;
+        const color = focused ? 'white' : colors.brandPurpleLight;
         return <FontAwesome name="flag-checkered" size={19} color={color} />;
       },
     },
@@ -50,9 +50,9 @@ export default createMaterialBottomTabNavigator({
 }, {
   tabBarPosition: 'bottom',
   lazy: true,
-  activeTintColor: colors.brandPurple,
-  inactiveTintColor: colors.textColorLighter,
+  activeTintColor: 'white',
+  inactiveTintColor: colors.brandPurpleLight,
   barStyle: {
-    backgroundColor: 'white',
+    backgroundColor: colors.brandPurpleDark,
   },
 });

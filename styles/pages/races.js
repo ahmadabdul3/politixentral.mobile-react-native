@@ -237,11 +237,16 @@ const styles = StyleSheet.create({
   },
 
   seeDetailsLink: {
-    marginTop: 20,
-    paddingBottom: standardSpacingSize,
+    ...horizontalSpacing,
+    marginTop: 15,
+    paddingTop: 5,
+    paddingBottom: 5,
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
     alignItems: 'center',
+    backgroundColor: colors.backgroundGrayLight,
+    borderBottomRightRadius: 5,
+    borderBottomLeftRadius: 5,
   },
   seeDetailsLinkText: {
     fontSize: 10,

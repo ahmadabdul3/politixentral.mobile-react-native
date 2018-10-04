@@ -13,29 +13,39 @@ import styles from 'px/styles/pages/candidates';
 class Candidates extends PureComponent {
   render() {
     return (
-      <ScrollView style={{ paddingTop: 60 }}>
-        <CandidateSummary
-          nav={this.props}
-          title='alderman'
-          area='ward'
-          officialName='David Reyes'
-          officialLabel='ward 8'
-        />
-        <CandidateSummary
-          nav={this.props}
-          title='mayor'
-          area='city'
-          officialName='Tony Harp'
-          officialLabel='new haven'
-        />
-        <CandidateSummary
-          nav={this.props}
-          title='representative'
-          area='state'
-          officialName='Al Paolillo'
-          officialLabel='connecticut'
-        />
-      </ScrollView>
+      <View style={styles.screen}>
+        <View style={styles.pageHeader}>
+          <Text style={styles.pageTitle}>
+            { 'officials'.toUpperCase() }
+          </Text>
+          <Text style={styles.pageSubtitle}>
+            See who's currently in office in the places that matter to you
+          </Text>
+        </View>
+        <ScrollView>
+          <CandidateSummary
+            nav={this.props}
+            title='alderman'
+            area='ward'
+            officialName='David Reyes'
+            officialLabel='ward 8'
+          />
+          <CandidateSummary
+            nav={this.props}
+            title='mayor'
+            area='city'
+            officialName='Toni Harp'
+            officialLabel='new haven'
+          />
+          <CandidateSummary
+            nav={this.props}
+            title='representative'
+            area='state'
+            officialName='Al Paolillo'
+            officialLabel='connecticut'
+          />
+        </ScrollView>
+      </View>
     );
   }
 }
@@ -43,6 +53,11 @@ class Candidates extends PureComponent {
 class CandidateSummary extends PureComponent {
   goToProfile = () => {
     this.props.nav.navigation.navigate('Alder');
+  }
+
+  get firstName() {
+    const { officialName } = this.props;
+    return officialName.split(' ')[0];
   }
 
   render() {
@@ -74,6 +89,12 @@ class CandidateSummary extends PureComponent {
                   { this.props.officialLabel.toUpperCase() }
                 </Text>
               </View>
+            </View>
+            <View style={styles.viewFullProfile}>
+              <Text style={styles.viewFullProfileText}>
+                { `see ${this.firstName}'s full profile`.toUpperCase() }
+              </Text>
+              <SimpleLineIcons name="arrow-right-circle" size={15} color={colors.accent} />
             </View>
           </View>
         </TouchableHighlight>
