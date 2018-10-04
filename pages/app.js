@@ -34,7 +34,7 @@ export default createMaterialBottomTabNavigator({
     navigationOptions: {
       tabBarIcon: ({ tintColor, focused }) => {
         const color = focused ? colors.brandPurple : colors.textColorLighter;
-        return <MaterialIcons name="person-outline" size={22} color={color} />;
+        return <Ionicons name="ios-people" size={22} color={color} />;
       },
     },
   },
