@@ -14,7 +14,27 @@ class Candidates extends PureComponent {
   render() {
     return (
       <ScrollView style={{ paddingTop: 60 }}>
-        <CandidateSummary pro={this.props}/>
+        <CandidateSummary
+          nav={this.props}
+          title='alderman'
+          area='ward'
+          officialName='David Reyes'
+          officialLabel='ward 8'
+        />
+        <CandidateSummary
+          nav={this.props}
+          title='mayor'
+          area='city'
+          officialName='Tony Harp'
+          officialLabel='new haven'
+        />
+        <CandidateSummary
+          nav={this.props}
+          title='representative'
+          area='state'
+          officialName='Al Paolillo'
+          officialLabel='connecticut'
+        />
       </ScrollView>
     );
   }
@@ -22,22 +42,42 @@ class Candidates extends PureComponent {
 
 class CandidateSummary extends PureComponent {
   goToProfile = () => {
-    this.props.pro.navigation.navigate('Alder');
+    this.props.nav.navigation.navigate('Alder');
   }
 
   render() {
     return (
-      <View style={styles.candidateSummaryBox}>
+      <ShadowView style={styles.candidateSummaryBox}>
         <TouchableHighlight
           onPress={this.goToProfile}
           style={styles.candidateSummary}
           underlayColor={colors.backgroundGrayDarker}
         >
-          <Text>
-            Alder
-          </Text>
+          <View>
+            <View style={styles.candidateSummaryHeader}>
+              <Text>
+                <Text style={styles.candidateSummaryTitle}>
+                  { this.props.title.toUpperCase() }
+                </Text>
+                <Text style={styles.candidateSummaryTitleSecondary}>
+                  { `   |  ${this.props.area}`.toUpperCase() }
+                </Text>
+              </Text>
+            </View>
+            <View style={styles.candidateSummaryBody}>
+              <View style={styles.currentOfficialImage} />
+              <View style={styles.currentOfficialDetails}>
+                <Text style={styles.currentOfficialName}>
+                  { this.props.officialName }
+                </Text>
+                <Text style={styles.currentOfficialLabel}>
+                  { this.props.officialLabel.toUpperCase() }
+                </Text>
+              </View>
+            </View>
+          </View>
         </TouchableHighlight>
-      </View>
+      </ShadowView>
     );
   }
 }

@@ -38,15 +38,6 @@ export default createMaterialBottomTabNavigator({
       },
     },
   },
-  // Alder: {
-  //   screen: CandidateProfile,
-  //   navigationOptions: {
-  //     tabBarIcon: ({ tintColor, focused }) => {
-  //       const color = focused ? colors.brandPurple : colors.textColorLighter;
-  //       return <MaterialIcons name="person-outline" size={22} color={color} />;
-  //     },
-  //   },
-  // },
   Races: {
     screen: Races,
     navigationOptions: {
