@@ -35,8 +35,8 @@ export default class AnimatedHeaderScroll extends PureComponent {
   animateHeader = (e) => {
     const yPosition = e.nativeEvent.contentOffset.y;
     this.setState({
-      marginTop: -10 - yPosition,
-      opacity: 1 - yPosition * 0.01,
+      marginTop: -10 - yPosition * 0.5,
+      opacity: 1 - yPosition * 0.005,
     });
 
 
