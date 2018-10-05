@@ -7,26 +7,12 @@ export const scrollRangeForAnimation = 100;
 
 export default class AnimatedHeaderScroll extends PureComponent {
   state = {
-    marginTop: new Animated.Value(-10),
+    titlePaddingTop: new Animated.Value(60),
+    marginTop: new Animated.Value(0),
     opacity: new Animated.Value(1),
   };
   scrollView = null;
   headerCollapsed = false;
-
-  onScrollEndSnapToEdge = event => {
-      if (!this.scrollView) return;
-
-      // const animationStartPoint = 0;
-      // const animationHalfwayPoint = scrollRangeForAnimation / 2;
-      // const animationEndPoint = scrollRangeForAnimation;
-      // const y = event.nativeEvent.contentOffset.y;
-      //
-      // if (y > animationStartPoint && y < animationHalfwayPoint) {
-      //     this.scrollView.scrollTo({ y: animationStartPoint });
-      // } else if (y >= animationHalfwayPoint && y < animationEndPoint) {
-      //     this.scrollView.scrollTo({ y: animationEndPoint });
-      // }
-  }
 
   registerScrollView = scrollView => {
       this.scrollView = scrollView ? scrollView._component : null;
@@ -34,46 +20,34 @@ export default class AnimatedHeaderScroll extends PureComponent {
 
   animateHeader = (e) => {
     const yPosition = e.nativeEvent.contentOffset.y;
+    if (yPosition < 1) return;
+
+    let paddingTop = 60 - yPosition * 2;
+    if (paddingTop < 25) paddingTop = 25;
+
+    let marginTop = 0 - yPosition * 2;
+    let opacity = 1 - yPosition * 0.01;
+
+    if (yPosition < 10) {
+      marginTop = 0;
+      opacity = 1;
+    }
+
     this.setState({
-      marginTop: -10 - yPosition * 0.5,
-      opacity: 1 - yPosition * 0.005,
+      marginTop,
+      opacity,
+      titlePaddingTop: paddingTop,
     });
-
-
-    // if (yPosition > 0 && !this.headerCollapsed) {
-    //   this.headerCollapsed = true;
-    //   // const opacityAnimation = Animated.timing(
-    //   //   opacity,
-    //   //   {
-    //   //     toValue: 0,
-    //   //     duration: 1000,
-    //   //   }
-    //   // );
-    //   //
-    //   // opacityAnimation.start();
-    //   this.setState({ marginTop: 0 });
-    // } else if (yPosition < 5 && this.headerCollapsed) {
-    //   this.headerCollapsed = false;
-    //   // const opacityAnimation = Animated.timing(
-    //   //   opacity,
-    //   //   {
-    //   //     toValue: 1,
-    //   //     duration: 1000,
-    //   //   }
-    //   // );
-    //   //
-    //   // opacityAnimation.start();
-    //   this.setState({ marginTop: 0 });
-    // }
   }
 
   render() {
-    const { marginTop, opacity } = this.state;
+    const { marginTop, opacity, titlePaddingTop } = this.state;
+
     return (
       <View style={styles.screen}>
         <View style={styles.pageHeader}>
           <View>
-            <Animated.Text
+            <Text
               style={{
                 ...stylesObj.pageSubtitle,
                 marginTop,
@@ -81,13 +55,13 @@ export default class AnimatedHeaderScroll extends PureComponent {
               }}
             >
               { this.props.subtitle }
-            </Animated.Text>
+            </Text>
           </View>
-          <Text style={styles.pageTitle}>
+          <Text style={{ ...stylesObj.pageTitle, paddingTop: titlePaddingTop }}>
             { this.props.title && this.props.title.toUpperCase() }
           </Text>
         </View>
-        <Animated.ScrollView
+        <ScrollView
           style={styles.scrollView}
           onScrollEndDrag={() => {}}
           onMomentumScrollEnd={() => {}}
@@ -95,29 +69,9 @@ export default class AnimatedHeaderScroll extends PureComponent {
           scrollEventThrottle={16}
           ref={this.registerScrollView}
         >
-
-          <View style={styles.scrollItems}>
-            { this.props.children }
-          </View>
-        </Animated.ScrollView>
+          { this.props.children }
+        </ScrollView>
       </View>
     );
   }
 }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//   },
-//   header: {
-//     paddingTop: 50,
-//   },
-//   scrollView: {
-//     backgroundColor: '#eee',
-//   },
-//   item: {
-//     padding: 80,
-//     backgroundColor: 'white',
-//     margin: 10,
-//   },
-// });

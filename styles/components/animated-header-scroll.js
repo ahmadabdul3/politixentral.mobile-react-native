@@ -11,10 +11,11 @@ import {
 const styles = {
   screen: {
     ...screen,
-    backgroundColor: colors.backgroundGray,
+    backgroundColor: colors.backgroundGrayDark,
   },
   pageHeader: {
-    backgroundColor: colors.backgroundGrayLight,
+    backgroundColor: colors.backgroundGrayLighter,
+    backgroundColor: 'white',
     borderBottomWidth: 1,
     borderBottomColor: colors.backgroundGrayDark,
     flexDirection: 'column-reverse',
@@ -22,13 +23,12 @@ const styles = {
   pageTitle: {
     ...horizontalSpacing,
     paddingTop: 60,
-    paddingBottom: 20,
+    paddingBottom: 10,
     fontWeight: '900',
     color: colors.primary,
     fontSize: 30,
   },
   pageSubtitle: {
-    backgroundColor: colors.backgroundGrayLight,
     marginTop: -10,
     paddingBottom: 30,
     paddingLeft: standardSpacingSize * 2,
@@ -39,12 +39,7 @@ const styles = {
     color: colors.textColorLighter,
   },
   scrollView: {
-    backgroundColor: colors.backgroundGrayLight,
-  },
-  scrollItems: {
-    // borderTopWidth: 1,
-    // borderTopColor: colors.backgroundGrayDark,
-    // backgroundColor: colors.backgroundGray,
+    backgroundColor: colors.backgroundGray,
   },
 };
 

@@ -11,22 +11,6 @@ import {
 
 
 const styles = {
-  screen: {
-    ...screen,
-    backgroundColor: colors.backgroundGray,
-  },
-  pageHeader: {
-    backgroundColor: colors.backgroundGrayLight,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.backgroundGrayDark,
-  },
-  pageTitle: {
-    ...pageTitle,
-  },
-  pageSubtitle: {
-    ...pageSubtitle,
-    marginBottom: 40,
-  },
   candidateSummaryBox: {
     marginRight: standardSpacingSize * 0.5,
     marginLeft: standardSpacingSize * 0.5,
@@ -37,23 +21,16 @@ const styles = {
     backgroundColor: 'white',
     borderRadius: 5,
   },
-  candidateSummaryHeader: {
-    ...horizontalSpacing,
-    paddingTop: standardSpacingSize,
-  },
+
   candidateSummaryTitle: {
-    ...sectionTitle,
-    color: colors.primary,
-  },
-  candidateSummaryTitleSecondary: {
-    ...pageSubtitle,
-    fontSize: 20,
-    fontWeight: '300',
+    fontSize: 10,
+    color: colors.textColor,
+    fontWeight: 'bold',
   },
 
   candidateSummaryBody: {
     ...horizontalSpacing,
-    marginTop: standardSpacingSize,
+    paddingTop: standardSpacingSize,
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -93,12 +70,12 @@ const styles = {
   currentOfficialName: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: colors.textColor,
+    color: colors.primary,
   },
 
   currentOfficialLabel: {
     marginTop: 2,
-    fontSize: 11,
+    fontSize: 9,
     color: colors.textColor,
   },
 };

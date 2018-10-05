@@ -10,22 +10,6 @@ import {
 } from 'px/styles/utils';
 
 const styles = StyleSheet.create({
-  screen: {
-    ...screen,
-    backgroundColor: colors.backgroundGray,
-  },
-  pageHeader: {
-    backgroundColor: colors.backgroundGrayLight,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.backgroundGrayDark,
-  },
-  pageTitle: {
-    ...pageTitle,
-  },
-  pageSubtitle: {
-    ...pageSubtitle,
-    marginBottom: 40,
-  },
   section: {
     ...section,
     marginBottom: 60,

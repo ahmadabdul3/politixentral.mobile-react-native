@@ -1,11 +1,12 @@
 import React, { PureComponent } from 'react';
 import { LinearGradient } from 'expo';
-import { Text, View, ScrollView, Image, TouchableHighlight } from 'react-native';
+import { Text, View, ScrollView, Image, TouchableHighlight, Dimensions } from 'react-native';
 import { SimpleLineIcons } from '@expo/vector-icons';
 import ShadowView from 'px/components/shadow-view';
 import { createStackNavigator } from 'react-navigation';
 import CandidateProfile from 'px/pages/candidate-profile';
 import AnimatedHeaderScroll from 'px/components/animated-header-scroll';
+import PageSection from 'px/components/page-section';
 
 import colors from 'px/styles/colors';
 import styles from 'px/styles/pages/candidates';
@@ -18,41 +19,57 @@ class Candidates extends PureComponent {
         title='my officials'
         subtitle='here are the elected individuals that currently hold office in your city and state'
       >
-        <CandidateSummary
-          nav={this.props}
-          title='alderman'
-          area='ward'
-          officialName='David Reyes'
-          officialLabel='ward 8'
-        />
-        <CandidateSummary
-          nav={this.props}
-          title='mayor'
-          area='city'
-          officialName='Toni Harp'
-          officialLabel='new haven'
-        />
-        <CandidateSummary
-          nav={this.props}
-          title='treasurer'
-          area='city'
-          officialName='Someone Else'
-          officialLabel='new haven'
-        />
-        <CandidateSummary
-          nav={this.props}
-          title='othertitle'
-          area='city'
-          officialName='Another Person'
-          officialLabel='new haven'
-        />
-        <CandidateSummary
-          nav={this.props}
-          title='representative'
-          area='state'
-          officialName='Al Paolillo'
-          officialLabel='connecticut'
-        />
+        <PageSection title='ward'>
+          <ScrollView
+            style={{ paddingTop: 5, paddingBottom: 15 }}
+            horizontal={true}
+          >
+            <CandidateSummary
+              nav={this.props}
+              title='alderman'
+              officialName='David Reyes'
+              officialLabel='ward 8'
+            />
+          </ScrollView>
+        </PageSection>
+        <PageSection title='city'>
+          <ScrollView
+            style={{ paddingTop: 5, paddingBottom: 15 }}
+            horizontal={true}
+          >
+            <CandidateSummary
+              nav={this.props}
+              title='mayor'
+              officialName='Toni Harp'
+              officialLabel='new haven'
+            />
+            <CandidateSummary
+              nav={this.props}
+              title='treasurer'
+              officialName='Someone Else'
+              officialLabel='new haven'
+            />
+            <CandidateSummary
+              nav={this.props}
+              title='othertitle'
+              officialName='Another Person'
+              officialLabel='new haven'
+            />
+          </ScrollView>
+        </PageSection>
+        <PageSection title='state'>
+          <ScrollView
+            style={{ paddingTop: 5, paddingBottom: 15 }}
+            horizontal={true}
+          >
+            <CandidateSummary
+              nav={this.props}
+              title='representative'
+              officialName='Al Paolillo'
+              officialLabel='connecticut'
+            />
+          </ScrollView>
+        </PageSection>
       </AnimatedHeaderScroll>
     );
   }
@@ -77,21 +94,14 @@ class CandidateSummary extends PureComponent {
           underlayColor={colors.backgroundGrayDarker}
         >
           <View>
-            <View style={styles.candidateSummaryHeader}>
-              <Text>
-                <Text style={styles.candidateSummaryTitle}>
-                  { this.props.title.toUpperCase() }
-                </Text>
-                <Text style={styles.candidateSummaryTitleSecondary}>
-                  { `   |  ${this.props.area}`.toUpperCase() }
-                </Text>
-              </Text>
-            </View>
             <View style={styles.candidateSummaryBody}>
               <View style={styles.currentOfficialImage} />
               <View style={styles.currentOfficialDetails}>
                 <Text style={styles.currentOfficialName}>
                   { this.props.officialName }
+                </Text>
+                <Text style={styles.candidateSummaryTitle}>
+                  { this.props.title.toUpperCase() }
                 </Text>
                 <Text style={styles.currentOfficialLabel}>
                   { this.props.officialLabel.toUpperCase() }
