@@ -17,6 +17,7 @@ const styles = {
     backgroundColor: colors.backgroundGrayLight,
     borderBottomWidth: 1,
     borderBottomColor: colors.backgroundGrayDark,
+    flexDirection: 'column-reverse',
   },
   pageTitle: {
     ...horizontalSpacing,
@@ -27,14 +28,23 @@ const styles = {
     fontSize: 30,
   },
   pageSubtitle: {
+    backgroundColor: colors.backgroundGrayLight,
     marginTop: -10,
     paddingBottom: 30,
-    marginLeft: standardSpacingSize * 2,
-    marginRight: standardSpacingSize,
+    paddingLeft: standardSpacingSize * 2,
+    paddingRight: standardSpacingSize,
     fontWeight: '300',
     fontSize: 24,
     lineHeight: 30,
     color: colors.textColorLighter,
+  },
+  scrollView: {
+    backgroundColor: colors.backgroundGrayLight,
+  },
+  scrollItems: {
+    // borderTopWidth: 1,
+    // borderTopColor: colors.backgroundGrayDark,
+    // backgroundColor: colors.backgroundGray,
   },
 };
 

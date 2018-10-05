@@ -3,16 +3,12 @@ import { StyleSheet, Text, View, ScrollView, Animated } from 'react-native';
 import stylesObj from 'px/styles/components/animated-header-scroll';
 const styles = StyleSheet.create(stylesObj);
 
-console.log('stylesobj', stylesObj);
-
 export const scrollRangeForAnimation = 100;
 
 export default class AnimatedHeaderScroll extends PureComponent {
   state = {
+    marginTop: new Animated.Value(-10),
     opacity: new Animated.Value(1),
-    fontSize: new Animated.Value(24),
-    paddingBottom: new Animated.Value(30),
-    display: 'flex',
   };
   scrollView = null;
   headerCollapsed = false;
@@ -37,98 +33,72 @@ export default class AnimatedHeaderScroll extends PureComponent {
   }
 
   animateHeader = (e) => {
-    const { opacity, fontSize, paddingBottom } = this.state;
     const yPosition = e.nativeEvent.contentOffset.y;
+    this.setState({
+      marginTop: -10 - yPosition,
+      opacity: 1 - yPosition * 0.01,
+    });
 
-    if (yPosition > 0 && !this.headerCollapsed) {
-      this.headerCollapsed = true;
-      // const opacityAnimation = Animated.timing(
-      //   opacity,
-      //   {
-      //     toValue: 0,
-      //     duration: 1000,
-      //   }
-      // );
-      //
-      // const fontSizeAnimation = Animated.timing(
-      //   fontSize,
-      //   {
-      //     toValue: 1,
-      //     duration: 1000,
-      //   }
-      // );
-      //
-      // const paddingBottomAnimation = Animated.timing(
-      //   paddingBottom,
-      //   {
-      //     toValue: 0,
-      //     duration: 1000,
-      //   }
-      // );
-      //
-      // opacityAnimation.start();
-      // fontSizeAnimation.start();
-      // paddingBottomAnimation.start();
-      this.setState({ display: 'none' });
-    } else if (yPosition < 5 && this.headerCollapsed) {
-      this.headerCollapsed = false;
-      // const opacityAnimation = Animated.timing(
-      //   opacity,
-      //   {
-      //     toValue: 1,
-      //     duration: 1000,
-      //   }
-      // );
-      //
-      // const fontSizeAnimation = Animated.timing(
-      //   fontSize,
-      //   {
-      //     toValue: 24,
-      //     duration: 1000,
-      //   }
-      // );
-      //
-      // const paddingBottomAnimation = Animated.timing(
-      //   paddingBottom,
-      //   {
-      //     toValue: 30,
-      //     duration: 1000,
-      //   }
-      // );
-      //
-      // opacityAnimation.start();
-      // fontSizeAnimation.start();
-      // paddingBottomAnimation.start();
-      this.setState({ display: 'flex' });
-    }
+
+    // if (yPosition > 0 && !this.headerCollapsed) {
+    //   this.headerCollapsed = true;
+    //   // const opacityAnimation = Animated.timing(
+    //   //   opacity,
+    //   //   {
+    //   //     toValue: 0,
+    //   //     duration: 1000,
+    //   //   }
+    //   // );
+    //   //
+    //   // opacityAnimation.start();
+    //   this.setState({ marginTop: 0 });
+    // } else if (yPosition < 5 && this.headerCollapsed) {
+    //   this.headerCollapsed = false;
+    //   // const opacityAnimation = Animated.timing(
+    //   //   opacity,
+    //   //   {
+    //   //     toValue: 1,
+    //   //     duration: 1000,
+    //   //   }
+    //   // );
+    //   //
+    //   // opacityAnimation.start();
+    //   this.setState({ marginTop: 0 });
+    // }
   }
 
   render() {
-    const { opacity, fontSize, paddingBottom, display } = this.state;
+    const { marginTop, opacity } = this.state;
     return (
       <View style={styles.screen}>
         <View style={styles.pageHeader}>
+          <View>
+            <Animated.Text
+              style={{
+                ...stylesObj.pageSubtitle,
+                marginTop,
+                opacity,
+              }}
+            >
+              { this.props.subtitle }
+            </Animated.Text>
+          </View>
           <Text style={styles.pageTitle}>
             { this.props.title && this.props.title.toUpperCase() }
           </Text>
-          <Animated.Text style={{
-            ...stylesObj.pageSubtitle,
-            // fontSize: fontSize,
-            // opacity: opacity,
-            // paddingBottom: paddingBottom,
-            display,
-          }}>
-            { this.props.subtitle }
-          </Animated.Text>
         </View>
         <Animated.ScrollView
           style={styles.scrollView}
-          onScrollEndDrag={this.animateHeader}
-          onMomentumScrollEnd={this.animateHeader}
-          onScroll={() => {}}
+          onScrollEndDrag={() => {}}
+          onMomentumScrollEnd={() => {}}
+          onScroll={this.animateHeader}
+          scrollEventThrottle={16}
           ref={this.registerScrollView}
         >
-          { this.props.children }
+
+          <View style={styles.scrollItems}>
+            { this.props.children }
+          </View>
         </Animated.ScrollView>
       </View>
     );
