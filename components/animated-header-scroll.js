@@ -7,37 +7,48 @@ export const scrollRangeForAnimation = 100;
 
 export default class AnimatedHeaderScroll extends PureComponent {
   state = {
-    titlePaddingTop: new Animated.Value(60),
+    titlePaddingTop: new Animated.Value(40),
     marginTop: new Animated.Value(0),
     opacity: new Animated.Value(1),
   };
-  scrollView = null;
   headerCollapsed = false;
+  scrollBeginPosition = null;
 
-  registerScrollView = scrollView => {
-      this.scrollView = scrollView ? scrollView._component : null;
+  collapseHeader() {
+    const { opacity, marginTop, titlePaddingTop } = this.state;
+    const duration = 300;
+    this.headerCollapsed = true;
+
+    Animated.parallel([
+      Animated.timing(opacity, { duration, toValue: 0 }),
+      Animated.timing(marginTop, { duration,  toValue: -150 }),
+      Animated.timing(titlePaddingTop, { duration, toValue: 25 }),
+    ]).start();
   }
 
-  animateHeader = (e) => {
+  expandHeader() {
+    const { opacity, marginTop, titlePaddingTop } = this.state;
+    const duration = 300;
+    this.headerCollapsed = false;
+
+    Animated.parallel([
+      Animated.timing(opacity, { duration, toValue: 1 }),
+      Animated.timing(marginTop, { duration,  toValue: 0 }),
+      Animated.timing(titlePaddingTop, { duration, toValue: 40 }),
+    ]).start();
+  }
+
+  onScrollBeginDrag = (e) => {
+    this.scrollBeginPosition = e.nativeEvent.contentOffset.y;
+  }
+
+  onScroll = (e) => {
     const yPosition = e.nativeEvent.contentOffset.y;
-    if (yPosition < 1) return;
-
-    let paddingTop = 60 - yPosition * 2;
-    if (paddingTop < 25) paddingTop = 25;
-
-    let marginTop = 0 - yPosition * 2;
-    let opacity = 1 - yPosition * 0.01;
-
-    if (yPosition < 10) {
-      marginTop = 0;
-      opacity = 1;
+    if (yPosition > this.scrollBeginPosition) {
+      if (!this.headerCollapsed) this.collapseHeader();
+    } else if (yPosition < this.scrollBeginPosition) {
+      if (yPosition < 50 && this.headerCollapsed) this.expandHeader();
     }
-
-    this.setState({
-      marginTop,
-      opacity,
-      titlePaddingTop: paddingTop,
-    });
   }
 
   render() {
@@ -47,7 +58,7 @@ export default class AnimatedHeaderScroll extends PureComponent {
       <View style={styles.screen}>
         <View style={styles.pageHeader}>
           <View>
-            <Text
+            <Animated.Text
               style={{
                 ...stylesObj.pageSubtitle,
                 marginTop,
@@ -55,19 +66,22 @@ export default class AnimatedHeaderScroll extends PureComponent {
               }}
             >
               { this.props.subtitle }
-            </Text>
+            </Animated.Text>
           </View>
-          <Text style={{ ...stylesObj.pageTitle, paddingTop: titlePaddingTop }}>
+          <Animated.Text
+            style={{
+              ...stylesObj.pageTitle,
+              paddingTop: titlePaddingTop,
+            }}
+          >
             { this.props.title && this.props.title.toUpperCase() }
-          </Text>
+          </Animated.Text>
         </View>
         <ScrollView
           style={styles.scrollView}
-          onScrollEndDrag={() => {}}
-          onMomentumScrollEnd={() => {}}
-          onScroll={this.animateHeader}
+          onScrollBeginDrag={this.onScrollBeginDrag}
+          onScroll={this.onScroll}
           scrollEventThrottle={16}
-          ref={this.registerScrollView}
         >
           { this.props.children }
         </ScrollView>
