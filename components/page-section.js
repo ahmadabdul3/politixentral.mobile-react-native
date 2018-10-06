@@ -2,16 +2,22 @@ import React, { PureComponent } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import rawStyles from 'px/styles/components/page-section';
 
-const styles = StyleSheet.create(rawStyles);
+const baseStyles = StyleSheet.create(rawStyles);
 
 export default class PageSection extends PureComponent {
+  static defaultProps = {
+    customStyles: {}
+  };
+
   render() {
-    const { title, children } = this.props;
+    const { title, customStyles, children } = this.props;
 
     return (
-      <View style={styles.pageSection}>
-        <Text style={styles.sectionTitle}>{ title && title.toUpperCase() }</Text>
-        <View style={styles.pageSectionContent}>
+      <View style={[ baseStyles.pageSection, customStyles.pageSection ]}>
+        <Text style={[ baseStyles.sectionTitle, customStyles.sectionTitle ]}>
+          { title && title.toUpperCase() }
+        </Text>
+        <View style={[ baseStyles.pageSectionContent, customStyles.pageSectionContent ]}>
           { children }
         </View>
       </View>

@@ -11,6 +11,13 @@ import {
 
 
 const styles = {
+  pageSection: {
+    paddingTop: 0,
+    paddingBottom: 0,
+  },
+  pageSectionContent: {
+    marginTop: -10,
+  },
   candidateSummaryBox: {
     marginRight: standardSpacingSize * 0.5,
     marginLeft: standardSpacingSize * 0.5,

@@ -19,7 +19,7 @@ class Candidates extends PureComponent {
         title='my officials'
         subtitle='here are the elected individuals that currently hold office in your city and state'
       >
-        <PageSection title='ward'>
+        <CandidatePageSection title='ward'>
           <ScrollView
             style={{ paddingTop: 5, paddingBottom: 15 }}
             horizontal={true}
@@ -31,8 +31,8 @@ class Candidates extends PureComponent {
               officialLabel='ward 8'
             />
           </ScrollView>
-        </PageSection>
-        <PageSection title='city'>
+        </CandidatePageSection>
+        <CandidatePageSection title='city'>
           <ScrollView
             style={{ paddingTop: 5, paddingBottom: 15 }}
             horizontal={true}
@@ -56,8 +56,8 @@ class Candidates extends PureComponent {
               officialLabel='new haven'
             />
           </ScrollView>
-        </PageSection>
-        <PageSection title='state'>
+        </CandidatePageSection>
+        <CandidatePageSection title='state'>
           <ScrollView
             style={{ paddingTop: 5, paddingBottom: 15 }}
             horizontal={true}
@@ -69,8 +69,27 @@ class Candidates extends PureComponent {
               officialLabel='connecticut'
             />
           </ScrollView>
-        </PageSection>
+        </CandidatePageSection>
       </AnimatedHeaderScroll>
+    );
+  }
+}
+
+class CandidatePageSection extends PureComponent {
+  render() {
+    const { title, children } = this.props;
+    const customStyles = {
+      pageSection: styles.pageSection,
+      pageSectionContent: styles.pageSectionContent,
+    };
+
+    return (
+      <PageSection
+        title={title}
+        customStyles={customStyles}
+      >
+        { children }
+      </PageSection>
     );
   }
 }
