@@ -6,11 +6,13 @@ import ShadowView from 'px/components/shadow-view';
 import AnimatedHeaderScroll from 'px/components/animated-header-scroll';
 import { HorisontalScrollPageSection } from 'px/components/page-section';
 import { ClickableContentSummaryBox } from 'px/components/content-summary-card';
+import { createStackNavigator } from 'react-navigation';
+import RaceDetails from 'px/pages/race-details';
 
 import colors from 'px/styles/colors';
 import styles from 'px/styles/pages/races';
 
-export default class Races extends PureComponent {
+class Races extends PureComponent {
   render() {
     return (
       <AnimatedHeaderScroll
@@ -21,18 +23,21 @@ export default class Races extends PureComponent {
           <RaceOverview
             position='alderman'
             currentOfficialName='David Reyes'
+            nav={this.props}
           />
         </HorisontalScrollPageSection>
         <HorisontalScrollPageSection title='new haven' titleSecondary='city'>
           <RaceOverview
             position='mayor'
             currentOfficialName='Tony Harp'
+            nav={this.props}
           />
         </HorisontalScrollPageSection>
         <HorisontalScrollPageSection title='ct' titleSecondary='state'>
           <RaceOverview
             position='representative'
             currentOfficialName='Al Paolillo'
+            nav={this.props}
           />
         </HorisontalScrollPageSection>
     </AnimatedHeaderScroll>
@@ -41,19 +46,19 @@ export default class Races extends PureComponent {
 }
 
 class RaceOverview extends PureComponent {
+  goToDetails = () => {
+    this.props.nav.navigation.navigate('RaceDetails');
+  }
+
   render() {
     const { position, area, currentOfficialName } = this.props;
     return (
       <ClickableContentSummaryBox
         cardTitle={position}
-        onPress={() => {}}
+        onPress={this.goToDetails}
         ViewType={ShadowView}
       >
         <RaceOverviewDetails candidateName={currentOfficialName} />
-        <RaceOverviewCurrentOfficial
-          position={position}
-          currentOfficialName={currentOfficialName}
-        />
         <RaceOverviewCandidates />
         <View style={styles.seeDetailsLink}>
           <Text style={styles.seeDetailsLinkText}>
@@ -86,6 +91,14 @@ class RaceOverviewDetails extends PureComponent {
           </Text>
           <Text style={styles.detailValue}>
             { '   4' }
+          </Text>
+        </Text>
+        <Text style={styles.detail}>
+          <Text style={styles.detailLabel}>
+            { 'incumbent'.toUpperCase() }
+          </Text>
+          <Text style={styles.detailValue}>
+            { `   ${candidateName}` }
           </Text>
         </Text>
       </View>
@@ -126,41 +139,21 @@ class RaceOverviewCurrentOfficial extends PureComponent {
   }
 }
 
-class CandidateCard extends PureComponent {
-  static party = {
-    democratic: 'democratic',
-    republican: 'republican',
-    independent: 'independent',
-  };
+const nav = createStackNavigator({
+  Races: {
+    screen: Races,
+    navigationOptions: () => ({
+      headerTransparent: true,
+      headerTintColor: colors.primary,
+    }),
+  },
+  RaceDetails: {
+    screen: RaceDetails,
+    navigationOptions: () => ({
+      headerTransparent: true,
+      headerTintColor: colors.primary,
+    }),
+  },
+});
 
-  get imageBoxClass() {
-    const { party } = this.props;
-    if (party === CandidateCard.party.democratic) return styles.candidateCardImageBoxBlue;
-    if (party === CandidateCard.party.republican) return styles.candidateCardImageBoxRed;
-    if (party === CandidateCard.party.independent) return styles.candidateCardImageBoxYellow;
-    return styles.candidateCardImageBox;
-  }
-
-  render() {
-    const { name, label } = this.props;
-    personImage = 'https://orig00.deviantart.net/819f/f/2018/261/e/9/screen_shot_2018_09_18_at_12_42_15_pm_by_duxfox-dcn63uc.png';
-
-    return (
-      <View style={styles.candidateCard}>
-        <View style={this.imageBoxClass} >
-          <Image
-            source={{ uri: personImage }}
-            style={{ width: '100%', height: '100%' }}
-            resizeMode='cover'
-          />
-        </View>
-        <Text style={styles.candidateName}>
-          { name }
-        </Text>
-        <Text style={styles.candidateLabel}>
-          { label.toUpperCase() }
-        </Text>
-      </View>
-    );
-  }
-}
+export default nav;

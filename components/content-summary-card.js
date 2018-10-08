@@ -22,7 +22,7 @@ export class ClickableContentSummaryBox extends PureComponent {
         </Text>
         <ViewType>
           <TouchableHighlight
-            onPress={this.onPress}
+            onPress={onPress}
             underlayColor={colors.backgroundGrayDarker}
           >
             <View style={styles.cardChildrenBox}>

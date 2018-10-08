@@ -7,7 +7,6 @@ export const scrollRangeForAnimation = 100;
 
 export default class AnimatedHeaderScroll extends PureComponent {
   state = {
-    titlePaddingTop: new Animated.Value(40),
     marginTop: new Animated.Value(0),
     opacity: new Animated.Value(1),
   };
@@ -15,26 +14,24 @@ export default class AnimatedHeaderScroll extends PureComponent {
   scrollBeginPosition = null;
 
   collapseHeader() {
-    const { opacity, marginTop, titlePaddingTop } = this.state;
+    const { opacity, marginTop } = this.state;
     const duration = 300;
     this.headerCollapsed = true;
 
     Animated.parallel([
       Animated.timing(opacity, { duration, toValue: 0 }),
       Animated.timing(marginTop, { duration,  toValue: -150 }),
-      Animated.timing(titlePaddingTop, { duration, toValue: 25 }),
     ]).start();
   }
 
   expandHeader() {
-    const { opacity, marginTop, titlePaddingTop } = this.state;
+    const { opacity, marginTop } = this.state;
     const duration = 300;
     this.headerCollapsed = false;
 
     Animated.parallel([
       Animated.timing(opacity, { duration, toValue: 1 }),
       Animated.timing(marginTop, { duration,  toValue: 0 }),
-      Animated.timing(titlePaddingTop, { duration, toValue: 40 }),
     ]).start();
   }
 
@@ -52,7 +49,7 @@ export default class AnimatedHeaderScroll extends PureComponent {
   }
 
   render() {
-    const { marginTop, opacity, titlePaddingTop } = this.state;
+    const { marginTop, opacity } = this.state;
 
     return (
       <View style={styles.screen}>
@@ -68,14 +65,9 @@ export default class AnimatedHeaderScroll extends PureComponent {
               { this.props.subtitle }
             </Animated.Text>
           </View>
-          <Animated.Text
-            style={{
-              ...stylesObj.pageTitle,
-              paddingTop: titlePaddingTop,
-            }}
-          >
+          <Text style={{ ...stylesObj.pageTitle }}>
             { this.props.title && this.props.title.toUpperCase() }
-          </Animated.Text>
+          </Text>
         </View>
         <ScrollView
           style={styles.scrollView}

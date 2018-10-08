@@ -22,7 +22,8 @@ const styles = {
   },
   pageTitle: {
     ...horizontalSpacing,
-    paddingTop: 60,
+    paddingLeft: standardSpacingSize * 1.5,
+    paddingTop: 24,
     paddingBottom: 10,
     fontWeight: '900',
     color: colors.primary,
@@ -31,7 +32,7 @@ const styles = {
   pageSubtitle: {
     marginTop: -10,
     paddingBottom: 30,
-    paddingLeft: standardSpacingSize * 2,
+    paddingLeft: standardSpacingSize * 2.5,
     paddingRight: standardSpacingSize,
     fontWeight: '300',
     fontSize: 24,
