@@ -17,9 +17,9 @@ const styles = {
   raceDetailCandidateCard: {
     marginRight: standardSpacingSize * 0.5,
     marginLeft: standardSpacingSize * 0.5,
-    marginTop: 1,
+    marginTop: -1,
     backgroundColor: 'white',
-    borderRadius: 5,
+    borderRadius: 2,
     ...horizontalSpacing,
     ...verticalSpacing,
     flexDirection: 'row',

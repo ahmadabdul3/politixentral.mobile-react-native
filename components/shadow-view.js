@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import rawStyles from 'px/styles/components/shadow-view';
+const styles = StyleSheet.create(rawStyles);
 
 export default class ShadowView extends PureComponent {
   render() {
@@ -7,14 +9,14 @@ export default class ShadowView extends PureComponent {
 
     return (
       <View
-        shadowColor='black'
-        shadowOpacity={0.12}
-        shadowOffset={{ width: 0, height: 4 }}
-        shadowRadius={7}
-        style={style}
+        style={[styles.shadowView, style]}
       >
         { children }
       </View>
     );
   }
 }
+// shadowColor='black'
+// shadowOpacity={0.12}
+// shadowOffset={{ width: 0, height: 4 }}
+// shadowRadius={7}

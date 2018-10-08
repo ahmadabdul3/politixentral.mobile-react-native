@@ -50,7 +50,10 @@ export class HorisontalScrollPageSection extends PureComponent {
         customStyles={customStyles}
       >
         <ScrollView
-          style={{ paddingTop: 5, paddingBottom: 15 }}
+          style={{
+            paddingLeft: 10, paddingRight: 10,
+            paddingTop: 5, paddingBottom: 15
+          }}
           horizontal={true}
         >
           { children }

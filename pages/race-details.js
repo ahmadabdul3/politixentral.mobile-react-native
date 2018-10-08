@@ -10,7 +10,7 @@ export default class RaceDetails extends PureComponent {
     return (
       <AnimatedHeaderScroll
         title='race details'
-        subtitle="Alderman - more details about the role and the race. We can even have info below this header if we don't want it to disappear"
+        subtitle="Alderman - more details about the role and the race go under this header"
       >
         <View style={styles.raceDetailsOfficials}>
           <RaceDetailCandidate name='David Reyes' />

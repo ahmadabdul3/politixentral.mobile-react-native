@@ -11,13 +11,14 @@ import {
 const styles = {
   screen: {
     ...screen,
-    backgroundColor: colors.backgroundGrayDark,
+    backgroundColor: colors.backgroundGrayLighter,
+    backgroundColor: 'white',
   },
   pageHeader: {
     backgroundColor: colors.backgroundGrayLighter,
     backgroundColor: 'white',
-    borderBottomWidth: 1,
-    borderBottomColor: colors.backgroundGrayDark,
+    borderBottomWidth: 2,
+    borderBottomColor: colors.backgroundGrayDarker,
     flexDirection: 'column-reverse',
   },
   pageTitle: {
@@ -40,7 +41,7 @@ const styles = {
     color: colors.textColorLighter,
   },
   scrollView: {
-    backgroundColor: colors.backgroundGray,
+    // backgroundColor: colors.backgroundGray,
   },
 };
 
