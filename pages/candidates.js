@@ -107,36 +107,35 @@ class CandidateSummary extends PureComponent {
 
   render() {
     return (
-      <ShadowView style={styles.candidateSummaryBox}>
-        <TouchableHighlight
-          onPress={this.goToProfile}
-          style={styles.candidateSummary}
-          underlayColor={colors.backgroundGrayDarker}
-        >
-          <View>
-            <View style={styles.candidateSummaryBody}>
-              <View style={styles.currentOfficialImage} />
-              <View style={styles.currentOfficialDetails}>
-                <Text style={styles.currentOfficialName}>
-                  { this.props.officialName }
+      <View style={styles.candidateSummaryBox}>
+        <Text style={styles.candidateSummaryTitle}>
+          { this.props.title.toUpperCase() }
+        </Text>
+        <ShadowView>
+          <TouchableHighlight
+            onPress={this.goToProfile}
+            style={styles.candidateSummary}
+            underlayColor={colors.backgroundGrayDarker}
+          >
+            <View>
+              <View style={styles.candidateSummaryBody}>
+                <View style={styles.currentOfficialImage} />
+                <View style={styles.currentOfficialDetails}>
+                  <Text style={styles.currentOfficialName}>
+                    { this.props.officialName }
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.viewFullProfile}>
+                <Text style={styles.viewFullProfileText}>
+                  { `full profile`.toUpperCase() }
                 </Text>
-                <Text style={styles.candidateSummaryTitle}>
-                  { this.props.title.toUpperCase() }
-                </Text>
-                <Text style={styles.currentOfficialLabel}>
-                  { this.props.officialLabel.toUpperCase() }
-                </Text>
+                <SimpleLineIcons name="arrow-right-circle" size={15} color={colors.accent} />
               </View>
             </View>
-            <View style={styles.viewFullProfile}>
-              <Text style={styles.viewFullProfileText}>
-                { `see ${this.firstName}'s full profile`.toUpperCase() }
-              </Text>
-              <SimpleLineIcons name="arrow-right-circle" size={15} color={colors.accent} />
-            </View>
-          </View>
-        </TouchableHighlight>
-      </ShadowView>
+          </TouchableHighlight>
+        </ShadowView>
+      </View>
     );
   }
 }

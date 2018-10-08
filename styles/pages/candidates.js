@@ -30,15 +30,17 @@ const styles = {
   },
 
   candidateSummaryTitle: {
-    fontSize: 10,
-    color: colors.textColor,
+    fontSize: 13,
+    color: colors.textColorLighter,
     fontWeight: 'bold',
+    marginLeft: 10,
+    marginBottom: 2,
   },
 
   candidateSummaryBody: {
     ...horizontalSpacing,
     paddingTop: standardSpacingSize,
-    flexDirection: 'row',
+    // flexDirection: 'row',
     alignItems: 'center',
   },
 
@@ -71,10 +73,11 @@ const styles = {
   },
 
   currentOfficialDetails: {
-    marginLeft: 15,
+    // marginLeft: 15,
   },
 
   currentOfficialName: {
+    marginTop: 10,
     fontSize: 16,
     fontWeight: 'bold',
     color: colors.primary,
