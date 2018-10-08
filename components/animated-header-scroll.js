@@ -13,9 +13,9 @@ export default class AnimatedHeaderScroll extends PureComponent {
   headerCollapsed = false;
   scrollBeginPosition = null;
 
-  collapseHeader() {
+  collapseHeader(yPosition) {
     const { opacity, marginTop } = this.state;
-    const duration = 300;
+    const duration = 200;
     this.headerCollapsed = true;
 
     Animated.parallel([
@@ -24,9 +24,9 @@ export default class AnimatedHeaderScroll extends PureComponent {
     ]).start();
   }
 
-  expandHeader() {
+  expandHeader(yPosition) {
     const { opacity, marginTop } = this.state;
-    const duration = 300;
+    const duration = 150;
     this.headerCollapsed = false;
 
     Animated.parallel([
@@ -42,9 +42,9 @@ export default class AnimatedHeaderScroll extends PureComponent {
   onScroll = (e) => {
     const yPosition = e.nativeEvent.contentOffset.y;
     if (yPosition > this.scrollBeginPosition) {
-      if (!this.headerCollapsed) this.collapseHeader();
+      if (!this.headerCollapsed) this.collapseHeader(yPosition);
     } else if (yPosition < this.scrollBeginPosition) {
-      if (yPosition < 50 && this.headerCollapsed) this.expandHeader();
+      if (yPosition < 50 && this.headerCollapsed) this.expandHeader(yPosition);
     }
   }
 
