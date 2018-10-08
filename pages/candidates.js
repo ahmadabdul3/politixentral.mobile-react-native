@@ -17,9 +17,9 @@ class Candidates extends PureComponent {
     return (
       <AnimatedHeaderScroll
         title='my officials'
-        subtitle='here are the elected individuals that currently hold office in your city and state'
+        subtitle='Here are the elected individuals that currently hold office in your city and state'
       >
-        <CandidatePageSection title='ward'>
+        <CandidatePageSection title='#8' titleSecondary='ward'>
           <ScrollView
             style={{ paddingTop: 5, paddingBottom: 15 }}
             horizontal={true}
@@ -32,7 +32,7 @@ class Candidates extends PureComponent {
             />
           </ScrollView>
         </CandidatePageSection>
-        <CandidatePageSection title='city'>
+        <CandidatePageSection title='new haven' titleSecondary='city'>
           <ScrollView
             style={{ paddingTop: 5, paddingBottom: 15 }}
             horizontal={true}
@@ -57,7 +57,7 @@ class Candidates extends PureComponent {
             />
           </ScrollView>
         </CandidatePageSection>
-        <CandidatePageSection title='state'>
+        <CandidatePageSection title='ct' titleSecondary='state'>
           <ScrollView
             style={{ paddingTop: 5, paddingBottom: 15 }}
             horizontal={true}
@@ -77,7 +77,7 @@ class Candidates extends PureComponent {
 
 class CandidatePageSection extends PureComponent {
   render() {
-    const { title, children } = this.props;
+    const { title, titleSecondary, children } = this.props;
     const customStyles = {
       pageSection: styles.pageSection,
       pageSectionContent: styles.pageSectionContent,
@@ -86,6 +86,7 @@ class CandidatePageSection extends PureComponent {
     return (
       <PageSection
         title={title}
+        titleSecondary={titleSecondary}
         customStyles={customStyles}
       >
         { children }

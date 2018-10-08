@@ -10,12 +10,26 @@ export default class PageSection extends PureComponent {
   };
 
   render() {
-    const { title, customStyles, children } = this.props;
+    const { title, titleSecondary, customStyles, children } = this.props;
 
     return (
       <View style={[ baseStyles.pageSection, customStyles.pageSection ]}>
-        <Text style={[ baseStyles.sectionTitle, customStyles.sectionTitle ]}>
-          { title && title.toUpperCase() }
+        <Text style={baseStyles.sectionTitleBox}>
+          <Text style={[ baseStyles.sectionTitle, customStyles.sectionTitle ]}>
+            { title && title.toUpperCase() }
+          </Text>
+          {
+            titleSecondary && (
+              <Text
+                style={[
+                  baseStyles.sectionTitleSecondary,
+                  customStyles.sectionTitleSecondary,
+                ]}
+              >
+                { '  |  ' + titleSecondary.toUpperCase() }
+              </Text>
+            )
+          }
         </Text>
         <View style={[ baseStyles.pageSectionContent, customStyles.pageSectionContent ]}>
           { children }
