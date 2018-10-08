@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, ScrollView } from 'react-native';
 import rawStyles from 'px/styles/components/page-section';
 
 const baseStyles = StyleSheet.create(rawStyles);
@@ -35,6 +35,27 @@ export default class PageSection extends PureComponent {
           { children }
         </View>
       </View>
+    );
+  }
+}
+
+export class HorisontalScrollPageSection extends PureComponent {
+  render() {
+    const { title, titleSecondary, customStyles, children } = this.props;
+
+    return (
+      <PageSection
+        title={title}
+        titleSecondary={titleSecondary}
+        customStyles={customStyles}
+      >
+        <ScrollView
+          style={{ paddingTop: 5, paddingBottom: 15 }}
+          horizontal={true}
+        >
+          { children }
+        </ScrollView>
+      </PageSection>
     );
   }
 }

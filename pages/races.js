@@ -4,6 +4,8 @@ import { Text, View, ScrollView, Image } from 'react-native';
 import { SimpleLineIcons } from '@expo/vector-icons';
 import ShadowView from 'px/components/shadow-view';
 import AnimatedHeaderScroll from 'px/components/animated-header-scroll';
+import { HorisontalScrollPageSection } from 'px/components/page-section';
+import { ClickableContentSummaryBox } from 'px/components/content-summary-card';
 
 import colors from 'px/styles/colors';
 import styles from 'px/styles/pages/races';
@@ -15,50 +17,25 @@ export default class Races extends PureComponent {
         title='races'
         subtitle="See who's running for office in the places that matter to you"
       >
-      <RaceOverview
-        position='alderman'
-        area='ward'
-        currentOfficialName='David Reyes'
-      />
-      <RaceOverview
-        position='mayor'
-        area='city'
-        currentOfficialName='Tony Harp'
-      />
-      <RaceOverview
-        position='representative'
-        area='state'
-        currentOfficialName='Al Paolillo'
-      />
+        <HorisontalScrollPageSection title='#8' titleSecondary='ward'>
+          <RaceOverview
+            position='alderman'
+            currentOfficialName='David Reyes'
+          />
+        </HorisontalScrollPageSection>
+        <HorisontalScrollPageSection title='new haven' titleSecondary='city'>
+          <RaceOverview
+            position='mayor'
+            currentOfficialName='Tony Harp'
+          />
+        </HorisontalScrollPageSection>
+        <HorisontalScrollPageSection title='ct' titleSecondary='state'>
+          <RaceOverview
+            position='representative'
+            currentOfficialName='Al Paolillo'
+          />
+        </HorisontalScrollPageSection>
     </AnimatedHeaderScroll>
-    );
-  }
-}
-
-class Section extends PureComponent {
-  render() {
-    const { title, subtitle, children } = this.props;
-
-    return (
-      <View style={styles.section}>
-        <View style={styles.sectionHeader}>
-          <View style={styles.sectionTitleBox}>
-            <Text style={styles.sectionTitle}>
-              { title.toUpperCase() }
-            </Text>
-            <View style={styles.titleSubtitleSeparator} />
-            <Text style={styles.sectionSubtitle}>
-              { subtitle.toUpperCase() }
-            </Text>
-          </View>
-          <Text style={styles.sectionHeaderLink}>
-            { 'more details'.toUpperCase() }
-          </Text>
-        </View>
-        <View style={styles.sectionContent}>
-          { children }
-        </View>
-      </View>
     );
   }
 }
@@ -67,48 +44,32 @@ class RaceOverview extends PureComponent {
   render() {
     const { position, area, currentOfficialName } = this.props;
     return (
-      <ShadowView style={styles.raceOverview}>
-        <View style={styles.raceOverviewTop}>
-          <RaceOverviewHeader position={position} area={area} />
-          <RaceOverviewDetails />
-          <RaceOverviewCandidates />
-        </View>
+      <ClickableContentSummaryBox
+        cardTitle={position}
+        onPress={() => {}}
+        ViewType={ShadowView}
+      >
+        <RaceOverviewDetails candidateName={currentOfficialName} />
         <RaceOverviewCurrentOfficial
           position={position}
           currentOfficialName={currentOfficialName}
         />
+        <RaceOverviewCandidates />
         <View style={styles.seeDetailsLink}>
           <Text style={styles.seeDetailsLinkText}>
             { `see full race details`.toUpperCase() }
           </Text>
           <SimpleLineIcons name="arrow-right-circle" size={15} color={colors.accent} />
         </View>
-      </ShadowView>
-    );
-  }
-}
-
-class RaceOverviewHeader extends PureComponent {
-  render() {
-    const { position, area } = this.props;
-
-    return (
-      <View style={styles.raceOverviewHeader}>
-        <Text>
-          <Text style={styles.raceOverviewTitle}>
-            { position.toUpperCase() }
-          </Text>
-          <Text style={styles.raceOverviewTitleSecondary}>
-            { `   |  ${area}`.toUpperCase() }
-          </Text>
-        </Text>
-      </View>
+      </ClickableContentSummaryBox>
     );
   }
 }
 
 class RaceOverviewDetails extends PureComponent {
   render() {
+    const { candidateName } = this.props;
+
     return (
       <View style={styles.raceOverviewDetails}>
         <Text style={styles.detail}>
@@ -150,20 +111,15 @@ class RaceOverviewCurrentOfficial extends PureComponent {
     const { position, currentOfficialName } = this.props;
 
     return (
-      <View style={styles.raceOverviewCurrentOfficial}>
-        <Text style={styles.currentOfficialHeader}>
-          { `current ${position}`.toUpperCase() }
-        </Text>
-        <View style={styles.currentOfficialSummary}>
-          <View style={styles.currentOfficialImage} />
-          <View style={styles.currentOfficialDetails}>
-            <Text style={styles.currentOfficialName}>
-              { currentOfficialName }
-            </Text>
-            <Text style={styles.currentOfficialLabel}>
-              { 'detail label'.toUpperCase() }
-            </Text>
-          </View>
+      <View style={styles.currentOfficialSummary}>
+        <View style={styles.currentOfficialImage} />
+        <View style={styles.currentOfficialDetails}>
+          <Text style={styles.currentOfficialName}>
+            { currentOfficialName }
+          </Text>
+          <Text style={styles.currentOfficialLabel}>
+            { 'incumbent'.toUpperCase() }
+          </Text>
         </View>
       </View>
     );

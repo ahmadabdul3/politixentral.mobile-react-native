@@ -1,12 +1,13 @@
 import React, { PureComponent } from 'react';
 import { LinearGradient } from 'expo';
-import { Text, View, ScrollView, Image, TouchableHighlight, Dimensions } from 'react-native';
+import { Text, View, ScrollView, Image, Dimensions } from 'react-native';
 import { SimpleLineIcons } from '@expo/vector-icons';
 import ShadowView from 'px/components/shadow-view';
 import { createStackNavigator } from 'react-navigation';
 import CandidateProfile from 'px/pages/candidate-profile';
 import AnimatedHeaderScroll from 'px/components/animated-header-scroll';
-import PageSection from 'px/components/page-section';
+import { HorisontalScrollPageSection } from 'px/components/page-section';
+import { ClickableContentSummaryBox } from 'px/components/content-summary-card';
 
 import colors from 'px/styles/colors';
 import styles from 'px/styles/pages/candidates';
@@ -19,78 +20,43 @@ class Candidates extends PureComponent {
         title='my officials'
         subtitle='Here are the elected individuals that currently hold office in your city and state'
       >
-        <CandidatePageSection title='#8' titleSecondary='ward'>
-          <ScrollView
-            style={{ paddingTop: 5, paddingBottom: 15 }}
-            horizontal={true}
-          >
-            <CandidateSummary
-              nav={this.props}
-              title='alderman'
-              officialName='David Reyes'
-              officialLabel='ward 8'
-            />
-          </ScrollView>
-        </CandidatePageSection>
-        <CandidatePageSection title='new haven' titleSecondary='city'>
-          <ScrollView
-            style={{ paddingTop: 5, paddingBottom: 15 }}
-            horizontal={true}
-          >
-            <CandidateSummary
-              nav={this.props}
-              title='mayor'
-              officialName='Toni Harp'
-              officialLabel='new haven'
-            />
-            <CandidateSummary
-              nav={this.props}
-              title='treasurer'
-              officialName='Someone Else'
-              officialLabel='new haven'
-            />
-            <CandidateSummary
-              nav={this.props}
-              title='othertitle'
-              officialName='Another Person'
-              officialLabel='new haven'
-            />
-          </ScrollView>
-        </CandidatePageSection>
-        <CandidatePageSection title='ct' titleSecondary='state'>
-          <ScrollView
-            style={{ paddingTop: 5, paddingBottom: 15 }}
-            horizontal={true}
-          >
+        <HorisontalScrollPageSection title='#8' titleSecondary='ward'>
+          <CandidateSummary
+            nav={this.props}
+            title='alderman'
+            officialName='David Reyes'
+            officialLabel='ward 8'
+          />
+        </HorisontalScrollPageSection>
+        <HorisontalScrollPageSection title='new haven' titleSecondary='city'>
+          <CandidateSummary
+            nav={this.props}
+            title='mayor'
+            officialName='Toni Harp'
+            officialLabel='new haven'
+          />
+          <CandidateSummary
+            nav={this.props}
+            title='treasurer'
+            officialName='Someone Else'
+            officialLabel='new haven'
+          />
+          <CandidateSummary
+            nav={this.props}
+            title='othertitle'
+            officialName='Another Person'
+            officialLabel='new haven'
+          />
+        </HorisontalScrollPageSection>
+        <HorisontalScrollPageSection title='ct' titleSecondary='state'>
             <CandidateSummary
               nav={this.props}
               title='representative'
               officialName='Al Paolillo'
               officialLabel='connecticut'
             />
-          </ScrollView>
-        </CandidatePageSection>
+        </HorisontalScrollPageSection>
       </AnimatedHeaderScroll>
-    );
-  }
-}
-
-class CandidatePageSection extends PureComponent {
-  render() {
-    const { title, titleSecondary, children } = this.props;
-    const customStyles = {
-      pageSection: styles.pageSection,
-      pageSectionContent: styles.pageSectionContent,
-    };
-
-    return (
-      <PageSection
-        title={title}
-        titleSecondary={titleSecondary}
-        customStyles={customStyles}
-      >
-        { children }
-      </PageSection>
     );
   }
 }
@@ -100,42 +66,28 @@ class CandidateSummary extends PureComponent {
     this.props.nav.navigation.navigate('Alder');
   }
 
-  get firstName() {
-    const { officialName } = this.props;
-    return officialName.split(' ')[0];
-  }
-
   render() {
+    const { title, officialName } = this.props;
+
     return (
-      <View style={styles.candidateSummaryBox}>
-        <Text style={styles.candidateSummaryTitle}>
-          { this.props.title.toUpperCase() }
-        </Text>
-        <ShadowView>
-          <TouchableHighlight
-            onPress={this.goToProfile}
-            style={styles.candidateSummary}
-            underlayColor={colors.backgroundGrayDarker}
-          >
-            <View>
-              <View style={styles.candidateSummaryBody}>
-                <View style={styles.currentOfficialImage} />
-                <View style={styles.currentOfficialDetails}>
-                  <Text style={styles.currentOfficialName}>
-                    { this.props.officialName }
-                  </Text>
-                </View>
-              </View>
-              <View style={styles.viewFullProfile}>
-                <Text style={styles.viewFullProfileText}>
-                  { `full profile`.toUpperCase() }
-                </Text>
-                <SimpleLineIcons name="arrow-right-circle" size={15} color={colors.accent} />
-              </View>
-            </View>
-          </TouchableHighlight>
-        </ShadowView>
-      </View>
+      <ClickableContentSummaryBox
+        cardTitle={title}
+        onPress={this.goToProfile}
+        ViewType={ShadowView}
+      >
+        <View style={styles.candidateSummaryBody}>
+          <View style={styles.currentOfficialImage} />
+          <Text style={styles.currentOfficialName}>
+            { officialName }
+          </Text>
+        </View>
+        <View style={styles.viewFullProfile}>
+          <Text style={styles.viewFullProfileText}>
+            { `full profile`.toUpperCase() }
+          </Text>
+          <SimpleLineIcons name="arrow-right-circle" size={15} color={colors.accent} />
+        </View>
+      </ClickableContentSummaryBox>
     );
   }
 }

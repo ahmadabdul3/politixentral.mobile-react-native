@@ -4,8 +4,6 @@ import { horizontalSpacing, verticalSpacing } from 'px/styles/utils';
 
 const styles = {
   pageSection: {
-    paddingTop: 10,
-    paddingBottom: 10,
   },
   sectionTitleBox: {
     ...verticalSpacing,
@@ -22,7 +20,7 @@ const styles = {
     fontSize: 20,
   },
   pageSectionContent: {
-
+    marginTop: -10,
   },
 };
 

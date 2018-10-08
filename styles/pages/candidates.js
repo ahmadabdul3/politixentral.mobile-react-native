@@ -11,13 +11,6 @@ import {
 
 
 const styles = {
-  pageSection: {
-    paddingTop: 0,
-    paddingBottom: 0,
-  },
-  pageSectionContent: {
-    marginTop: -10,
-  },
   candidateSummaryBox: {
     marginRight: standardSpacingSize * 0.5,
     marginLeft: standardSpacingSize * 0.5,
@@ -33,7 +26,7 @@ const styles = {
     fontSize: 13,
     color: colors.textColorLighter,
     fontWeight: 'bold',
-    marginLeft: 10,
+    marginLeft: 5,
     marginBottom: 2,
   },
 
@@ -70,10 +63,6 @@ const styles = {
     borderRadius: 50,
     borderWidth: 3,
     borderColor: colors.backgroundGrayDark,
-  },
-
-  currentOfficialDetails: {
-    // marginLeft: 15,
   },
 
   currentOfficialName: {

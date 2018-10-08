@@ -10,143 +10,21 @@ import {
 } from 'px/styles/utils';
 
 const styles = StyleSheet.create({
-  section: {
-    ...section,
-    marginBottom: 60,
-  },
-  sectionHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  sectionHeaderLink: {
-    color: colors.accent,
-    fontSize: 12,
-    fontWeight: 'bold',
-    marginRight: standardSpacingSize,
-  },
-  sectionTitle: {
-    ...sectionTitle,
-    paddingTop: 0,
-    paddingBottom: 0,
-  },
-  sectionTitleBox: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    alignContent: 'center',
-  },
-  titleSubtitleSeparator: {
-    marginRight: 15,
-    width: 1,
-    height: 20,
-    backgroundColor: colors.textColorLighter,
-  },
-  sectionSubtitle: {
-    color: colors.textColorLighter,
-    fontWeight: '300',
-    fontSize: 20,
-  },
-  sectionContent: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-    // marginRight: standardSpacingSize,
-    // marginLeft: standardSpacingSize,
-  },
-  candidateCard: {
-    padding: 15,
-    // flexGrow: 1,
-    margin: 5,
-    borderRadius: 5,
-    backgroundColor: 'white',
-    alignItems: 'center',
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: colors.backgroundGrayDarker,
-  },
-  candidateCardImageBox: {
-    width: 50,
-    height: 50,
-    borderRadius: 50,
-    borderWidth: 5,
-    borderColor: colors.textColorLighter,
-    overflow: 'hidden',
-    backgroundColor: 'white',
-  },
-  candidateCardImageBoxBlue: {
-    width: 50,
-    height: 50,
-    borderRadius: 50,
-    borderWidth: 3,
-    borderColor: colors.blue,
-    overflow: 'hidden',
-    backgroundColor: 'white',
-  },
-  candidateCardImageBoxRed: {
-    width: 50,
-    height: 50,
-    borderRadius: 50,
-    borderWidth: 3,
-    borderColor: colors.red,
-    overflow: 'hidden',
-    backgroundColor: 'white',
-  },
-  candidateCardImageBoxYellow: {
-    width: 50,
-    height: 50,
-    borderRadius: 50,
-    borderWidth: 3,
-    borderColor: colors.yellow,
-    overflow: 'hidden',
-    backgroundColor: 'white',
-  },
-  candidateName: {
-    marginTop: 15,
-    color: colors.textColor,
-    fontWeight: 'bold',
-    fontSize: 15,
-  },
-  candidateLabel: {
-    marginTop: 3,
-    fontWeight: 'bold',
-    fontSize: 10,
-    color: colors.textColorLighter,
-  },
-
-  raceOverview: {
-    backgroundColor: 'white',
+  raceOverviewBox: {
     marginRight: standardSpacingSize * 0.5,
     marginLeft: standardSpacingSize * 0.5,
     marginTop: 20,
     marginBottom: 10,
-    borderRadius: 5,
   },
 
-  // raceOverviewTop: {
-  //   backgroundColor: colors.primary,
-  //   borderTopRightRadius: 5,
-  //   borderTopLeftRadius: 5,
-  // },
-  raceOverviewHeader: {
-    ...horizontalSpacing,
-    ...verticalSpacing,
-    paddingBottom: 10,
-  },
-  raceOverviewTitle: {
-    ...sectionTitle,
-    color: colors.primary,
-    // color: 'white',
-  },
-  raceOverviewTitleSecondary: {
-    ...pageSubtitle,
-    // color: colors.brandPurpleLightest,
-    fontSize: 20,
-    fontWeight: '300',
+  raceOverview: {
+    backgroundColor: 'white',
+    borderRadius: 5,
   },
 
   raceOverviewDetails: {
     ...horizontalSpacing,
+    paddingTop: standardSpacingSize,
   },
   detail: {
     marginTop: 2,
@@ -167,8 +45,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     ...horizontalSpacing,
     paddingBottom: 20,
-    borderBottomColor: colors.backgroundGrayDark,
-    borderBottomWidth: 1,
+    // borderBottomColor: colors.backgroundGrayDark,
+    // borderBottomWidth: 1,
   },
   raceOverviewCandidate: {
     marginRight: 10,
@@ -191,16 +69,20 @@ const styles = StyleSheet.create({
   },
 
   currentOfficialSummary: {
+    ...horizontalSpacing,
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 15,
+    marginTop: 10,
+    paddingBottom: 15,
+    borderBottomColor: colors.backgroundGrayDark,
+    borderBottomWidth: 1,
   },
 
   currentOfficialImage: {
-    width: 50,
-    height: 50,
+    width: 40,
+    height: 40,
     borderRadius: 50,
-    borderWidth: 3,
+    borderWidth: 2,
     borderColor: colors.backgroundGrayDark,
   },
 
@@ -211,7 +93,7 @@ const styles = StyleSheet.create({
   currentOfficialName: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: colors.textColor,
+    color: colors.primary,
   },
 
   currentOfficialLabel: {
@@ -222,7 +104,7 @@ const styles = StyleSheet.create({
 
   seeDetailsLink: {
     ...horizontalSpacing,
-    marginTop: 15,
+    // marginTop: 15,
     paddingTop: 5,
     paddingBottom: 5,
     flexDirection: 'row',
