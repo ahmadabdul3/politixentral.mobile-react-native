@@ -21,6 +21,7 @@ const educationSummary = {
 const styles = StyleSheet.create({
   mainView: {
     backgroundColor: colors.backgroundGray,
+    backgroundColor: 'white',
   },
   sectionTitle: {
     ...sectionTitle,

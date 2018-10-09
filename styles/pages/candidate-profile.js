@@ -6,19 +6,36 @@ import {
   verticalSpacing,
   standardSpacingSize,
 } from 'px/styles/utils';
+import { pageTitle, pageSubtitle } from 'px/styles/typography';
 
 const styles = StyleSheet.create({
   screen,
+  tabHeader: {
+    ...verticalSpacing,
+    backgroundColor: colors.primary,
+    flexDirection: 'column-reverse',
+  },
+  tabHeaderText: {
+    ...pageTitle,
+    paddingTop: 0,
+    paddingBottom: 0,
+    paddingLeft: 0,
+    paddingRight: 0,
+    marginLeft: 50,
+    color: 'white',
+    fontWeight: '900',
+  },
   header: {
-    paddingRight: 30,
-    paddingLeft: 30,
-    paddingTop: 80,
-    paddingBottom: 30,
+    paddingRight: standardSpacingSize,
+    paddingTop: 30,
+    // paddingBottom: 30,
     backgroundColor: colors.logoGreen,
-    minHeight: 50,
+    height: '100%',
     alignItems: 'center',
+    // flexDirection: 'column-reverse',
   },
   headerBio: {
+    paddingLeft: 50,
     flexDirection: 'row',
     justifyContent: 'center',
   },
@@ -28,7 +45,7 @@ const styles = StyleSheet.create({
     width: 70,
     height: 70,
     borderWidth: 5,
-    borderColor: colors.blue,
+    borderColor: colors.primaryDark,
     borderRadius: 80,
     overflow: 'hidden',
   },
@@ -66,7 +83,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   missionStatement: {
-    marginTop: 24,
+    paddingLeft: standardSpacingSize,
+    marginTop: 25,
+    paddingBottom: 30,
   },
   statementBody: {
     fontSize: 13,
@@ -109,6 +128,19 @@ const styles = StyleSheet.create({
   education: {
 
   },
+
+  headerStatementToggle: {
+    width: 35,
+    height: 35,
+    borderRadius: 35,
+    backgroundColor: colors.brandPurpleLight,
+    overflow: 'hidden',
+  },
+  headerStatementToggleTouchable: {
+    width: 35,
+    height: 35,
+    borderRadius: 35,
+  }
 });
 
 export default styles;

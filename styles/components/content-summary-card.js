@@ -18,7 +18,7 @@ const styles = {
   },
   cardTitle: {
     fontSize: 13,
-    color: colors.textColorLighter,
+    color: colors.brandPurpleLighter,
     fontWeight: 'bold',
     marginLeft: 5,
     marginBottom: 2,

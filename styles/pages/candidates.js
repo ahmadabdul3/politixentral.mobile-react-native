@@ -24,7 +24,7 @@ const styles = {
 
   candidateSummaryTitle: {
     fontSize: 13,
-    color: colors.textColorLighter,
+    color: colors.brandPurpleLighter,
     fontWeight: 'bold',
     marginLeft: 5,
     marginBottom: 2,
@@ -69,7 +69,7 @@ const styles = {
     marginTop: 10,
     fontSize: 16,
     fontWeight: 'bold',
-    color: colors.primary,
+    color: colors.textColor,
   },
 
   currentOfficialLabel: {

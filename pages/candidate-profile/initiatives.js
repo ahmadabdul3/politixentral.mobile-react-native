@@ -15,11 +15,19 @@ import ShadowView from 'px/components/shadow-view';
 
 export default class Initiatives extends PureComponent {
   render() {
+    const {
+      ScrollViewWrapper,
+      setShouldCollapse,
+    } = this.props.bulkProps.screenProps;
+
     return (
-      <ScrollView style={styles.mainView}>
+      <ScrollViewWrapper
+        style={styles.mainView}
+        setShouldCollapse={setShouldCollapse}
+      >
         <WhatStandFor />
         <Projects />
-      </ScrollView>
+      </ScrollViewWrapper>
     );
   }
 }

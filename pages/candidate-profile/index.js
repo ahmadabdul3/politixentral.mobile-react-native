@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import candidateProfileStyles from 'px/styles/pages/candidate-profile';
 import colors from 'px/styles/colors';
 import { createMaterialTopTabNavigator } from 'react-navigation';
-import { View, Text } from 'react-native';
+import { View, Text, Animated, ScrollView } from 'react-native';
 import RepHeader from './rep-header';
 import About from './about';
 import Activity from './activity';
@@ -10,21 +10,24 @@ import Initiatives from './initiatives';
 
 
 const RepTabs = createMaterialTopTabNavigator({
-  Initiatives: {
-    screen: Initiatives
+  Bio: {
+    screen: RepHeader
+  },
+  Inits: {
+    screen: (props) => <Initiatives bulkProps={props} />,
   },
   Feed: {
-    screen: Activity
+    screen: (props) => <Activity bulkProps={props} />,
   },
   About: {
-    screen: About
+    screen: (props) => <About bulkProps={props} />,
   },
 }, {
   tabBarOptions: {
     activeTintColor: 'white',
     inactiveTintColor: colors.brandPurpleLight,
     style: {
-      backgroundColor: colors.primaryDark,
+      backgroundColor: colors.primary,
     },
     indicatorStyle: {
       backgroundColor: 'white',
@@ -32,15 +35,74 @@ const RepTabs = createMaterialTopTabNavigator({
   }
 });
 
-export default class CandidateProfile extends PureComponent {
-  static router = RepTabs.router;
-  name = 'Alder';
+class ScrollViewWrapper extends PureComponent {
+  scrollBeginPosition = null;
+  headerCollapsed = false;
+
+  onScrollBeginDrag = (e) => {
+    this.scrollBeginPosition = e.nativeEvent.contentOffset.y;
+  }
+
+  onScroll = (e) => {
+    const { setShouldCollapse } = this.props;
+
+    const yPosition = e.nativeEvent.contentOffset.y;
+    if (yPosition > this.scrollBeginPosition) {
+      if (!this.headerCollapsed) {
+        this.headerCollapsed = true;
+        setShouldCollapse(true);
+      }
+    } else if (yPosition < this.scrollBeginPosition) {
+      if (yPosition < 50 && this.headerCollapsed) {
+        this.headerCollapsed = false;
+        setShouldCollapse(false);
+      }
+    }
+  }
 
   render() {
     return (
+      <ScrollView
+        style={this.props.style}
+        onScrollBeginDrag={this.onScrollBeginDrag}
+        onScroll={this.onScroll}
+        scrollEventThrottle={16}
+      >
+        { this.props.children }
+      </ScrollView>
+    );
+  }
+}
+
+export default class CandidateProfile extends PureComponent {
+  static router = RepTabs.router;
+  name = 'Alder';
+  // headerCollapsed = false;
+  state = {
+    shouldCollapse: false,
+  };
+
+  setShouldCollapse = (shouldCollapse) => {
+    this.setState({ shouldCollapse });
+  }
+
+  render() {
+    const { shouldCollapse } = this.state;
+
+    return (
       <View style={candidateProfileStyles.screen}>
-        <RepHeader />
-        <RepTabs navigation={this.props.navigation} />
+        <View style={candidateProfileStyles.tabHeader}>
+          <Text style={candidateProfileStyles.tabHeaderText}>
+            David Reyes
+          </Text>
+        </View>
+        <RepTabs
+          navigation={this.props.navigation}
+          screenProps={{
+            setShouldCollapse: this.setShouldCollapse,
+            ScrollViewWrapper: ScrollViewWrapper,
+          }}
+        />
       </View>
     );
   }
