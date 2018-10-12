@@ -10,13 +10,13 @@ export default class ShadowView extends PureComponent {
     return (
       <View
         style={[styles.shadowView, style]}
+        shadowColor='black'
+        shadowOpacity={0.2}
+        shadowOffset={{ width: 0, height: 7 }}
+        shadowRadius={12}
       >
         { children }
       </View>
     );
   }
 }
-// shadowColor='black'
-// shadowOpacity={0.12}
-// shadowOffset={{ width: 0, height: 4 }}
-// shadowRadius={7}

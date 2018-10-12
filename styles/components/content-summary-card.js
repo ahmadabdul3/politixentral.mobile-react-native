@@ -13,7 +13,7 @@ const styles = {
   card: {
     marginRight: standardSpacingSize * 0.5,
     marginLeft: standardSpacingSize * 0.5,
-    marginTop: 20,
+    marginTop: 0,
     marginBottom: 10,
   },
   cardTitle: {

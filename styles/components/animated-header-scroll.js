@@ -17,8 +17,8 @@ const styles = {
   pageHeader: {
     backgroundColor: colors.backgroundGrayLighter,
     backgroundColor: 'white',
-    borderBottomWidth: 2,
-    borderBottomColor: colors.backgroundGrayDarker,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.backgroundPurpleDark,
     flexDirection: 'column-reverse',
   },
   pageTitle: {
@@ -38,10 +38,13 @@ const styles = {
     fontWeight: '300',
     fontSize: 24,
     lineHeight: 30,
-    color: colors.textColorLighter,
+    color: colors.brandPurpleMutedLight,
+  },
+  pageBody: {
+    flexGrow: 1,
   },
   scrollView: {
-    // backgroundColor: colors.backgroundGray,
+    backgroundColor: colors.backgroundPurple,
   },
 };
 

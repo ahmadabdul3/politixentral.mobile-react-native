@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import colors from 'px/styles/colors';
-import { sectionTitle } from 'px/styles/typography';
+import { sectionTitleGray } from 'px/styles/typography';
 import { section } from 'px/styles/sectioning';
 import {
   screen,
@@ -24,13 +24,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   sectionTitle: {
-    ...sectionTitle,
+    ...sectionTitleGray,
   },
   section: {
     ...section,
   },
   newsAndActivityTitle: {
-    ...sectionTitle,
+    ...sectionTitleGray,
   },
   educationSummary: {
     ...educationSummary,

@@ -4,6 +4,7 @@ import { horizontalSpacing, verticalSpacing } from 'px/styles/utils';
 
 const styles = {
   pageSection: {
+    marginBottom: 25,
   },
   sectionTitleBox: {
     ...verticalSpacing,
@@ -15,12 +16,12 @@ const styles = {
     paddingBottom: 0,
   },
   sectionTitleSecondary: {
-    color: colors.textColorLighter,
+    color: colors.brandPurpleLightest,
     fontWeight: '300',
     fontSize: 20,
   },
   pageSectionContent: {
-    marginTop: -10,
+    marginTop: 10,
   },
 };
 

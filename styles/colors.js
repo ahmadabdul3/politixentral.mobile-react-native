@@ -25,6 +25,7 @@ const colors = {
   brandPurpleLight2: '#B39EFF',
   brandPurpleLighter: '#a587dc',
   brandPurpleLightest: '#c8b5ec',
+  brandPurpleMutedLight: '#7a699a',
   orange: '#FA8A39',
   // red: '#F5336E',
   red: '#f53465',
@@ -35,6 +36,8 @@ const colors = {
   backgroundGrayLighter: '#f9fafc',
   backgroundGrayDark: '#e3e5ec',
   backgroundGrayDarker: '#dddfe6',
+  backgroundPurple: '#574479',
+  backgroundPurpleDark: '#564379',
 
   // social media
   facebook: '#3B5998',

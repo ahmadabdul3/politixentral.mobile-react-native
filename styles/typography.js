@@ -11,8 +11,13 @@ export const sectionTitle = {
   ...verticalSpacing,
   paddingBottom: 30,
   fontWeight: '800',
-  color: colors.textColor,
+  color: 'white',
   fontSize: 22,
+};
+
+export const sectionTitleGray = {
+  ...sectionTitle,
+  color: colors.textColor,
 };
 
 export const pageTitle = {
@@ -32,5 +37,5 @@ export const pageSubtitle = {
   fontWeight: '300',
   fontSize: 24,
   lineHeight: 28,
-  color: colors.textColorLighter,
+  color: colors.brandPurpleLight,
 };

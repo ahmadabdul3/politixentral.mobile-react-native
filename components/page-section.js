@@ -52,7 +52,7 @@ export class HorisontalScrollPageSection extends PureComponent {
         <ScrollView
           style={{
             paddingLeft: 10, paddingRight: 10,
-            paddingTop: 5, paddingBottom: 15
+            paddingTop: 0, paddingBottom: 15
           }}
           horizontal={true}
         >

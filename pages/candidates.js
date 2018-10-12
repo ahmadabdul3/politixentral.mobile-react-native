@@ -1,12 +1,12 @@
 import React, { PureComponent } from 'react';
 import { LinearGradient } from 'expo';
-import { Text, View, ScrollView, Image, Dimensions } from 'react-native';
+import { Text, View, ScrollView, Image, Dimensions, TouchableHighlight } from 'react-native';
 import { SimpleLineIcons } from '@expo/vector-icons';
 import ShadowView from 'px/components/shadow-view';
 import { createStackNavigator } from 'react-navigation';
 import CandidateProfile from 'px/pages/candidate-profile';
 import AnimatedHeaderScroll from 'px/components/animated-header-scroll';
-import { HorisontalScrollPageSection } from 'px/components/page-section';
+import PageSection from 'px/components/page-section';
 import { ClickableContentSummaryBox } from 'px/components/content-summary-card';
 
 import colors from 'px/styles/colors';
@@ -20,15 +20,15 @@ class Candidates extends PureComponent {
         title='my officials'
         subtitle='Here are the elected individuals that currently hold office in your city and state'
       >
-        <HorisontalScrollPageSection title='#8' titleSecondary='ward'>
+        <PageSection title='#8' titleSecondary='ward'>
           <CandidateSummary
             nav={this.props}
             title='alderman'
             officialName='David Reyes'
             officialLabel='ward 8'
           />
-        </HorisontalScrollPageSection>
-        <HorisontalScrollPageSection title='new haven' titleSecondary='city'>
+        </PageSection>
+        <PageSection title='new haven' titleSecondary='city'>
           <CandidateSummary
             nav={this.props}
             title='mayor'
@@ -37,7 +37,7 @@ class Candidates extends PureComponent {
           />
           <CandidateSummary
             nav={this.props}
-            title='treasurer'
+            title='chief of staff'
             officialName='Someone Else'
             officialLabel='new haven'
           />
@@ -47,19 +47,20 @@ class Candidates extends PureComponent {
             officialName='Another Person'
             officialLabel='new haven'
           />
-        </HorisontalScrollPageSection>
-        <HorisontalScrollPageSection title='ct' titleSecondary='state'>
-            <CandidateSummary
-              nav={this.props}
-              title='representative'
-              officialName='Al Paolillo'
-              officialLabel='connecticut'
-            />
-        </HorisontalScrollPageSection>
+        </PageSection>
       </AnimatedHeaderScroll>
     );
   }
 }
+
+// <PageSection title='ct' titleSecondary='state'>
+//     <CandidateSummary
+//       nav={this.props}
+//       title='representative'
+//       officialName='Al Paolillo'
+//       officialLabel='connecticut'
+//     />
+// </PageSection>
 
 class CandidateSummary extends PureComponent {
   goToProfile = () => {
@@ -70,24 +71,32 @@ class CandidateSummary extends PureComponent {
     const { title, officialName } = this.props;
 
     return (
-      <ClickableContentSummaryBox
-        cardTitle={title}
-        onPress={this.goToProfile}
-        ViewType={ShadowView}
-      >
-        <View style={styles.candidateSummaryBody}>
-          <View style={styles.currentOfficialImage} />
-          <Text style={styles.currentOfficialName}>
-            { officialName }
-          </Text>
-        </View>
-        <View style={styles.viewFullProfile}>
-          <Text style={styles.viewFullProfileText}>
-            { `full profile`.toUpperCase() }
-          </Text>
-          <SimpleLineIcons name="arrow-right-circle" size={15} color={colors.accent} />
-        </View>
-      </ClickableContentSummaryBox>
+      <ShadowView style={styles.candidateSummaryBox}>
+        <TouchableHighlight
+          onPress={this.goToProfile}
+          underlayColor={colors.backgroundGrayDarker}
+        >
+          <View style={styles.candidateSummaryBody}>
+            <View style={styles.candidateSummaryBio}>
+              <View style={styles.currentOfficialImage} />
+              <View>
+                <Text style={styles.currentOfficialName}>
+                  { officialName }
+                </Text>
+                <Text style={styles.candidateTitle}>
+                  { title.toUpperCase() }
+                </Text>
+              </View>
+            </View>
+            <View style={styles.viewFullProfile}>
+              <Text style={styles.viewFullProfileText}>
+                { `profile`.toUpperCase() }
+              </Text>
+              <SimpleLineIcons name="arrow-right-circle" size={15} color={colors.accent} />
+            </View>
+          </View>
+        </TouchableHighlight>
+      </ShadowView>
     );
   }
 }
@@ -97,14 +106,14 @@ const nav = createStackNavigator({
     screen: Candidates,
     navigationOptions: () => ({
       headerTransparent: true,
-      headerTintColor: 'white',
+      headerTintColor: colors.primary,
     }),
   },
   Alder: {
     screen: CandidateProfile,
     navigationOptions: () => ({
       headerTransparent: true,
-      headerTintColor: 'white',
+      headerTintColor: colors.primary,
     }),
   },
 });

@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   screen,
   tabHeader: {
     ...verticalSpacing,
-    backgroundColor: colors.primary,
+    backgroundColor: 'white',
     flexDirection: 'column-reverse',
   },
   tabHeaderText: {
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     paddingRight: 0,
     marginBottom: 0,
     marginLeft: 50,
-    color: 'white',
+    color: colors.primary,
     fontWeight: '900',
   },
   header: {
