@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
   raceOverview: {
     backgroundColor: 'white',
     borderRadius: 5,
+    width: '100%',
   },
 
   raceOverviewDetails: {

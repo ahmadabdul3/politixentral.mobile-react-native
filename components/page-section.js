@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Text, View, StyleSheet, ScrollView } from 'react-native';
+import { Text, View, StyleSheet, ScrollView, Dimensions } from 'react-native';
 import rawStyles from 'px/styles/components/page-section';
 
 const baseStyles = StyleSheet.create(rawStyles);
@@ -51,10 +51,16 @@ export class HorisontalScrollPageSection extends PureComponent {
       >
         <ScrollView
           style={{
-            paddingLeft: 10, paddingRight: 10,
+            paddingLeft: 0, paddingRight: 0,
             paddingTop: 0, paddingBottom: 15
           }}
           horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          scrollEventThrottle={10}
+          pagingEnabled
+          snapToInterval={Dimensions.get('window').width}
+          snapToAlignment={"center"}
+          decelerationRate="fast"
         >
           { children }
         </ScrollView>

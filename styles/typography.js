@@ -26,7 +26,7 @@ export const pageTitle = {
   paddingBottom: 60,
   fontWeight: '900',
   color: colors.primary,
-  fontSize: 30,
+  fontSize: 26,
 };
 
 export const pageSubtitle = {
@@ -35,7 +35,7 @@ export const pageSubtitle = {
   marginLeft: standardSpacingSize * 2,
   marginRight: standardSpacingSize,
   fontWeight: '300',
-  fontSize: 24,
+  fontSize: 23,
   lineHeight: 28,
   color: colors.brandPurpleLight,
 };

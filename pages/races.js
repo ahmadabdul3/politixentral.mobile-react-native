@@ -25,6 +25,16 @@ class Races extends PureComponent {
             currentOfficialName='David Reyes'
             nav={this.props}
           />
+          <RaceOverview
+            position='alderman'
+            currentOfficialName='David Reyes'
+            nav={this.props}
+          />
+          <RaceOverview
+            position='alderman'
+            currentOfficialName='David Reyes'
+            nav={this.props}
+          />
         </HorisontalScrollPageSection>
         <HorisontalScrollPageSection title='new haven' titleSecondary='city'>
           <RaceOverview

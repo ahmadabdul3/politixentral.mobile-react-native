@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import colors from 'px/styles/colors';
 import { pageTitle, pageSubtitle, sectionTitle } from 'px/styles/typography';
 import { section } from 'px/styles/sectioning';
@@ -15,6 +15,7 @@ const styles = {
     marginLeft: standardSpacingSize * 0.5,
     marginTop: 0,
     marginBottom: 10,
+    width: Dimensions.get('window').width - standardSpacingSize,
   },
   cardTitle: {
     fontSize: 13,
