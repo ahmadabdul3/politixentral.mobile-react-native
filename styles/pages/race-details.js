@@ -24,6 +24,7 @@ const styles = {
     ...verticalSpacing,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    marginTop: 1,
   },
 
   imagePlaceholder: {

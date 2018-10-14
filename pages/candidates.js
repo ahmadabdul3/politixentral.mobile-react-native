@@ -38,13 +38,13 @@ class Candidates extends PureComponent {
           <CandidateSummary
             nav={this.props}
             title='chief of staff'
-            officialName='Someone Else'
+            officialName='Tomas Reyes'
             officialLabel='new haven'
           />
           <CandidateSummary
             nav={this.props}
-            title='othertitle'
-            officialName='Another Person'
+            title='Chief Administrative Officer'
+            officialName='Michael Carter'
             officialLabel='new haven'
           />
         </PageSection>

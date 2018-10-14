@@ -68,7 +68,7 @@ const styles = {
     width: 40,
     height: 40,
     borderRadius: 40,
-    borderWidth: 3,
+    borderWidth: 2,
     marginRight: 15,
     borderColor: colors.backgroundGrayDark,
   },

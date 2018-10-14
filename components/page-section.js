@@ -58,13 +58,18 @@ export class HorisontalScrollPageSection extends PureComponent {
           showsHorizontalScrollIndicator={false}
           scrollEventThrottle={10}
           pagingEnabled
-          snapToInterval={Dimensions.get('window').width}
           snapToAlignment={"center"}
           decelerationRate="fast"
         >
           { children }
         </ScrollView>
+        <View style={baseStyles.horizontalScrollPageSectionDots}>
+          <View style={baseStyles.horizontalScrollPageSectionDot} />
+          <View style={baseStyles.horizontalScrollPageSectionDot} />
+        </View>
       </PageSection>
     );
   }
 }
+
+// snapToInterval={Dimensions.get('window').width}

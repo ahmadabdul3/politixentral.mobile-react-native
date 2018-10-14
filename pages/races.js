@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react';
 import { LinearGradient } from 'expo';
-import { Text, View, ScrollView, Image } from 'react-native';
+import { Text, View, ScrollView, Image, TouchableHighlight } from 'react-native';
 import { SimpleLineIcons } from '@expo/vector-icons';
 import ShadowView from 'px/components/shadow-view';
 import AnimatedHeaderScroll from 'px/components/animated-header-scroll';
-import { HorisontalScrollPageSection } from 'px/components/page-section';
+import PageSection from 'px/components/page-section';
 import { ClickableContentSummaryBox } from 'px/components/content-summary-card';
 import { createStackNavigator } from 'react-navigation';
 import RaceDetails from 'px/pages/race-details';
@@ -19,37 +19,30 @@ class Races extends PureComponent {
         title='races'
         subtitle="See who's running for office in the places that matter to you"
       >
-        <HorisontalScrollPageSection title='#8' titleSecondary='ward'>
+        <PageSection title='#8' titleSecondary='ward'>
           <RaceOverview
             position='alderman'
             currentOfficialName='David Reyes'
             nav={this.props}
           />
-          <RaceOverview
-            position='alderman'
-            currentOfficialName='David Reyes'
-            nav={this.props}
-          />
-          <RaceOverview
-            position='alderman'
-            currentOfficialName='David Reyes'
-            nav={this.props}
-          />
-        </HorisontalScrollPageSection>
-        <HorisontalScrollPageSection title='new haven' titleSecondary='city'>
+        </PageSection>
+        <PageSection title='new haven' titleSecondary='city'>
           <RaceOverview
             position='mayor'
             currentOfficialName='Tony Harp'
             nav={this.props}
           />
-        </HorisontalScrollPageSection>
-        <HorisontalScrollPageSection title='ct' titleSecondary='state'>
           <RaceOverview
-            position='representative'
-            currentOfficialName='Al Paolillo'
+            position='chief of staff'
+            currentOfficialName='Tomas Reyes'
             nav={this.props}
           />
-        </HorisontalScrollPageSection>
+          <RaceOverview
+            position='Chief Administrative Officer'
+            currentOfficialName='Michael Carter'
+            nav={this.props}
+          />
+        </PageSection>
     </AnimatedHeaderScroll>
     );
   }
@@ -63,20 +56,42 @@ class RaceOverview extends PureComponent {
   render() {
     const { position, area, currentOfficialName } = this.props;
     return (
-      <ClickableContentSummaryBox
-        cardTitle={position}
-        onPress={this.goToDetails}
-        ViewType={ShadowView}
-      >
-        <RaceOverviewDetails candidateName={currentOfficialName} />
-        <RaceOverviewCandidates />
+      <ShadowView style={styles.raceOverviewBox}>
+        <TouchableHighlight
+          onPress={this.goToDetails}
+          underlayColor={colors.backgroundGrayDarker}
+        >
+          <View>
+            <RaceOverviewHeader title={position} incumbent={currentOfficialName} />
+            <RaceOverviewCandidates />
+          </View>
+        </TouchableHighlight>
+      </ShadowView>
+    )
+  }
+}
+
+class RaceOverviewHeader extends PureComponent {
+  render() {
+    const { title, incumbent } = this.props;
+
+    return (
+      <View style={styles.raceOverviewHeader}>
+        <View style={styles.raceOverviewHeaderLeft}>
+          <Text style={styles.raceOverviewTitle}>
+            { title.toUpperCase() }
+          </Text>
+          <Text style={styles.raceOverviewIncumbent}>
+            CURRENT: {incumbent}
+          </Text>
+        </View>
         <View style={styles.seeDetailsLink}>
           <Text style={styles.seeDetailsLinkText}>
-            { `see full race details`.toUpperCase() }
+            { `race details`.toUpperCase() }
           </Text>
           <SimpleLineIcons name="arrow-right-circle" size={15} color={colors.accent} />
         </View>
-      </ClickableContentSummaryBox>
+      </View>
     );
   }
 }
@@ -117,7 +132,12 @@ class RaceOverviewDetails extends PureComponent {
 }
 
 class RaceOverviewCandidates extends PureComponent {
+  static defaultProps = {
+    numberOfCandidates: 4,
+  };
+
   render() {
+    const { numberOfCandidates } = this.props;
     return (
       <View style={styles.raceOverviewCandidates}>
         <View style={styles.raceOverviewCandidate} />

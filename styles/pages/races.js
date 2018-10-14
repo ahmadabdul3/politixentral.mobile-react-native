@@ -13,14 +13,9 @@ const styles = StyleSheet.create({
   raceOverviewBox: {
     marginRight: standardSpacingSize * 0.5,
     marginLeft: standardSpacingSize * 0.5,
-    marginTop: 20,
-    marginBottom: 10,
-  },
-
-  raceOverview: {
+    marginTop: 1,
     backgroundColor: 'white',
-    borderRadius: 5,
-    width: '100%',
+    borderRadius: 3,
   },
 
   raceOverviewDetails: {
@@ -41,11 +36,14 @@ const styles = StyleSheet.create({
   },
 
   raceOverviewCandidates: {
-    marginTop: 15,
-    flexDirection: 'row',
-    justifyContent: 'center',
     ...horizontalSpacing,
-    paddingBottom: 20,
+    flexDirection: 'row',
+    paddingTop: 9,
+    paddingBottom: 11,
+    backgroundColor: colors.backgroundGrayLight,
+    borderBottomLeftRadius: 3,
+    borderBottomRightRadius: 3,
+    // justifyContent: 'center',
     // borderBottomColor: colors.backgroundGrayDark,
     // borderBottomWidth: 1,
   },
@@ -103,17 +101,40 @@ const styles = StyleSheet.create({
     color: colors.textColor,
   },
 
-  seeDetailsLink: {
+  raceOverviewHeader: {
+    ...verticalSpacing,
     ...horizontalSpacing,
-    // marginTop: 15,
-    paddingTop: 5,
-    paddingBottom: 5,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingBottom: 15,
+    borderBottomColor: colors.backgroundGrayDark1,
+    borderBottomWidth: 1,
+  },
+
+  raceOverviewHeaderLeft: {
+    flexGrow: 1,
+    flexShrink: 1,
+  },
+
+  raceOverviewTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: colors.textColor,
+  },
+
+  raceOverviewIncumbent: {
+    fontSize: 11,
+    marginTop: 2,
+    fontWeight: 'bold',
+    color: colors.textColorLighter,
+  },
+
+  seeDetailsLink: {
+    marginLeft: 10,
     flexDirection: 'row',
     justifyContent: 'flex-end',
     alignItems: 'center',
-    backgroundColor: colors.backgroundGrayLight,
-    borderBottomRightRadius: 5,
-    borderBottomLeftRadius: 5,
+
   },
   seeDetailsLinkText: {
     fontSize: 10,

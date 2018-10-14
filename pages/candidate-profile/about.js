@@ -8,19 +8,11 @@ import {
 
 export default class About extends PureComponent {
   render() {
-    const {
-      ScrollViewWrapper,
-      setShouldCollapse,
-    } = this.props.bulkProps.screenProps;
-
     return (
-      <ScrollViewWrapper
-        style={styles.mainView}
-        setShouldCollapse={setShouldCollapse}
-      >
+      <ScrollView style={styles.mainView}>
         <Experience />
         <Education />
-      </ScrollViewWrapper>
+      </ScrollView>
     );
   }
 }

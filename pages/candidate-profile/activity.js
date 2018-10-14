@@ -26,23 +26,15 @@ export default class Activity extends PureComponent {
     });
   }
   render() {
-    const {
-      ScrollViewWrapper,
-      setShouldCollapse,
-    } = this.props.bulkProps.screenProps;
-
     return (
-      <ScrollViewWrapper
-        style={styles.mainView}
-        setShouldCollapse={setShouldCollapse}
-      >
+      <ScrollView style={styles.mainView}>
         <Text style={styles.newsAndActivityTitle}>
           {`news and activity`.toUpperCase()}
         </Text>
         <View style={styles.candidateFeed}>
           { this.feed }
         </View>
-      </ScrollViewWrapper>
+      </ScrollView>
     );
   }
 }

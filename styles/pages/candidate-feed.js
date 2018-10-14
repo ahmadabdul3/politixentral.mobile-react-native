@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import colors from 'px/styles/colors';
-import { sectionTitleGray } from 'px/styles/typography';
+import { sectionTitle } from 'px/styles/typography';
 import { section } from 'px/styles/sectioning';
 import {
   screen,
@@ -11,14 +11,14 @@ import {
 
 const styles = StyleSheet.create({
   mainView: {
-    backgroundColor: colors.backgroundGray,
-    backgroundColor: 'white',
+    backgroundColor: colors.backgroundPurple,
+    backgroundColor: colors.backgroundPurple,
   },
   candidateFeed: {
     ...section,
   },
   newsAndActivityTitle: {
-    ...sectionTitleGray,
+    ...sectionTitle,
   },
 });
 

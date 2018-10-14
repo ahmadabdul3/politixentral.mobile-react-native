@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import colors from 'px/styles/colors';
-import { sectionTitleGray } from 'px/styles/typography';
+import { sectionTitle } from 'px/styles/typography';
 import { section } from 'px/styles/sectioning';
 import {
   screen,
@@ -23,11 +23,11 @@ const projectShared = {
 
 const styles = StyleSheet.create({
   mainView: {
-    backgroundColor: colors.backgroundGray,
-    backgroundColor: 'white',
+    backgroundColor: colors.backgroundPurple,
+    backgroundColor: colors.backgroundPurple,
   },
   sectionTitle: {
-    ...sectionTitleGray,
+    ...sectionTitle,
   },
   whatStandFor: {
     ...section,
@@ -59,6 +59,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     lineHeight: 15,
     color: colors.textColor,
+    color: 'white',
   },
   projects: {
     ...section,

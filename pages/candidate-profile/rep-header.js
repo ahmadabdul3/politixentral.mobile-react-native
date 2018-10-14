@@ -9,55 +9,7 @@ import {
 } from 'react-native';
 
 export default class RepHeader extends PureComponent {
-  // headerCollapsed = false;
-  // state = {
-  //   missionStatementStyles: {
-  //     marginTop: new Animated.Value(25),
-  //     opacity: new Animated.Value(1),
-  //   },
-  // };
-
-  // expandHeader() {
-  //   // const { opacity, marginTop } = this.state.missionStatementStyles;
-  //   //
-  //   // Animated.parallel([
-  //   //   Animated.timing(opacity, { duration: 400, toValue: 1 }),
-  //   //   Animated.timing(marginTop, { duration: 100,  toValue: 25 }),
-  //   // ]).start();
-  //   this.setState({
-  //     missionStatementStyles: {
-  //       display: 'flex',
-  //     }
-  //   });
-  // }
-
-  // collapseHeader() {
-  //   // const { opacity, marginTop } = this.state.missionStatementStyles;
-  //   //
-  //   // Animated.parallel([
-  //   //   Animated.timing(opacity, { duration: 20, toValue: 0 }),
-  //   //   Animated.timing(marginTop, { duration: 200,  toValue: -150 }),
-  //   // ]).start();
-  //   this.setState({
-  //     missionStatementStyles: {
-  //       display: 'none',
-  //     }
-  //   });
-  // }
-
-  // toggleHeader = () => {
-  //   if (this.headerCollapsed) {
-  //     this.headerCollapsed = false;
-  //     this.expandHeader();
-  //   } else {
-  //     this.headerCollapsed = true;
-  //     this.collapseHeader();
-  //   }
-  // }
-
   render() {
-    // const { missionStatementStyles } = this.state;
-
     return (
       <LinearGradient
         colors={[ colors.primary, colors.primaryDark ]}
@@ -69,21 +21,6 @@ export default class RepHeader extends PureComponent {
     );
   }
 }
-
-// <HeaderStatementToggle onPress={this.toggleHeader} />
-// class HeaderStatementToggle extends PureComponent {
-//   render() {
-//     return (
-//         <TouchableHighlight
-//           onPress={this.props.onPress}
-//           underlayColor={colors.brandPurpleLighter}
-//           style={styles.headerStatementToggleTouchable}
-//         >
-//           <View style={styles.headerStatementToggle} />
-//         </TouchableHighlight>
-//     );
-//   }
-// }
 
 class HeaderBio extends PureComponent {
   render() {

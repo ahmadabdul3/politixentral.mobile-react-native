@@ -9,7 +9,10 @@ import {
 import { pageTitle, pageSubtitle } from 'px/styles/typography';
 
 const styles = StyleSheet.create({
-  screen,
+  screen: {
+    ...screen,
+    backgroundColor: colors.backgroundPurple,
+  },
   tabHeader: {
     ...verticalSpacing,
     backgroundColor: 'white',
