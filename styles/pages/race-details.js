@@ -14,35 +14,66 @@ const styles = {
     paddingLeft: 50,
     paddingTop: 27,
   },
+  raceDetailCandidates: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: standardSpacingSize,
+    flexWrap: 'wrap',
+  },
+  candidateSummaryHeader: {
+    margin: 10,
+    marginBottom: 20,
+    alignItems: 'center',
+  },
+  candidateSummaryHeaderImage: {
+    width: 50,
+    height: 50,
+    borderRadius: 50,
+    overflow: 'hidden',
+    backgroundColor: colors.brandPurpleLighter,
+  },
+  candidateSummaryHeaderFirstName: {
+    color: 'white',
+    marginTop: 10,
+    textAlign: 'center',
+    fontWeight: 'bold',
+  },
+  candidateSummaryHeaderLastName: {
+    color: 'white',
+    marginTop: 0,
+    textAlign: 'center',
+    fontWeight: 'bold',
+  },
   raceDetailsOfficials: {
     ...verticalSpacing,
   },
 
   raceDetailCandidateCard: {
-    marginRight: standardSpacingSize * 0.5,
-    marginLeft: standardSpacingSize * 0.5,
-    marginTop: -1,
-    backgroundColor: 'white',
-    borderRadius: 2,
-    ...horizontalSpacing,
-    ...verticalSpacing,
+    marginRight: standardSpacingSize,
+    marginLeft: standardSpacingSize,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 1,
+    marginTop: 20,
   },
 
   imagePlaceholder: {
+    overflow: 'hidden',
+    backgroundColor: colors.brandPurpleLighter,
     width: 40,
     height: 40,
     borderRadius: 40,
-    borderWidth: 2,
-    borderColor: colors.backgroundGrayDark,
     marginRight: 10,
   },
 
   reaceDetailBio: {
     flexDirection: 'row',
-    alignItems: 'center',
+  },
+  candidateComparisonDataItems: {
+    marginLeft: 10,
+  },
+  candidateComparisonDataItem: {
+    color: 'white',
+    marginBottom: 5,
   },
 
 };

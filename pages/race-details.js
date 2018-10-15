@@ -4,6 +4,7 @@ import AnimatedHeaderScroll from 'px/components/animated-header-scroll';
 import rawStyles from 'px/styles/pages/race-details';
 const styles = StyleSheet.create(rawStyles);
 import ShadowView from 'px/components/shadow-view';
+import PageSection from 'px/components/page-section';
 
 export default class RaceDetails extends PureComponent {
   render() {
@@ -13,18 +14,54 @@ export default class RaceDetails extends PureComponent {
         subtitle="Alderman - more details about the role and the race go under this header"
         customStyles={{ pageTitle: styles.pageTitle }}
       >
-        <View style={styles.raceDetailsOfficials}>
-          <RaceDetailCandidate name='David Reyes' />
-          <RaceDetailCandidate name='Another Person' />
-          <RaceDetailCandidate name='Some Guy' />
-          <RaceDetailCandidate name='William Ruiz' />
-        </View>
+        <RaceDetailCandidates />
+        <PageSection title='skills'>
+          <CandidateComparisonData data={['project management', 'financial analysis']} />
+          <CandidateComparisonData data={['team building', 'group event organization', 'eating buffalo wings']} />
+          <CandidateComparisonData data={['project management', 'financial analysis']} />
+          <CandidateComparisonData data={['team building', 'group event organization', 'eating buffalo wings']} />
+        </PageSection>
+        <PageSection title='initiatives'>
+          <CandidateComparisonData data={['project management', 'financial analysis']} />
+          <CandidateComparisonData data={['team building', 'group event organization', 'eating buffalo wings']} />
+          <CandidateComparisonData data={['project management', 'financial analysis']} />
+          <CandidateComparisonData data={['team building', 'group event organization', 'eating buffalo wings']} />
+        </PageSection>
       </AnimatedHeaderScroll>
     )
   }
 }
 
-class RaceDetailCandidate extends PureComponent {
+class RaceDetailCandidates extends PureComponent {
+  render() {
+    return (
+      <View style={styles.raceDetailCandidates}>
+        <CandidateSummaryHeader />
+        <CandidateSummaryHeader />
+        <CandidateSummaryHeader />
+        <CandidateSummaryHeader />
+      </View>
+    );
+  }
+}
+
+class CandidateSummaryHeader extends PureComponent {
+  render() {
+    return (
+      <View style={styles.candidateSummaryHeader}>
+        <View style={styles.candidateSummaryHeaderImage} />
+        <Text style={styles.candidateSummaryHeaderFirstName}>
+          candidate
+        </Text>
+        <Text style={styles.candidateSummaryHeaderLastName}>
+          name
+        </Text>
+      </View>
+    );
+  }
+}
+
+class CandidateComparisonData extends PureComponent {
   render() {
     return (
       <ShadowView style={styles.raceDetailCandidateCard}>
@@ -32,9 +69,17 @@ class RaceDetailCandidate extends PureComponent {
           <View style={styles.imagePlaceholder}>
 
           </View>
-          <Text>
-            { this.props.name }
-          </Text>
+          <View style={styles.candidateComparisonDataItems}>
+            {
+              this.props.data.map((item, i) => {
+                return (
+                  <Text key={i} style={styles.candidateComparisonDataItem}>
+                    - { item }
+                  </Text>
+                );
+              })
+            }
+          </View>
         </View>
       </ShadowView>
     );

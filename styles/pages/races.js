@@ -106,6 +106,7 @@ const styles = StyleSheet.create({
     ...horizontalSpacing,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'flex-start',
     paddingBottom: 15,
     borderBottomColor: colors.backgroundGrayDark1,
     borderBottomWidth: 1,
