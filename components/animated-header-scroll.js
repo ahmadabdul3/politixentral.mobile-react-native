@@ -50,6 +50,7 @@ export default class AnimatedHeaderScroll extends PureComponent {
 
   render() {
     const { marginTop, opacity } = this.state;
+    const { customStyles } = this.props;
 
     return (
       <View style={styles.screen}>
@@ -65,7 +66,7 @@ export default class AnimatedHeaderScroll extends PureComponent {
               { this.props.subtitle }
             </Animated.Text>
           </View>
-          <Text style={{ ...stylesObj.pageTitle }}>
+          <Text style={[stylesObj.pageTitle, customStyles && customStyles.pageTitle]}>
             { this.props.title && this.props.title.toUpperCase() }
           </Text>
         </View>

@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   educationSummaryDate: {
-    color: colors.brandPurpleLighter,
+    color: colors.brandPurpleLightest,
     fontWeight: 'bold',
     fontSize: 10,
   },
@@ -66,17 +66,17 @@ const styles = StyleSheet.create({
   },
   educationSummaryLocation: {
     fontSize: 10,
-    color: colors.textColorLight,
+    color: colors.textColorLighter,
     fontWeight: 'bold',
   },
   school: {
     fontWeight: 'bold',
-    color: colors.textColorLighter,
+    color: colors.textColorLightest,
     fontSize: 12,
   },
   educationFieldDegree: {
     marginTop: 3,
-    color: colors.primary,
+    color: 'white',
     fontWeight: 'bold',
     fontSize: 16,
     alignItems: 'center',

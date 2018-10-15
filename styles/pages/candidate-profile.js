@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   },
   tabHeaderText: {
     ...pageTitle,
-    paddingTop: 0,
+    paddingTop: 3,
     paddingBottom: 0,
     paddingLeft: 0,
     paddingRight: 0,

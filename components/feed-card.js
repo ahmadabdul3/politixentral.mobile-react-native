@@ -24,7 +24,7 @@ export default class FeedCard extends PureComponent {
     const { media } = this.props;
     if (!media) return;
 
-    return <ScaledImage uri={media} maxHeight={140} maxWidth={150} />;
+    return <ScaledImage uri={media} maxHeight={110} maxWidth={120} />;
   }
 
   get style() {
@@ -77,7 +77,9 @@ class SocialIcon extends PureComponent {
 
     return (
       <View style={styles.socialMediaSourceIcon}>
-        { icon }
+        <View style={styles.socialMediaSourceIconBox}>
+          { icon }
+        </View>
         <Text style={styles.socialMediaSourceIconLabel}>
           {label.toUpperCase()}
         </Text>

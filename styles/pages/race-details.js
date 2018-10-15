@@ -10,6 +10,10 @@ import {
 } from 'px/styles/utils';
 
 const styles = {
+  pageTitle: {
+    paddingLeft: 50,
+    paddingTop: 27,
+  },
   raceDetailsOfficials: {
     ...verticalSpacing,
   },

@@ -21,13 +21,13 @@ const RepTabs = createMaterialTopTabNavigator({
   },
 }, {
   tabBarOptions: {
-    activeTintColor: colors.primary,
+    activeTintColor: colors.backgroundPurpleDark,
     inactiveTintColor: colors.textColorLighter,
     style: {
       backgroundColor: 'white',
     },
     indicatorStyle: {
-      backgroundColor: colors.primary,
+      backgroundColor: colors.backgroundPurpleDark,
     }
   }
 });

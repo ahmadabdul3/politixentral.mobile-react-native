@@ -11,6 +11,7 @@ export default class RaceDetails extends PureComponent {
       <AnimatedHeaderScroll
         title='race details'
         subtitle="Alderman - more details about the role and the race go under this header"
+        customStyles={{ pageTitle: styles.pageTitle }}
       >
         <View style={styles.raceDetailsOfficials}>
           <RaceDetailCandidate name='David Reyes' />

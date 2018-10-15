@@ -12,17 +12,21 @@ const borderRadius = 10;
 
 const feedCardShared = {
   ...cardStyles,
+  paddingRight: 0,
+  paddingLeft: 0,
   backgroundColor: 'transparent',
   borderRadius: 0,
   position: 'relative',
   paddingTop: 0,
-  paddingBottom: 0,
-  marginRight: 0,
-  marginLeft: 0,
+  paddingBottom: 20,
+  marginRight: standardSpacingSize * 0.5,
+  marginLeft: standardSpacingSize * 0.5,
   marginTop: 20,
   flexDirection: 'row',
-  alignItems: 'flex-start',
-  overflow: 'hidden',
+  // alignItems: 'flex',
+  // borderBottomColor: colors.brandPurpleLightest,
+  // borderBottomWidth: StyleSheet.hairlineWidth,
+  // overflow: 'hidden',
 };
 
 const styles = StyleSheet.create({
@@ -36,20 +40,23 @@ const styles = StyleSheet.create({
   feedCardLast: {
     ...feedCardShared,
     marginBottom: 20,
+    borderBottomWidth: 0,
   },
   feedCardMediaSection: {
     marginLeft: 10,
+    paddingTop: 12,
     flexGrow: 0,
     flexShrink: 0,
-    justifyContent: 'flex-start',
   },
   feedCardMediaContainer: {
     overflow: 'hidden',
-    borderRadius: 5,
-    backgroundColor: 'red',
+    borderRadius: 2,
+    // backgroundColor: 'red',
   },
   feedCardText: {
     paddingRight: 10,
+    paddingTop: 10,
+    paddingBottom: 10,
     flexGrow: 1,
     flexShrink: 1,
   },
@@ -58,11 +65,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginLeft: 1,
   },
+  socialMediaSourceIconBox: {
+    backgroundColor: 'white',
+    borderRadius: 18,
+    width: 18,
+    height: 18,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   socialMediaSourceIconLabel: {
     fontWeight: 'bold',
     fontSize: 10,
-    color: colors.textColorLight,
-    marginLeft: 10,
+    color: colors.brandPurpleLightest,
+    marginLeft: 8,
   },
   date: {
     marginTop: 20,
@@ -73,7 +88,7 @@ const styles = StyleSheet.create({
   title: {
     marginTop: 7,
     fontWeight: 'bold',
-    color: colors.primary,
+    color: 'white',
     fontSize: 16,
     lineHeight: 18,
   },
