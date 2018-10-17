@@ -12,7 +12,7 @@ export default class RepHeader extends PureComponent {
   render() {
     return (
       <LinearGradient
-        colors={[ colors.primary, colors.primaryDark ]}
+        colors={[colors.backgroundPurple, colors.backgroundPurpleDarker]}
         style={styles.header}
       >
         <HeaderBio />
@@ -21,6 +21,12 @@ export default class RepHeader extends PureComponent {
     );
   }
 }
+
+// <View style={candidateProfileStyles.tabHeader}>
+//   <Text style={candidateProfileStyles.tabHeaderText}>
+//     David Reyes
+//   </Text>
+// </View>
 
 class HeaderBio extends PureComponent {
   render() {

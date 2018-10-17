@@ -39,6 +39,7 @@ const colors = {
   backgroundGrayDarker: '#dddfe6',
   backgroundPurple: '#574479',
   backgroundPurpleDark: '#564379',
+  backgroundPurpleDarker: '#4E3D6B',
 
   // social media
   facebook: '#3B5998',

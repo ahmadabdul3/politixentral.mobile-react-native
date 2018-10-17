@@ -15,8 +15,8 @@ const styles = StyleSheet.create({
   },
   tabHeader: {
     ...verticalSpacing,
-    backgroundColor: 'white',
-    flexDirection: 'column-reverse',
+    paddingBottom: 0,
+    backgroundColor: colors.backgroundPurple,
   },
   tabHeaderText: {
     ...pageTitle,
@@ -30,11 +30,10 @@ const styles = StyleSheet.create({
     fontWeight: '900',
   },
   header: {
+    backgroundColor: colors.backgroundPurple,
     paddingRight: standardSpacingSize,
     paddingTop: 30,
     // paddingBottom: 30,
-    backgroundColor: colors.logoGreen,
-    height: '100%',
     alignItems: 'center',
     // flexDirection: 'column-reverse',
   },
@@ -48,8 +47,8 @@ const styles = StyleSheet.create({
     flexShrink: 0,
     width: 70,
     height: 70,
-    borderWidth: 5,
-    borderColor: colors.primaryDark,
+    borderWidth: 3,
+    borderColor: colors.backgroundGrayDarker,
     borderRadius: 80,
     overflow: 'hidden',
   },
@@ -75,21 +74,14 @@ const styles = StyleSheet.create({
     width: '100%',
     marginTop: 15,
   },
-  // headerDemographicsSeperator: {
-  //   width: '100%',
-  //   height: 0.5,
-  //   marginBottom: 15,
-  //   marginTop: 7,
-  //   backgroundColor: 'white',
-  // },
   headerDemographicsRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
   missionStatement: {
     paddingLeft: standardSpacingSize,
-    marginTop: 25,
-    paddingBottom: 30,
+    marginTop: 15,
+    paddingBottom: 0,
   },
   statementBody: {
     fontSize: 13,

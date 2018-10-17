@@ -21,13 +21,13 @@ const RepTabs = createMaterialTopTabNavigator({
   },
 }, {
   tabBarOptions: {
-    activeTintColor: colors.backgroundPurpleDark,
-    inactiveTintColor: colors.textColorLighter,
+    activeTintColor: 'white',
+    inactiveTintColor: colors.brandPurpleLighter,
     style: {
-      backgroundColor: 'white',
+      backgroundColor: colors.backgroundPurpleDarker,
     },
     indicatorStyle: {
-      backgroundColor: colors.backgroundPurpleDark,
+      backgroundColor: 'white',
     }
   }
 });
@@ -39,11 +39,7 @@ export default class CandidateProfile extends PureComponent {
   render() {
     return (
       <View style={candidateProfileStyles.screen}>
-        <View style={candidateProfileStyles.tabHeader}>
-          <Text style={candidateProfileStyles.tabHeaderText}>
-            David Reyes
-          </Text>
-        </View>
+        <RepHeader />
         <RepTabs
           navigation={this.props.navigation}
         />
@@ -51,3 +47,9 @@ export default class CandidateProfile extends PureComponent {
     );
   }
 }
+
+<View style={candidateProfileStyles.tabHeader}>
+  <Text style={candidateProfileStyles.tabHeaderText}>
+    David Reyes
+  </Text>
+</View>

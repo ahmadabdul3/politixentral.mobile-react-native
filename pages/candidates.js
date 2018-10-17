@@ -106,14 +106,14 @@ const nav = createStackNavigator({
     screen: Candidates,
     navigationOptions: () => ({
       headerTransparent: true,
-      headerTintColor: colors.primary,
+      headerTintColor: 'white',
     }),
   },
   Alder: {
     screen: CandidateProfile,
     navigationOptions: () => ({
       headerTransparent: true,
-      headerTintColor: colors.primary,
+      headerTintColor: 'white',
     }),
   },
 });
