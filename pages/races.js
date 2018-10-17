@@ -32,16 +32,6 @@ class Races extends PureComponent {
             currentOfficialName='Tony Harp'
             nav={this.props}
           />
-          <RaceOverview
-            position='chief of staff'
-            currentOfficialName='Tomas Reyes'
-            nav={this.props}
-          />
-          <RaceOverview
-            position='Chief Administrative Officer'
-            currentOfficialName='Michael Carter'
-            nav={this.props}
-          />
         </PageSection>
     </AnimatedHeaderScroll>
     );

@@ -47,6 +47,20 @@ class Candidates extends PureComponent {
             officialName='Michael Carter'
             officialLabel='new haven'
           />
+          <CandidateSummary
+            nav={this.props}
+            title='Board President'
+            officialName='Michael Carter'
+            officialLabel='new haven'
+          />
+        </PageSection>
+        <PageSection title='ct' titleSecondary='state'>
+          <CandidateSummary
+            nav={this.props}
+            title='representative'
+            officialName='Al Paolillo'
+            officialLabel='connecticut'
+          />
         </PageSection>
       </AnimatedHeaderScroll>
     );

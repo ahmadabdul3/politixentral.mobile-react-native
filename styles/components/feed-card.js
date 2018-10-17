@@ -12,21 +12,19 @@ const borderRadius = 10;
 
 const feedCardShared = {
   ...cardStyles,
-  paddingRight: 0,
-  paddingLeft: 0,
-  backgroundColor: 'transparent',
-  borderRadius: 0,
-  position: 'relative',
-  paddingTop: 0,
+  paddingRight: standardSpacingSize * 0.5,
+  paddingLeft: standardSpacingSize * 0.5,
+  paddingTop: 20,
   paddingBottom: 20,
-  marginRight: standardSpacingSize * 0.5,
-  marginLeft: standardSpacingSize * 0.5,
-  marginTop: 20,
+  marginTop: 0,
+  marginBottom: 0,
+  marginRight: 0,
+  marginLeft: 0,
+  backgroundColor: 'transparent',
+  position: 'relative',
   flexDirection: 'row',
-  // alignItems: 'flex',
-  // borderBottomColor: colors.brandPurpleLightest,
-  // borderBottomWidth: StyleSheet.hairlineWidth,
-  // overflow: 'hidden',
+  borderBottomColor: colors.backgroundPurpleDarker,
+  borderBottomWidth: 1,
 };
 
 const styles = StyleSheet.create({
@@ -43,8 +41,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0,
   },
   feedCardMediaSection: {
-    marginLeft: 10,
-    paddingTop: 12,
+    marginLeft: 15,
     flexGrow: 0,
     flexShrink: 0,
   },
@@ -55,7 +52,6 @@ const styles = StyleSheet.create({
   },
   feedCardText: {
     paddingRight: 10,
-    paddingTop: 10,
     paddingBottom: 10,
     flexGrow: 1,
     flexShrink: 1,
@@ -81,7 +77,7 @@ const styles = StyleSheet.create({
   },
   date: {
     marginTop: 20,
-    color: colors.textColorLighter,
+    color: colors.brandPurpleLightest,
     fontSize: 11,
     fontWeight: 'bold',
   },
@@ -90,7 +86,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white',
     fontSize: 16,
-    lineHeight: 18,
+    lineHeight: 22,
   },
   description: {
     marginTop: 15,

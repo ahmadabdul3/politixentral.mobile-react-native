@@ -5,8 +5,11 @@ import colors from 'px/styles/colors';
 import ShadowView from 'px/components/shadow-view';
 import ScaledImage from 'px/components/scaled-image';
 import socialMediaSources from 'px/constants/social-media-sources';
-import { Text, View, Image } from 'react-native';
+import { Text, View, Image, Dimensions } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
+
+const width = Dimensions.get('window').width / 3.5;
+const height = width - 10;
 
 export default class FeedCard extends PureComponent {
   get socialMediaSourceIcon() {
@@ -24,7 +27,7 @@ export default class FeedCard extends PureComponent {
     const { media } = this.props;
     if (!media) return;
 
-    return <ScaledImage uri={media} maxHeight={110} maxWidth={120} />;
+    return <ScaledImage uri={media} maxHeight={height} maxWidth={width} />;
   }
 
   get style() {

@@ -12,10 +12,10 @@ import {
 const educationSummary = {
   marginRight: standardSpacingSize,
   marginLeft: standardSpacingSize,
-  marginTop: 15,
-  paddingTop: 25,
-  borderTopWidth: StyleSheet.hairlineWidth,
-  borderTopColor: colors.backgroundGrayDarker,
+  marginTop: 25,
+  paddingTop: 22,
+  borderTopWidth: 1,
+  borderTopColor: colors.backgroundPurpleDarker,
 };
 
 const styles = StyleSheet.create({
