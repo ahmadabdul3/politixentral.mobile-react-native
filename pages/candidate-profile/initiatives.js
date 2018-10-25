@@ -12,6 +12,7 @@ import {
 } from '@expo/vector-icons';
 import colors from 'px/styles/colors';
 import ShadowView from 'px/components/shadow-view';
+import PageSection from 'px/components/page-section';
 
 export default class Initiatives extends PureComponent {
   render() {
@@ -62,6 +63,30 @@ class WhatStandFor extends PureComponent {
             }
           />
         </View>
+        <PageSection title='committees'>
+          <View style={styles.committeeItem}>
+            <View style={styles.committeeItemIcon}>
+              <MaterialIcons
+                name='attach-money' size={20} color={'white'}
+                style={{ marginLeft: 2 }}
+              />
+            </View>
+            <Text style={styles.committeeItemText}>
+              Finance
+            </Text>
+          </View>
+          <View style={styles.committeeItem}>
+            <View style={styles.committeeItemIcon}>
+              <Entypo
+                name='shield' size={16} color={'white'}
+                style={{ marginTop: 3 }}
+              />
+            </View>
+            <Text style={styles.committeeItemText}>
+              Public Safety
+            </Text>
+          </View>
+        </PageSection>
       </View>
     );
   }

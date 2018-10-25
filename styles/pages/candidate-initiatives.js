@@ -61,6 +61,26 @@ const styles = StyleSheet.create({
     color: colors.textColor,
     color: 'white',
   },
+  committeeItem: {
+    ...horizontalSpacing,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  committeeItemIcon: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 30,
+    height: 30,
+    borderRadius: 30,
+    borderWidth: 1,
+    borderColor: 'white',
+  },
+  committeeItemText: {
+    color: 'white',
+    marginLeft: 10,
+    fontSize: 16,
+  },
   projects: {
     ...section,
   },
