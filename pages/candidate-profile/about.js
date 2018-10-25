@@ -54,6 +54,7 @@ class Experience extends PureComponent {
           date={item.date}
           firstInSequence={firstInSequence}
           lastInSequence={lastInSequence}
+          summary='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor'
         />
       );
     });
@@ -128,7 +129,7 @@ class EducationSummary extends PureComponent {
   }
 
   render() {
-    const { degree, fieldOfStudy, school, location, date } = this.props;
+    const { degree, fieldOfStudy, school, location, date, summary } = this.props;
 
     return (
       <View style={this.style}>
@@ -143,6 +144,13 @@ class EducationSummary extends PureComponent {
             { degree ?  ` - ${degree}` : '' }
           </Text>
         </Text>
+        {
+          summary && (
+            <Text style={styles.experienceSummary}>
+              { summary }
+            </Text>
+          )
+        }
         <View style={styles.schoolAndLocation}>
           <Text style={styles.school}>
             { school.toUpperCase() }

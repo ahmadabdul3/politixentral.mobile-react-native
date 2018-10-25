@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   },
   educationSummaryLocation: {
     fontSize: 10,
-    color: colors.textColorLighter,
+    color: colors.textColorLightest,
     fontWeight: 'bold',
   },
   school: {
@@ -87,6 +87,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     alignItems: 'center',
   },
+  experienceSummary: {
+    color: 'white',
+    marginTop: 10,
+    marginBottom: 5,
+  }
 });
 
 export default styles;
