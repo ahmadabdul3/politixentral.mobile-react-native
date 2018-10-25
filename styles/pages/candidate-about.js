@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   skill: {
     ...horizontalSpacing,
     color: 'white',
-    fontSize: 16,
+    // fontSize: 16,
     marginTop: 5,
   },
   newsAndActivityTitle: {
