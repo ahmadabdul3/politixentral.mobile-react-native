@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
     ...horizontalSpacing,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    marginBottom: 20,
   },
   initiative: {
     width: 80,
@@ -70,16 +71,17 @@ const styles = StyleSheet.create({
   committeeItemIcon: {
     alignItems: 'center',
     justifyContent: 'center',
-    width: 30,
-    height: 30,
+    width: 35,
+    height: 35,
     borderRadius: 30,
     borderWidth: 1,
     borderColor: 'white',
   },
   committeeItemText: {
     color: 'white',
-    marginLeft: 10,
-    fontSize: 16,
+    marginLeft: 13,
+    fontSize: 18,
+    fontWeight: 'bold',
   },
   projects: {
     ...section,

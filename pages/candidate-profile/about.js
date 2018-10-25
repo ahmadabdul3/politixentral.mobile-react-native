@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import styles from 'px/styles/pages/candidate-about';
 import { Entypo } from '@expo/vector-icons';
 import colors from 'px/styles/colors';
+import PageSection from 'px/components/page-section';
 import {
   View, Text, ScrollView
 } from 'react-native';
@@ -10,9 +11,28 @@ export default class About extends PureComponent {
   render() {
     return (
       <ScrollView style={styles.mainView}>
+        <Skills />
         <Experience />
         <Education />
       </ScrollView>
+    );
+  }
+}
+
+class Skills extends PureComponent {
+  render() {
+    return (
+      <PageSection title='skills'>
+        <Text style={styles.skill}>
+          - Financial Analysis
+        </Text>
+        <Text style={styles.skill}>
+          - Team Leading and Management
+        </Text>
+        <Text style={styles.skill}>
+          - Tracking and Reporting
+        </Text>
+      </PageSection>
     );
   }
 }

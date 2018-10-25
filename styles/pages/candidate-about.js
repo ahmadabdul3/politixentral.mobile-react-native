@@ -29,6 +29,12 @@ const styles = StyleSheet.create({
   section: {
     ...section,
   },
+  skill: {
+    ...horizontalSpacing,
+    color: 'white',
+    fontSize: 16,
+    marginTop: 5,
+  },
   newsAndActivityTitle: {
     ...sectionTitle,
   },

@@ -67,7 +67,7 @@ class WhatStandFor extends PureComponent {
           <View style={styles.committeeItem}>
             <View style={styles.committeeItemIcon}>
               <MaterialIcons
-                name='attach-money' size={20} color={'white'}
+                name='attach-money' size={24} color={'white'}
                 style={{ marginLeft: 2 }}
               />
             </View>
@@ -78,7 +78,7 @@ class WhatStandFor extends PureComponent {
           <View style={styles.committeeItem}>
             <View style={styles.committeeItemIcon}>
               <Entypo
-                name='shield' size={16} color={'white'}
+                name='shield' size={20} color={'white'}
                 style={{ marginTop: 3 }}
               />
             </View>
