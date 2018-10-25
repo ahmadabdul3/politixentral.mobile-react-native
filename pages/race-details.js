@@ -17,15 +17,15 @@ export default class RaceDetails extends PureComponent {
         <RaceDetailCandidates />
         <PageSection title='skills'>
           <CandidateComparisonData data={['project management', 'financial analysis']} />
-          <CandidateComparisonData data={['team building', 'group event organization', 'eating buffalo wings']} />
+          <CandidateComparisonData data={['team leadership', 'group event organization', 'financial analysis']} />
           <CandidateComparisonData data={['project management', 'financial analysis']} />
-          <CandidateComparisonData data={['team building', 'group event organization', 'eating buffalo wings']} />
+          <CandidateComparisonData data={['team leadership', 'group event organization', 'financial analysis']} />
         </PageSection>
         <PageSection title='initiatives'>
           <CandidateComparisonData data={['project management', 'financial analysis']} />
-          <CandidateComparisonData data={['team building', 'group event organization', 'eating buffalo wings']} />
+          <CandidateComparisonData data={['team leadership', 'group event organization', 'financial analysis']} />
           <CandidateComparisonData data={['project management', 'financial analysis']} />
-          <CandidateComparisonData data={['team building', 'group event organization', 'eating buffalo wings']} />
+          <CandidateComparisonData data={['team leadership', 'group event organization', 'financial analysis']} />
         </PageSection>
       </AnimatedHeaderScroll>
     )
