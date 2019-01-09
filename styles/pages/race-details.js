@@ -33,13 +33,13 @@ const styles = {
     backgroundColor: colors.brandPurpleLighter,
   },
   candidateSummaryHeaderFirstName: {
-    color: 'white',
+    // color: 'white',
     marginTop: 10,
     textAlign: 'center',
     fontWeight: 'bold',
   },
   candidateSummaryHeaderLastName: {
-    color: 'white',
+    // color: 'white',
     marginTop: 0,
     textAlign: 'center',
     fontWeight: 'bold',
@@ -72,7 +72,7 @@ const styles = {
     marginLeft: 10,
   },
   candidateComparisonDataItem: {
-    color: 'white',
+    // color: 'white',
     marginBottom: 5,
   },
 

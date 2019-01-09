@@ -15,9 +15,10 @@ const styles = {
   sectionTitle: {
     ...sectionTitle,
     paddingBottom: 0,
+    color: colors.textColor,
   },
   sectionTitleSecondary: {
-    color: colors.brandPurpleLightest,
+    color: colors.textColorLighter,
     fontWeight: '300',
     fontSize: 20,
   },

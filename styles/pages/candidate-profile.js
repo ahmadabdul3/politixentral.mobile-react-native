@@ -11,7 +11,7 @@ import { pageTitle, pageSubtitle } from 'px/styles/typography';
 const styles = StyleSheet.create({
   screen: {
     ...screen,
-    backgroundColor: colors.backgroundPurple,
+    backgroundColor: colors.backgroundGray,
   },
   tabHeader: {
     ...verticalSpacing,

@@ -24,7 +24,7 @@ const projectShared = {
 const styles = StyleSheet.create({
   mainView: {
     backgroundColor: colors.backgroundPurple,
-    backgroundColor: colors.backgroundPurple,
+    backgroundColor: colors.backgroundGray,
   },
   sectionTitle: {
     ...sectionTitle,
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     lineHeight: 15,
     color: colors.textColor,
-    color: 'white',
+    color: colors.textColor,
   },
   committeeItem: {
     ...horizontalSpacing,
@@ -75,10 +75,10 @@ const styles = StyleSheet.create({
     height: 35,
     borderRadius: 30,
     borderWidth: 1,
-    borderColor: 'white',
+    borderColor: colors.brandPurple,
   },
   committeeItemText: {
-    color: 'white',
+    color: colors.textColor,
     marginLeft: 13,
     fontSize: 18,
     fontWeight: 'bold',

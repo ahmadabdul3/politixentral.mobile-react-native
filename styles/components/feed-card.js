@@ -23,7 +23,7 @@ const feedCardShared = {
   backgroundColor: 'transparent',
   position: 'relative',
   flexDirection: 'row',
-  borderBottomColor: colors.backgroundPurpleDarker,
+  borderBottomColor: colors.backgroundGrayDark,
   borderBottomWidth: 1,
 };
 
@@ -72,19 +72,19 @@ const styles = StyleSheet.create({
   socialMediaSourceIconLabel: {
     fontWeight: 'bold',
     fontSize: 10,
-    color: colors.brandPurpleLightest,
+    color: colors.textColorLight,
     marginLeft: 8,
   },
   date: {
     marginTop: 20,
-    color: colors.brandPurpleLightest,
+    color: colors.brandPurpleLight,
     fontSize: 11,
     fontWeight: 'bold',
   },
   title: {
     marginTop: 7,
     fontWeight: 'bold',
-    color: 'white',
+    color: colors.textColor,
     fontSize: 16,
     lineHeight: 22,
   },

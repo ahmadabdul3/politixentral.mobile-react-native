@@ -11,7 +11,7 @@ export const sectionTitle = {
   ...verticalSpacing,
   paddingBottom: 30,
   fontWeight: '800',
-  color: 'white',
+  // color: 'white',
   fontSize: 22,
 };
 

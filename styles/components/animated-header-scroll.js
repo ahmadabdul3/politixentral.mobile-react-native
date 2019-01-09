@@ -18,7 +18,7 @@ const styles = {
     backgroundColor: colors.backgroundGrayLighter,
     backgroundColor: 'white',
     borderBottomWidth: 1,
-    borderBottomColor: colors.backgroundPurpleDark,
+    borderBottomColor: colors.backgroundGrayDark,
     flexDirection: 'column-reverse',
   },
   pageTitle: {
@@ -44,7 +44,7 @@ const styles = {
     flexGrow: 1,
   },
   scrollView: {
-    backgroundColor: colors.backgroundPurple,
+    backgroundColor: colors.backgroundGray,
   },
 };
 

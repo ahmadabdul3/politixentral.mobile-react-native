@@ -55,5 +55,7 @@ export default createMaterialBottomTabNavigator({
   inactiveTintColor: colors.textColorLightest,
   barStyle: {
     backgroundColor: 'white',
+    borderTopWidth: 1,
+    borderTopColor: colors.backgroundGrayDark,
   },
 });

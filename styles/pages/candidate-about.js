@@ -15,13 +15,13 @@ const educationSummary = {
   marginTop: 25,
   paddingTop: 22,
   borderTopWidth: 1,
-  borderTopColor: colors.backgroundPurpleDarker,
+  borderTopColor: colors.backgroundGrayDark,
 };
 
 const styles = StyleSheet.create({
   mainView: {
     backgroundColor: colors.backgroundPurple,
-    backgroundColor: colors.backgroundPurple,
+    backgroundColor: colors.backgroundGray,
   },
   sectionTitle: {
     ...sectionTitle,
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   },
   skill: {
     ...horizontalSpacing,
-    color: 'white',
+    // color: 'white',
     // fontSize: 16,
     marginTop: 5,
   },
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   educationSummaryDate: {
-    color: colors.brandPurpleLightest,
+    color: colors.brandPurpleLight,
     fontWeight: 'bold',
     fontSize: 10,
   },
@@ -72,23 +72,23 @@ const styles = StyleSheet.create({
   },
   educationSummaryLocation: {
     fontSize: 10,
-    color: colors.textColorLightest,
+    color: colors.textColorLighter,
     fontWeight: 'bold',
   },
   school: {
     fontWeight: 'bold',
-    color: colors.textColorLightest,
+    color: colors.textColorLighter,
     fontSize: 12,
   },
   educationFieldDegree: {
     marginTop: 3,
-    color: 'white',
+    // color: 'white',
     fontWeight: 'bold',
     fontSize: 16,
     alignItems: 'center',
   },
   experienceSummary: {
-    color: 'white',
+    // color: 'white',
     marginTop: 10,
     marginBottom: 5,
   }

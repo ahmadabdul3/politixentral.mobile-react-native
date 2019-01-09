@@ -36,6 +36,7 @@ const styles = {
   candidateSummaryBio: {
     flexDirection: 'row',
     alignItems: 'center',
+    flexGrow: 1,
   },
 
   candidateTitle: {
@@ -53,6 +54,7 @@ const styles = {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-end',
+    flexShrink: 0,
     // borderBottomRightRadius: 5,
     // borderBottomLeftRadius: 5,
   },
@@ -73,10 +75,15 @@ const styles = {
     borderColor: colors.backgroundGrayDark,
   },
 
+  currentOfficialNameWrapper: {
+    flexWrap: 'wrap',
+  },
+
   currentOfficialName: {
     fontSize: 16,
     fontWeight: 'bold',
     color: colors.textColor,
+    flexWrap: 'wrap',
   },
 
   currentOfficialLabel: {

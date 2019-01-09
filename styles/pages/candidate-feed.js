@@ -12,7 +12,7 @@ import {
 const styles = StyleSheet.create({
   mainView: {
     backgroundColor: colors.backgroundPurple,
-    backgroundColor: colors.backgroundPurple,
+    backgroundColor: colors.backgroundGray,
   },
   candidateFeed: {
     ...section,
