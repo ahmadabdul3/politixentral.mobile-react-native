@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { LinearGradient } from 'expo';
 import { Text, View, ScrollView, Image, Dimensions, TouchableHighlight } from 'react-native';
-import { SimpleLineIcons } from '@expo/vector-icons';
+import { SimpleLineIcons, Ionicons } from '@expo/vector-icons';
 import ShadowView from 'px/components/shadow-view';
 import { createStackNavigator } from 'react-navigation';
 import CandidateProfile from 'px/pages/candidate-profile';
@@ -91,69 +91,16 @@ class Candidates extends PureComponent {
             </PageSection>
           ))
         }
-        {
-          // <PageSection title='#8' titleSecondary='ward'>
-          //   {
-          //     // <CandidateSummary
-          //     //   nav={this.props}
-          //     //   title='alderman'
-          //     //   officialName='David Reyes'
-          //     //   officialLabel='ward 8'
-          //     // />
-          //   }
-          // </PageSection>
-          // <PageSection title='new haven' titleSecondary='city'>
-          //   <CandidateSummary
-          //     nav={this.props}
-          //     title='mayor'
-          //     officialName='Toni Harp'
-          //     officialLabel='new haven'
-          //   />
-          //   <CandidateSummary
-          //     nav={this.props}
-          //     title='chief of staff'
-          //     officialName='Tomas Reyes'
-          //     officialLabel='new haven'
-          //   />
-          //   <CandidateSummary
-          //     nav={this.props}
-          //     title='Chief Administrative Officer'
-          //     officialName='Michael Carter'
-          //     officialLabel='new haven'
-          //   />
-          //   <CandidateSummary
-          //     nav={this.props}
-          //     title='Board President'
-          //     officialName='Michael Carter'
-          //     officialLabel='new haven'
-          //   />
-          // </PageSection>
-          // <PageSection title='ct' titleSecondary='state'>
-          //   <CandidateSummary
-          //     nav={this.props}
-          //     title='representative'
-          //     officialName='Al Paolillo'
-          //     officialLabel='connecticut'
-          //   />
-          // </PageSection>
-        }
       </AnimatedHeaderScroll>
     );
   }
 }
 
-// <PageSection title='ct' titleSecondary='state'>
-//     <CandidateSummary
-//       nav={this.props}
-//       title='representative'
-//       officialName='Al Paolillo'
-//       officialLabel='connecticut'
-//     />
-// </PageSection>
-
 class CandidateSummary extends PureComponent {
   goToProfile = () => {
-    this.props.nav.navigation.navigate('Alder');
+    this.props.nav.navigation.navigate(
+      'Candidate', { politicianData: this.props.politicianData }
+    );
   }
 
   get fullName() {
@@ -161,8 +108,35 @@ class CandidateSummary extends PureComponent {
     return `${firstName} ${lastName}`;
   }
 
+  get title() {
+    const {
+      titlePrimary,
+      levelOfResponsibility,
+      areaOfResponsibility
+    } = this.props.politicianData;
+
+    if (levelOfResponsibility !== 'District') return titlePrimary;
+    return `${titlePrimary.toUpperCase()} | Ward ${areaOfResponsibility}`;
+  }
+
+  get image() {
+    const { firstName, lastName } = this.props.politicianData;
+
+    if (firstName === 'Dave' && lastName === 'Reyes') {
+      let personImageUrl = 'https://orig00.deviantart.net/819f/f/2018/261/e/9/screen_shot_2018_09_18_at_12_42_15_pm_by_duxfox-dcn63uc.png';
+      return (
+        <Image
+          source={{ uri: personImageUrl }}
+          style={{ width: '100%', height: '100%' }}
+          resizeMode='cover'
+        />
+      );
+    }
+
+    return <Ionicons name="ios-person" size={45} color={colors.textColorLighter} />;
+  }
+
   render() {
-    const { titlePrimary } = this.props.politicianData;
 
     return (
       <ShadowView style={styles.candidateSummaryBox}>
@@ -172,13 +146,15 @@ class CandidateSummary extends PureComponent {
         >
           <View style={styles.candidateSummaryBody}>
             <View style={styles.candidateSummaryBio}>
-              <View style={styles.currentOfficialImage} />
+              <View style={styles.currentOfficialImage}>
+                { this.image }
+              </View>
               <View style={styles.currentOfficialNameWrapper}>
                 <Text style={styles.currentOfficialName}>
                   { this.fullName }
                 </Text>
                 <Text style={styles.candidateTitle}>
-                  { titlePrimary.toUpperCase() }
+                  { this.title }
                 </Text>
               </View>
             </View>
@@ -203,7 +179,7 @@ const nav = createStackNavigator({
       headerTintColor: 'white',
     }),
   },
-  Alder: {
+  Candidate: {
     screen: CandidateProfile,
     navigationOptions: () => ({
       headerTransparent: true,

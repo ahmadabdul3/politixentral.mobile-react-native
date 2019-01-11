@@ -7,15 +7,17 @@ import styles from 'px/styles/pages/candidate-profile';
 import {
   View, Text, StyleSheet, Image, ScrollView, Animated, TouchableHighlight
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 export default class RepHeader extends PureComponent {
   render() {
+    const { politicianData } = this.props;
     return (
       <LinearGradient
         colors={[colors.backgroundPurple, colors.backgroundPurpleDarker]}
         style={styles.header}
       >
-        <HeaderBio />
+        <HeaderBio politicianData={politicianData} />
         <HeaderStatement />
       </LinearGradient>
     );
@@ -29,26 +31,53 @@ export default class RepHeader extends PureComponent {
 // </View>
 
 class HeaderBio extends PureComponent {
+  get fullName() {
+    const {
+      firstName,
+      middleName,
+      lastName,
+      suffix,
+    } = this.props.politicianData;
+    const suf = suffix ? `, ${suffix}` : '';
+    return `${firstName} ${middleName} ${lastName}${suf}`;
+  }
+
+  get image() {
+    const { firstName, lastName } = this.props.politicianData;
+    console.log('first name', firstName);
+    console.log('last name', lastName);
+    if (firstName === 'Dave' && lastName === 'Reyes') {
+      let personImageUrl = 'https://orig00.deviantart.net/819f/f/2018/261/e/9/screen_shot_2018_09_18_at_12_42_15_pm_by_duxfox-dcn63uc.png';
+      return (
+        <Image
+          source={{ uri: personImageUrl }}
+          style={{ width: '100%', height: '100%' }}
+          resizeMode='cover'
+        />
+      );
+    }
+
+    return <Ionicons name="ios-person" size={80} color='white' />;
+  }
+
   render() {
-    // const personImage = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQk0-hgCk5RZ2_ZYfEGmGaa2kq3i-Wh-FZJVHbHXrBueWDFkdt0';
-    const personImage = 'https://orig00.deviantart.net/819f/f/2018/261/e/9/screen_shot_2018_09_18_at_12_42_15_pm_by_duxfox-dcn63uc.png';
+    const {
+      titlePrimary
+    } = this.props.politicianData;
+
     return (
       <View style={styles.headerBio}>
         <ShadowView style={styles.repImage}>
-          <Image
-            source={{ uri: personImage }}
-            style={{ width: '100%', height: '100%' }}
-            resizeMode='cover'
-          />
+          { this.image }
         </ShadowView>
         <View style={styles.headerBioText}>
           <Text style={styles.repName}>
-            David Reyes
+            { this.fullName }
           </Text>
           <Text style={styles.repDescription}>
-            {`Alderman`.toUpperCase()}
+            { titlePrimary.toUpperCase() }
           </Text>
-          <HeaderDemographics />
+          <HeaderDemographics politicianData={this.props.politicianData} />
         </View>
       </View>
     );
@@ -57,14 +86,20 @@ class HeaderBio extends PureComponent {
 
 class HeaderDemographics extends PureComponent {
   render() {
+    const {
+      city,
+      levelOfResponsibility,
+      areaOfResponsibility,
+      party
+    } = this.props.politicianData;
     return (
       <View style={styles.headerDemographics}>
         <View style={styles.headerDemographicsRow}>
-          <Demographic label='City' value='New Haven' white />
-          <Demographic label='Ward' value='8' white />
+          <Demographic label='City' value={city} white />
+          <Demographic label='Ward' value={areaOfResponsibility} white />
         </View>
         <View style={styles.headerDemographicsRow}>
-          <Demographic label='Party' value='Democratic' white />
+          <Demographic label='Party' value={party} white />
           <Demographic label='Years In Position' value='2' white />
         </View>
       </View>

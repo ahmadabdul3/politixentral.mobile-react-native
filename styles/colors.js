@@ -31,6 +31,7 @@ const colors = {
   red: '#f53465',
   blue: '#2c6bff',
   yellow: '#f7cf00',
+  backgroundGrayShadow: 'rgb(179, 185, 210)',
   backgroundGray: '#f3f4f8',
   backgroundGrayDark1: '#F0F1F5',
   backgroundGrayLight: '#f6f7f9',

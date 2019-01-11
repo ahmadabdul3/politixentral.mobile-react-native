@@ -51,6 +51,8 @@ const styles = StyleSheet.create({
     borderColor: colors.backgroundGrayDarker,
     borderRadius: 80,
     overflow: 'hidden',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   headerBioText: {
     flexGrow: 1,

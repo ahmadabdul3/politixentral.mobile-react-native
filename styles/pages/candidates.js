@@ -28,7 +28,6 @@ const styles = {
     paddingTop: standardSpacingSize * 0.5,
     paddingBottom: standardSpacingSize * 0.5,
     flexDirection: 'row',
-    // flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
   },
@@ -37,6 +36,7 @@ const styles = {
     flexDirection: 'row',
     alignItems: 'center',
     flexGrow: 1,
+    flexShrink: 1,
   },
 
   candidateTitle: {
@@ -44,6 +44,31 @@ const styles = {
     marginTop: 2,
     fontWeight: 'bold',
     color: colors.textColorLighter,
+  },
+
+  currentOfficialImage: {
+    width: 40,
+    height: 40,
+    borderRadius: 40,
+    borderWidth: 2,
+    marginRight: 15,
+    borderColor: colors.textColorLighter,
+    overflow: 'hidden',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  currentOfficialNameWrapper: {
+    flexWrap: 'wrap',
+    flexGrow: 1,
+    flexShrink: 1,
+  },
+
+  currentOfficialName: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: colors.textColor,
+    flexWrap: 'wrap',
   },
 
   viewFullProfile: {
@@ -66,30 +91,11 @@ const styles = {
     marginRight: 10,
   },
 
-  currentOfficialImage: {
-    width: 40,
-    height: 40,
-    borderRadius: 40,
-    borderWidth: 2,
-    marginRight: 15,
-    borderColor: colors.backgroundGrayDark,
-  },
-
-  currentOfficialNameWrapper: {
-    flexWrap: 'wrap',
-  },
-
-  currentOfficialName: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: colors.textColor,
-    flexWrap: 'wrap',
-  },
-
   currentOfficialLabel: {
     marginTop: 2,
     fontSize: 9,
     color: colors.textColor,
+    flexShrink: 0,
   },
 };
 
