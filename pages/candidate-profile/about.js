@@ -3,17 +3,30 @@ import styles from 'px/styles/pages/candidate-about';
 import { Entypo } from '@expo/vector-icons';
 import colors from 'px/styles/colors';
 import PageSection from 'px/components/page-section';
+import ComingSoon from 'px/components/coming-soon';
 import {
   View, Text, ScrollView
 } from 'react-native';
 
 export default class About extends PureComponent {
   render() {
+    const { firstName, lastName } = this.props.screenProps.politicianData;
+    if (firstName === 'Dave' && lastName === 'Reyes') {
+      return (
+        <ScrollView style={styles.mainView}>
+          <Skills />
+          <Experience />
+          <Education />
+        </ScrollView>
+      );
+    }
+
     return (
       <ScrollView style={styles.mainView}>
-        <Skills />
-        <Experience />
-        <Education />
+        <Text style={styles.sectionTitle}>
+          {`skills, experience, and education`.toUpperCase()}
+        </Text>
+        <ComingSoon />
       </ScrollView>
     );
   }

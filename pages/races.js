@@ -8,6 +8,7 @@ import PageSection from 'px/components/page-section';
 import { ClickableContentSummaryBox } from 'px/components/content-summary-card';
 import { createStackNavigator } from 'react-navigation';
 import RaceDetails from 'px/pages/race-details';
+import ComingSoon from 'px/components/coming-soon';
 
 import colors from 'px/styles/colors';
 import styles from 'px/styles/pages/races';
@@ -17,22 +18,31 @@ class Races extends PureComponent {
     return (
       <AnimatedHeaderScroll
         title='races'
-        subtitle="See who's running for office in the places that matter to you"
+        subtitle={
+          "Soon, we will provide you with profiles of all races in the city"
+          + " of New Haven. You will be able to compare candidates and view their profiles"
+          + " side by side helping you vote for the person the represents your ideals best!"
+        }
       >
-        <PageSection title='#8' titleSecondary='ward'>
-          <RaceOverview
-            position='alderman'
-            currentOfficialName='David Reyes'
-            nav={this.props}
-          />
-        </PageSection>
-        <PageSection title='new haven' titleSecondary='city'>
-          <RaceOverview
-            position='mayor'
-            currentOfficialName='Tony Harp'
-            nav={this.props}
-          />
-        </PageSection>
+        <View style={{ marginTop: 20 }}>
+          <ComingSoon />
+        </View>
+        {
+          // <PageSection title='#8' titleSecondary='ward'>
+          //   <RaceOverview
+          //     position='alderman'
+          //     currentOfficialName='David Reyes'
+          //     nav={this.props}
+          //   />
+          // </PageSection>
+          // <PageSection title='new haven' titleSecondary='city'>
+          //   <RaceOverview
+          //     position='mayor'
+          //     currentOfficialName='Tony Harp'
+          //     nav={this.props}
+          //   />
+          // </PageSection>
+        }
     </AnimatedHeaderScroll>
     );
   }

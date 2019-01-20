@@ -3,6 +3,7 @@ import { View, Text, ScrollView } from 'react-native';
 import FeedCard from 'px/components/feed-card';
 import socialMediaSources from 'px/constants/social-media-sources';
 import styles from 'px/styles/pages/candidate-feed';
+import ComingSoon from 'px/components/coming-soon';
 
 export default class Activity extends PureComponent {
   get feed() {
@@ -25,14 +26,19 @@ export default class Activity extends PureComponent {
       );
     });
   }
+
   render() {
+    const { firstName, lastName } = this.props.screenProps.politicianData;
+    let feed = <ComingSoon />;
+    if (firstName === 'Dave' && lastName === 'Reyes') feed = this.feed;
+
     return (
       <ScrollView style={styles.mainView}>
         <Text style={styles.newsAndActivityTitle}>
           {`news and activity`.toUpperCase()}
         </Text>
         <View style={styles.candidateFeed}>
-          { this.feed }
+          { feed }
         </View>
       </ScrollView>
     );

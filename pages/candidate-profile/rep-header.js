@@ -44,8 +44,7 @@ class HeaderBio extends PureComponent {
 
   get image() {
     const { firstName, lastName } = this.props.politicianData;
-    console.log('first name', firstName);
-    console.log('last name', lastName);
+
     if (firstName === 'Dave' && lastName === 'Reyes') {
       let personImageUrl = 'https://orig00.deviantart.net/819f/f/2018/261/e/9/screen_shot_2018_09_18_at_12_42_15_pm_by_duxfox-dcn63uc.png';
       return (
@@ -96,11 +95,18 @@ class HeaderDemographics extends PureComponent {
       <View style={styles.headerDemographics}>
         <View style={styles.headerDemographicsRow}>
           <Demographic label='City' value={city} white />
-          <Demographic label='Ward' value={areaOfResponsibility} white />
+          {
+            levelOfResponsibility === 'District' ? (
+              <Demographic label='Ward' value={areaOfResponsibility} white />
+            ) : <Demographic label='' value='' white />
+          }
         </View>
         <View style={styles.headerDemographicsRow}>
           <Demographic label='Party' value={party} white />
-          <Demographic label='Years In Position' value='2' white />
+          <Demographic label='' value='' white />
+          {
+            // <Demographic label='Years In Position' value='2' white />
+          }
         </View>
       </View>
     );

@@ -14,19 +14,17 @@ export default class ScaledImage extends PureComponent {
     height: 0,
   };
 
-  getHeight({ imageHeight, windowWidth, imageWidth }) {
+  getHeight({ imageHeight, windowWidth, imageWidth, width }) {
     const { maxHeight } = this.props;
     if (maxHeight && imageHeight > maxHeight) return maxHeight;
 
-    let height = imageHeight * (windowWidth * 0.97 / imageWidth);
+    let height = imageHeight * (width / imageWidth);
     return height;
   }
 
-  getWidth() {
+  getWidth(windowWidth) {
     const { maxWidth, fullWidth } = this.props;
     if (maxWidth) return maxWidth;
-
-    const windowWidth = Dimensions.get('window').width;
     if (fullWidth) return windowWidth;
     return windowWidth * 0.97;
   }
@@ -36,8 +34,10 @@ export default class ScaledImage extends PureComponent {
 
     Image.getSize(uri, (imageWidth, imageHeight) => {
       const windowWidth = Dimensions.get('window').width;
-      const height = this.getHeight({ imageHeight, windowWidth, imageWidth });
-      const width = this.getWidth();
+      const width = this.getWidth(windowWidth);
+      const height = this.getHeight({
+        imageHeight, windowWidth, imageWidth, width
+      });
 
       this.setState({ width, height });
     });

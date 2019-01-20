@@ -11,14 +11,14 @@ import Initiatives from './initiatives';
 
 const RepTabs = createMaterialTopTabNavigator({
   Initiatives: {
-    screen: (props) => <Initiatives bulkProps={props} />,
+    screen: (props) => <Initiatives {...props} />,
   },
-  // Feed: {
-  //   screen: (props) => <Activity bulkProps={props} />,
-  // },
-  // About: {
-  //   screen: (props) => <About bulkProps={props} />,
-  // },
+  Feed: {
+    screen: (props) => <Activity {...props} /> ,
+  },
+  About: {
+    screen: (props) => <About {...props} />,
+  },
 }, {
   tabBarOptions: {
     activeTintColor: 'white',
@@ -45,6 +45,7 @@ export default class CandidateProfile extends PureComponent {
         <RepHeader politicianData={politicianData} />
         <RepTabs
           navigation={this.props.navigation}
+          screenProps={{ politicianData }}
         />
       </View>
     );

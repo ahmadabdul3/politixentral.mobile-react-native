@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   header: {
     backgroundColor: colors.backgroundPurple,
     paddingRight: standardSpacingSize,
-    paddingTop: 30,
+    paddingTop: 40,
     // paddingBottom: 30,
     alignItems: 'center',
     // flexDirection: 'column-reverse',

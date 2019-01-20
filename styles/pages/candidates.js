@@ -43,7 +43,7 @@ const styles = {
     fontSize: 11,
     marginTop: 2,
     fontWeight: 'bold',
-    color: colors.textColorLighter,
+    color: colors.textColorLight,
   },
 
   currentOfficialImage: {

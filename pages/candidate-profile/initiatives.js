@@ -16,79 +16,96 @@ import PageSection from 'px/components/page-section';
 
 export default class Initiatives extends PureComponent {
   render() {
+    const { politicianData } = this.props.screenProps;
     return (
       <ScrollView style={styles.mainView}>
-        <WhatStandFor />
+        <View style={styles.whatStandFor}>
+          <Text style={styles.sectionTitle}>
+            {`what i stand for`.toUpperCase()}
+          </Text>
+          <View style={styles.initiativesWrapper}>
+            <Initiative
+              title='increase safety'
+              image={
+                <Image
+                  source={{ uri: 'https://pre00.deviantart.net/7aae/th/pre/i/2018/261/a/4/screen_shot_2018_09_18_at_1_14_49_pm_by_duxfox-dcn66hn.png' }}
+                  style={{ width: 40, height: 50, overflow: 'hidden' }}
+                  resizeMode='cover'
+                />
+              }
+            />
+            <Initiative
+              title='reduce taxes'
+              image={
+                <Image
+                  source={{ uri: 'https://pre00.deviantart.net/7b89/th/pre/i/2018/261/9/5/screen_shot_2018_09_18_at_1_15_29_pm_by_duxfox-dcn66hh.png' }}
+                  style={{ width: 40, height: 40, overflow: 'hidden' }}
+                  resizeMode='cover'
+                />
+              }
+            />
+            <Initiative
+              title='improve education'
+              image={
+                <Image
+                  source={{ uri: 'https://pre00.deviantart.net/7aa9/th/pre/i/2018/261/f/7/screen_shot_2018_09_18_at_1_14_08_pm_by_duxfox-dcn66hu.png' }}
+                  style={{ width: 45, height: 45, overflow: 'hidden' }}
+                  resizeMode='cover'
+                />
+              }
+            />
+          </View>
+          <Committees politicianData={politicianData} />
+        </View>
       </ScrollView>
     );
   }
 }
 
-class WhatStandFor extends PureComponent {
+class Committees extends PureComponent {
   render() {
+    const { committees, firstName, lastName } = this.props.politicianData;
+    if (!committees || committees.length < 1) {
+      return (
+        <PageSection title='committees'>
+          <Text style={{ marginLeft: 25 }}>
+            { firstName } { lastName } is not currently part of any committees
+          </Text>
+        </PageSection>
+      );
+    }
+
     return (
-      <View style={styles.whatStandFor}>
-        <Text style={styles.sectionTitle}>
-          {`what i stand for`.toUpperCase()}
-        </Text>
-        <View style={styles.initiativesWrapper}>
-          <Initiative
-            title='increase safety'
-            image={
-              <Image
-                source={{ uri: 'https://pre00.deviantart.net/7aae/th/pre/i/2018/261/a/4/screen_shot_2018_09_18_at_1_14_49_pm_by_duxfox-dcn66hn.png' }}
-                style={{ width: 40, height: 50, overflow: 'hidden' }}
-                resizeMode='cover'
-              />
-            }
-          />
-          <Initiative
-            title='reduce taxes'
-            image={
-              <Image
-                source={{ uri: 'https://pre00.deviantart.net/7b89/th/pre/i/2018/261/9/5/screen_shot_2018_09_18_at_1_15_29_pm_by_duxfox-dcn66hh.png' }}
-                style={{ width: 40, height: 40, overflow: 'hidden' }}
-                resizeMode='cover'
-              />
-            }
-          />
-          <Initiative
-            title='improve education'
-            image={
-              <Image
-                source={{ uri: 'https://pre00.deviantart.net/7aa9/th/pre/i/2018/261/f/7/screen_shot_2018_09_18_at_1_14_08_pm_by_duxfox-dcn66hu.png' }}
-                style={{ width: 45, height: 45, overflow: 'hidden' }}
-                resizeMode='cover'
-              />
-            }
+      <PageSection title='committees'>
+        { committees.map((c) => (<CommitteeItem key={c.committeeTermId} data={c} />)) }
+      </PageSection>
+    );
+  }
+}
+
+class CommitteeItem extends PureComponent {
+  get text() {
+    const { committeeName, committeeTermTitle } = this.props.data;
+    if (!committeeTermTitle) return committeeName;
+    return `${committeeName} - ${committeeTermTitle}`;
+  }
+
+  render() {
+    const { data } = this.props;
+
+    return (
+      <View style={styles.committeeItem}>
+        <View style={styles.committeeItemIcon}>
+          <MaterialIcons
+            name='star' size={24} color={colors.brandPurple}
+            style={{ marginLeft: 2 }}
           />
         </View>
-        <PageSection title='committees'>
-          <View style={styles.committeeItem}>
-            <View style={styles.committeeItemIcon}>
-              <MaterialIcons
-                name='attach-money' size={24} color={colors.brandPurple}
-                style={{ marginLeft: 2 }}
-              />
-            </View>
-            <Text style={styles.committeeItemText}>
-              Finance
-            </Text>
-          </View>
-          <View style={styles.committeeItem}>
-            <View style={styles.committeeItemIcon}>
-              <Entypo
-                name='shield' size={20} color={colors.brandPurple}
-                style={{ marginTop: 3 }}
-              />
-            </View>
-            <Text style={styles.committeeItemText}>
-              Public Safety
-            </Text>
-          </View>
-        </PageSection>
+        <Text style={styles.committeeItemText}>
+          { this.text }
+        </Text>
       </View>
-    );
+    )
   }
 }
 

@@ -29,6 +29,8 @@ class Candidates extends PureComponent {
         else all[p.levelOfResponsibility] = [p];
         return all;
       }, {});
+      const alders = categorizedPoliticians.District;
+      const sortedAlders = alders.sort((a, b) => a.areaOfResponsibility - b.areaOfResponsibility);
       this.pageSections = Object.keys(categorizedPoliticians).map(key => key);
       this.setState({ politicians: categorizedPoliticians, loading: false });
     }).catch(err => {
@@ -111,12 +113,16 @@ class CandidateSummary extends PureComponent {
   get title() {
     const {
       titlePrimary,
+      titleSecondary,
       levelOfResponsibility,
       areaOfResponsibility
     } = this.props.politicianData;
+    let title = '';
 
-    if (levelOfResponsibility !== 'District') return titlePrimary;
-    return `${titlePrimary.toUpperCase()} | Ward ${areaOfResponsibility}`;
+    if (levelOfResponsibility !== 'District') title = titlePrimary;
+    else title = `${titlePrimary.toUpperCase()} | Ward ${areaOfResponsibility}`;
+    if (titleSecondary) return `${title} - ${titleSecondary}`;
+    return title;
   }
 
   get image() {
