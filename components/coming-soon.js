@@ -4,7 +4,7 @@ import ScaledImage from 'px/components/scaled-image';
 
 export default class ComingSoon extends PureComponent {
   render() {
-    const uri = 'https://www.healthepro.com/wp-content/uploads/2018/06/Coming-Soon-2-copy-3.png';
+    const uri = 'https://res.cloudinary.com/politixentral/image/upload/c_scale,q_100,w_316/v1548081017/Coming-Soon.png';
     return (
       <View style={{
         alignItems: 'center',

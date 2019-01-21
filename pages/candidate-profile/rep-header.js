@@ -59,6 +59,29 @@ class HeaderBio extends PureComponent {
     return <Ionicons name="ios-person" size={80} color='white' />;
   }
 
+  get title() {
+    const {
+      titlePrimary,
+      titleSecondary
+    } = this.props.politicianData;
+
+    if (!titleSecondary) {
+      return (
+        <Text style={styles.repDescription}>
+          { titlePrimary.toUpperCase() }
+        </Text>
+      );
+    }
+
+    return (
+      <Text style={styles.repDescription}>
+        { titlePrimary.toUpperCase() } | <Text style={styles.repDescriptionSubtitle}>
+          { titleSecondary.toUpperCase() }
+        </Text>
+      </Text>
+    )
+  }
+
   render() {
     const {
       titlePrimary
@@ -74,7 +97,7 @@ class HeaderBio extends PureComponent {
             { this.fullName }
           </Text>
           <Text style={styles.repDescription}>
-            { titlePrimary.toUpperCase() }
+            { this.title }
           </Text>
           <HeaderDemographics politicianData={this.props.politicianData} />
         </View>

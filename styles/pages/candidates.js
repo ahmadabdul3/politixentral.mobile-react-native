@@ -88,7 +88,7 @@ const styles = {
     fontSize: 10,
     color: colors.accent,
     fontWeight: 'bold',
-    marginRight: 10,
+    marginRight: 5,
   },
 
   currentOfficialLabel: {

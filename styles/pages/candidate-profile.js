@@ -71,6 +71,9 @@ const styles = StyleSheet.create({
     fontSize: 11,
     fontWeight: 'bold',
   },
+  repDescriptionSubtitle: {
+    fontWeight: 'normal',
+  },
   headerDemographics: {
     alignItems: 'center',
     width: '100%',
