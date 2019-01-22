@@ -21,6 +21,7 @@ const colors = {
   brandBlueOffPurple: '#7570FF',
   brandPurple: base.primary,
   brandPurpleDark: base.primaryDark,
+  brandPurpleDarker: '#402C66',
   brandPurpleLight: '#805ac7',
   brandPurpleLight2: '#B39EFF',
   brandPurpleLighter: '#a587dc',

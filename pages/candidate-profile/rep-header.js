@@ -43,13 +43,23 @@ class HeaderBio extends PureComponent {
   }
 
   get image() {
-    const { firstName, lastName } = this.props.politicianData;
+    const {
+      firstName,
+      lastName,
+      levelOfResponsibility,
+      areaOfResponsibility,
+      titlePrimary
+    } = this.props.politicianData;
 
-    if (firstName === 'Dave' && lastName === 'Reyes') {
-      let personImageUrl = 'https://orig00.deviantart.net/819f/f/2018/261/e/9/screen_shot_2018_09_18_at_12_42_15_pm_by_duxfox-dcn63uc.png';
+    if (levelOfResponsibility === 'District') {
+      const urlBase = 'https://res.cloudinary.com/politixentral/image/upload/v1548117437';
+      const level = levelOfResponsibility === 'District' ? 'ward' : levelOfResponsibility;
+      const urlEnd = `${titlePrimary}_${firstName}_${lastName}_${level}_${areaOfResponsibility}.png`;
+      const url = `${urlBase}/${urlEnd}`;
+
       return (
         <Image
-          source={{ uri: personImageUrl }}
+          source={{ uri: url }}
           style={{ width: '100%', height: '100%' }}
           resizeMode='cover'
         />

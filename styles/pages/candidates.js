@@ -24,7 +24,8 @@ const styles = {
   },
 
   candidateSummaryBody: {
-    ...horizontalSpacing,
+    paddingRight: standardSpacingSize * 0.7,
+    paddingLeft: standardSpacingSize * 0.7,
     paddingTop: standardSpacingSize * 0.5,
     paddingBottom: standardSpacingSize * 0.5,
     flexDirection: 'row',
@@ -47,10 +48,10 @@ const styles = {
   },
 
   currentOfficialImage: {
-    width: 40,
-    height: 40,
-    borderRadius: 40,
-    borderWidth: 2,
+    width: 50,
+    height: 50,
+    borderRadius: 50,
+    borderWidth: 1,
     marginRight: 15,
     borderColor: colors.textColorLighter,
     overflow: 'hidden',
@@ -80,6 +81,7 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'flex-end',
     flexShrink: 0,
+    marginLeft: 10,
     // borderBottomRightRadius: 5,
     // borderBottomLeftRadius: 5,
   },

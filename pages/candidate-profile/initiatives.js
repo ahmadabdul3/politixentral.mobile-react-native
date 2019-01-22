@@ -68,7 +68,7 @@ class Committees extends PureComponent {
     if (!committees || committees.length < 1) {
       return (
         <PageSection title='committees'>
-          <Text style={{ marginLeft: 25 }}>
+          <Text style={{ marginLeft: 25, marginRight: 25 }}>
             { firstName } { lastName } is not currently part of any committees
           </Text>
         </PageSection>
