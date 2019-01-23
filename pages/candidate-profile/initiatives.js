@@ -9,6 +9,7 @@ import {
   Foundation,
   Feather,
   Entypo,
+  Octicons,
 } from '@expo/vector-icons';
 import colors from 'px/styles/colors';
 import ShadowView from 'px/components/shadow-view';
@@ -84,10 +85,67 @@ class Committees extends PureComponent {
 }
 
 class CommitteeItem extends PureComponent {
+  static iconFor = {
+    'Tax Abatement': {
+      name: 'attach-money',
+      iconBrand: MaterialIcons,
+    },
+    'Education': {
+      name: 'md-school',
+      iconBrand: Ionicons,
+    },
+    'Human Services': {
+      name: 'human-male-female',
+      iconBrand: MaterialCommunityIcons,
+    },
+    'Finance': {
+      name: 'finance',
+      iconBrand: MaterialCommunityIcons,
+    },
+    'Public Safety': {
+      name: 'safety-cone',
+      iconBrand: Foundation,
+    },
+    'Legislation': {
+      name: 'law',
+      iconBrand: Octicons,
+    },
+    'Youth Services': {
+      name: 'child-friendly',
+      iconBrand: MaterialIcons,
+    },
+    'Community Development': {
+      name: 'md-people',
+      iconBrand: Ionicons,
+    },
+    'Aldermanic Affairs': {
+      name: 'md-people',
+      iconBrand: Ionicons,
+    },
+    'City Services and Environmental Policy': {
+      name: 'city',
+      iconBrand: MaterialCommunityIcons,
+    },
+  };
+
   get text() {
     const { committeeName, committeeTermTitle } = this.props.data;
     if (!committeeTermTitle) return committeeName;
     return `${committeeName} - ${committeeTermTitle}`;
+  }
+
+  get icon() {
+    const { committeeName } = this.props.data;
+    const icon = CommitteeItem.iconFor[committeeName];
+
+    return (
+      <icon.iconBrand
+        name={icon.name}
+        size={24}
+        color={colors.brandPurple}
+        style={{ marginLeft: 2 }}
+      />
+    );
   }
 
   render() {
@@ -96,10 +154,7 @@ class CommitteeItem extends PureComponent {
     return (
       <View style={styles.committeeItem}>
         <View style={styles.committeeItemIcon}>
-          <MaterialIcons
-            name='star' size={24} color={colors.brandPurple}
-            style={{ marginLeft: 2 }}
-          />
+          { this.icon }
         </View>
         <Text style={styles.committeeItemText}>
           { this.text }
