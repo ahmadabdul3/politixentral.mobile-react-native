@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   raceOverviewBox: {
     marginRight: standardSpacingSize * 0.5,
     marginLeft: standardSpacingSize * 0.5,
-    marginTop: 1,
+    marginTop: 10,
     backgroundColor: 'white',
     borderRadius: 3,
   },

@@ -1,6 +1,9 @@
 import React, { PureComponent } from 'react';
 import { LinearGradient } from 'expo';
-import { Text, View, ScrollView, Image, Dimensions, TouchableHighlight } from 'react-native';
+import {
+  Text, View, ScrollView, Image, Dimensions, TouchableHighlight, AsyncStorage
+} from 'react-native';
+import LOCAL_STORAGE from 'px/constants/local-storage';
 import { SimpleLineIcons, Ionicons } from '@expo/vector-icons';
 import ShadowView from 'px/components/shadow-view';
 import { createStackNavigator } from 'react-navigation';
@@ -11,6 +14,7 @@ import { ClickableContentSummaryBox } from 'px/components/content-summary-card';
 
 import colors from 'px/styles/colors';
 import styles from 'px/styles/pages/candidates';
+import http from 'px/services/http';
 
 
 class Candidates extends PureComponent {
@@ -20,23 +24,36 @@ class Candidates extends PureComponent {
     loading: false,
   };
 
+  getAddressInfo = async () => {
+    const info = await AsyncStorage.getItem(LOCAL_STORAGE.ADDRESS_INFO);
+    return info;
+  }
+
   componentDidMount() {
     this.setState({ loading: true });
-    fetch('http://px-staging.herokuapp.com/politicians').then(res => res.json()).then(res => {
-      const categorizedPoliticians = res.politicians.reduce((all, p) => {
-        const category = all[p.levelOfResponsibility];
-        if (category) all[p.levelOfResponsibility] = [...category, p];
-        else all[p.levelOfResponsibility] = [p];
-        return all;
-      }, {});
-      const alders = categorizedPoliticians.District;
-      const sortedAlders = alders.sort((a, b) => a.areaOfResponsibility - b.areaOfResponsibility);
-      this.pageSections = Object.keys(categorizedPoliticians).map(key => key);
-      this.setState({ politicians: categorizedPoliticians, loading: false });
+    this.getAddressInfo().then(addressInfoString => {
+      const addressInfo = JSON.parse(addressInfoString);
+      console.log('addressInfo', addressInfo);
+      const { city, state, district } = addressInfo;
+      const query = `city=${city}&state=${state}&district=${district}`;
+      const urlBase = 'http://px-staging.herokuapp.com/politicians/location?';
+      const url = urlBase + query;
+      http.get(url).then(res => {
+        const categorizedPoliticians = res.politicians.reduce((all, p) => {
+          const category = all[p.levelOfResponsibility];
+          if (category) all[p.levelOfResponsibility] = [...category, p];
+          else all[p.levelOfResponsibility] = [p];
+          return all;
+        }, {});
+        // const alders = categorizedPoliticians.District;
+        // const sortedAlders = alders.sort((a, b) => a.areaOfResponsibility - b.areaOfResponsibility);
+        this.pageSections = Object.keys(categorizedPoliticians).map(key => key);
+        this.setState({ politicians: categorizedPoliticians, loading: false });
+      });
     }).catch(err => {
       this.setState({ loading: false });
       console.warn(err);
-    });
+    });;
   }
 
   getPageSections() {
@@ -49,13 +66,14 @@ class Candidates extends PureComponent {
   getSectionTitle(section) {
     const politicians = this.state.politicians[section];
     const firstPolitician = politicians && politicians[0] || {};
+    return firstPolitician.areaOfResponsibility || '';
 
-    switch (firstPolitician.levelOfResponsibility) {
-      case 'District': return 'All';
-      case 'City': return firstPolitician.areaOfResponsibility;
-      case 'State': return firstPolitician.areaOfResponsibility;
-      default: return firstPolitician.levelOfResponsibility;
-    }
+    // switch (firstPolitician.levelOfResponsibility) {
+    //   case 'District': return 'All';
+    //   case 'City': return firstPolitician.areaOfResponsibility;
+    //   case 'State': return firstPolitician.areaOfResponsibility;
+    //   default: return firstPolitician.levelOfResponsibility;
+    // }
   }
 
   getSectionTitleSecondary(section) {
@@ -134,10 +152,12 @@ class CandidateSummary extends PureComponent {
       titlePrimary
     } = this.props.politicianData;
 
-    if (levelOfResponsibility === 'District') {
+    if (levelOfResponsibility === 'District' || firstName + lastName === 'JustinElicker') {
       const urlBase = 'https://res.cloudinary.com/politixentral/image/upload/v1548117437';
       const level = levelOfResponsibility === 'District' ? 'ward' : levelOfResponsibility;
-      const urlEnd = `${titlePrimary}_${firstName}_${lastName}_${level}_${areaOfResponsibility}.png`;
+      // if (areaOfResponsibility.indexOf(' ') > -1) areaOfResponsibility.replace(' ', '%20')
+      const extension = firstName + lastName === 'JustinElicker' ? 'jpg' : 'png';
+      const urlEnd = `${titlePrimary}_${firstName}_${lastName}_${level}_${areaOfResponsibility}.${extension}`;
       const url = `${urlBase}/${urlEnd}`;
 
       return (

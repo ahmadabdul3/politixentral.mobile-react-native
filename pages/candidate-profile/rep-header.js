@@ -51,10 +51,12 @@ class HeaderBio extends PureComponent {
       titlePrimary
     } = this.props.politicianData;
 
-    if (levelOfResponsibility === 'District') {
+    if (levelOfResponsibility === 'District' || firstName + lastName === 'JustinElicker') {
       const urlBase = 'https://res.cloudinary.com/politixentral/image/upload/v1548117437';
       const level = levelOfResponsibility === 'District' ? 'ward' : levelOfResponsibility;
-      const urlEnd = `${titlePrimary}_${firstName}_${lastName}_${level}_${areaOfResponsibility}.png`;
+      // if (areaOfResponsibility.indexOf(' ') > -1) areaOfResponsibility.replace(' ', '%20')
+      const extension = firstName + lastName === 'JustinElicker' ? 'jpg' : 'png';
+      const urlEnd = `${titlePrimary}_${firstName}_${lastName}_${level}_${areaOfResponsibility}.${extension}`;
       const url = `${urlBase}/${urlEnd}`;
 
       return (

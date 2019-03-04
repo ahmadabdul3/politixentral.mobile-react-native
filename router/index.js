@@ -37,11 +37,11 @@ class LoadingScreen extends PureComponent {
 
   // Fetch the token from storage then navigate to our appropriate place
   checkAddressPresence = async () => {
-    const address = await AsyncStorage.getItem(LOCAL_STORAGE.ADDRESS);
+    const addressInfo = await AsyncStorage.getItem(LOCAL_STORAGE.ADDRESS_INFO);
 
     // This will switch to the App screen or Auth screen and this loading
     // screen will be unmounted and thrown away.
-    const route = address ? ROUTES.APP : ROUTES.ENTER_ADDRESS;
+    const route = addressInfo ? ROUTES.APP : ROUTES.ENTER_ADDRESS;
     this.props.navigation.navigate(route);
   };
 
