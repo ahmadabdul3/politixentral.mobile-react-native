@@ -134,7 +134,8 @@ class Races extends PureComponent {
 
 class RaceOverview extends PureComponent {
   goToDetails = () => {
-    this.props.nav.navigation.navigate('RaceDetails');
+    // this.props.nav.navigation.navigate('RaceDetails');
+    console.log('');
   }
 
   render() {
