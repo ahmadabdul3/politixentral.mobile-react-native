@@ -68,7 +68,7 @@ class HeaderBio extends PureComponent {
       );
     }
 
-    return <Ionicons name="ios-person" size={80} color='white' />;
+    return <Ionicons name="ios-person" size={80} color={colors.secondaryDarker} />;
   }
 
   get title() {
@@ -101,9 +101,9 @@ class HeaderBio extends PureComponent {
 
     return (
       <View style={styles.headerBio}>
-        <ShadowView style={styles.repImage}>
+        <View style={styles.repImage}>
           { this.image }
-        </ShadowView>
+        </View>
         <View style={styles.headerBioText}>
           <Text style={styles.repName}>
             { this.fullName }
