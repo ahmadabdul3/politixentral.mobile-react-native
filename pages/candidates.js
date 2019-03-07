@@ -243,15 +243,31 @@ class CandidateSummary extends PureComponent {
 const nav = createStackNavigator({
   Officials: {
     screen: Candidates,
-    navigationOptions: () => ({
-      headerTransparent: true,
+    navigationOptions: ({ navigation }) => ({
+      // title: `${navigation.state.params.name}'s Profile'`,
+      title: 'POLITIXENTRAL',
+      headerStyle: {
+        backgroundColor: colors.secondary,
+        borderBottomColor: colors.secondaryLight,
+      },
+      headerTitleStyle: {
+        color: 'white',
+      },
       headerTintColor: 'white',
     }),
   },
   Candidate: {
     screen: CandidateProfile,
-    navigationOptions: () => ({
-      headerTransparent: true,
+    navigationOptions: ({ navigation }) => ({
+      // title: `${navigation.state.params.name}'s Profile'`,
+      title: 'POLITIXENTRAL',
+      headerStyle: {
+        backgroundColor: colors.secondary,
+        borderBottomColor: colors.secondaryLight,
+      },
+      headerTitleStyle: {
+        color: 'white',
+      },
       headerTintColor: 'white',
     }),
   },

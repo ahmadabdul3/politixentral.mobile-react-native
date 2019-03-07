@@ -287,16 +287,32 @@ class RaceOverviewCurrentOfficial extends PureComponent {
 const nav = createStackNavigator({
   Races: {
     screen: Races,
-    navigationOptions: () => ({
-      headerTransparent: true,
-      headerTintColor: colors.primary,
+    navigationOptions: ({ navigation }) => ({
+      // title: `${navigation.state.params.name}'s Profile'`,
+      title: 'POLITIXENTRAL',
+      headerStyle: {
+        backgroundColor: colors.secondary,
+        borderBottomColor: colors.secondaryLight,
+      },
+      headerTitleStyle: {
+        color: 'white',
+      },
+      headerTintColor: 'white',
     }),
   },
   RaceDetails: {
     screen: RaceDetails,
-    navigationOptions: () => ({
-      headerTransparent: true,
-      headerTintColor: colors.primary,
+    navigationOptions: ({ navigation }) => ({
+      // title: `${navigation.state.params.name}'s Profile'`,
+      title: 'POLITIXENTRAL',
+      headerStyle: {
+        backgroundColor: colors.secondary,
+        borderBottomColor: colors.secondaryLight,
+      },
+      headerTitleStyle: {
+        color: 'white',
+      },
+      headerTintColor: 'white',
     }),
   },
 });
