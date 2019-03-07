@@ -17,6 +17,8 @@ const styles = {
     marginTop: 1,
     backgroundColor: 'white',
     borderRadius: 3,
+    borderWidth: 1,
+    borderColor: colors.backgroundGrayDark,
   },
   candidateSummary: {
     backgroundColor: 'white',

@@ -16,6 +16,8 @@ const styles = StyleSheet.create({
     marginTop: 10,
     backgroundColor: 'white',
     borderRadius: 3,
+    borderWidth: 1,
+    borderColor: colors.backgroundGrayDark,
   },
 
   raceOverviewDetails: {
@@ -40,7 +42,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingTop: 9,
     paddingBottom: 11,
-    backgroundColor: colors.backgroundGrayLight,
+    backgroundColor: 'white',
     borderBottomLeftRadius: 3,
     borderBottomRightRadius: 3,
     // justifyContent: 'center',

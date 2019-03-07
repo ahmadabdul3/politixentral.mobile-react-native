@@ -32,7 +32,8 @@ const styles = StyleSheet.create({
   header: {
     backgroundColor: colors.backgroundPurple,
     paddingRight: standardSpacingSize,
-    paddingTop: 40,
+    paddingTop: 20,
+    paddingBottom: 40,
     // paddingBottom: 30,
     alignItems: 'center',
     // flexDirection: 'column-reverse',
@@ -48,7 +49,7 @@ const styles = StyleSheet.create({
     width: 70,
     height: 70,
     borderWidth: 4,
-    borderColor: colors.brandPurpleDarker,
+    borderColor: colors.secondaryDarker,
     borderRadius: 80,
     overflow: 'hidden',
     justifyContent: 'center',
@@ -66,7 +67,7 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   repDescription: {
-    color: colors.brandPurpleLighter,
+    color: colors.secondaryLighter,
     marginTop: 5,
     fontSize: 11,
     fontWeight: 'bold',

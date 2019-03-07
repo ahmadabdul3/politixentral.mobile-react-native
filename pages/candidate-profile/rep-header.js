@@ -14,7 +14,7 @@ export default class RepHeader extends PureComponent {
     const { politicianData } = this.props;
     return (
       <LinearGradient
-        colors={[colors.backgroundPurple, colors.backgroundPurpleDarker]}
+        colors={[colors.secondary, colors.secondaryDark]}
         style={styles.header}
       >
         <HeaderBio politicianData={politicianData} />
@@ -152,12 +152,12 @@ class HeaderStatement extends PureComponent {
   render() {
     const { missionStatementStyles } = this.props;
     return (
-      <Animated.View style={[styles.missionStatement, missionStatementStyles]}>
+      <View style={[styles.missionStatement, missionStatementStyles]}>
         <Text style={styles.statementBody}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit,
           sed do eiusmod tempor incididunt ut
         </Text>
-      </Animated.View>
+      </View>
     );
   }
 }

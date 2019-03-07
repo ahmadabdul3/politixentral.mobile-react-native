@@ -11,6 +11,9 @@ import CandidateProfile from 'px/pages/candidate-profile';
 import AnimatedHeaderScroll from 'px/components/animated-header-scroll';
 import PageSection from 'px/components/page-section';
 import { ClickableContentSummaryBox } from 'px/components/content-summary-card';
+import {
+  PageTitlePrimary, PageDescription, PageHeader
+} from 'px/components/page-text';
 
 import colors from 'px/styles/colors';
 import styles from 'px/styles/pages/candidates';
@@ -19,6 +22,7 @@ import http from 'px/services/http';
 
 class Candidates extends PureComponent {
   pageSections;
+
   state = {
     politicians: {},
     loading: false,
@@ -85,33 +89,62 @@ class Candidates extends PureComponent {
 
   render() {
     const { politicians, loading } = this.state;
+    // if (loading) return (<Text>Loading office holder profiles</Text>);
 
     return (
-      <AnimatedHeaderScroll
-        title='my officials'
-        subtitle='Here are the elected individuals that currently hold office in your city and state'
-      >
+      <ScrollView>
         {
-          loading ? <Text>Loading office holder profiles</Text> :
-          this.getPageSections().map((section, i) => (
-            <PageSection
-              key={i + section}
-              title={this.getSectionTitle(section)}
-              titleSecondary={this.getSectionTitleSecondary(section)}
-            >
-              {
-                politicians[section].map((p, i) => (
-                  <CandidateSummary
-                    key={i + p.firstName + p.lastName}
-                    nav={this.props}
-                    politicianData={p}
-                  />
-                ))
-              }
-            </PageSection>
-          ))
+          // <AnimatedHeaderScroll
+          //   title='my officials'
+          //   subtitle='Here are the elected individuals that currently hold office in your city and state'
+          // >
         }
-      </AnimatedHeaderScroll>
+        <PageHeader>
+          <PageTitlePrimary>
+            MY OFFICIALS
+          </PageTitlePrimary>
+          <PageDescription>
+            Here are the elected individuals that currently hold office in your city and state
+          </PageDescription>
+        </PageHeader>
+          {
+            loading ? (
+              <View style={{
+                backgroundColor: 'white',
+                paddingTop: 20,
+                paddingBottom: 20,
+                paddingRight: 20,
+                paddingLeft: 20,
+                borderRadius: 3,
+                marginTop: 20,
+                marginRight: 10,
+                marginLeft: 10,
+                marginBottom: 20,
+                borderWidth: 1,
+                borderColor: colors.backgroundGrayDark,
+              }}>
+                <Text>Loading Office Holders...</Text>
+              </View>
+            ) :
+            this.getPageSections().map((section, i) => (
+              <PageSection
+                key={i + section}
+                title={this.getSectionTitle(section)}
+                titleSecondary={this.getSectionTitleSecondary(section)}
+              >
+                {
+                  politicians[section].map((p, i) => (
+                    <CandidateSummary
+                      key={i + p.firstName + p.lastName}
+                      nav={this.props}
+                      politicianData={p}
+                    />
+                  ))
+                }
+              </PageSection>
+            ))
+          }
+      </ScrollView>
     );
   }
 }
@@ -175,7 +208,7 @@ class CandidateSummary extends PureComponent {
   render() {
 
     return (
-      <ShadowView style={styles.candidateSummaryBox}>
+      <View style={styles.candidateSummaryBox}>
         <TouchableHighlight
           onPress={this.goToProfile}
           underlayColor={colors.backgroundGrayDarker}
@@ -202,7 +235,7 @@ class CandidateSummary extends PureComponent {
             </View>
           </View>
         </TouchableHighlight>
-      </ShadowView>
+      </View>
     );
   }
 }

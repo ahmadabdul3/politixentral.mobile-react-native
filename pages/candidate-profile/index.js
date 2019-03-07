@@ -41,13 +41,16 @@ export default class CandidateProfile extends PureComponent {
     const politicianData = navigation.getParam('politicianData');
 
     return (
-      <View style={candidateProfileStyles.screen}>
+      <ScrollView style={candidateProfileStyles.screen}>
         <RepHeader politicianData={politicianData} />
-        <RepTabs
-          navigation={this.props.navigation}
-          screenProps={{ politicianData }}
-        />
-      </View>
+        {
+          // <RepTabs
+          //   navigation={this.props.navigation}
+          //   screenProps={{ politicianData }}
+          // />
+        }
+        <Initiatives politicianData={politicianData} />
+      </ScrollView>
     );
   }
 }

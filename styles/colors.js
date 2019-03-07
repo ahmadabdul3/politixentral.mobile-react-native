@@ -1,9 +1,13 @@
 
 const base = {
   primary: '#6033b3',
+  primary: '#333a56',
   primaryDark: '#4f2a93',
   secondary: '#b56cfe',
+  secondary: '#52658f',
   accent: '#33dc92',
+  accent: '#00aa4b',
+  offWhiteYellow: '#f9f7e8',
 };
 
 const colors = {
@@ -11,7 +15,12 @@ const colors = {
   primary: base.primary,
   primaryDark: base.primaryDark,
   secondary: base.secondary,
+  secondaryDark: '#415073',
+  secondaryDarker: '#374463',
+  secondaryLight: '#6479a7',
+  secondaryLighter: '#99add8',
   accent: base.accent,
+  cardBackgroundColor: base.offWhiteYellow,
   lightestGray: '#F5F6F7',
   lighterGray: '#EDF0F2',
   textColor: '#2e354e',
@@ -34,6 +43,7 @@ const colors = {
   yellow: '#f7cf00',
   backgroundGrayShadow: 'rgb(179, 185, 210)',
   backgroundGray: '#f3f4f8',
+  backgroundGray: '#e3e0e5',
   backgroundGrayDark1: '#F0F1F5',
   backgroundGrayLight: '#f6f7f9',
   backgroundGrayLighter: '#f9fafc',

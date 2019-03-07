@@ -17,6 +17,10 @@ import colors from 'px/styles/colors';
 import styles from 'px/styles/pages/races';
 import http from 'px/services/http';
 
+import {
+  PageTitlePrimary, PageDescription, PageHeader
+} from 'px/components/page-text';
+
 class Races extends PureComponent {
   pageSections;
   state = {
@@ -85,14 +89,34 @@ class Races extends PureComponent {
   render() {
     const { races, loading } = this.state;
     return (
-      <AnimatedHeaderScroll
-        title='races'
-        subtitle={
-          "These are the current races that are coming up in your city and state"
-        }
-      >
+      <ScrollView>
+        <PageHeader>
+          <PageTitlePrimary>
+            RACES
+          </PageTitlePrimary>
+          <PageDescription>
+            These are the current races that are coming up in your city and state
+          </PageDescription>
+        </PageHeader>
         {
-          loading ? <Text>Loading races</Text> :
+          loading ? (
+            <View style={{
+              backgroundColor: 'white',
+              paddingTop: 20,
+              paddingBottom: 20,
+              paddingRight: 20,
+              paddingLeft: 20,
+              borderRadius: 3,
+              marginTop: 20,
+              marginRight: 10,
+              marginLeft: 10,
+              marginBottom: 20,
+              borderWidth: 1,
+              borderColor: colors.backgroundGrayDark,
+            }}>
+              <Text>Loading Races...</Text>
+            </View>
+          ) :
           this.getPageSections().map((section, i) => (
             <PageSection
               key={i + section}
@@ -112,7 +136,7 @@ class Races extends PureComponent {
             </PageSection>
           ))
         }
-      </AnimatedHeaderScroll>
+      </ScrollView>
     );
   }
 }
@@ -141,17 +165,21 @@ class RaceOverview extends PureComponent {
   render() {
     const { position, area, currentOfficialName } = this.props;
     return (
-      <ShadowView style={styles.raceOverviewBox}>
-        <TouchableHighlight
-          onPress={this.goToDetails}
-          underlayColor={colors.backgroundGrayDarker}
-        >
+      <View style={styles.raceOverviewBox}>
+        {
+          // <TouchableHighlight
+          //   onPress={this.goToDetails}
+          //   underlayColor={colors.backgroundGrayDarker}
+          // >
+        }
           <View>
             <RaceOverviewHeader title={position} incumbent={currentOfficialName} />
             <RaceOverviewCandidates />
           </View>
-        </TouchableHighlight>
-      </ShadowView>
+        {
+          //</TouchableHighlight>
+        }
+      </View>
     )
   }
 }
@@ -170,12 +198,14 @@ class RaceOverviewHeader extends PureComponent {
             CURRENT: {incumbent}
           </Text>
         </View>
-        <View style={styles.seeDetailsLink}>
-          <Text style={styles.seeDetailsLinkText}>
-            { `race details`.toUpperCase() }
-          </Text>
-          <SimpleLineIcons name="arrow-right-circle" size={15} color={colors.accent} />
-        </View>
+        {
+          // <View style={styles.seeDetailsLink}>
+          //   <Text style={styles.seeDetailsLinkText}>
+          //     { `race details`.toUpperCase() }
+          //   </Text>
+          //   <SimpleLineIcons name="arrow-right-circle" size={15} color={colors.accent} />
+          // </View>
+        }
       </View>
     );
   }

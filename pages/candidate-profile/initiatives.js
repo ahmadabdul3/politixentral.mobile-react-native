@@ -17,9 +17,9 @@ import PageSection from 'px/components/page-section';
 
 export default class Initiatives extends PureComponent {
   render() {
-    const { politicianData } = this.props.screenProps;
+    const { politicianData } = this.props;
     return (
-      <ScrollView style={styles.mainView}>
+      <View style={styles.mainView}>
         <View style={styles.whatStandFor}>
           <Text style={styles.sectionTitle}>
             {`what i stand for`.toUpperCase()}
@@ -58,7 +58,7 @@ export default class Initiatives extends PureComponent {
           </View>
           <Committees politicianData={politicianData} />
         </View>
-      </ScrollView>
+      </View>
     );
   }
 }
