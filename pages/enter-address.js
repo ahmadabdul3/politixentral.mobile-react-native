@@ -23,7 +23,9 @@ export default class EnterAddress extends PureComponent {
       const url = 'http://px-staging.herokuapp.com/address-info?address=' + address;
       let res = await http.get(url);
       console.log('RESPONSE', res);
-      await AsyncStorage.setItem(LOCAL_STORAGE.ADDRESS_INFO, JSON.stringify(res.data));
+      const data = { ...res.data };
+      data.address = address;
+      await AsyncStorage.setItem(LOCAL_STORAGE.ADDRESS_INFO, JSON.stringify(data));
       this.props.navigation.navigate(ROUTES.APP);
     } catch (e) {
       console.log('error', e);
@@ -37,7 +39,7 @@ export default class EnterAddress extends PureComponent {
     return (
       <View style={styles.enterAddressPage}>
         <Text>
-          enter address
+          Enter Your Address
         </Text>
         <TextInput
           style={styles.addressInput}
@@ -49,7 +51,7 @@ export default class EnterAddress extends PureComponent {
         <Text>
           { error }
         </Text>
-        <Button onPress={this.goToApp} title='go' />
+        <Button onPress={this.goToApp} title='Go' />
       </View>
     );
   }

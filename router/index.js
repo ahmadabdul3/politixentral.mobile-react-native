@@ -25,7 +25,7 @@ export default class Router extends PureComponent {
         }
       );
 
-      return <Comp />
+      return <Comp />;
     }
 }
 

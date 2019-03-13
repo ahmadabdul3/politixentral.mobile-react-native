@@ -95,7 +95,7 @@ class Races extends PureComponent {
             RACES
           </PageTitlePrimary>
           <PageDescription>
-            These are the current races that are coming up in your city and state
+            These are the current races that are coming up in your city and state.
           </PageDescription>
         </PageHeader>
         {
@@ -284,37 +284,44 @@ class RaceOverviewCurrentOfficial extends PureComponent {
   }
 }
 
-const nav = createStackNavigator({
-  Races: {
-    screen: Races,
-    navigationOptions: ({ navigation }) => ({
-      // title: `${navigation.state.params.name}'s Profile'`,
-      title: 'POLITIXENTRAL',
-      headerStyle: {
-        backgroundColor: colors.secondary,
-        borderBottomColor: colors.secondaryLight,
+export default class RacesNav extends PureComponent {
+  render() {
+    const { address, navigation } = this.props;
+    const Nav = createStackNavigator({
+      Races: {
+        screen: (props) => {
+          const { address } = props.screenProps;
+          return <Races address={address} />;
+        },
+        navigationOptions: ({ navigation }) => ({
+          // title: `${navigation.state.params.name}'s Profile'`,
+          title: 'POLITIXENTRAL',
+          headerStyle: {
+            backgroundColor: colors.secondary,
+            borderBottomColor: colors.secondaryLight,
+          },
+          headerTitleStyle: {
+            color: 'white',
+          },
+          headerTintColor: 'white',
+        }),
       },
-      headerTitleStyle: {
-        color: 'white',
+      RaceDetails: {
+        screen: RaceDetails,
+        navigationOptions: ({ navigation }) => ({
+          // title: `${navigation.state.params.name}'s Profile'`,
+          title: 'POLITIXENTRAL',
+          headerStyle: {
+            backgroundColor: colors.secondary,
+            borderBottomColor: colors.secondaryLight,
+          },
+          headerTitleStyle: {
+            color: 'white',
+          },
+          headerTintColor: 'white',
+        }),
       },
-      headerTintColor: 'white',
-    }),
-  },
-  RaceDetails: {
-    screen: RaceDetails,
-    navigationOptions: ({ navigation }) => ({
-      // title: `${navigation.state.params.name}'s Profile'`,
-      title: 'POLITIXENTRAL',
-      headerStyle: {
-        backgroundColor: colors.secondary,
-        borderBottomColor: colors.secondaryLight,
-      },
-      headerTitleStyle: {
-        color: 'white',
-      },
-      headerTintColor: 'white',
-    }),
-  },
-});
-
-export default nav;
+    });
+    return <Nav screenProps={{ address }} />;
+  }
+}

@@ -5,9 +5,11 @@ import City from 'px/pages/city';
 import District from 'px/pages/district';
 import colors from 'px/styles/colors';
 import { Ionicons, MaterialIcons, Foundation, FontAwesome } from '@expo/vector-icons';
-import Races from 'px/pages/races';
-import Candidates from 'px/pages/candidates';
+import RacesPageContainer from 'px/containers/races_page_container';
+// import Candidates from 'px/pages/candidates';
 import Animation from 'px/components/animated-header-scroll';
+import SettingsPageContainer from 'px/containers/settings_page_container';
+import CandidatesPageContainer from 'px/containers/candidates_page_container';
 
 console.disableYellowBox = true;
 
@@ -31,7 +33,7 @@ export default createMaterialBottomTabNavigator ({
   //   },
   // },
   Officials: {
-    screen: Candidates,
+    screen: CandidatesPageContainer,
     navigationOptions: {
       tabBarIcon: ({ tintColor, focused }) => {
         const color = focused ? colors.primary : colors.textColorLightest;
@@ -40,11 +42,20 @@ export default createMaterialBottomTabNavigator ({
     },
   },
   Races: {
-    screen: Races,
+    screen: RacesPageContainer,
     navigationOptions: {
       tabBarIcon: ({ tintColor, focused }) => {
         const color = focused ? colors.primary : colors.textColorLightest;
         return <FontAwesome name="flag-checkered" size={19} color={color} />;
+      },
+    },
+  },
+  Settings: {
+    screen: SettingsPageContainer,
+    navigationOptions: {
+      tabBarIcon: ({ tintColor, focused }) => {
+        const color = focused ? colors.primary : colors.textColorLightest;
+        return <Ionicons name="ios-settings" size={19} color={color} />;
       },
     },
   },

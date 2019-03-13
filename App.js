@@ -1,11 +1,25 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Router from 'px/router';
+import { Provider } from 'react-redux';
+import reducer from 'px/redux';
+import thunk from 'redux-thunk';
+import { applyMiddleware, compose, createStore } from 'redux';
+
+const store = createStore(
+  reducer, // new root reducer with router state
+  {}, // initial state
+  compose(
+    applyMiddleware(thunk),
+  ),
+);
 
 export default class App extends React.Component {
   render() {
     return (
-      <Router />
+      <Provider store={store}>
+        <Router />
+      </Provider>
     );
   }
 }

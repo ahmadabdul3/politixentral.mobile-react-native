@@ -33,11 +33,15 @@ class Candidates extends PureComponent {
     return info;
   }
 
-  componentDidMount() {
+  componentDidUpdate(prevProps) {
+    if (prevProps.address !== this.props.address) this.fetchCandidates();
+  }
+
+  fetchCandidates() {
     this.setState({ loading: true });
     this.getAddressInfo().then(addressInfoString => {
       const addressInfo = JSON.parse(addressInfoString);
-      console.log('addressInfo', addressInfo);
+      // console.log('addressInfo', addressInfo);
       const { city, state, district } = addressInfo;
       const query = `city=${city}&state=${state}&district=${district}`;
       const urlBase = 'http://px-staging.herokuapp.com/politicians/location?';
@@ -57,7 +61,11 @@ class Candidates extends PureComponent {
     }).catch(err => {
       this.setState({ loading: false });
       console.warn(err);
-    });;
+    });
+  }
+
+  componentDidMount() {
+    this.fetchCandidates();
   }
 
   getPageSections() {
@@ -89,6 +97,7 @@ class Candidates extends PureComponent {
 
   render() {
     const { politicians, loading } = this.state;
+    console.log('render again');
     // if (loading) return (<Text>Loading office holder profiles</Text>);
 
     return (
@@ -104,7 +113,7 @@ class Candidates extends PureComponent {
             MY OFFICIALS
           </PageTitlePrimary>
           <PageDescription>
-            Here are the elected individuals that currently hold office in your city and state
+            Here are the elected individuals that currently hold office in your city and state.
           </PageDescription>
         </PageHeader>
           {
@@ -240,37 +249,47 @@ class CandidateSummary extends PureComponent {
   }
 }
 
-const nav = createStackNavigator({
-  Officials: {
-    screen: Candidates,
-    navigationOptions: ({ navigation }) => ({
-      // title: `${navigation.state.params.name}'s Profile'`,
-      title: 'POLITIXENTRAL',
-      headerStyle: {
-        backgroundColor: colors.secondary,
-        borderBottomColor: colors.secondaryLight,
+export default class CandidatesNav extends PureComponent {
+  render() {
+    const { address, navigation } = this.props;
+    const Nav = createStackNavigator({
+      Officials: {
+        screen: (props) => {
+          const { address } = props.screenProps;
+          return <Candidates address={address} />;
+        },
+        navigationOptions: ({ navigation }) => ({
+          // title: `${navigation.state.params.name}'s Profile'`,
+          title: 'POLITIXENTRAL',
+          headerStyle: {
+            backgroundColor: colors.secondary,
+            borderBottomColor: colors.secondaryLight,
+          },
+          headerTitleStyle: {
+            color: 'white',
+          },
+          headerTintColor: 'white',
+        }),
       },
-      headerTitleStyle: {
-        color: 'white',
+      Candidate: {
+        screen: CandidateProfile,
+        navigationOptions: ({ navigation }) => ({
+          // title: `${navigation.state.params.name}'s Profile'`,
+          title: 'POLITIXENTRAL',
+          headerStyle: {
+            backgroundColor: colors.secondary,
+            borderBottomColor: colors.secondaryLight,
+          },
+          headerTitleStyle: {
+            color: 'white',
+          },
+          headerTintColor: 'white',
+        }),
       },
-      headerTintColor: 'white',
-    }),
-  },
-  Candidate: {
-    screen: CandidateProfile,
-    navigationOptions: ({ navigation }) => ({
-      // title: `${navigation.state.params.name}'s Profile'`,
-      title: 'POLITIXENTRAL',
-      headerStyle: {
-        backgroundColor: colors.secondary,
-        borderBottomColor: colors.secondaryLight,
-      },
-      headerTitleStyle: {
-        color: 'white',
-      },
-      headerTintColor: 'white',
-    }),
-  },
-});
+    });
+    return <Nav screenProps={{ address }} />;
+  }
+}
 
-export default nav;
+
+// export default nav;
