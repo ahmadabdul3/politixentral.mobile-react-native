@@ -31,6 +31,28 @@ const pageHeaderStyles = StyleSheet.create({
   },
 });
 
+export class PageHeaderLargeTop extends PureComponent {
+  render() {
+    return (
+      <LinearGradient
+        colors={[colors.secondary, colors.secondaryDark]}
+        style={pageHeaderLargeTopStyles.pageHeader}>
+        { this.props.children }
+      </LinearGradient>
+    );
+  }
+}
+
+const pageHeaderLargeTopStyles = StyleSheet.create({
+  pageHeader: {
+    backgroundColor: colors.secondary,
+    paddingTop: 40,
+    paddingBottom: 20,
+    // borderBottomWidth: 1,
+    // borderBottomColor: colors.backgroundGrayDarker
+  },
+});
+
 export class PageTitlePrimary extends PureComponent {
   render() {
     const { children } = this.props;

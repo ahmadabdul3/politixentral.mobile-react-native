@@ -26,7 +26,11 @@ export class PrimaryButton extends PureComponent {
           borderRadius: 3,
         }, customStyles ]}
       >
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        <View style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
           {
             text ? (
               <Text style={{

@@ -97,7 +97,7 @@ class Candidates extends PureComponent {
 
   render() {
     const { politicians, loading } = this.state;
-    console.log('render again');
+    // console.log('render again', this.props);
     // if (loading) return (<Text>Loading office holder profiles</Text>);
 
     return (
@@ -160,6 +160,7 @@ class Candidates extends PureComponent {
 
 class CandidateSummary extends PureComponent {
   goToProfile = () => {
+    // console.log(this.props);
     this.props.nav.navigation.navigate(
       'Candidate', { politicianData: this.props.politicianData }
     );
@@ -256,7 +257,7 @@ export default class CandidatesNav extends PureComponent {
       Officials: {
         screen: (props) => {
           const { address } = props.screenProps;
-          return <Candidates address={address} />;
+          return <Candidates address={address} navigation={props.navigation} />;
         },
         navigationOptions: ({ navigation }) => ({
           // title: `${navigation.state.params.name}'s Profile'`,

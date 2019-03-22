@@ -4,12 +4,13 @@ import { createMaterialBottomTabNavigator } from 'react-navigation-material-bott
 import City from 'px/pages/city';
 import District from 'px/pages/district';
 import colors from 'px/styles/colors';
-import { Ionicons, MaterialIcons, Foundation, FontAwesome } from '@expo/vector-icons';
+import { MaterialCommunityIcons, Ionicons, MaterialIcons, Foundation, FontAwesome } from '@expo/vector-icons';
 import RacesPageContainer from 'px/containers/races_page_container';
 // import Candidates from 'px/pages/candidates';
 import Animation from 'px/components/animated-header-scroll';
 import SettingsPageContainer from 'px/containers/settings_page_container';
 import CandidatesPageContainer from 'px/containers/candidates_page_container';
+import MessagesPage from 'px/pages/messages';
 
 console.disableYellowBox = true;
 
@@ -47,6 +48,15 @@ export default createMaterialBottomTabNavigator ({
       tabBarIcon: ({ tintColor, focused }) => {
         const color = focused ? colors.primary : colors.textColorLightest;
         return <FontAwesome name="flag-checkered" size={19} color={color} />;
+      },
+    },
+  },
+  Messages: {
+    screen: MessagesPage,
+    navigationOptions: {
+      tabBarIcon: ({ tintColor, focused }) => {
+        const color = focused ? colors.primary : colors.textColorLightest;
+        return <MaterialCommunityIcons name="message-text" size={19} color={color} />;
       },
     },
   },
