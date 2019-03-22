@@ -10,6 +10,7 @@ import colors from 'px/styles/colors';
 import {
   PageTitlePrimary, PageDescription, PageHeader
 } from 'px/components/page-text';
+import ComingSoon from 'px/components/coming-soon';
 
 class PageComponent extends PureComponent {
   render() {
@@ -24,7 +25,7 @@ class PageComponent extends PureComponent {
           </PageDescription>
         </PageHeader>
         <View>
-          <MessageSummary />
+          <ComingSoon />
         </View>
       </ScrollView>
     );
