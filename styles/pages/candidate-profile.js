@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     // flexDirection: 'column-reverse',
   },
   headerBio: {
-    paddingLeft: 50,
+    paddingLeft: 30,
     flexDirection: 'row',
     justifyContent: 'center',
   },

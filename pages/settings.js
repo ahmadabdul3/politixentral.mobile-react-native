@@ -189,7 +189,8 @@ class Authentication extends PureComponent {
       role: 'end-user',
     };
     try {
-      const newUser = await http.post('http://px-staging.herokuapp.com/users', { user });
+      const newUserResponse = await http.post('http://px-staging.herokuapp.com/users', { user });
+      const newUser = newUserResponse.user;
       await AsyncStorage.setItem(LOCAL_STORAGE.USER_INFO, JSON.stringify(newUser));
     } catch (e) {
       console.log('error', e);

@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, Text, Image, ScrollView } from 'react-native';
+import { View, Text, Image, ScrollView, AsyncStorage } from 'react-native';
 import styles from 'px/styles/pages/candidate-initiatives';
 import {
   Ionicons,

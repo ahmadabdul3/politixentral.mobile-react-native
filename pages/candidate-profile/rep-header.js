@@ -8,10 +8,11 @@ import {
   View, Text, StyleSheet, Image, ScrollView, Animated, TouchableHighlight
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { PrimaryButton } from 'px/components/buttons';
 
 export default class RepHeader extends PureComponent {
   render() {
-    const { politicianData } = this.props;
+    const { politicianData, openNewMessageForm } = this.props;
     return (
       <LinearGradient
         colors={[colors.secondary, colors.secondaryDark]}
@@ -19,6 +20,13 @@ export default class RepHeader extends PureComponent {
       >
         <HeaderBio politicianData={politicianData} />
         <HeaderStatement />
+        <PrimaryButton
+          text={'Send a Message'}
+          customStyles={{
+            flexGrow: 1, flexShrink: 1,
+            marginTop: 20,
+          }}
+          onPress={openNewMessageForm} />
       </LinearGradient>
     );
   }
