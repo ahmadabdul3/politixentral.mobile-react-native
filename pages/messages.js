@@ -16,35 +16,50 @@ import ComingSoon from 'px/components/coming-soon';
 import http from 'px/services/http';
 import urls from 'px/constants/urls';
 import LOCAL_STORAGE from 'px/constants/local-storage';
+import { PrimaryButton } from 'px/components/buttons';
 
 class PageComponent extends PureComponent {
   state = {
-    messages: []
+    messages: [],
+    messagesRefreshing: false,
   };
 
   componentDidMount() {
-    AsyncStorage.getItem(LOCAL_STORAGE.USER_INFO).then(rawUser => {
-      console.log('RAW USER', rawUser);
-      if (rawUser) return JSON.parse(rawUser);
-      throw({ message: 'no user session' });
-    }).then(user => {
-      console.log('USER', user);
+    this.fetchMessages();
+  }
+
+  async getUser() {
+    if (this.user) return this.user;
+    const rawUser = await AsyncStorage.getItem(LOCAL_STORAGE.USER_INFO);
+    if (rawUser) {
+      const user = JSON.parse(rawUser);
+      this.user = user;
+      return user;
+    }
+    throw({ message: 'no user session' });
+  }
+
+  async fetchMessages() {
+    try {
+      const user = await this.getUser();
       const { id } = user;
-      console.log('id', id);
       const url = urls.dataApiServer + 'messages?userId=' + id;
-      console.log('URL', url);
-      return http.get(url);
-    }).then(res => {
-      console.log('res', res);
+      const res = await http.get(url);
       this.setState({ messages: res.messageData });
-    }).catch(e => {
+    } catch (e) {
       console.log('error', e);
-    });
+    }
+  }
+
+  refreshMessages = async () => {
+    this.setState({ messagesRefreshing: true, messages: [] });
+    await this.fetchMessages();
+    this.setState({ messagesRefreshing: false });
   }
 
   render() {
-    const { messages } = this.state;
-    console.log('messages', this.props);
+    const { messages, messagesRefreshing } = this.state;
+    // console.log('messages', this.props);
 
     return (
       <ScrollView>
@@ -56,6 +71,17 @@ class PageComponent extends PureComponent {
             Communicate with your Representatives and let your voice be heard.
           </PageDescription>
         </PageHeader>
+        <PrimaryButton
+          text={'Click to Refresh Messages'}
+          customStyles={{
+            flexGrow: 1, flexShrink: 1,
+            marginTop: 20,
+            marginBottom: 20,
+            marginRight: 10,
+            marginLeft: 10,
+          }}
+          onPress={this.refreshMessages}
+          loading={messagesRefreshing} />
         <View style={{ paddingBottom: 20 }}>
           {
             messages && messages.length ? (
