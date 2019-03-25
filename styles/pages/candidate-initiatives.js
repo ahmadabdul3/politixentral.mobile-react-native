@@ -23,8 +23,8 @@ const projectShared = {
 
 const styles = StyleSheet.create({
   mainView: {
-    backgroundColor: colors.backgroundPurple,
-    backgroundColor: colors.backgroundGray,
+    // backgroundColor: colors.backgroundPurple,
+    // backgroundColor: colors.backgroundGray,
   },
   sectionTitle: {
     ...sectionTitle,
