@@ -22,6 +22,7 @@ class PageComponent extends PureComponent {
   state = {
     messages: [],
     messagesRefreshing: false,
+    error: '',
   };
 
   componentDidMount() {
@@ -36,6 +37,8 @@ class PageComponent extends PureComponent {
       this.user = user;
       return user;
     }
+    // - I have to update the redux global store to keep track of a user session when a person logs in / out
+    // this.setState({ error: `Please create an account or log in to send and view messages. You can get started on the Settings (gear icon) page.` });
     throw({ message: 'no user session' });
   }
 
@@ -70,23 +73,27 @@ class PageComponent extends PureComponent {
           <PageDescription>
             Communicate with your Representatives and let your voice be heard.
           </PageDescription>
+          <PrimaryButton
+            text={'Click to Refresh Messages'}
+            customStyles={{
+              flexGrow: 1, flexShrink: 1,
+              marginTop: 25,
+              marginRight: 25,
+              marginLeft: 25,
+              marginBottom: 0
+            }}
+            onPress={this.refreshMessages}
+            loading={messagesRefreshing} />
         </PageHeader>
-        <PrimaryButton
-          text={'Click to Refresh Messages'}
-          customStyles={{
-            flexGrow: 1, flexShrink: 1,
-            marginTop: 20,
-            marginBottom: 20,
-            marginRight: 10,
-            marginLeft: 10,
-          }}
-          onPress={this.refreshMessages}
-          loading={messagesRefreshing} />
         <View style={{ paddingBottom: 20 }}>
           {
             messages && messages.length ? (
               messages.map(m =>
-                <MessageSummary messageData={m} key={m.id} navigation={this.props.navigation} />)
+                <MessageSummary
+                  messageData={m}
+                  key={m.id}
+                  navigation={this.props.navigation}
+                  currentUser={this.user} />)
             ) : <NoMessages />
           }
         </View>
@@ -96,8 +103,22 @@ class PageComponent extends PureComponent {
 }
 
 class MessageSummary extends PureComponent {
+  determinePolitician() {
+    const {
+      senderId,
+      senderFirstName,
+      senderLastName,
+      receiverId,
+      receiverFirstName,
+      receiverLastName
+    } = this.props.messageData;
+    const { id } = this.props.currentUser;
+    if (id === senderId) return receiverFirstName + ' ' + receiverLastName;
+    return senderFirstName + ' ' + senderLastName;
+  }
+
   render() {
-    const { messageData, navigation } = this.props;
+    const { messageData, navigation, currentUser } = this.props;
     const { title, body, createdAt } = messageData;
     return (
       <View style={{
@@ -111,7 +132,7 @@ class MessageSummary extends PureComponent {
         minHeight: 50,
       }}>
         <TouchableHighlight
-          onPress={() => { navigation.navigate('MessageThread'); }}
+          onPress={() => { navigation.navigate('MessageThread', { messageData, currentUser }); }}
           underlayColor={colors.backgroundGrayDarker}
         >
           <View style={{ padding: 20 }}>
@@ -143,7 +164,7 @@ class MessageSummary extends PureComponent {
                   fontSize: 10,
                   marginTop: 2,
                 }}>
-                  Darnell Goldson
+                  { this.determinePolitician() }
                 </Text>
               </View>
               <View>
@@ -195,16 +216,80 @@ class NoMessages extends PureComponent {
 }
 
 class MessageThread extends PureComponent {
+  state = {
+    messages: [],
+  };
+
+  componentDidMount() {
+    const { navigation } = this.props;
+    const messageData = navigation.getParam('messageData');
+    const { threadId } = messageData;
+    const url = urls.dataApiServer + 'messages/thread/' + threadId;
+    http.get(url).then(r => {
+      const { messageData } = r;
+      this.setState({ messages: messageData });
+    }).catch(e => {
+      console.log('err', e);
+    });
+  }
+
   render() {
+    const { navigation } = this.props;
+    const currentUser = navigation.getParam('currentUser');
+    const { messages } = this.state;
+
     return (
-      <View>
-        <Text>
-          Message Thread
-        </Text>
-      </View>
+      <ScrollView style={{ paddingBottom: 20 }}>
+        {
+          messages && messages.length > 0 ? (
+            messages.map(m => (
+              <MessageSummary
+                key={m.id}
+                messageData={m}
+                currentUser={currentUser}
+                navigation={{ navigate: () => {}}}
+              />
+            ))
+          ) : (
+            <View style={{
+              padding: 20,
+              margin: 10,
+              marginTop: 20,
+              marginBottom: 20,
+              backgroundColor: 'white',
+              borderWidth: 1,
+              borderColor: colors.backgroundGrayDarker,
+            }}>
+              <Text>
+                Loading messages, this should only take a second.
+              </Text>
+            </View>
+          )
+        }
+      </ScrollView>
     );
   };
 }
+
+// class MessageThreadSummary extends PureComponent {
+//   render() {
+//     return (
+//       <View style={{
+//         padding: 20,
+//         margin: 10,
+//         marginTop: 20,
+//         marginBottom: 20,
+//         backgroundColor: 'white',
+//         borderWidth: 1,
+//         borderColor: colors.backgroundGrayDarker,
+//       }}>
+//         <Text>
+//
+//         </Text>
+//       </View>
+//     );
+//   }
+// }
 
 
 export default class PageNav extends PureComponent {
