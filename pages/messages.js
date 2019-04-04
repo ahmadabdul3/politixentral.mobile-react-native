@@ -86,7 +86,7 @@ class PageComponent extends PureComponent {
     // console.log('messages', this.props);
 
     return (
-      <ScrollView>
+      <ScrollView style={{ backgroundColor: 'white' }}>
         <PageHeader>
           <PageTitlePrimary>
             MESSAGES
@@ -106,7 +106,7 @@ class PageComponent extends PureComponent {
             onPress={this.refreshMessages}
             loading={messagesRefreshing} />
         </PageHeader>
-        <View style={{ paddingBottom: 20 }}>
+        <View style={{ paddingTop: 15, paddingBottom: 15 }}>
           {
             messages && messages.length ? (
               messages.map(m =>
@@ -124,6 +124,10 @@ class PageComponent extends PureComponent {
 }
 
 class MessageSummary extends PureComponent {
+  static defaultProps = {
+    showTitle: true,
+  };
+
   determinePolitician() {
     const {
       senderId,
@@ -139,77 +143,49 @@ class MessageSummary extends PureComponent {
   }
 
   render() {
-    const { messageData, navigation, currentUser } = this.props;
+    const { messageData, navigation, currentUser, showTitle } = this.props;
     const { title, body, createdAt } = messageData;
     return (
-      <View style={{
-        backgroundColor: 'white',
-        borderWidth: 1,
-        borderColor: colors.backgroundGrayDarker,
-        marginRight: 10,
-        marginLeft: 10,
-        marginTop: 10,
-        borderRadius: 3,
-        minHeight: 50,
-      }}>
-        <TouchableHighlight
-          onPress={() => { navigation.navigate('MessageThread', { messageData, currentUser }); }}
-          underlayColor={colors.backgroundGrayDarker}
-        >
-          <View style={{ padding: 20 }}>
-            <Text style={{ fontWeight: 'bold', color: colors.textColor }}>
-              { title }
+      <TouchableHighlight
+        onPress={() => { navigation.navigate('MessageThread', { messageData, currentUser }); }}
+        underlayColor={colors.backgroundGrayDarker}
+      >
+        <View style={{
+          backgroundColor: 'white',
+          minHeight: 50,
+          paddingTop: 15,
+          paddingBottom: 15,
+          paddingRight: 20,
+          paddingLeft: 20,
+        }}>
+          <View style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}>
+            <Text style={{ fontWeight: 'bold' }}>
+              { this.determinePolitician() }
             </Text>
-            <Text style={{ marginTop: 10, color: colors.textColor }}>
-              { body }
-            </Text>
-            <View style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              marginTop: 15,
-              borderTopWidth: 1,
-              borderTopColor: colors.backgroundGray,
-              paddingTop: 15,
+            <Text style={{
+              fontSize: 11,
+              marginTop: 2,
+              color: colors.textColorLight
             }}>
-              <View>
-                <Text style={{
-                  color: colors.textColorLight,
-                  fontWeight: 'bold',
-                  fontSize: 9,
-                }}>
-                  SENT TO
-                </Text>
-                <Text style={{
-                  color: colors.textColorLight,
-                  fontSize: 10,
-                  marginTop: 2,
-                }}>
-                  { this.determinePolitician() }
-                </Text>
-              </View>
-              <View>
-                <Text style={{
-                  color: colors.textColorLight,
-                  fontWeight: 'bold',
-                  fontSize: 9,
-                  textAlign: 'right',
-                }}>
-                  DATE SENT
-                </Text>
-                <Text style={{
-                  textAlign: 'right',
-                  fontSize: 10,
-                  marginTop: 2,
-                  color: colors.textColorLight
-                }}>
-                  { createdAt.slice(0, 10) }
-                </Text>
-              </View>
-            </View>
+              { createdAt.slice(0, 10) }
+            </Text>
           </View>
-        </TouchableHighlight>
-      </View>
+          {
+            showTitle && (
+              <Text style={{ marginTop: 5, color: colors.textColor }}>
+                { title }
+              </Text>
+            )
+          }
+          <Text style={{ marginTop: 3, color: colors.textColor }}>
+            { body }
+          </Text>
+        </View>
+      </TouchableHighlight>
     );
   }
 }
@@ -260,16 +236,39 @@ class MessageThread extends PureComponent {
     const { messages } = this.state;
 
     return (
-      <ScrollView style={{ paddingBottom: 20 }}>
+      <ScrollView style={{
+        paddingBottom: 20,
+        backgroundColor: 'white',
+      }}>
         {
           messages && messages.length > 0 ? (
-            messages.map(m => (
-              <MessageSummary
-                key={m.id}
-                messageData={m}
-                currentUser={currentUser}
-                navigation={{ navigate: () => {}}}
-              />
+            <Text style={{
+              fontSize: 23,
+              paddingTop: 35,
+              paddingBottom: 20,
+              paddingRight: 20,
+              paddingLeft: 20,
+            }}>
+              { messages[0].title }
+            </Text>
+          ) : null
+        }
+        {
+          messages && messages.length > 0 ? (
+            messages.map((m, i) => (
+              <View
+                style={{
+                  borderTopWidth: 1,
+                  borderTopColor: i === 0 ? 'white' : colors.backgroundGrayDarker,
+                }}
+                key={m.id}>
+                <MessageSummary
+                  showTitle={false}
+                  messageData={m}
+                  currentUser={currentUser}
+                  navigation={{ navigate: () => {}}}
+                />
+              </View>
             ))
           ) : (
             <View style={{
