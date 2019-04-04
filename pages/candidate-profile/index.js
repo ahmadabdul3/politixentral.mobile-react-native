@@ -21,6 +21,7 @@ import { BaseInput, BaseTextarea } from 'px/components/inputs';
 import { PrimaryButton, SecondaryButton } from 'px/components/buttons';
 import urls from 'px/constants/urls';
 import http from 'px/services/http';
+import { dataApiPost } from 'px/clients/data_api_client';
 
 const RepTabs = createMaterialTopTabNavigator({
   Initiatives: {
@@ -97,6 +98,14 @@ class NewMessageForm extends PureComponent {
   };
 
   componentDidMount() {
+    this.setUser();
+  }
+
+  componentDidUpdate() {
+    if (!this.user) this.setUser();
+  }
+
+  setUser() {
     AsyncStorage.getItem(LOCAL_STORAGE.USER_INFO).then(rawUser => {
       if (rawUser) return JSON.parse(rawUser);
       throw({ message: 'no user session' });
@@ -129,7 +138,6 @@ class NewMessageForm extends PureComponent {
       const title = this.state.title.trim();
       const body = this.state.body.trim();
       if (!title || !body) throw({ friendlyMessage: 'Please provide a title and the details of your message.' });
-      const url = urls.dataApiServer + 'messages';
       const { politicianData } = this.props;
       const senderId = this.user.id;
       const receiverId = this.props.politicianData.userId;
@@ -138,7 +146,8 @@ class NewMessageForm extends PureComponent {
       const polFullName = polFirstName + ' ' + polLastName;
       const message = { senderId, receiverId, title, body };
       console.log('message', message);
-      const newMessage = await http.post(url, { message });
+      const newMessage = await dataApiPost('messages', { message });
+      // const newMessage = await http.post(url, { message });
       this.setState({
         formMessage: '',
         messageSending: false,
@@ -154,6 +163,11 @@ class NewMessageForm extends PureComponent {
       );
     } catch (e) {
       console.log(e);
+      if (e.message === 'user not logged in') {
+        this.setState({ formMessage: 'Please log in to send messages.', messageSending: false });
+        this.messageSending = false;
+        return;
+      }
       const formMessage = e.friendlyMessage
         || `There was a problem with sending your message, please try again.`;
       this.setState({ formMessage, messageSending: false });
@@ -170,9 +184,7 @@ class NewMessageForm extends PureComponent {
           animationType="slide"
           transparent={false}
           visible={visible}
-          onRequestClose={() => {
-            Alert.alert('Modal has been closed.');
-          }}>
+          onBackButtonPress={closeModal}>
             <ScrollView
               style={{
                 flexGrow: 1,

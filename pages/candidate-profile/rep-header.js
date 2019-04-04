@@ -5,12 +5,30 @@ import ShadowView from 'px/components/shadow-view';
 import Demographic from 'px/components/demographic';
 import styles from 'px/styles/pages/candidate-profile';
 import {
-  View, Text, StyleSheet, Image, ScrollView, Animated, TouchableHighlight
+  View, Text, StyleSheet, Image, ScrollView, Animated, TouchableHighlight,
+  AsyncStorage, Alert
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { PrimaryButton } from 'px/components/buttons';
+import LOCAL_STORAGE from 'px/constants/local-storage';
 
 export default class RepHeader extends PureComponent {
+  openNewMessageForm = () => {
+    const { openNewMessageForm } = this.props;
+    AsyncStorage.getItem(LOCAL_STORAGE.SESSION_INFO).then(rawSession => {
+      if (!rawSession) throw({ message: 'no user session' });
+      openNewMessageForm();
+    }).catch(e => {
+      if (e.message === 'no user session') {
+        Alert.alert(
+          'Please Log In',
+          'You need to log in to send and view messages. You can log in or sign up in the settings page.',
+          [{ text: 'OK', onPress: () => {} }],
+          { cancelable: false },
+        );
+      }
+    });
+  }
   render() {
     const { politicianData, openNewMessageForm } = this.props;
     return (
@@ -26,7 +44,7 @@ export default class RepHeader extends PureComponent {
             flexGrow: 1, flexShrink: 1,
             marginTop: 20,
           }}
-          onPress={openNewMessageForm} />
+          onPress={this.openNewMessageForm} />
       </LinearGradient>
     );
   }

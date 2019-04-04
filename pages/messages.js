@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   FlatList,
   Modal,
+  Alert,
 } from 'react-native';
 import colors from 'px/styles/colors';
 import {
@@ -17,8 +18,10 @@ import http from 'px/services/http';
 import urls from 'px/constants/urls';
 import LOCAL_STORAGE from 'px/constants/local-storage';
 import { PrimaryButton } from 'px/components/buttons';
+import { dataApiGet } from 'px/clients/data_api_client';
 
 class PageComponent extends PureComponent {
+  user;
   state = {
     messages: [],
     messagesRefreshing: false,
@@ -39,18 +42,36 @@ class PageComponent extends PureComponent {
     }
     // - I have to update the redux global store to keep track of a user session when a person logs in / out
     // this.setState({ error: `Please create an account or log in to send and view messages. You can get started on the Settings (gear icon) page.` });
-    throw({ message: 'no user session' });
+    throw({ name: 'NoAuthSession', message: 'no user session' });
+  }
+
+  async getSession() {
+    const rawSession = await AsyncStorage.getItem(LOCAL_STORAGE.SESSION_INFO);
+    if (!rawSession) throw({ name: 'NoAuthSession', message: 'Please log in or sign up' });
+    const session = JSON.parse(rawSession);
+    return session;
   }
 
   async fetchMessages() {
     try {
       const user = await this.getUser();
+      const session = await this.getSession();
       const { id } = user;
-      const url = urls.dataApiServer + 'messages?userId=' + id;
-      const res = await http.get(url);
+      const { access_token } = session;
+      const url = 'messages?userId=' + id;
+      const res = await dataApiGet(url);
+      console.log('res', res);
       this.setState({ messages: res.messageData });
     } catch (e) {
       console.log('error', e);
+      if (e.name === 'NoAuthSession') {
+        Alert.alert(
+          'Please Log In',
+          'You need to log in to send and view messages. You can log in or sign up in the settings page.',
+          [{ text: 'OK', onPress: () => {} }],
+          { cancelable: false },
+        );
+      }
     }
   }
 
@@ -224,8 +245,8 @@ class MessageThread extends PureComponent {
     const { navigation } = this.props;
     const messageData = navigation.getParam('messageData');
     const { threadId } = messageData;
-    const url = urls.dataApiServer + 'messages/thread/' + threadId;
-    http.get(url).then(r => {
+    const url = 'messages/thread/' + threadId;
+    dataApiGet(url).then(r => {
       const { messageData } = r;
       this.setState({ messages: messageData });
     }).catch(e => {
