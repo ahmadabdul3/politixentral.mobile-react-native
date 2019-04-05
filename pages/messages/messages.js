@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Component } from 'react';
 import { createStackNavigator } from 'react-navigation';
 import {
   TextInput,
@@ -20,7 +20,7 @@ import LOCAL_STORAGE from 'px/constants/local-storage';
 import { PrimaryButton } from 'px/components/buttons';
 import { dataApiGet } from 'px/clients/data_api_client';
 
-class PageComponent extends PureComponent {
+export default class PageComponent extends PureComponent {
   user;
   state = {
     messages: [],
@@ -32,7 +32,7 @@ class PageComponent extends PureComponent {
     this.fetchMessages();
   }
 
-  async getUser() {
+  getUser = async () => {
     if (this.user) return this.user;
     const rawUser = await AsyncStorage.getItem(LOCAL_STORAGE.USER_INFO);
     if (rawUser) {
@@ -40,19 +40,18 @@ class PageComponent extends PureComponent {
       this.user = user;
       return user;
     }
-    // - I have to update the redux global store to keep track of a user session when a person logs in / out
-    // this.setState({ error: `Please create an account or log in to send and view messages. You can get started on the Settings (gear icon) page.` });
-    throw({ name: 'NoAuthSession', message: 'no user session' });
-  }
 
-  async getSession() {
+    throw({ name: 'NoAuthSession', message: 'no user session' });
+  };
+
+  getSession = async () => {
     const rawSession = await AsyncStorage.getItem(LOCAL_STORAGE.SESSION_INFO);
     if (!rawSession) throw({ name: 'NoAuthSession', message: 'Please log in or sign up' });
     const session = JSON.parse(rawSession);
     return session;
-  }
+  };
 
-  async fetchMessages() {
+  fetchMessages = async () => {
     try {
       const user = await this.getUser();
       const session = await this.getSession();
@@ -60,8 +59,7 @@ class PageComponent extends PureComponent {
       const { access_token } = session;
       const url = 'messages?userId=' + id;
       const res = await dataApiGet(url);
-      console.log('res', res);
-      this.setState({ messages: res.messageData });
+      this.props.getMessagesSuccess(res.messageData);
     } catch (e) {
       console.log('error', e);
       if (e.name === 'NoAuthSession') {
@@ -73,17 +71,17 @@ class PageComponent extends PureComponent {
         );
       }
     }
-  }
+  };
 
   refreshMessages = async () => {
     this.setState({ messagesRefreshing: true, messages: [] });
     await this.fetchMessages();
     this.setState({ messagesRefreshing: false });
-  }
+  };
 
   render() {
-    const { messages, messagesRefreshing } = this.state;
-    // console.log('messages', this.props);
+    const { messagesRefreshing } = this.state;
+    const { messages } = this.props;
 
     return (
       <ScrollView style={{ backgroundColor: 'white' }}>
@@ -97,7 +95,8 @@ class PageComponent extends PureComponent {
           <PrimaryButton
             text={'Click to Refresh Messages'}
             customStyles={{
-              flexGrow: 1, flexShrink: 1,
+              flexGrow: 1,
+              flexShrink: 1,
               marginTop: 25,
               marginRight: 25,
               marginLeft: 25,
@@ -108,13 +107,14 @@ class PageComponent extends PureComponent {
         </PageHeader>
         <View style={{ paddingTop: 15, paddingBottom: 15 }}>
           {
-            messages && messages.length ? (
-              messages.map(m =>
+            !messagesRefreshing && messages && messages.length ? (
+              messages.map(m => (
                 <MessageSummary
                   messageData={m}
                   key={m.id}
                   navigation={this.props.navigation}
-                  currentUser={this.user} />)
+                  currentUser={this.user} />
+              ))
             ) : <NoMessages />
           }
         </View>
@@ -126,6 +126,7 @@ class PageComponent extends PureComponent {
 class MessageSummary extends PureComponent {
   static defaultProps = {
     showTitle: true,
+    currentUser: {},
   };
 
   determinePolitician() {
@@ -142,8 +143,38 @@ class MessageSummary extends PureComponent {
     return senderFirstName + ' ' + senderLastName;
   }
 
+  get parties() {
+    const { showSenderOnly, messageData, currentUser } = this.props;
+    const {
+      senderId,
+      senderFirstName,
+      senderLastName,
+      receiverFirstName,
+      receiverLastName
+    } = messageData;
+    const currentUserId = currentUser.id;
+
+    if (showSenderOnly) {
+      if (senderId === currentUserId) return 'me';
+      const { senderFirstName, senderLastName } = messageData;
+      return senderFirstName + ' ' + senderLastName;
+    }
+
+    let otherPerson;
+
+    if (senderId === currentUserId) otherPerson = receiverFirstName + ' ' + receiverLastName;
+    else otherPerson = senderFirstName + ' ' + senderLastName;
+    return otherPerson + ', me';
+  }
+
   render() {
-    const { messageData, navigation, currentUser, showTitle } = this.props;
+    const {
+      messageData,
+      navigation,
+      currentUser,
+      showTitle,
+      showSenderOnly
+    } = this.props;
     const { title, body, createdAt } = messageData;
     return (
       <TouchableHighlight
@@ -157,35 +188,113 @@ class MessageSummary extends PureComponent {
           paddingBottom: 15,
           paddingRight: 20,
           paddingLeft: 20,
+          flexDirection: 'row',
         }}>
+          <MessageImage
+            messageData={messageData}
+            showSenderOnly={showSenderOnly}
+            currentUser={currentUser} />
           <View style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
+            flexGrow: 1,
+            flexShrink: 1,
+            marginLeft: 20,
           }}>
-            <Text style={{ fontWeight: 'bold' }}>
-              { this.determinePolitician() }
-            </Text>
-            <Text style={{
-              fontSize: 11,
-              marginTop: 2,
-              color: colors.textColorLight
+            <View style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
             }}>
-              { createdAt.slice(0, 10) }
+              <Text style={{ fontSize: 16, color: colors.textColor }}>
+                { this.parties }
+              </Text>
+              <Text style={{
+                fontSize: 11,
+                color: colors.textColorLight
+              }}>
+                { createdAt.slice(0, 10) }
+              </Text>
+            </View>
+            {
+              showTitle && (
+                <Text style={{ marginTop: 7, color: colors.textColor }}>
+                  { title }
+                </Text>
+              )
+            }
+            <Text style={{
+              marginTop: 1,
+              color: colors.textColor,
+              fontSize: 13,
+              lineHeight: 18
+            }}>
+              { body }
             </Text>
           </View>
-          {
-            showTitle && (
-              <Text style={{ marginTop: 5, color: colors.textColor }}>
-                { title }
-              </Text>
-            )
-          }
-          <Text style={{ marginTop: 3, color: colors.textColor }}>
-            { body }
-          </Text>
         </View>
       </TouchableHighlight>
+    );
+  }
+}
+
+class MessageImage extends PureComponent {
+  get senderImage() {
+    const { messageData } = this.props;
+    if (messageData.senderImage) return <View />;
+    const { senderFirstName, senderLastName, senderEmail } = messageData;
+    if (!senderFirstName) {
+      return (
+        <Text style={{ color: 'white', fontWeight: 'bold' }}>
+          { senderEmail[0].toUpperCase() }
+        </Text>
+      );
+    }
+    return (
+      <Text style={{ color: 'white', fontWeight: 'bold' }}>
+        { (senderFirstName[0] + ' ' + senderLastName[0]).toUpperCase() }
+      </Text>
+    );
+  }
+
+  get image() {
+    const { messageData, showSenderOnly, currentUser } = this.props;
+    const { senderId } = messageData;
+    if (showSenderOnly) return this.senderImage;
+    // - if the current user is not the sender, we show the sender's image,
+    //   which is who the current user is communicating with. In other words,
+    //   if it's a regular end user who is the current user, we want to show
+    //   the image of the politician they're talking to
+    else if (senderId !== currentUser.id) return this.senderImage;
+
+    if (messageData.receiverImage) return <View />;
+    const { receiverFirstName, receiverLastName, receiverEmail } = messageData;
+    if (!receiverFirstName) {
+      return (
+        <Text style={{ color: 'white', fontWeight: 'bold' }}>
+          { receiverEmail[0].toUpperCase() }
+        </Text>
+      )
+    }
+    return (
+      <Text style={{ color: 'white', fontWeight: 'bold' }}>
+        { (receiverFirstName[0] + ' ' + receiverLastName[0]).toUpperCase() }
+      </Text>
+    );
+  }
+
+  render() {
+    return (
+      <View style={{
+        flexGrow: 0,
+        flexShrink: 0,
+        width: 45,
+        height: 45,
+        borderRadius: 45,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: colors.secondary,
+      }}>
+        { this.image }
+      </View>
     );
   }
 }
@@ -212,7 +321,7 @@ class NoMessages extends PureComponent {
   }
 }
 
-class MessageThread extends PureComponent {
+export class MessageThread extends PureComponent {
   state = {
     messages: [],
   };
@@ -223,8 +332,7 @@ class MessageThread extends PureComponent {
     const { threadId } = messageData;
     const url = 'messages/thread/' + threadId;
     dataApiGet(url).then(r => {
-      const { messageData } = r;
-      this.setState({ messages: messageData });
+      this.setState({ messages: r.messageData });
     }).catch(e => {
       console.log('err', e);
     });
@@ -243,11 +351,12 @@ class MessageThread extends PureComponent {
         {
           messages && messages.length > 0 ? (
             <Text style={{
-              fontSize: 23,
+              fontSize: 25,
               paddingTop: 35,
               paddingBottom: 20,
               paddingRight: 20,
               paddingLeft: 20,
+              color: colors.textColor
             }}>
               { messages[0].title }
             </Text>
@@ -259,10 +368,11 @@ class MessageThread extends PureComponent {
               <View
                 style={{
                   borderTopWidth: 1,
-                  borderTopColor: i === 0 ? 'white' : colors.backgroundGrayDarker,
+                  borderTopColor: i === 0 ? 'white' : colors.backgroundGray,
                 }}
                 key={m.id}>
                 <MessageSummary
+                  showSenderOnly
                   showTitle={false}
                   messageData={m}
                   currentUser={currentUser}
@@ -289,63 +399,4 @@ class MessageThread extends PureComponent {
       </ScrollView>
     );
   };
-}
-
-// class MessageThreadSummary extends PureComponent {
-//   render() {
-//     return (
-//       <View style={{
-//         padding: 20,
-//         margin: 10,
-//         marginTop: 20,
-//         marginBottom: 20,
-//         backgroundColor: 'white',
-//         borderWidth: 1,
-//         borderColor: colors.backgroundGrayDarker,
-//       }}>
-//         <Text>
-//
-//         </Text>
-//       </View>
-//     );
-//   }
-// }
-
-
-export default class PageNav extends PureComponent {
-  render() {
-    const Nav = createStackNavigator({
-      Home: {
-        screen: PageComponent,
-        navigationOptions: ({ navigation }) => ({
-          // title: `${navigation.state.params.name}'s Profile'`,
-          title: 'POLITIXENTRAL',
-          headerStyle: {
-            backgroundColor: colors.secondary,
-            borderBottomColor: colors.secondaryLight,
-          },
-          headerTitleStyle: {
-            color: 'white',
-          },
-          headerTintColor: 'white',
-        }),
-      },
-      MessageThread: {
-        screen: MessageThread,
-        navigationOptions: ({ navigation }) => ({
-          // title: `${navigation.state.params.name}'s Profile'`,
-          title: 'POLITIXENTRAL',
-          headerStyle: {
-            backgroundColor: colors.secondary,
-            borderBottomColor: colors.secondaryLight,
-          },
-          headerTitleStyle: {
-            color: 'white',
-          },
-          headerTintColor: 'white',
-        }),
-      },
-    });
-    return <Nav />;
-  }
 }

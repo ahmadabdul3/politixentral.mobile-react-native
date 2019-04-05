@@ -1,11 +1,9 @@
 import { connect } from 'react-redux';
-import MessagesPage from 'px/pages/messages/messages';
+import SendMessageForm from 'px/components/send_message_form';
 import { actions as messageActions } from 'px/redux/messages';
 
 export function mapStateToProps({ messages }) {
-  return {
-    messages: messages.data,
-  };
+  return {};
 }
 
 export function mapDispatchToProps(dispatch) {
@@ -17,6 +15,6 @@ export function mapDispatchToProps(dispatch) {
 const Container = connect(
   mapStateToProps,
   mapDispatchToProps
-)(MessagesPage);
+)(SendMessageForm);
 
 export default Container;

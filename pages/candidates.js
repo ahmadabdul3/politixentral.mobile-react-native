@@ -256,7 +256,6 @@ export default class CandidatesNav extends PureComponent {
     const Nav = createStackNavigator({
       Officials: {
         screen: (props) => {
-          const { address } = props.screenProps;
           return <Candidates address={address} navigation={props.navigation} />;
         },
         navigationOptions: ({ navigation }) => ({
@@ -288,7 +287,7 @@ export default class CandidatesNav extends PureComponent {
         }),
       },
     });
-    return <Nav screenProps={{ address }} />;
+    return <Nav />;
   }
 }
 
