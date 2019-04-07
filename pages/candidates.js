@@ -55,7 +55,6 @@ class Candidates extends PureComponent {
         }, {});
         // const alders = categorizedPoliticians.District;
         // const sortedAlders = alders.sort((a, b) => a.areaOfResponsibility - b.areaOfResponsibility);
-        this.pageSections = Object.keys(categorizedPoliticians).map(key => key);
         this.setState({ politicians: categorizedPoliticians, loading: false });
       });
     }).catch(err => {
@@ -71,7 +70,13 @@ class Candidates extends PureComponent {
   getPageSections() {
     if (this.pageSections) return this.pageSections;
     const { politicians } = this.state;
-    this.pageSections = Object.keys(politicians).map(key => key);
+    if (!politicians || Object.keys(politicians).length < 1) return [];
+    const pageSectionOrder = ['District', 'City', 'State', 'Executive Branch'];
+    const tempSections = [];
+    this.pageSections = pageSectionOrder.forEach(s => {
+      if (politicians[s]) tempSections.push(s);
+    });
+    this.pageSections = [ ...tempSections ];
     return this.pageSections;
   }
 
@@ -97,7 +102,7 @@ class Candidates extends PureComponent {
 
   render() {
     const { politicians, loading } = this.state;
-    // console.log('render again', this.props);
+    // console.log('render', this.getPageSections());
     // if (loading) return (<Text>Loading office holder profiles</Text>);
 
     return (
@@ -178,12 +183,12 @@ class CandidateSummary extends PureComponent {
       levelOfResponsibility,
       areaOfResponsibility
     } = this.props.politicianData;
-    let title = '';
+    // let title = '';
+    // if (levelOfResponsibility !== 'District') title = titlePrimary;
+    // else title = `${titlePrimary.toUpperCase()} | Ward ${areaOfResponsibility}`;
 
-    if (levelOfResponsibility !== 'District') title = titlePrimary;
-    else title = `${titlePrimary.toUpperCase()} | Ward ${areaOfResponsibility}`;
-    if (titleSecondary) return `${title} - ${titleSecondary}`;
-    return title;
+    if (titleSecondary) return `${titlePrimary} - ${titleSecondary}`;
+    return titlePrimary;
   }
 
   get image() {

@@ -19,6 +19,7 @@ import urls from 'px/constants/urls';
 import LOCAL_STORAGE from 'px/constants/local-storage';
 import { PrimaryButton } from 'px/components/buttons';
 import { dataApiGet } from 'px/clients/data_api_client';
+import SendMessageFormContainer from 'px/containers/send_message_form_container';
 
 export default class PageComponent extends PureComponent {
   user;
@@ -157,13 +158,19 @@ class MessageSummary extends PureComponent {
     if (showSenderOnly) {
       if (senderId === currentUserId) return 'me';
       const { senderFirstName, senderLastName } = messageData;
+      if (!senderFirstName) return 'Sender';
       return senderFirstName + ' ' + senderLastName;
     }
 
     let otherPerson;
 
-    if (senderId === currentUserId) otherPerson = receiverFirstName + ' ' + receiverLastName;
-    else otherPerson = senderFirstName + ' ' + senderLastName;
+    if (senderId === currentUserId) {
+      if (!receiverFirstName) otherPerson = 'Recipient';
+      else otherPerson = receiverFirstName + ' ' + receiverLastName;
+    } else {
+      if (!senderFirstName) otherPerson = 'Recipient';
+      else otherPerson = senderFirstName + ' ' + senderLastName;
+    }
     return otherPerson + ', me';
   }
 
@@ -202,17 +209,21 @@ class MessageSummary extends PureComponent {
             <View style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
-              alignItems: 'center',
+              alignItems: 'flex-start',
             }}>
-              <Text style={{ fontSize: 16, color: colors.textColor }}>
-                { this.parties }
+              <View style={{ flexGrow: 1, flexShrink: 1, marginTop: -4 }}>
+                <Text style={{ fontSize: 16, color: colors.textColor }}>
+                  { this.parties }
+                </Text>
+              </View>
+              <View style={{ flexGrow: 0, flexShrink: 0, marginLeft: 10 }}>
+                <Text style={{
+                  fontSize: 11,
+                  color: colors.textColorLight
+                }}>
+                  { createdAt.slice(0, 10) }
               </Text>
-              <Text style={{
-                fontSize: 11,
-                color: colors.textColorLight
-              }}>
-                { createdAt.slice(0, 10) }
-              </Text>
+              </View>
             </View>
             {
               showTitle && (
@@ -244,7 +255,7 @@ class MessageImage extends PureComponent {
     if (!senderFirstName) {
       return (
         <Text style={{ color: 'white', fontWeight: 'bold' }}>
-          { senderEmail[0].toUpperCase() }
+          { 'R M'.toUpperCase() }
         </Text>
       );
     }
@@ -270,7 +281,7 @@ class MessageImage extends PureComponent {
     if (!receiverFirstName) {
       return (
         <Text style={{ color: 'white', fontWeight: 'bold' }}>
-          { receiverEmail[0].toUpperCase() }
+          { 'R M'.toUpperCase() }
         </Text>
       )
     }
@@ -322,81 +333,165 @@ class NoMessages extends PureComponent {
 }
 
 export class MessageThread extends PureComponent {
+  user;
   state = {
     messages: [],
+    newMessageFormOpen: false,
   };
 
   componentDidMount() {
+    this.fetchThreadMessages();
+  }
+
+  getUser = async () => {
+    if (this.user) return this.user;
+    const rawUser = await AsyncStorage.getItem(LOCAL_STORAGE.USER_INFO);
+
+    if (!rawUser) throw({ name: 'NoAuthSession', message: 'no user session' });
+    const user = JSON.parse(rawUser);
+    this.user = user;
+    return user;
+  };
+
+  fetchThreadMessages = async () => {
     const { navigation } = this.props;
     const messageData = navigation.getParam('messageData');
     const { threadId } = messageData;
     const url = 'messages/thread/' + threadId;
-    dataApiGet(url).then(r => {
-      this.setState({ messages: r.messageData });
-    }).catch(e => {
+    try {
+      const response = await dataApiGet(url);
+      this.setState({ messages: response.messageData });
+    } catch (e) {
       console.log('err', e);
+    }
+  }
+
+  openNewMessageForm = () => {
+    AsyncStorage.getItem(LOCAL_STORAGE.SESSION_INFO).then(rawSession => {
+      if (!rawSession) throw({ message: 'no user session' });
+      this.setState({ newMessageFormOpen: true });
+    }).catch(e => {
+      if (e.message === 'no user session') {
+        Alert.alert(
+          'Please Log In',
+          'You need to log in to send and view messages. You can log in or sign up in the settings page.',
+          [{ text: 'OK', onPress: () => {} }],
+          { cancelable: false },
+        );
+      }
     });
+  }
+
+  closeNewMessageForm = () => {
+    this.setState({ newMessageFormOpen: false });
+  }
+
+  getMessageData = async () => {
+    const user = await this.getUser();
+    const { messages } = this.state;
+    if (!messages || messages.length < 1) throw({ message: 'no messages' });
+    const message = messages[messages.length - 1];
+    const receiverId = message.senderId === user.id ? message.receiverId : message.senderId;
+    return {
+      senderId: user.id,
+      receiverId,
+      threadId: message.threadId,
+      title: message.title,
+      parentId: message.id,
+    };
   }
 
   render() {
     const { navigation } = this.props;
     const currentUser = navigation.getParam('currentUser');
-    const { messages } = this.state;
+    const { messages, newMessageFormOpen } = this.state;
 
     return (
-      <ScrollView style={{
-        paddingBottom: 20,
-        backgroundColor: 'white',
+      <View style={{
+        flexGrow: 1,
+        flexShrink: 1,
+        backgroundColor: 'white'
       }}>
-        {
-          messages && messages.length > 0 ? (
-            <Text style={{
-              fontSize: 25,
-              paddingTop: 35,
-              paddingBottom: 20,
-              paddingRight: 20,
-              paddingLeft: 20,
-              color: colors.textColor
-            }}>
-              { messages[0].title }
-            </Text>
-          ) : null
-        }
-        {
-          messages && messages.length > 0 ? (
-            messages.map((m, i) => (
-              <View
-                style={{
-                  borderTopWidth: 1,
-                  borderTopColor: i === 0 ? 'white' : colors.backgroundGray,
-                }}
-                key={m.id}>
-                <MessageSummary
-                  showSenderOnly
-                  showTitle={false}
-                  messageData={m}
-                  currentUser={currentUser}
-                  navigation={{ navigate: () => {}}}
-                />
-              </View>
-            ))
-          ) : (
-            <View style={{
-              padding: 20,
-              margin: 10,
-              marginTop: 20,
-              marginBottom: 20,
-              backgroundColor: 'white',
-              borderWidth: 1,
-              borderColor: colors.backgroundGrayDarker,
-            }}>
-              <Text>
-                Loading messages, this should only take a second.
+        <SendMessageFormContainer
+          replyMessage
+          visible={newMessageFormOpen}
+          closeModal={this.closeNewMessageForm}
+          getMessageData={this.getMessageData}
+          updateThreadMessages={this.fetchThreadMessages} />
+        <ScrollView style={{
+          paddingBottom: 20,
+          backgroundColor: 'white',
+          flexGrow: 1,
+          flexShrink: 1,
+        }}>
+          {
+            messages && messages.length > 0 ? (
+              <Text style={{
+                fontSize: 25,
+                paddingTop: 35,
+                paddingBottom: 20,
+                paddingRight: 20,
+                paddingLeft: 20,
+                color: colors.textColor
+              }}>
+                { messages[0].title }
               </Text>
-            </View>
-          )
-        }
-      </ScrollView>
+            ) : null
+          }
+          {
+            messages && messages.length > 0 ? (
+              messages.map((m, i) => (
+                <View
+                  style={{
+                    borderTopWidth: 1,
+                    borderTopColor: i === 0 ? 'white' : colors.backgroundGrayLight,
+                  }}
+                  key={m.id}>
+                  <MessageSummary
+                    showSenderOnly
+                    showTitle={false}
+                    messageData={m}
+                    currentUser={currentUser}
+                    navigation={{ navigate: () => {}}}
+                  />
+                </View>
+              ))
+            ) : (
+              <View style={{
+                padding: 20,
+                margin: 10,
+                marginTop: 20,
+                marginBottom: 20,
+                backgroundColor: 'white',
+                borderWidth: 1,
+                borderColor: colors.backgroundGrayDarker,
+              }}>
+                <Text>
+                  Loading messages, this should only take a second.
+                </Text>
+              </View>
+            )
+          }
+        </ScrollView>
+        <View style={{
+          flexGrow: 0,
+          flexShrink: 0,
+          borderTopColor: colors.backgroundGrayLight,
+          borderTopWidth: 1,
+        }}>
+          <PrimaryButton
+            text='Reply'
+            customStyles={{
+              flexGrow: 1,
+              flexShrink: 1,
+              marginTop: 10,
+              marginRight: 25,
+              marginLeft: 25,
+              marginBottom: 10,
+            }}
+            onPress={this.openNewMessageForm} />
+        </View>
+      </View>
     );
   };
 }
