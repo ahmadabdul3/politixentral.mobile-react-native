@@ -123,7 +123,6 @@ export default class SendMessageForm extends PureComponent {
         { cancelable: false },
       );
     } catch (e) {
-      console.log(e);
       this.messageSending = false;
       if (e.message === 'user not logged in') {
         this.setState({ formMessage: 'Please log in to send messages.', messageSending: false });
