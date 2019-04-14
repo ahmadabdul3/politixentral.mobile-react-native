@@ -91,7 +91,7 @@ export default class PageComponent extends PureComponent {
             MESSAGES
           </PageTitlePrimary>
           <PageDescription>
-            Communicate with your Representatives and let your voice be heard.
+            Communicate with your Representatives and make your voice heard.
           </PageDescription>
           <PrimaryButton
             text={'Click to Refresh Messages'}

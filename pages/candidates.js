@@ -22,6 +22,7 @@ import http from 'px/services/http';
 
 class Candidates extends PureComponent {
   pageSections;
+  addressInfo;
 
   state = {
     politicians: {},
@@ -29,8 +30,11 @@ class Candidates extends PureComponent {
   };
 
   getAddressInfo = async () => {
+    if (this.addressInfo) return this.addressInfo;
     const info = await AsyncStorage.getItem(LOCAL_STORAGE.ADDRESS_INFO);
-    return info;
+    if (!info) throw({ message: 'Cant determine address, please provide a new address' });
+    this.addressInfo = JSON.parse(info);
+    return this.addressInfo;
   }
 
   componentDidUpdate(prevProps) {
@@ -39,8 +43,7 @@ class Candidates extends PureComponent {
 
   fetchCandidates() {
     this.setState({ loading: true });
-    this.getAddressInfo().then(addressInfoString => {
-      const addressInfo = JSON.parse(addressInfoString);
+    this.getAddressInfo().then(addressInfo => {
       // console.log('addressInfo', addressInfo);
       const { city, state, district } = addressInfo;
       const query = `city=${city}&state=${state}&district=${district}`;
@@ -51,8 +54,15 @@ class Candidates extends PureComponent {
           const category = all[p.levelOfResponsibility];
           if (category) all[p.levelOfResponsibility] = [...category, p];
           else all[p.levelOfResponsibility] = [p];
+          all = this.addAlderBoardPresidentToCity(all, p);
           return all;
         }, {});
+        const distPols = categorizedPoliticians.District;
+        if (distPols && distPols.length > 1) {
+          categorizedPoliticians.District = distPols.filter(p => (
+            p.titleSecondary !== 'Board President'
+          ));
+        }
         // const alders = categorizedPoliticians.District;
         // const sortedAlders = alders.sort((a, b) => a.areaOfResponsibility - b.areaOfResponsibility);
         this.setState({ politicians: categorizedPoliticians, loading: false });
@@ -61,6 +71,23 @@ class Candidates extends PureComponent {
       this.setState({ loading: false });
       console.warn(err);
     });
+  }
+
+  addAlderBoardPresidentToCity(all, politician) {
+    // - if a person's address is in the ward where the alder is the
+    //   board president, we will only get 1 alder response from the server
+    // - otherwise, we will get 2 alders
+    // - and if the address is out of a town we support, we show all alders
+    // - therefore, if the address returns the board president alder under the
+    //   ward section, we also show that person under city
+    // - if the address returns the non-board president alder, then the board
+    //   alder just goes under city
+    if (politician.levelOfResponsibility !== 'District') return all;
+    else if (politician.titleSecondary !== 'Board President') return all;
+    const cityPoliticians = all.City;
+    if (cityPoliticians) all.City = [...cityPoliticians, politician];
+    else all.City = [politician];
+    return all;
   }
 
   componentDidMount() {
@@ -81,6 +108,14 @@ class Candidates extends PureComponent {
   }
 
   getSectionTitle(section) {
+    if (this.addressInfo) {
+      console.log('section', section);
+      const { city, state, district } = this.addressInfo;
+      if (section === 'District') return `${district}`;
+      else if (section === 'City') return `${city}`;
+      else if (section === 'State') return `${state}`;
+      return 'USA';
+    }
     const politicians = this.state.politicians[section];
     const firstPolitician = politicians && politicians[0] || {};
     return firstPolitician.areaOfResponsibility || '';
@@ -94,10 +129,8 @@ class Candidates extends PureComponent {
   }
 
   getSectionTitleSecondary(section) {
-    const politicians = this.state.politicians[section];
-    const firstPolitician = politicians && politicians[0] || {};
-    if (firstPolitician.levelOfResponsibility === 'District') return 'Ward';
-    return firstPolitician.levelOfResponsibility;
+    if (section === 'District') return 'Ward';
+    return section;
   }
 
   render() {
