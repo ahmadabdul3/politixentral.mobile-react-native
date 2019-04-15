@@ -250,7 +250,15 @@ class MessageSummary extends PureComponent {
 class MessageImage extends PureComponent {
   get senderImage() {
     const { messageData } = this.props;
-    if (messageData.senderImage) return <View />;
+    if (messageData.senderPhotoUrl) {
+      return (
+        <Image
+          source={{ uri: messageData.senderPhotoUrl }}
+          style={{ width: '100%', height: '100%' }}
+          resizeMode='cover'
+        />
+      );
+    }
     const { senderFirstName, senderLastName, senderEmail } = messageData;
     if (!senderFirstName) {
       return (
@@ -276,7 +284,15 @@ class MessageImage extends PureComponent {
     //   the image of the politician they're talking to
     else if (senderId !== currentUser.id) return this.senderImage;
 
-    if (messageData.receiverImage) return <View />;
+    if (messageData.receiverPhotoUrl) {
+      return (
+        <Image
+          source={{ uri: messageData.receiverPhotoUrl }}
+          style={{ width: '100%', height: '100%' }}
+          resizeMode='cover'
+        />
+      );
+    }
     const { receiverFirstName, receiverLastName, receiverEmail } = messageData;
     if (!receiverFirstName) {
       return (
@@ -303,6 +319,9 @@ class MessageImage extends PureComponent {
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: colors.secondary,
+        overflow: 'hidden',
+        borderWidth: 1,
+        borderColor: 'white',
       }}>
         { this.image }
       </View>
@@ -425,10 +444,34 @@ export class MessageThread extends PureComponent {
           flexShrink: 1,
         }}>
           {
+            // messages && messages.length > 0 ? (
+            //   <View style={{
+            //     flexDirection: 'row',
+            //     justifyContent: 'center',
+            //     paddingTop: 20,
+            //     paddingBottom: 20,
+            //   }}>
+            //     <MessageImage
+            //       messageData={messages[0]}
+            //       currentUser={this.user || {}} />
+            //     <View style={{ marginLeft: -25 }}>
+            //       <MessageImage
+            //         messageData={{
+            //           senderFirstName: messages[0].receiverFirstName,
+            //           senderLastName: messages[0].receiverLastName,
+            //           senderPhotoUrl: messages[0].receiverPhotoUrl,
+            //         }}
+            //         currentUser={{}}
+            //         showSenderOnly />
+            //     </View>
+            //   </View>
+            // ) : null
+          }
+          {
             messages && messages.length > 0 ? (
               <Text style={{
                 fontSize: 25,
-                paddingTop: 35,
+                paddingTop: 20,
                 paddingBottom: 20,
                 paddingRight: 20,
                 paddingLeft: 20,

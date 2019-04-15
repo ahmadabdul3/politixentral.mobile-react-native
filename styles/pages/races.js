@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
 
   raceOverviewCandidates: {
     ...horizontalSpacing,
-    flexDirection: 'row',
+    // flexDirection: 'row',
     paddingTop: 9,
     paddingBottom: 11,
     backgroundColor: 'white',
@@ -51,10 +51,11 @@ const styles = StyleSheet.create({
   },
   raceOverviewCandidate: {
     marginRight: 10,
-    width: 40,
-    height: 40,
-    borderRadius: 40,
-    borderWidth: 2,
+    width: 50,
+    height: 50,
+    borderRadius: 50,
+    overflow: 'hidden',
+    borderWidth: 1,
     borderColor: colors.backgroundGrayDark,
     backgroundColor: 'white',
   },

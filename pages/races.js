@@ -37,7 +37,7 @@ class Races extends PureComponent {
     this.setState({ loading: true });
     this.getAddressInfo().then(addressInfoString => {
       const addressInfo = JSON.parse(addressInfoString);
-      console.log('addressInfo', addressInfo);
+      // console.log('addressInfo', addressInfo);
       const { city, state, district } = addressInfo;
       const query = `city=${city}&state=${state}&district=${district}`;
       const urlBase = 'http://px-staging.herokuapp.com/races/location?';
@@ -88,6 +88,7 @@ class Races extends PureComponent {
 
   render() {
     const { races, loading } = this.state;
+
     return (
       <ScrollView>
         <PageHeader>
@@ -126,6 +127,7 @@ class Races extends PureComponent {
               {
                 races[section].map((r, i) => (
                   <RaceOverview
+                    raceData={r}
                     key={i + r.levelOfResponsibility + r.areaOfResponsibility + r.position}
                     position={r.position}
                     currentOfficialName={this.getRaceCurrentOfficeHolder(r)}
@@ -159,11 +161,11 @@ class Races extends PureComponent {
 class RaceOverview extends PureComponent {
   goToDetails = () => {
     // this.props.nav.navigation.navigate('RaceDetails');
-    console.log('');
+    // console.log('');
   }
 
   render() {
-    const { position, area, currentOfficialName } = this.props;
+    const { position, area, currentOfficialName, raceData } = this.props;
     return (
       <View style={styles.raceOverviewBox}>
         {
@@ -174,7 +176,7 @@ class RaceOverview extends PureComponent {
         }
           <View>
             <RaceOverviewHeader title={position} incumbent={currentOfficialName} />
-            <RaceOverviewCandidates />
+            <RaceOverviewCandidates raceData={raceData} />
           </View>
         {
           //</TouchableHighlight>
@@ -247,18 +249,40 @@ class RaceOverviewDetails extends PureComponent {
 }
 
 class RaceOverviewCandidates extends PureComponent {
-  static defaultProps = {
-    numberOfCandidates: 4,
-  };
-
   render() {
-    const { numberOfCandidates } = this.props;
+    const { candidateTerms } = this.props.raceData;
     return (
       <View style={styles.raceOverviewCandidates}>
-        <View style={styles.raceOverviewCandidate} />
-        <View style={styles.raceOverviewCandidate} />
-        <View style={styles.raceOverviewCandidate} />
-        <View style={styles.raceOverviewCandidate} />
+        <View>
+          <Text style={{
+            fontWeight: 'bold',
+          }}>
+            Running Candidates
+          </Text>
+        </View>
+        <View style={{
+          flexDirection: 'row',
+          marginTop: 10,
+        }}>
+          {
+            candidateTerms && candidateTerms.length ? candidateTerms.map(ct => (
+              <View style={styles.raceOverviewCandidate} key={ct.id}>
+                {
+                  ct.politician
+                  && ct.politician.user
+                  && ct.politician.user.photoUrl
+                  && (
+                    <Image
+                      source={{ uri: ct.politician.user.photoUrl }}
+                      style={{ width: '100%', height: '100%' }}
+                      resizeMode='cover'
+                    />
+                  )
+                }
+              </View>
+            )) : <Text>There are no candidates running for this office at this time.</Text>
+          }
+        </View>
       </View>
     );
   }
