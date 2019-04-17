@@ -14,7 +14,7 @@ import { ClickableContentSummaryBox } from 'px/components/content-summary-card';
 import {
   PageTitlePrimary, PageDescription, PageHeader
 } from 'px/components/page-text';
-
+import { dataApiGet } from 'px/clients/data_api_client';
 import colors from 'px/styles/colors';
 import styles from 'px/styles/pages/candidates';
 import http from 'px/services/http';
@@ -47,9 +47,9 @@ class Candidates extends PureComponent {
       // console.log('addressInfo', addressInfo);
       const { city, state, district } = addressInfo;
       const query = `city=${city}&state=${state}&district=${district}`;
-      const urlBase = 'http://px-staging.herokuapp.com/politicians/location?';
+      const urlBase = 'politicians/location?';
       const url = urlBase + query;
-      http.get(url).then(res => {
+      dataApiGet(url).then(res => {
         const categorizedPoliticians = res.politicians.reduce((all, p) => {
           const category = all[p.levelOfResponsibility];
           if (category) all[p.levelOfResponsibility] = [...category, p];
