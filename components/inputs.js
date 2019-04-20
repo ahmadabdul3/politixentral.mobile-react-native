@@ -70,6 +70,7 @@ export class BaseTextarea extends PureComponent {
           paddingLeft: 10,
           paddingRight: 10,
           marginTop: 5,
+          textAlignVertical: 'top',
         }, customStyles]}
       />
     );

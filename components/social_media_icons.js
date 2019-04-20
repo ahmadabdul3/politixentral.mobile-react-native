@@ -70,7 +70,7 @@ function getSocialMediaData() {
     },
     {
       icon: <Feather name='mail' size={size} color={colors.primary} />,
-      link: 'mailto: politixentral.engineering@gmail.com',
+      link: 'mailto: politixentral@gmail.com',
     },
   ];
 }
