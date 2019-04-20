@@ -100,3 +100,33 @@ const pageDescriptionStyles = StyleSheet.create({
     color: colors.secondaryLighter,
   },
 });
+
+export class SectionTitlePrimary extends PureComponent {
+  render() {
+    const { children, extraStyles } = this.props;
+    return (
+      <Text
+        style={[{
+          fontSize: 20, fontWeight: 'bold', color: colors.textColor
+        }, extraStyles]}>
+        { children }
+      </Text>
+    );
+  }
+}
+
+export class PageSection extends PureComponent {
+  render() {
+    const { children, extraStyles } = this.props;
+    return (
+      <View style={[
+        {
+          marginTop: 40,
+        },
+        extraStyles
+      ]}>
+        { children }
+      </View>
+    );
+  }
+}

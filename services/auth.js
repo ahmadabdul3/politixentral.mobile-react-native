@@ -46,15 +46,17 @@ export async function logout(options) {
   throw (result);
 }
 
-export async function saveUserToServer({ params }) {
+export async function saveUserToServer({ params, deviceId }) {
   const idToken = params.id_token;
   const decoded = jwtDecode(idToken);
   const user = {
     email: decoded.email,
     auth0Id: decoded.sub,
     role: 'end-user',
+    deviceId,
   };
-  return await http.post('http://px-staging.herokuapp.com/users', { user });
+  return await http.post('https://px-staging.herokuapp.com/users', { user });
+  // return await http.post('http://192.168.86.175:3000/users', { user });
 }
 
 

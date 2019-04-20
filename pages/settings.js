@@ -18,10 +18,19 @@ import {
 } from 'react-native';
 import { PrimaryButton, SecondaryButton } from 'px/components/buttons';
 import {
-  PageTitlePrimary, PageDescription, PageHeader, PageHeaderLargeTop
+  PageTitlePrimary,
+  PageDescription,
+  PageHeader,
+  PageHeaderLargeTop,
+  SectionTitlePrimary
 } from 'px/components/page-text';
 import { BaseInput } from 'px/components/inputs';
 import { authenticate, saveUserToServer, logout } from 'px/services/auth';
+import SocialMediaIcons from 'px/components/social_media_icons';
+import {
+  determinePushNotificationPermission,
+  getDeviceId
+} from 'px/services/push_notification_permissions';
 
 class Settings extends PureComponent {
   state = {
@@ -134,24 +143,66 @@ class Settings extends PureComponent {
     } = this.state;
 
     return (
-      <View style={{ paddingRight: 15, paddingLeft: 15, paddingTop: 20, paddingBottom: 20 }}>
-        <Address address={address} beginChangeAddress={this.beginChangeAddress} />
-        {
-          changeAddressInProgress ?
-            <NewAddressForm
-              newAddress={newAddress}
-              updateNewAddress={this.updateNewAddress}
-              submitUpdateAddress={this.submitUpdateAddress}
-              cancelUpdateAddress={this.cancelUpdateAddress}
-              error={error}
-              loading={changeAddressSaving} />
-            : null
-        }
-        <Authentication
-          sessionExists={sessionData}
-          deleteSession={this.deleteSession}
-          addSession={this.addSession}
-        />
+      <View style={{
+        height: '100%',
+      }}>
+        <ScrollView
+          style={{
+            paddingRight: 15,
+            paddingLeft: 15,
+            paddingTop: 20,
+            paddingBottom: 20,
+            flexGrow: 1,
+            flexShrink: 1,
+          }}>
+          <Address address={address} beginChangeAddress={this.beginChangeAddress} />
+          {
+            changeAddressInProgress ?
+              <NewAddressForm
+                newAddress={newAddress}
+                updateNewAddress={this.updateNewAddress}
+                submitUpdateAddress={this.submitUpdateAddress}
+                cancelUpdateAddress={this.cancelUpdateAddress}
+                error={error}
+                loading={changeAddressSaving} />
+              : null
+          }
+        </ScrollView>
+        <View
+          style={{
+            flexGrow: 0,
+            flexShrink: 0,
+            borderTopWidth: 1,
+            borderTopColor: colors.backgroundGrayDarker,
+            paddingRight: 15,
+            paddingLeft: 15,
+            paddingTop: 20,
+            paddingBottom: 20,
+            backgroundColor: colors.backgroundColor,
+          }}>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'flex-end',
+            }}>
+            <SocialMediaIcons />
+            <View>
+              <Authentication
+                sessionExists={sessionData}
+                deleteSession={this.deleteSession}
+                addSession={this.addSession}
+              />
+            </View>
+          </View>
+          <Text style={{
+            marginTop: 15,
+            textAlign: 'center',
+            color: colors.textColor,
+          }}>
+            © 2019 PolitiXentral
+          </Text>
+        </View>
       </View>
     );
   }
@@ -162,7 +213,10 @@ class Authentication extends PureComponent {
     try {
       const response = await authenticate();
       const { jsonSessionInfo, result } = response;
-      const userResponse = await saveUserToServer({ params: result.params });
+      const pushNotificationPermission = await determinePushNotificationPermission();
+      let deviceId;
+      if (pushNotificationPermission === 'granted') deviceId = await getDeviceId();
+      const userResponse = await saveUserToServer({ params: result.params, deviceId });
       const newUser = userResponse.user;
       await AsyncStorage.setItem(LOCAL_STORAGE.USER_INFO, JSON.stringify(newUser));
       this.props.addSession(jsonSessionInfo);
@@ -183,7 +237,7 @@ class Authentication extends PureComponent {
   render() {
     const { sessionExists } = this.props;
     return (
-      <View style={{ flexDirection: 'row', marginTop: 30 }}>
+      <View style={{ flexDirection: 'row' }}>
         {
           sessionExists ? (
             <SecondaryButton
@@ -271,9 +325,9 @@ class Address extends PureComponent {
     const { address, beginChangeAddress } = this.props;
     return (
       <View>
-        <Text style={{ fontSize: 20, fontWeight: 'bold', color: colors.textColor }}>
+        <SectionTitlePrimary>
           Current Address
-        </Text>
+        </SectionTitlePrimary>
         <View style={{ flexDirection: 'row', marginTop: 5, alignItems: 'flex-start' }}>
           <View style={{ flexGrow: 1, flexShrink: 1, paddingTop: 5 }}>
             <Text>{ address || "Cannot determine your address" }</Text>

@@ -5,6 +5,9 @@ import { Provider } from 'react-redux';
 import reducer from 'px/redux';
 import thunk from 'redux-thunk';
 import { applyMiddleware, compose, createStore } from 'redux';
+import { requestPermissionForPushNotifications } from 'px/services/push_notification_permissions';
+
+requestPermissionForPushNotifications();
 
 const store = createStore(
   reducer, // new root reducer with router state

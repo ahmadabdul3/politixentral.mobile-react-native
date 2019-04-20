@@ -133,6 +133,42 @@ class Candidates extends PureComponent {
     return section;
   }
 
+  renderCityPoliticians() {
+    const politicians = this.state.politicians.City;
+    const order = [
+      'Mayor',
+      'Alder',
+      'City Clerk',
+      'Director of Legislative Services'
+    ];
+    const addedPoliticians = {};
+    const allPols = order.map((titlePrimary, i) => {
+      const p = politicians.find(p => p.titlePrimary === titlePrimary);
+      addedPoliticians[p.titlePrimary] = true;
+      return (
+        <CandidateSummary
+          key={i + p.firstName + p.lastName}
+          nav={this.props}
+          politicianData={p}
+        />
+      );
+    });
+
+    politicians.forEach((p, i) => {
+      if (addedPoliticians[p.titlePrimary]) return;
+      addedPoliticians[p.titlePrimary] = true;
+      allPols.push(
+        <CandidateSummary
+          key={i + p.firstName + p.lastName}
+          nav={this.props}
+          politicianData={p}
+        />
+      );
+    });
+
+    return allPols;
+  }
+
   render() {
     const { politicians, loading } = this.state;
     // console.log('render', this.getPageSections());
@@ -180,13 +216,15 @@ class Candidates extends PureComponent {
                 titleSecondary={this.getSectionTitleSecondary(section)}
               >
                 {
-                  politicians[section].map((p, i) => (
-                    <CandidateSummary
-                      key={i + p.firstName + p.lastName}
-                      nav={this.props}
-                      politicianData={p}
-                    />
-                  ))
+                  section === 'City' ?
+                    this.renderCityPoliticians() :
+                    politicians[section].map((p, i) => (
+                      <CandidateSummary
+                        key={i + p.firstName + p.lastName}
+                        nav={this.props}
+                        politicianData={p}
+                      />
+                    ))
                 }
               </PageSection>
             ))
