@@ -61,7 +61,7 @@ export async function dataApiDelete(resourceUrl, data, extraHeaders={}) {
 
 async function getHeaders() {
   const rawSession = await AsyncStorage.getItem(LOCAL_STORAGE.SESSION_INFO);
-  if (!rawSession) return {};
+  if (!!rawSession === false) return {};
   const session = JSON.parse(rawSession);
   return { authorization: 'bearer ' + session.access_token };
 }

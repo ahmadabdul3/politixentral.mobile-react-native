@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
-import AnimatedHeaderScroll from 'px/components/animated-header-scroll';
+import { Text, View, StyleSheet, ScrollView } from 'react-native';
 import rawStyles from 'px/styles/pages/race-details';
 const styles = StyleSheet.create(rawStyles);
 import ShadowView from 'px/components/shadow-view';
@@ -9,11 +8,13 @@ import PageSection from 'px/components/page-section';
 export default class RaceDetails extends PureComponent {
   render() {
     return (
-      <AnimatedHeaderScroll
-        title='race details'
-        subtitle="Alderman - more details about the role and the race go under this header"
-        customStyles={{ pageTitle: styles.pageTitle }}
-      >
+      <ScrollView>
+      {
+        //   title='race details'
+        //   subtitle="Alderman - more details about the role and the race go under this header"
+        //   customStyles={{ pageTitle: styles.pageTitle }}
+        // >
+      }
         <RaceDetailCandidates />
         <PageSection title='skills'>
           <CandidateComparisonData data={['project management', 'financial analysis']} />
@@ -27,7 +28,7 @@ export default class RaceDetails extends PureComponent {
           <CandidateComparisonData data={['project management', 'financial analysis']} />
           <CandidateComparisonData data={['team leadership', 'group event organization', 'financial analysis']} />
         </PageSection>
-      </AnimatedHeaderScroll>
+      </ScrollView>
     )
   }
 }

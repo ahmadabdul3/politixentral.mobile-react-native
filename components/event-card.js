@@ -12,7 +12,7 @@ export default class EventCard extends PureComponent {
       lastInSequence,
     } = this.props;
 
-    const style = lastInSequence ? cardStyles.cardLast : cardStyles.card;
+    const style = !!lastInSequence ? cardStyles.cardLast : cardStyles.card;
 
     return (
       <ShadowView style={style}>

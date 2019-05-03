@@ -19,7 +19,7 @@ const styles = {
   },
   sectionTitleSecondary: {
     color: colors.textColorLighter,
-    fontWeight: '300',
+    fontWeight: 'normal',
     fontSize: 20,
   },
   pageSectionContent: {

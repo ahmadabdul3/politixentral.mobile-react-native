@@ -21,6 +21,7 @@ export class BaseInput extends PureComponent {
         onChangeText={onChange}
         placeholder={placeholder}
         ref={r => this.ref = r}
+        underlineColorAndroid='transparent'
         style={[{
           height: 40,
           borderColor: colors.backgroundGrayDarker,
@@ -57,6 +58,7 @@ export class BaseTextarea extends PureComponent {
         numberOfLines={5}
         onChangeText={onChange}
         placeholder={placeholder}
+        underlineColorAndroid='transparent'
         onBlur={this.onBlur}
         onFocus={this.onFocus}
         ref={r => this.ref = r}

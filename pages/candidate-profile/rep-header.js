@@ -5,7 +5,7 @@ import ShadowView from 'px/components/shadow-view';
 import Demographic from 'px/components/demographic';
 import styles from 'px/styles/pages/candidate-profile';
 import {
-  View, Text, StyleSheet, Image, ScrollView, Animated, TouchableHighlight,
+  View, Text, StyleSheet, Image, ScrollView, TouchableHighlight,
   AsyncStorage, Alert
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
@@ -16,17 +16,20 @@ export default class RepHeader extends PureComponent {
   openNewMessageForm = () => {
     const { openNewMessageForm } = this.props;
     AsyncStorage.getItem(LOCAL_STORAGE.SESSION_INFO).then(rawSession => {
-      if (!rawSession) throw({ message: 'no user session' });
-      openNewMessageForm();
-    }).catch(e => {
-      if (e.message === 'no user session') {
+      if (!!rawSession === false) {
         Alert.alert(
           'Please Log In',
           'You need to log in to send and view messages. You can log in or sign up in the settings page.',
           [{ text: 'OK', onPress: () => {} }],
           { cancelable: false },
         );
+      } else {
+        openNewMessageForm();
       }
+    }).catch(e => {
+      console.log('*************************************');
+      console.log(e);
+      console.log('*************************************');
     });
   }
   render() {
@@ -64,14 +67,14 @@ class HeaderBio extends PureComponent {
       lastName,
       suffix,
     } = this.props.politicianData;
-    const suf = suffix ? `, ${suffix}` : '';
+    const suf = !!suffix ? `, ${suffix}` : '';
     return `${firstName} ${middleName} ${lastName}${suf}`;
   }
 
   get image() {
     const { photoUrl } = this.props.politicianData;
 
-    if (photoUrl) {
+    if (!!photoUrl) {
       return (
         <Image
           source={{ uri: photoUrl }}
@@ -90,7 +93,7 @@ class HeaderBio extends PureComponent {
       titleSecondary
     } = this.props.politicianData;
 
-    if (!titleSecondary) {
+    if (!!titleSecondary === false) {
       return (
         <Text style={styles.repDescription}>
           { titlePrimary.toUpperCase() }

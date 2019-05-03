@@ -10,7 +10,7 @@ export const sectionTitle = {
   ...horizontalSpacing,
   ...verticalSpacing,
   paddingBottom: 30,
-  fontWeight: '800',
+  fontWeight: 'bold',
   // color: 'white',
   fontSize: 22,
 };
@@ -24,7 +24,7 @@ export const pageTitle = {
   ...horizontalSpacing,
   paddingTop: 60,
   paddingBottom: 60,
-  fontWeight: '900',
+  fontWeight: 'bold',
   color: colors.primary,
   fontSize: 26,
 };
@@ -34,7 +34,7 @@ export const pageSubtitle = {
   marginBottom: 60,
   marginLeft: standardSpacingSize * 2,
   marginRight: standardSpacingSize,
-  fontWeight: '300',
+  fontWeight: 'normal',
   fontSize: 23,
   lineHeight: 28,
   color: colors.brandPurpleLight,

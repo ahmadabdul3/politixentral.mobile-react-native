@@ -16,10 +16,10 @@ export default class PageSection extends PureComponent {
       <View style={[ baseStyles.pageSection, customStyles.pageSection ]}>
         <Text style={baseStyles.sectionTitleBox}>
           <Text style={[ baseStyles.sectionTitle, customStyles.sectionTitle ]}>
-            { title && title.toUpperCase() }
+            { !!title ? title.toUpperCase() : '' }
           </Text>
           {
-            titleSecondary && (
+            !!titleSecondary ? (
               <Text
                 style={[
                   baseStyles.sectionTitleSecondary,
@@ -28,7 +28,7 @@ export default class PageSection extends PureComponent {
               >
                 { '  |  ' + titleSecondary.toUpperCase() }
               </Text>
-            )
+            ) : null
           }
         </Text>
         <View style={[ baseStyles.pageSectionContent, customStyles.pageSectionContent ]}>

@@ -52,5 +52,8 @@ export async function determinePushNotificationPermission() {
 }
 
 export async function getDeviceId() {
-  return await Notifications.getExpoPushTokenAsync();
+  console.log('getting device id');
+  const id = await Notifications.getExpoPushTokenAsync();
+  console.log('id is', id);
+  return id;
 }

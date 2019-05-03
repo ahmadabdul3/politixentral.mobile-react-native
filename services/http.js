@@ -6,7 +6,7 @@ http.base = function(method, url, data, headers) {
     createFetchParams(method, data, headers)
   ).then((response) => {
     const json = response.json();
-    if (!response.ok) return json.then(err => { throw err; });
+    if (!!response.ok === false) return json.then(err => { throw err; });
     return json;
   });
 };
@@ -44,7 +44,7 @@ function createFetchParams(method, bodyData, headers) {
     },
   }
 
-  if (bodyData) {
+  if (!!bodyData) {
     params.body = JSON.stringify(bodyData);
   }
 

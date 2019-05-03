@@ -31,6 +31,7 @@ import {
   determinePushNotificationPermission,
   getDeviceId
 } from 'px/services/push_notification_permissions';
+import AlertAsync from 'px/services/alert_async';
 
 class Settings extends PureComponent {
   state = {
@@ -46,10 +47,10 @@ class Settings extends PureComponent {
   componentDidMount() {
     let newState = {};
     this.getAddress().then(addressData => {
-      if (addressData) newState = { ...addressData };
+      if (!!addressData) newState = { ...addressData };
       return this.getSession();
     }).then(sessionData => {
-      if (sessionData) newState.sessionData = sessionData;
+      if (!!sessionData) newState.sessionData = sessionData;
       this.setState(newState);
     }).catch(e => {
         console.log('ERROR: ', e);
@@ -80,10 +81,25 @@ class Settings extends PureComponent {
   };
 
   buildAddress({ addressData }) {
-    if (!addressData.streetName) return addressData.address;
+    let fullAddress = '';
+    let streetNameAdded = false;
+    let cityStateAdded = false;
 
-    const { streetNumber, streetName, city, state } = addressData;
-    return `${streetNumber} ${streetName}, ${city}, ${state}`;
+    if (!!addressData.streetName) {
+      streetNameAdded = true;
+      fullAddress += addressData.streetName;
+    }
+
+    if (!!addressData.streetNumber) fullAddress = addressData.streetNumber + ' ' + fullAddress;
+
+    if (!!addressData.city && !!addressData.state) {
+      cityStateAdded = true;
+      if (streetNameAdded) fullAddress += ', ';
+      fullAddress += addressData.city + ', ' + addressData.state;
+    }
+
+    if (cityStateAdded) return fullAddress;
+    else return addressData.address;
   }
 
   updateNewAddress = (newAddress) => {
@@ -93,7 +109,7 @@ class Settings extends PureComponent {
   submitUpdateAddress = async () => {
     const { setAddress } = this.props;
     const address = this.state.newAddress.trim();
-    if (!address) return;
+    if (!!address === false) return;
 
     this.setState({ changeAddressSaving: true });
     try {
@@ -103,9 +119,18 @@ class Settings extends PureComponent {
       const data = { ...res.data };
       const builtAddress = this.buildAddress({ addressData: data });
       data.address = builtAddress;
+      if (data.city !== 'New Haven') {
+        await AlertAsync(
+          'City not on PX',
+          `${data.city}, ${data.state} is not partnered with PX, but that's ok.`
+            + ` We will show you information for New Haven, CT instead.`,
+          [{ text: 'Ok', onPress: () => {} }]
+        );
+      }
       await AsyncStorage.setItem(LOCAL_STORAGE.ADDRESS_INFO, JSON.stringify(data));
       setAddress({ address: builtAddress });
       this.setState({
+        addressData: data,
         address: builtAddress,
         newAddress: '',
         changeAddressInProgress: false,
@@ -136,6 +161,7 @@ class Settings extends PureComponent {
     const {
       address,
       newAddress,
+      addressData,
       changeAddressInProgress,
       error,
       changeAddressSaving,
@@ -156,6 +182,19 @@ class Settings extends PureComponent {
             flexShrink: 1,
           }}>
           <Address address={address} beginChangeAddress={this.beginChangeAddress} />
+          {
+            addressData.city !== 'New Haven' ? (
+              <View style={{
+                marginTop: 5,
+              }}>
+                <Text>
+                  {
+                    `${addressData.city}, ${addressData.state} is not partnered with PX, but that's ok. We are showing you information for New Haven, CT instead. If you'd like your city to be on PX you can send us an email or message us on any of our social media pages (listed below), thanks!`
+                  }
+                </Text>
+              </View>
+            ) : null
+          }
           {
             changeAddressInProgress ?
               <NewAddressForm
@@ -215,13 +254,15 @@ class Authentication extends PureComponent {
       const { jsonSessionInfo, result } = response;
       const pushNotificationPermission = await determinePushNotificationPermission();
       let deviceId;
+      // console.log('push notification permission status', pushNotificationPermission);
       if (pushNotificationPermission === 'granted') deviceId = await getDeviceId();
+      // console.log('got device id', deviceId);
       const userResponse = await saveUserToServer({ params: result.params, deviceId });
       const newUser = userResponse.user;
       await AsyncStorage.setItem(LOCAL_STORAGE.USER_INFO, JSON.stringify(newUser));
       this.props.addSession(jsonSessionInfo);
     } catch (e) {
-      console.log('ERROR:', e);
+      console.log('*** ERROR: ****************', e);
     }
   };
 
@@ -239,7 +280,7 @@ class Authentication extends PureComponent {
     return (
       <View style={{ flexDirection: 'row' }}>
         {
-          sessionExists ? (
+          !!sessionExists ? (
             <SecondaryButton
               text='Log Out'
               customStyles={{ flexGrow: 1, flexShrink: 1 }}
@@ -295,7 +336,7 @@ class NewAddressForm extends PureComponent {
           ref={(r) => { this.addressInput = r; }}
         />
         {
-          error ? (
+          !!error ? (
             <Text style={{ marginTop: 5, textAlign: 'center' }}>{ error }</Text>
           ) : null
         }
@@ -325,9 +366,7 @@ class Address extends PureComponent {
     const { address, beginChangeAddress } = this.props;
     return (
       <View>
-        <SectionTitlePrimary>
-          Current Address
-        </SectionTitlePrimary>
+        <SectionTitlePrimary text='Current Address' />
         <View style={{ flexDirection: 'row', marginTop: 5, alignItems: 'flex-start' }}>
           <View style={{ flexGrow: 1, flexShrink: 1, paddingTop: 5 }}>
             <Text>{ address || "Cannot determine your address" }</Text>

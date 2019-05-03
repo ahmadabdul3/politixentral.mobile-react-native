@@ -136,8 +136,8 @@ class EducationSummary extends PureComponent {
   get style() {
     const { firstInSequence, lastInSequence } = this.props;
 
-    if (firstInSequence) return styles.educationSummaryFirst;
-    if (lastInSequence) return styles.educationSummaryLast;
+    if (!!firstInSequence) return styles.educationSummaryFirst;
+    if (!!lastInSequence) return styles.educationSummaryLast;
     return styles.educationSummary;
   }
 
@@ -154,15 +154,15 @@ class EducationSummary extends PureComponent {
             { fieldOfStudy }
           </Text>
           <Text style={styles.degree}>
-            { degree ?  ` - ${degree}` : '' }
+            { !!degree ?  ` - ${degree}` : '' }
           </Text>
         </Text>
         {
-          summary && (
+          !!summary ? (
             <Text style={styles.experienceSummary}>
               { summary }
             </Text>
-          )
+          ) : null
         }
         <View style={styles.schoolAndLocation}>
           <Text style={styles.school}>

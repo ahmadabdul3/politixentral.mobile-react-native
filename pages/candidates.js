@@ -8,7 +8,6 @@ import { SimpleLineIcons, Ionicons } from '@expo/vector-icons';
 import ShadowView from 'px/components/shadow-view';
 import { createStackNavigator } from 'react-navigation';
 import CandidateProfile from 'px/pages/candidate-profile';
-import AnimatedHeaderScroll from 'px/components/animated-header-scroll';
 import PageSection from 'px/components/page-section';
 import { ClickableContentSummaryBox } from 'px/components/content-summary-card';
 import {
@@ -30,9 +29,9 @@ class Candidates extends PureComponent {
   };
 
   getAddressInfo = async () => {
-    if (this.addressInfo) return this.addressInfo;
+    if (!!this.addressInfo) return this.addressInfo;
     const info = await AsyncStorage.getItem(LOCAL_STORAGE.ADDRESS_INFO);
-    if (!info) throw({ message: 'Cant determine address, please provide a new address' });
+    if (!!info === false) throw({ message: 'Cant determine address, please provide a new address' });
     this.addressInfo = JSON.parse(info);
     return this.addressInfo;
   }
@@ -52,13 +51,13 @@ class Candidates extends PureComponent {
       dataApiGet(url).then(res => {
         const categorizedPoliticians = res.politicians.reduce((all, p) => {
           const category = all[p.levelOfResponsibility];
-          if (category) all[p.levelOfResponsibility] = [...category, p];
+          if (!!category) all[p.levelOfResponsibility] = [...category, p];
           else all[p.levelOfResponsibility] = [p];
           all = this.addAlderBoardPresidentToCity(all, p);
           return all;
         }, {});
         const distPols = categorizedPoliticians.District;
-        if (distPols && distPols.length > 1) {
+        if (!!distPols && distPols.length > 1) {
           categorizedPoliticians.District = distPols.filter(p => (
             p.titleSecondary !== 'Board President'
           ));
@@ -85,7 +84,7 @@ class Candidates extends PureComponent {
     if (politician.levelOfResponsibility !== 'District') return all;
     else if (politician.titleSecondary !== 'Board President') return all;
     const cityPoliticians = all.City;
-    if (cityPoliticians) all.City = [...cityPoliticians, politician];
+    if (!!cityPoliticians) all.City = [...cityPoliticians, politician];
     else all.City = [politician];
     return all;
   }
@@ -95,29 +94,32 @@ class Candidates extends PureComponent {
   }
 
   getPageSections() {
-    if (this.pageSections) return this.pageSections;
+    if (!!this.pageSections) return this.pageSections;
     const { politicians } = this.state;
-    if (!politicians || Object.keys(politicians).length < 1) return [];
+    if (!!politicians === false || Object.keys(politicians).length < 1) return [];
     const pageSectionOrder = ['District', 'City', 'State', 'Executive Branch'];
     const tempSections = [];
     this.pageSections = pageSectionOrder.forEach(s => {
-      if (politicians[s]) tempSections.push(s);
+      if (!!politicians[s]) tempSections.push(s);
     });
     this.pageSections = [ ...tempSections ];
     return this.pageSections;
   }
 
   getSectionTitle(section) {
-    if (this.addressInfo) {
-      console.log('section', section);
+    if (!!this.addressInfo) {
       const { city, state, district } = this.addressInfo;
-      if (section === 'District') return `${district}`;
-      else if (section === 'City') return `${city}`;
-      else if (section === 'State') return `${state}`;
+      if (section === 'District') {
+        if (district === 'DISTRICT_NOT_FOUND') return 'ALL';
+        return `${district}`;
+        // else if (section === 'City') return `${city}`;
+      } else if (section === 'City') return 'New Haven';
+      // else if (section === 'State') return `${state}`;
+      else if (section === 'State') return 'CT';
       return 'USA';
     }
     const politicians = this.state.politicians[section];
-    const firstPolitician = politicians && politicians[0] || {};
+    const firstPolitician = !!politicians ? politicians[0] : {};
     return firstPolitician.areaOfResponsibility || '';
 
     // switch (firstPolitician.levelOfResponsibility) {
@@ -134,7 +136,8 @@ class Candidates extends PureComponent {
   }
 
   renderCityPoliticians() {
-    const politicians = this.state.politicians.City;
+    const politicians = !!this.state.politicians ? this.state.politicians.City : [];
+    if (!!politicians === false || politicians.length < 1) return null;
     const order = [
       'Mayor',
       'Alder',
@@ -142,26 +145,29 @@ class Candidates extends PureComponent {
       'Director of Legislative Services'
     ];
     const addedPoliticians = {};
-    const allPols = order.map((titlePrimary, i) => {
-      const p = politicians.find(p => p.titlePrimary === titlePrimary);
-      addedPoliticians[p.titlePrimary] = true;
-      return (
+    const allPols = [];
+    console.log('politicians', politicians);
+    order.forEach((titlePrimary, i) => {
+      const foundCityPolitician = politicians.find(pFind => pFind.titlePrimary === titlePrimary);
+      if (!!foundCityPolitician === false) return;
+      addedPoliticians[foundCityPolitician.titlePrimary] = true;
+      allPols.push(
         <CandidateSummary
-          key={i + p.firstName + p.lastName}
+          key={i + foundCityPolitician.firstName + foundCityPolitician.lastName}
           nav={this.props}
-          politicianData={p}
+          politicianData={foundCityPolitician}
         />
       );
     });
 
-    politicians.forEach((p, i) => {
-      if (addedPoliticians[p.titlePrimary]) return;
-      addedPoliticians[p.titlePrimary] = true;
+    politicians.forEach((pForEach, i) => {
+      if (!!addedPoliticians[pForEach.titlePrimary]) return;
+      addedPoliticians[pForEach.titlePrimary] = true;
       allPols.push(
         <CandidateSummary
-          key={i + p.firstName + p.lastName}
+          key={i + pForEach.firstName + pForEach.lastName}
           nav={this.props}
-          politicianData={p}
+          politicianData={pForEach}
         />
       );
     });
@@ -176,22 +182,12 @@ class Candidates extends PureComponent {
 
     return (
       <ScrollView>
-        {
-          // <AnimatedHeaderScroll
-          //   title='my officials'
-          //   subtitle='Here are the elected individuals that currently hold office in your city and state'
-          // >
-        }
         <PageHeader>
-          <PageTitlePrimary>
-            MY OFFICIALS
-          </PageTitlePrimary>
-          <PageDescription>
-            Here are the elected individuals that currently hold office in your city and state.
-          </PageDescription>
+          <PageTitlePrimary text='MY OFFICIALS' />
+          <PageDescription text='Here are the elected individuals that currently hold office in your city and state.' />
         </PageHeader>
           {
-            loading ? (
+            !!loading ? (
               <View style={{
                 backgroundColor: 'white',
                 paddingTop: 20,
@@ -258,14 +254,14 @@ class CandidateSummary extends PureComponent {
     // if (levelOfResponsibility !== 'District') title = titlePrimary;
     // else title = `${titlePrimary.toUpperCase()} | Ward ${areaOfResponsibility}`;
 
-    if (titleSecondary) return `${titlePrimary} - ${titleSecondary}`;
+    if (!!titleSecondary) return `${titlePrimary} - ${titleSecondary}`;
     return titlePrimary;
   }
 
   get image() {
     const { photoUrl } = this.props.politicianData;
 
-    if (photoUrl) {
+    if (!!photoUrl) {
       return (
         <Image
           source={{ uri: photoUrl }}

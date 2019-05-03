@@ -5,7 +5,6 @@ import {
 } from 'react-native';
 import { SimpleLineIcons } from '@expo/vector-icons';
 import ShadowView from 'px/components/shadow-view';
-import AnimatedHeaderScroll from 'px/components/animated-header-scroll';
 import PageSection from 'px/components/page-section';
 import { ClickableContentSummaryBox } from 'px/components/content-summary-card';
 import { createStackNavigator } from 'react-navigation';
@@ -45,7 +44,7 @@ class Races extends PureComponent {
       http.get(url).then(res => {
         const categorizedRaces = res.races.reduce((all, r) => {
           const category = all[r.levelOfResponsibility];
-          if (category) all[r.levelOfResponsibility] = [...category, r];
+          if (!!category) all[r.levelOfResponsibility] = [...category, r];
           else all[r.levelOfResponsibility] = [r];
           return all;
         }, {});
@@ -61,7 +60,7 @@ class Races extends PureComponent {
   }
 
   getPageSections() {
-    if (this.pageSections) return this.pageSections;
+    if (!!this.pageSections) return this.pageSections;
     const { races } = this.state;
     this.pageSections = Object.keys(races).map(key => key);
     return this.pageSections;
@@ -69,19 +68,22 @@ class Races extends PureComponent {
 
   getSectionTitle(section) {
     const races = this.state.races[section];
-    const firstRace = races && races[0] || {};
+    const firstRace = !!races ? races[0] : {};
+    if (firstRace.levelOfResponsibility === 'District' && races.length > 1) {
+      return 'All';
+    }
     return firstRace.areaOfResponsibility || '';
   }
 
   getSectionTitleSecondary(section) {
     const races = this.state.races[section];
-    const firstRace = races && races[0] || {};
+    const firstRace = !!races ? races[0] : {};
     if (firstRace.levelOfResponsibility === 'District') return 'Ward';
     return firstRace.levelOfResponsibility;
   }
 
   getRaceCurrentOfficeHolder(r) {
-    const politician = r.officeHolderTerm && r.officeHolderTerm.politician || {};
+    const politician = !!r.officeHolderTerm ? r.officeHolderTerm.politician : {};
     const { firstName, lastName } = politician;
     return firstName + ' ' + lastName;
   }
@@ -92,15 +94,11 @@ class Races extends PureComponent {
     return (
       <ScrollView>
         <PageHeader>
-          <PageTitlePrimary>
-            RACES
-          </PageTitlePrimary>
-          <PageDescription>
-            These are the current races that are coming up in your city and state.
-          </PageDescription>
+          <PageTitlePrimary text='RACES' />
+          <PageDescription text='These are the current races that are coming up in your city and state.' />
         </PageHeader>
         {
-          loading ? (
+          !!loading ? (
             <View style={{
               backgroundColor: 'white',
               paddingTop: 20,
@@ -265,19 +263,19 @@ class RaceOverviewCandidates extends PureComponent {
           marginTop: 10,
         }}>
           {
-            candidateTerms && candidateTerms.length ? candidateTerms.map(ct => (
+            !!candidateTerms && candidateTerms.length > 0 ? candidateTerms.map(ct => (
               <View style={styles.raceOverviewCandidate} key={ct.id}>
                 {
-                  ct.politician
-                  && ct.politician.user
-                  && ct.politician.user.photoUrl
-                  && (
+                  !!ct.politician
+                  && !!ct.politician.user
+                  && !!ct.politician.user.photoUrl
+                  ? (
                     <Image
                       source={{ uri: ct.politician.user.photoUrl }}
                       style={{ width: '100%', height: '100%' }}
                       resizeMode='cover'
                     />
-                  )
+                  ) : null
                 }
               </View>
             )) : <Text>There are no candidates running for this office at this time.</Text>

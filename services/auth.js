@@ -10,16 +10,24 @@ const auth0ClientId = 'M8vNnfxiQPCk44riCwcVPQY79GmNUej_';
 
 export async function authenticate(options) {
   const prompt = {};
-  if (options && options.silent) prompt.prompt = 'none';
+  if (!!options && !!options.silent) prompt.prompt = 'none';
 
   const authUrl = getAuthUrl({ prompt });
+  console.log('REDIRECT URL ');
+  console.log('REDIRECT URL ', AuthSession.getRedirectUrl());
+  console.log('REDIRECT URL ');
   const result = await AuthSession.startAsync({
     authUrl: authUrl
   });
 
+  console.log('*** AUTH RESULT ***');
+  console.log('*** AUTH RESULT ***', result);
+  console.log('*** AUTH RESULT ***');
+
   if (result.type === 'success') {
     const sessionInfo = JSON.stringify(result.params);
-    await AsyncStorage.setItem(LOCAL_STORAGE.SESSION_INFO, sessionInfo);
+    const asyncres = await AsyncStorage.setItem(LOCAL_STORAGE.SESSION_INFO, sessionInfo);
+    console.log('RETURNING RESULT DATA');
     return {
       result,
       jsonSessionInfo: sessionInfo,
@@ -55,14 +63,15 @@ export async function saveUserToServer({ params, deviceId }) {
     role: 'end-user',
     deviceId,
   };
-  return await http.post('https://px-staging.herokuapp.com/users', { user });
+  const saveres = await http.post('https://px-staging.herokuapp.com/users', { user });
+  return saveres;
   // return await http.post('http://192.168.86.175:3000/users', { user });
 }
 
 
 function getAuthUrl(options) {
-  const endpoint = options && options.endpoint || 'authorize';
-  const prompt = options && options.prompt || {};
+  const endpoint = (!!options && !!options.endpoint) ? options.endpoint : 'authorize';
+  const prompt = (!!options && !!options.prompt) ? options.prompt : {};
   const redirectUrl = AuthSession.getRedirectUrl();
 
   return `${auth0Domain}/${endpoint}?` + queryString.stringify({

@@ -1,6 +1,24 @@
 {
   "expo": {
-    "sdkVersion": "27.0.0",
-    "orientation": "portrait"
+    "name": "PolitiXentral",
+    "icon": "./assets/px-icon-no-alpha.png",
+    "slug": "px",
+    "version": "1.0.2",
+    "sdkVersion": "32.0.0",
+    "orientation": "portrait",
+    "primaryColor": "#52658f",
+    "scheme": "px",
+    "splash": {
+      "image": "./assets/px-splash.png"
+    },
+    "ios": {
+      "bundleIdentifier": "com.politixentral.PolitiXentral",
+      "buildNumber": "9"
+    },
+    "android": {
+      "package": "com.politixentral.PolitiXentral",
+      "versionCode": 26,
+      "permissions": []
+    }
   }
 }

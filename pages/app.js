@@ -7,7 +7,6 @@ import colors from 'px/styles/colors';
 import { MaterialCommunityIcons, Ionicons, MaterialIcons, Foundation, FontAwesome } from '@expo/vector-icons';
 import RacesPageContainer from 'px/containers/races_page_container';
 // import Candidates from 'px/pages/candidates';
-import Animation from 'px/components/animated-header-scroll';
 import SettingsPageContainer from 'px/containers/settings_page_container';
 import CandidatesPageContainer from 'px/containers/candidates_page_container';
 import MessagesPage from 'px/pages/messages';
@@ -37,7 +36,7 @@ export default createMaterialBottomTabNavigator ({
     screen: CandidatesPageContainer,
     navigationOptions: {
       tabBarIcon: ({ tintColor, focused }) => {
-        const color = focused ? colors.primary : colors.textColorLightest;
+        const color = !!focused ? colors.primary : colors.textColorLightest;
         return <Ionicons name="ios-people" size={22} color={color} />;
       },
     },
@@ -46,7 +45,7 @@ export default createMaterialBottomTabNavigator ({
     screen: RacesPageContainer,
     navigationOptions: {
       tabBarIcon: ({ tintColor, focused }) => {
-        const color = focused ? colors.primary : colors.textColorLightest;
+        const color = !!focused ? colors.primary : colors.textColorLightest;
         return <FontAwesome name="flag-checkered" size={19} color={color} />;
       },
     },
@@ -55,7 +54,7 @@ export default createMaterialBottomTabNavigator ({
     screen: MessagesPage,
     navigationOptions: {
       tabBarIcon: ({ tintColor, focused }) => {
-        const color = focused ? colors.primary : colors.textColorLightest;
+        const color = !!focused ? colors.primary : colors.textColorLightest;
         return <MaterialCommunityIcons name="message-text" size={19} color={color} />;
       },
     },
@@ -64,7 +63,7 @@ export default createMaterialBottomTabNavigator ({
     screen: SettingsPageContainer,
     navigationOptions: {
       tabBarIcon: ({ tintColor, focused }) => {
-        const color = focused ? colors.primary : colors.textColorLightest;
+        const color = !!focused ? colors.primary : colors.textColorLightest;
         return <Ionicons name="ios-settings" size={19} color={color} />;
       },
     },

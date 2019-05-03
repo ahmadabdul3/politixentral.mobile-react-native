@@ -3,7 +3,7 @@ import candidateProfileStyles from 'px/styles/pages/candidate-profile';
 import colors from 'px/styles/colors';
 import { createMaterialTopTabNavigator } from 'react-navigation';
 import {
-  View, Text, Animated, ScrollView, Modal,
+  View, Text, ScrollView, Modal,
   TouchableOpacity,
   Keyboard,
   AsyncStorage,

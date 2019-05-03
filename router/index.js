@@ -41,7 +41,7 @@ class LoadingScreen extends PureComponent {
 
     // This will switch to the App screen or Auth screen and this loading
     // screen will be unmounted and thrown away.
-    const route = addressInfo ? ROUTES.APP : ROUTES.ENTER_ADDRESS;
+    const route = !!addressInfo ? ROUTES.APP : ROUTES.ENTER_ADDRESS;
     this.props.navigation.navigate(route);
   };
 

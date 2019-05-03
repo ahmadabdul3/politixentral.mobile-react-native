@@ -5,7 +5,7 @@ import { View, Text, TouchableOpacity, Image } from 'react-native';
 
 export class PrimaryButton extends PureComponent {
   onPress = () => {
-    if (this.props.loading) return;
+    if (!!this.props.loading) return;
     this.props.onPress();
   }
 
@@ -32,7 +32,7 @@ export class PrimaryButton extends PureComponent {
           justifyContent: 'center',
         }}>
           {
-            text ? (
+            !!text ? (
               <Text style={{
                 fontSize: 14,
                 textAlign: 'center',
@@ -43,7 +43,7 @@ export class PrimaryButton extends PureComponent {
             ) : children
           }
           {
-            loading ? (
+            !!loading ? (
               <Image
                 style={{ width: 15, height: 15, marginLeft: 5 }}
                 source={require('../assets/Rolling-1s-200px.gif')}
@@ -58,7 +58,7 @@ export class PrimaryButton extends PureComponent {
 
 export class SecondaryButton extends PureComponent {
   onPress = () => {
-    if (this.props.loading) return;
+    if (!!this.props.loading) return;
     this.props.onPress();
   }
 
@@ -80,7 +80,7 @@ export class SecondaryButton extends PureComponent {
         }, customStyles ]}
       >
         {
-          text ? (
+          !!text ? (
             <Text style={{
               fontSize: 14,
               textAlign: 'center',

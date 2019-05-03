@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     marginBottom: 0,
     marginLeft: 50,
     color: colors.primary,
-    fontWeight: '900',
+    fontWeight: 'bold',
   },
   header: {
     backgroundColor: colors.backgroundPurple,

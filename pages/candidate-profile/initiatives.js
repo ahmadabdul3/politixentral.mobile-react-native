@@ -66,7 +66,7 @@ export default class Initiatives extends PureComponent {
 class Committees extends PureComponent {
   render() {
     const { committees, firstName, lastName } = this.props.politicianData;
-    if (!committees || committees.length < 1) {
+    if (!!committees === false || committees.length < 1) {
       return (
         <PageSection title='committees'>
           <Text style={{ marginLeft: 25, marginRight: 25 }}>
@@ -130,7 +130,7 @@ class CommitteeItem extends PureComponent {
 
   get text() {
     const { committeeName, committeeTermTitle } = this.props.data;
-    if (!committeeTermTitle) return committeeName;
+    if (!!committeeTermTitle === false) return committeeName;
     return `${committeeName} - ${committeeTermTitle}`;
   }
 
@@ -254,8 +254,8 @@ class ProjectSummary extends PureComponent {
 
   get style() {
     const { firstInSequence, lastInSequence } = this.props;
-    if (firstInSequence) return styles.projectFirst;
-    if (lastInSequence) return styles.projectLast;
+    if (!!firstInSequence) return styles.projectFirst;
+    if (!!lastInSequence) return styles.projectLast;
     return styles.project;
   }
 

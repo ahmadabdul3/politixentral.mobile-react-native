@@ -25,7 +25,7 @@ export default class FeedCard extends PureComponent {
 
   get media() {
     const { media } = this.props;
-    if (!media) return;
+    if (!!media === false) return null;
 
     return <ScaledImage uri={media} maxHeight={height} maxWidth={width} />;
   }
@@ -33,8 +33,8 @@ export default class FeedCard extends PureComponent {
   get style() {
     const { lastInSequence, firstInSequence } = this.props;
 
-    if (firstInSequence) return styles.feedCardFirst;
-    if (lastInSequence) return styles.feedCardLast;
+    if (!!firstInSequence) return styles.feedCardFirst;
+    if (!!lastInSequence) return styles.feedCardLast;
     return styles.feedCard;
   }
 

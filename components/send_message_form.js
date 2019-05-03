@@ -5,7 +5,7 @@ import { dataApiPost } from 'px/clients/data_api_client';
 import { BaseInput, BaseTextarea } from 'px/components/inputs';
 import { PrimaryButton, SecondaryButton } from 'px/components/buttons';
 import {
-  View, Text, Animated, ScrollView, Modal,
+  View, Text, ScrollView, Modal,
   TouchableOpacity,
   Keyboard,
   AsyncStorage,
@@ -30,12 +30,12 @@ export default class SendMessageForm extends PureComponent {
   }
 
   componentDidUpdate() {
-    if (!this.user) this.setUser();
+    if (!!this.user === false) this.setUser();
   }
 
   setUser() {
     AsyncStorage.getItem(LOCAL_STORAGE.USER_INFO).then(rawUser => {
-      if (rawUser) return JSON.parse(rawUser);
+      if (!!rawUser) return JSON.parse(rawUser);
       throw({ message: 'no user session' });
     }).then(user => {
       this.user = user;
@@ -71,12 +71,12 @@ export default class SendMessageForm extends PureComponent {
 
   validateInputs() {
     const body = this.state.body.trim();
-    if (this.props.replyMessage) return this.validateReplyMessage({ body });
+    if (!!this.props.replyMessage) return this.validateReplyMessage({ body });
     return this.validateInitialMessage({ body });
   }
 
   validateReplyMessage({ body }) {
-    if (body) return { body };
+    if (!!body) return { body };
     throw ({
       friendlyMessage: 'Please provide the details of your message.'
     });
@@ -84,7 +84,7 @@ export default class SendMessageForm extends PureComponent {
 
   validateInitialMessage({ body }) {
     const title = this.state.title.trim();
-    if (title && body) return { title, body };
+    if (!!title && !!body) return { title, body };
     throw ({
       friendlyMessage: 'Please provide a title and the details of your message.'
     });
@@ -97,18 +97,18 @@ export default class SendMessageForm extends PureComponent {
   }
 
   sendMessage = async () => {
-    if (this.messageSending) return;
+    if (!!this.messageSending) return;
     this.messageSending = true;
     try {
       const { getMessagesSuccess, getMessageData, updateThreadMessages } = this.props;
       this.setState({ messageSending: true });
       const { title, body } = this.validateInputs();
-      const messageData = getMessageData ? await getMessageData() : this.getMessageData();
+      const messageData = !!getMessageData ? await getMessageData() : this.getMessageData();
       messageData.title = messageData.title || title;
       messageData.body = body;
       const newMessage = await dataApiPost('messages', { message: messageData });
       getMessagesSuccess(newMessage.messageData);
-      if (updateThreadMessages) await updateThreadMessages();
+      if (!!updateThreadMessages) await updateThreadMessages();
       this.setState({
         formMessage: '',
         messageSending: false,
@@ -123,6 +123,9 @@ export default class SendMessageForm extends PureComponent {
         { cancelable: false },
       );
     } catch (e) {
+      console.log('*** ERROR ***');
+      console.log('*** ERROR ***', e);
+      console.log('*** ERROR ***');
       this.messageSending = false;
       if (e.message === 'user not logged in') {
         this.setState({ formMessage: 'Please log in to send messages.', messageSending: false });
@@ -136,7 +139,7 @@ export default class SendMessageForm extends PureComponent {
 
   get pageDescriptionText() {
     const { replyMessage } = this.props;
-    if (replyMessage) return 'Please provide the details for your message.';
+    if (!!replyMessage) return 'Please provide the details for your message.';
     return 'Please provide a title and the details for your message.';
   }
 
@@ -149,6 +152,7 @@ export default class SendMessageForm extends PureComponent {
           animationType="slide"
           transparent={false}
           visible={visible}
+          onRequestClose={this.closeModal}
           onBackButtonPress={this.closeModal}>
             <ScrollView
               style={{
@@ -156,16 +160,12 @@ export default class SendMessageForm extends PureComponent {
                 flexShrink: 1,
               }}>
                 <PageHeaderLargeTop>
-                  <PageTitlePrimary>
-                    Send a Message
-                  </PageTitlePrimary>
-                  <PageDescription>
-                    { this.pageDescriptionText }
-                  </PageDescription>
+                  <PageTitlePrimary text='Send a Message' />
+                  <PageDescription text={ this.pageDescriptionText } />
                 </PageHeaderLargeTop>
               <View style={{ padding: 20, paddingRight: 15, paddingLeft: 15 }}>
                 {
-                  replyMessage ? null : (
+                  !!replyMessage ? null : (
                     <BaseInput
                       placeholder='Title'
                       onChange={this.changeTitle}
@@ -198,7 +198,7 @@ export default class SendMessageForm extends PureComponent {
 class FormMessage extends PureComponent {
   render() {
     const { message } = this.props;
-    if (!message) return null;
+    if (!!message === false) return null;
     return (
       <View style={{ marginTop: 10, marginBottom: 10 }}>
         <Text>

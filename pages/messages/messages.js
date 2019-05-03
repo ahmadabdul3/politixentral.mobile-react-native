@@ -34,9 +34,9 @@ export default class PageComponent extends PureComponent {
   }
 
   getUser = async () => {
-    if (this.user) return this.user;
+    if (!!this.user) return this.user;
     const rawUser = await AsyncStorage.getItem(LOCAL_STORAGE.USER_INFO);
-    if (rawUser) {
+    if (!!rawUser) {
       const user = JSON.parse(rawUser);
       this.user = user;
       return user;
@@ -47,7 +47,7 @@ export default class PageComponent extends PureComponent {
 
   getSession = async () => {
     const rawSession = await AsyncStorage.getItem(LOCAL_STORAGE.SESSION_INFO);
-    if (!rawSession) throw({ name: 'NoAuthSession', message: 'Please log in or sign up' });
+    if (!!rawSession === false) throw({ name: 'NoAuthSession', message: 'Please log in or sign up' });
     const session = JSON.parse(rawSession);
     return session;
   };
@@ -87,12 +87,8 @@ export default class PageComponent extends PureComponent {
     return (
       <ScrollView style={{ backgroundColor: 'white' }}>
         <PageHeader>
-          <PageTitlePrimary>
-            MESSAGES
-          </PageTitlePrimary>
-          <PageDescription>
-            Communicate with your Representatives and make your voice heard.
-          </PageDescription>
+          <PageTitlePrimary text='MESSAGES' />
+          <PageDescription text='Communicate with your Representatives and make your voice heard.' />
           <PrimaryButton
             text={'Click to Refresh Messages'}
             customStyles={{
@@ -108,7 +104,7 @@ export default class PageComponent extends PureComponent {
         </PageHeader>
         <View style={{ paddingTop: 15, paddingBottom: 15 }}>
           {
-            !messagesRefreshing && messages && messages.length ? (
+            !!messagesRefreshing === false && !!messages && messages.length > 0 ? (
               messages.map(m => (
                 <MessageSummary
                   messageData={m}
@@ -155,20 +151,20 @@ class MessageSummary extends PureComponent {
     } = messageData;
     const currentUserId = currentUser.id;
 
-    if (showSenderOnly) {
+    if (!!showSenderOnly) {
       if (senderId === currentUserId) return 'me';
       const { senderFirstName, senderLastName } = messageData;
-      if (!senderFirstName) return 'Sender';
+      if (!!senderFirstName === false) return 'Sender';
       return senderFirstName + ' ' + senderLastName;
     }
 
     let otherPerson;
 
     if (senderId === currentUserId) {
-      if (!receiverFirstName) otherPerson = 'Recipient';
+      if (!!receiverFirstName === false) otherPerson = 'Recipient';
       else otherPerson = receiverFirstName + ' ' + receiverLastName;
     } else {
-      if (!senderFirstName) otherPerson = 'Recipient';
+      if (!!senderFirstName === false) otherPerson = 'Recipient';
       else otherPerson = senderFirstName + ' ' + senderLastName;
     }
     return otherPerson + ', me';
@@ -226,11 +222,11 @@ class MessageSummary extends PureComponent {
               </View>
             </View>
             {
-              showTitle && (
+              !!showTitle ? (
                 <Text style={{ marginTop: 7, color: colors.textColor }}>
                   { title }
                 </Text>
-              )
+              ) : null
             }
             <Text style={{
               marginTop: 1,
@@ -250,7 +246,7 @@ class MessageSummary extends PureComponent {
 class MessageImage extends PureComponent {
   get senderImage() {
     const { messageData } = this.props;
-    if (messageData.senderPhotoUrl) {
+    if (!!messageData.senderPhotoUrl) {
       return (
         <Image
           source={{ uri: messageData.senderPhotoUrl }}
@@ -260,7 +256,7 @@ class MessageImage extends PureComponent {
       );
     }
     const { senderFirstName, senderLastName, senderEmail } = messageData;
-    if (!senderFirstName) {
+    if (!!senderFirstName === false) {
       return (
         <Text style={{ color: 'white', fontWeight: 'bold' }}>
           { 'R M'.toUpperCase() }
@@ -277,14 +273,14 @@ class MessageImage extends PureComponent {
   get image() {
     const { messageData, showSenderOnly, currentUser } = this.props;
     const { senderId } = messageData;
-    if (showSenderOnly) return this.senderImage;
+    if (!!showSenderOnly) return this.senderImage;
     // - if the current user is not the sender, we show the sender's image,
     //   which is who the current user is communicating with. In other words,
     //   if it's a regular end user who is the current user, we want to show
     //   the image of the politician they're talking to
     else if (senderId !== currentUser.id) return this.senderImage;
 
-    if (messageData.receiverPhotoUrl) {
+    if (!!messageData.receiverPhotoUrl) {
       return (
         <Image
           source={{ uri: messageData.receiverPhotoUrl }}
@@ -294,7 +290,7 @@ class MessageImage extends PureComponent {
       );
     }
     const { receiverFirstName, receiverLastName, receiverEmail } = messageData;
-    if (!receiverFirstName) {
+    if (!!receiverFirstName === false) {
       return (
         <Text style={{ color: 'white', fontWeight: 'bold' }}>
           { 'R M'.toUpperCase() }
@@ -363,10 +359,10 @@ export class MessageThread extends PureComponent {
   }
 
   getUser = async () => {
-    if (this.user) return this.user;
+    if (!!this.user) return this.user;
     const rawUser = await AsyncStorage.getItem(LOCAL_STORAGE.USER_INFO);
 
-    if (!rawUser) throw({ name: 'NoAuthSession', message: 'no user session' });
+    if (!!rawUser === false) throw({ name: 'NoAuthSession', message: 'no user session' });
     const user = JSON.parse(rawUser);
     this.user = user;
     return user;
@@ -387,7 +383,7 @@ export class MessageThread extends PureComponent {
 
   openNewMessageForm = () => {
     AsyncStorage.getItem(LOCAL_STORAGE.SESSION_INFO).then(rawSession => {
-      if (!rawSession) throw({ message: 'no user session' });
+      if (!!rawSession === false) throw({ message: 'no user session' });
       this.setState({ newMessageFormOpen: true });
     }).catch(e => {
       if (e.message === 'no user session') {
@@ -408,7 +404,7 @@ export class MessageThread extends PureComponent {
   getMessageData = async () => {
     const user = await this.getUser();
     const { messages } = this.state;
-    if (!messages || messages.length < 1) throw({ message: 'no messages' });
+    if (!!messages === false || messages.length < 1) throw({ message: 'no messages' });
     const message = messages[messages.length - 1];
     const receiverId = message.senderId === user.id ? message.receiverId : message.senderId;
     return {
@@ -468,7 +464,7 @@ export class MessageThread extends PureComponent {
             // ) : null
           }
           {
-            messages && messages.length > 0 ? (
+            !!messages && messages.length > 0 ? (
               <Text style={{
                 fontSize: 25,
                 paddingTop: 20,
@@ -482,7 +478,7 @@ export class MessageThread extends PureComponent {
             ) : null
           }
           {
-            messages && messages.length > 0 ? (
+            !!messages && messages.length > 0 ? (
               messages.map((m, i) => (
                 <View
                   style={{

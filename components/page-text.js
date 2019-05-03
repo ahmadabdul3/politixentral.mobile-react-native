@@ -55,11 +55,11 @@ const pageHeaderLargeTopStyles = StyleSheet.create({
 
 export class PageTitlePrimary extends PureComponent {
   render() {
-    const { children } = this.props;
+    const { text, customStyles } = this.props;
 
     return (
-      <Text style={pageTitlePrimaryStyles.pageTitle}>
-        { children }
+      <Text style={[ pageTitlePrimaryStyles.pageTitle, customStyles ]}>
+        { text }
       </Text>
     );
   }
@@ -71,7 +71,7 @@ const pageTitlePrimaryStyles = StyleSheet.create({
     paddingLeft: standardSpacingSize,
     paddingTop: 0,
     paddingBottom: 20,
-    fontWeight: '900',
+    fontWeight: 'bold',
     color: 'white',
     fontSize: 26,
   },
@@ -79,11 +79,11 @@ const pageTitlePrimaryStyles = StyleSheet.create({
 
 export class PageDescription extends PureComponent {
   render() {
-    const { children } = this.props;
+    const { text, customStyles } = this.props;
 
     return (
-      <Text style={[pageDescriptionStyles.pageDescription ]}>
-        { children }
+      <Text style={[pageDescriptionStyles.pageDescription, customStyles ]}>
+        { text }
       </Text>
     );
   }
@@ -94,7 +94,7 @@ const pageDescriptionStyles = StyleSheet.create({
     marginTop: 0,
     paddingLeft: standardSpacingSize + 1,
     paddingRight: standardSpacingSize,
-    fontWeight: '300',
+    fontWeight: 'normal',
     fontSize: 22,
     lineHeight: 27,
     color: colors.secondaryLighter,
@@ -103,13 +103,13 @@ const pageDescriptionStyles = StyleSheet.create({
 
 export class SectionTitlePrimary extends PureComponent {
   render() {
-    const { children, extraStyles } = this.props;
+    const { text, extraStyles } = this.props;
     return (
       <Text
         style={[{
           fontSize: 20, fontWeight: 'bold', color: colors.textColor
         }, extraStyles]}>
-        { children }
+        { text }
       </Text>
     );
   }
