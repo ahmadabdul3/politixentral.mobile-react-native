@@ -30,7 +30,7 @@ const styles = {
     height: 50,
     borderRadius: 50,
     overflow: 'hidden',
-    backgroundColor: colors.brandPurpleLighter,
+    backgroundColor: colors.secondary,
   },
   candidateSummaryHeaderFirstName: {
     // color: 'white',
@@ -58,7 +58,7 @@ const styles = {
 
   imagePlaceholder: {
     overflow: 'hidden',
-    backgroundColor: colors.brandPurpleLighter,
+    backgroundColor: colors.secondary,
     width: 40,
     height: 40,
     borderRadius: 40,

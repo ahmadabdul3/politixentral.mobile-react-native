@@ -101,6 +101,106 @@ const pageDescriptionStyles = StyleSheet.create({
   },
 });
 
+export class PageHeaderSectionTitle extends PureComponent {
+  render() {
+    const { text, customStyles } = this.props;
+    return (
+      <Text style={[{
+        paddingLeft: standardSpacingSize + 1,
+        paddingRight: standardSpacingSize,
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: colors.secondaryLightest,
+        marginTop: 25,
+        marginBottom: 10,
+      }, customStyles]}>
+        { text }
+      </Text>
+    );
+  }
+}
+
+export class PageDataRow extends PureComponent {
+  render() {
+    const { children, customStyles } = this.props;
+
+    return (
+      <View style={[pageDataRowStyles.pageDataRow, customStyles ]}>
+        { children }
+      </View>
+    );
+  }
+}
+
+const pageDataRowStyles = StyleSheet.create({
+  pageDataRow: {
+    paddingLeft: standardSpacingSize + 1,
+    paddingRight: standardSpacingSize,
+    marginTop: 5,
+    flexDirection: 'row',
+  },
+});
+
+
+export class PageDataLabel extends PureComponent {
+  render() {
+    const { text, customStyles } = this.props;
+
+    return (
+      <Text style={[pageDataLabelStyles.pageDataLabel, customStyles ]}>
+        { text }
+      </Text>
+    );
+  }
+}
+
+const pageDataLabelStyles = StyleSheet.create({
+  pageDataLabel: {
+    fontWeight: 'bold',
+    fontSize: 14,
+    lineHeight: 20,
+    color: colors.secondary,
+  },
+});
+
+export class PageDataValue extends PureComponent {
+  render() {
+    const { text, customStyles } = this.props;
+
+    return (
+      <Text style={[pageDataValueStyles.pageDataValue, customStyles ]}>
+        { text }
+      </Text>
+    );
+  }
+}
+
+const pageDataValueStyles = StyleSheet.create({
+  pageDataValue: {
+    fontWeight: 'normal',
+    fontSize: 14,
+    lineHeight: 20,
+    marginLeft: 10,
+    color: colors.secondary,
+  },
+});
+
+export class PageHeaderDataSeparator extends PureComponent {
+  render() {
+    const { customStyles } = this.props;
+    return (
+      <View style={[{
+        marginRight: standardSpacingSize + 1,
+        marginLeft: standardSpacingSize,
+        marginTop: 10,
+        marginBottom: 10,
+        height: 1,
+        backgroundColor: colors.secondaryLight,
+      }, customStyles]} />
+    );
+  }
+}
+
 export class SectionTitlePrimary extends PureComponent {
   render() {
     const { text, extraStyles } = this.props;

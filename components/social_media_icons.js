@@ -14,7 +14,6 @@ export default class SocialMediaIcons extends PureComponent {
   render() {
     return (
       <View>
-        <SectionTitlePrimary text='Connect with us!' />
         <View style={{
           flexDirection: 'row',
           marginTop: 5,

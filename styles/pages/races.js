@@ -55,8 +55,8 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 50,
     overflow: 'hidden',
-    borderWidth: 1,
-    borderColor: colors.backgroundGrayDark,
+    // borderWidth: 1,
+    // borderColor: colors.backgroundGrayDark,
     backgroundColor: 'white',
   },
 

@@ -1,9 +1,10 @@
 import React, { PureComponent } from 'react';
 import { LinearGradient } from 'expo';
 import {
-  Text, View, ScrollView, Image, TouchableHighlight, AsyncStorage
+  Text, View, ScrollView, Image, TouchableHighlight, AsyncStorage,
+  Alert
 } from 'react-native';
-import { SimpleLineIcons } from '@expo/vector-icons';
+import { SimpleLineIcons, Octicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import ShadowView from 'px/components/shadow-view';
 import PageSection from 'px/components/page-section';
 import { ClickableContentSummaryBox } from 'px/components/content-summary-card';
@@ -17,7 +18,14 @@ import styles from 'px/styles/pages/races';
 import http from 'px/services/http';
 
 import {
-  PageTitlePrimary, PageDescription, PageHeader
+  PageTitlePrimary,
+  PageDescription,
+  PageHeader,
+  PageDataRow,
+  PageDataLabel,
+  PageDataValue,
+  PageHeaderDataSeparator,
+  PageHeaderSectionTitle
 } from 'px/components/page-text';
 
 class Races extends PureComponent {
@@ -50,7 +58,7 @@ class Races extends PureComponent {
         }, {});
         // const alders = categorizedPoliticians.District;
         // const sortedAlders = alders.sort((a, b) => a.areaOfResponsibility - b.areaOfResponsibility);
-        this.pageSections = Object.keys(categorizedRaces).map(key => key);
+        this.pageSections = this.orderPageSections({ races: categorizedRaces });
         this.setState({ races: categorizedRaces, loading: false });
       });
     }).catch(err => {
@@ -59,10 +67,21 @@ class Races extends PureComponent {
     });
   }
 
+  orderPageSections(options) {
+    const pageSectionOrder = ['City', 'District', 'Executive Branch'];
+    let racesToOrder = {};
+    if (!!options && !!options.races) racesToOrder = options.races;
+    else racesToOrder = this.state.races;
+    const pageSections = [];
+    pageSectionOrder.forEach(sectionTitle => {
+      if (!!racesToOrder[sectionTitle]) pageSections.push(sectionTitle);
+    });
+    return pageSections;
+  }
+
   getPageSections() {
     if (!!this.pageSections) return this.pageSections;
-    const { races } = this.state;
-    this.pageSections = Object.keys(races).map(key => key);
+    this.pageSections = this.orderPageSections();
     return this.pageSections;
   }
 
@@ -88,6 +107,21 @@ class Races extends PureComponent {
     return firstName + ' ' + lastName;
   }
 
+  // <PageDataRow>
+  //   <PageDataLabel text='Mail-in Registration Deadline (Primary):' />
+  //   <PageDataValue text='Sept. 5th, 2019' />
+  // </PageDataRow>
+  // <PageDataRow>
+  //   <PageDataLabel text='Changing Your Party Affiliation (to vote in Primary):' />
+  //   <PageDataValue text='Jun. 10th, 2019' />
+  // </PageDataRow>
+  // <PageDataRow>
+  //   <PageDataLabel text='In-person Voter Registration Deadline (Primary):' />
+  //   <PageDataValue text='Sept. 9th, 2019' />
+  // </PageDataRow>
+  // <PageHeaderDataSeparator customStyles={{ marginTop: 25 }} />
+
+
   render() {
     const { races, loading } = this.state;
 
@@ -95,8 +129,46 @@ class Races extends PureComponent {
       <ScrollView>
         <PageHeader>
           <PageTitlePrimary text='RACES' />
-          <PageDescription text='These are the current races that are coming up in your city and state.' />
+          <PageDescription text='Below are the current races that are coming up in your city and state.' />
         </PageHeader>
+        <View style={{
+          marginRight: 10,
+          marginLeft: 10,
+          marginTop: 20,
+          marginBottom: 20,
+          paddingBottom: 25,
+          borderColor: colors.textColorLightest,
+          borderWidth: 1,
+          borderRadius: 5,
+        }}>
+          <View style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+          }}>
+            <MaterialCommunityIcons
+              name='vote'
+              color={colors.textColor}
+              size={25}
+              style={{
+                marginTop: 13,
+                marginLeft: 20,
+              }} />
+            <PageHeaderSectionTitle
+              text='Election Dates'
+              customStyles={{
+                color: colors.textColor,
+                paddingLeft: 10,
+              }} />
+          </View>
+          <PageDataRow>
+            <PageDataLabel text='Primaries:' />
+            <PageDataValue text='Sept. 10th, 2019' />
+          </PageDataRow>
+          <PageDataRow>
+            <PageDataLabel text='Election Day:' />
+            <PageDataValue text='Nov. 5, 2019' />
+          </PageDataRow>
+        </View>
         {
           !!loading ? (
             <View style={{
@@ -129,7 +201,7 @@ class Races extends PureComponent {
                     key={i + r.levelOfResponsibility + r.areaOfResponsibility + r.position}
                     position={r.position}
                     currentOfficialName={this.getRaceCurrentOfficeHolder(r)}
-                    nav={this.props}
+                    nav={this.props.allProps}
                   />
                 ))
               }
@@ -156,29 +228,82 @@ class Races extends PureComponent {
 //   />
 // </PageSection>
 
+class HotRaceLabel extends PureComponent {
+  render() {
+    return (
+      <View style={{
+        flexDirection: 'row',
+        justifyContent: 'center',
+      }}>
+        <View style={{
+          borderColor: colors.red,
+          borderWidth: 1,
+          borderRadius: 20,
+          paddingTop: 3,
+          paddingBottom: 1,
+          paddingRight: 10,
+          paddingLeft: 10,
+          marginTop: -12,
+          backgroundColor: colors.red,
+          flexDirection: 'row',
+          justifyContent: 'center',
+        }}>
+          <Text style={{
+            color: 'white',
+            fontSize: 12,
+            fontWeight: 'bold',
+            marginRight: 5,
+          }}>
+            Hot Race
+          </Text>
+          <Octicons name="flame" size={15} color='white' />
+        </View>
+      </View>
+    );
+  }
+}
+
 class RaceOverview extends PureComponent {
   goToDetails = () => {
-    // this.props.nav.navigation.navigate('RaceDetails');
-    // console.log('');
+    const { position } = this.props;
+    if (!!position === false || position !== 'Mayor') {
+      Alert.alert(
+        'No Info Yet',
+        `Hi there! We're still collecting information for this race, please check back soon!`,
+        [{ text: 'OK' }],
+        { cancelable: false }
+      );
+      return;
+    };
+    this.props.nav.navigation.navigate('RaceDetails');
+  }
+
+  get hotRaceLabel() {
+    const { position } = this.props;
+    if (!!position === false || position !== 'Mayor') return;
+    return <HotRaceLabel />;
+  }
+
+  get hotRaceStyles() {
+    const { position } = this.props;
+    if (!!position === false || position !== 'Mayor') return {};
+    return { borderTopWidth: 1, borderTopColor: colors.red };
   }
 
   render() {
     const { position, area, currentOfficialName, raceData } = this.props;
     return (
-      <View style={styles.raceOverviewBox}>
-        {
-          // <TouchableHighlight
-          //   onPress={this.goToDetails}
-          //   underlayColor={colors.backgroundGrayDarker}
-          // >
-        }
+      <View style={[styles.raceOverviewBox, this.hotRaceStyles]}>
+        { this.hotRaceLabel }
+        <TouchableHighlight
+          onPress={this.goToDetails}
+          underlayColor={colors.backgroundGrayDarker}
+        >
           <View>
             <RaceOverviewHeader title={position} incumbent={currentOfficialName} />
             <RaceOverviewCandidates raceData={raceData} />
           </View>
-        {
-          //</TouchableHighlight>
-        }
+        </TouchableHighlight>
       </View>
     )
   }
@@ -198,14 +323,12 @@ class RaceOverviewHeader extends PureComponent {
             CURRENT: {incumbent}
           </Text>
         </View>
-        {
-          // <View style={styles.seeDetailsLink}>
-          //   <Text style={styles.seeDetailsLinkText}>
-          //     { `race details`.toUpperCase() }
-          //   </Text>
-          //   <SimpleLineIcons name="arrow-right-circle" size={15} color={colors.accent} />
-          // </View>
-        }
+        <View style={styles.seeDetailsLink}>
+          <Text style={styles.seeDetailsLinkText}>
+            { `race details`.toUpperCase() }
+          </Text>
+          <SimpleLineIcons name="arrow-right-circle" size={15} color={colors.accent} />
+        </View>
       </View>
     );
   }
@@ -313,7 +436,7 @@ export default class RacesNav extends PureComponent {
       Races: {
         screen: (props) => {
           const { address } = props.screenProps;
-          return <Races address={address} />;
+          return <Races address={address} allProps={props} />;
         },
         navigationOptions: ({ navigation }) => ({
           // title: `${navigation.state.params.name}'s Profile'`,

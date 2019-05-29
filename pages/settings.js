@@ -32,6 +32,7 @@ import {
   getDeviceId
 } from 'px/services/push_notification_permissions';
 import AlertAsync from 'px/services/alert_async';
+import LinkText from 'px/components/link_text';
 
 class Settings extends PureComponent {
   state = {
@@ -206,6 +207,18 @@ class Settings extends PureComponent {
                 loading={changeAddressSaving} />
               : null
           }
+          <View style={{ marginTop: 30 }}>
+            <SectionTitlePrimary text='Voter Registration' />
+            <View style={{ flexDirection: 'row', alignItems: 'baseline' }}>
+              <LinkText
+                text='Click here'
+                link='https://vote.gov/'
+                styles={{ marginTop: 10, marginRight: 4, }} />
+              <Text>
+                to easily register to vote online.
+              </Text>
+            </View>
+          </View>
         </ScrollView>
         <View
           style={{
@@ -219,6 +232,9 @@ class Settings extends PureComponent {
             paddingBottom: 20,
             backgroundColor: colors.backgroundColor,
           }}>
+          <SectionTitlePrimary
+            text='Connect with us and send us feedback!'
+            extraStyles={{ textAlign: 'center', width: '100%', marginBottom: 10 }} />
           <View
             style={{
               flexDirection: 'row',

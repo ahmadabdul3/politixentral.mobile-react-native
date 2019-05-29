@@ -40,7 +40,7 @@ export default class RepHeader extends PureComponent {
         style={styles.header}
       >
         <HeaderBio politicianData={politicianData} />
-        <HeaderStatement />
+        <HeaderStatement politicianData={politicianData} />
         <PrimaryButton
           text={'Send a Message'}
           customStyles={{
@@ -166,12 +166,18 @@ class HeaderDemographics extends PureComponent {
 
 class HeaderStatement extends PureComponent {
   render() {
-    const { missionStatementStyles } = this.props;
+    const { missionStatementStyles, politicianData } = this.props;
+    let missionStatement = '';
+    if (!!politicianData && !!politicianData.missionStatement) {
+      missionStatement = politicianData.missionStatement;
+    } else {
+      missionStatement = 'This politician has not signed up to PX yet. This is where their mission statement will appear.';
+    }
+
     return (
       <View style={[styles.missionStatement, missionStatementStyles]}>
         <Text style={styles.statementBody}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-          sed do eiusmod tempor incididunt ut
+          { missionStatement }
         </Text>
       </View>
     );
