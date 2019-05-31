@@ -146,7 +146,7 @@ class Candidates extends PureComponent {
     ];
     const addedPoliticians = {};
     const allPols = [];
-    console.log('politicians', politicians);
+    // console.log('politicians', politicians);
     order.forEach((titlePrimary, i) => {
       const foundCityPolitician = politicians.find(pFind => pFind.titlePrimary === titlePrimary);
       if (!!foundCityPolitician === false) return;

@@ -289,6 +289,8 @@ class ArticleSummary extends PureComponent {
           height: 75,
           borderRadius: 5,
           overflow: 'hidden',
+          borderWidth: 1,
+          borderColor: colors.textColorLightest,
         }}>
           <Image
             source={{ uri: data.image }}
@@ -377,11 +379,46 @@ class ArticleSummary extends PureComponent {
   }
 }
 
+class BackToOverview extends PureComponent {
+  render() {
+    return (
+      <View style={{ flexDirection: 'row' }}>
+        <TouchableOpacity
+          key={i}
+          onPress={() => this.props.navigation.navigate('Overview')}
+          style={{
+            marginTop: 20,
+            marginLeft: 20,
+            marginRight: 20,
+            flexDirection: 'row',
+            alignItems: 'center',
+          }}>
+          <Ionicons
+            name='ios-arrow-round-back'
+            size={18}
+            color={colors.secondary}
+            style={{
+              marginTop: 3,
+            }} />
+          <Text style={{
+            color: colors.secondary,
+            fontWeight: 'bold',
+            marginLeft: 10,
+          }}>
+            Back to Overview
+          </Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+}
+
 class ArticlesTab extends PureComponent {
   render() {
     const data = getArticlesData();
     return (
       <ScrollView>
+        <BackToOverview navigation={this.props.navigation} />
         {
           data.map((item, i) => (
             <ArticleSummary
@@ -413,6 +450,7 @@ class PoliceTab extends PureComponent {
     const data = getPoliceData();
     return (
       <ScrollView>
+        <BackToOverview navigation={this.props.navigation} />
         <CandidateModal
           closeModal={this.closeModal}
           visible={this.state.modalOpen}
@@ -449,6 +487,7 @@ class SchoolTab extends PureComponent {
     const data = getSchoolData();
     return (
       <ScrollView>
+        <BackToOverview navigation={this.props.navigation} />
         <CandidateModal
           closeModal={this.closeModal}
           visible={this.state.modalOpen}
@@ -485,6 +524,7 @@ class SlumlordTab extends PureComponent {
     const data = getSlumlordData();
     return (
       <ScrollView>
+        <BackToOverview navigation={this.props.navigation} />
         <CandidateModal
           closeModal={this.closeModal}
           visible={this.state.modalOpen}
@@ -521,6 +561,7 @@ class HomeOwnershipTab extends PureComponent {
     const data = getHomeOwnershipData();
     return (
       <ScrollView>
+        <BackToOverview navigation={this.props.navigation} />
         <CandidateModal
           closeModal={this.closeModal}
           visible={this.state.modalOpen}
@@ -557,6 +598,7 @@ class JobsTab extends PureComponent {
     const data = getJobsData();
     return (
       <ScrollView>
+        <BackToOverview navigation={this.props.navigation} />
         <CandidateModal
           closeModal={this.closeModal}
           visible={this.state.modalOpen}
@@ -593,6 +635,7 @@ class CandidatesTab extends PureComponent {
     const data = getOverviewData();
     return (
       <ScrollView>
+        <BackToOverview navigation={this.props.navigation} />
         <CandidateModal
           closeModal={this.closeModal}
           visible={this.state.modalOpen}

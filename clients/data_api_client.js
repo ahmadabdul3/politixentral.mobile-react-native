@@ -5,7 +5,7 @@ import { authenticate } from 'px/services/auth';
 import AlertAsync from 'px/services/alert_async';
 
 const baseUrl = 'https://px-staging.herokuapp.com/';
-// const baseUrl = 'http://192.168.86.175:3000/';
+// const baseUrl = 'http://192.168.86.236:3000/';
 
 export async function dataApiGet(resourceUrl, extraHeaders={}) {
   // try {

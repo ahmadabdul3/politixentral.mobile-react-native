@@ -6,7 +6,12 @@ import { Provider } from 'react-redux';
 import reducer from 'px/redux';
 import thunk from 'redux-thunk';
 import { applyMiddleware, compose, createStore } from 'redux';
-import { requestPermissionForPushNotifications } from 'px/services/push_notification_permissions';
+import {
+  requestPermissionForPushNotifications,
+  determinePushNotificationPermission,
+  getDeviceId,
+} from 'px/services/push_notification_permissions';
+import { dataApiPost } from 'px/clients/data_api_client';
 
 const store = createStore(
   reducer, // new root reducer with router state
@@ -22,7 +27,18 @@ export default class App extends React.Component {
   };
 
   componentDidMount() {
-    requestPermissionForPushNotifications();
+    requestPermissionForPushNotifications().then(() => {
+      return determinePushNotificationPermission();
+    }).then(permissionStatus => {
+      if (permissionStatus !== 'granted') throw({});
+      return getDeviceId();
+    }).then(deviceId => {
+      return dataApiPost('device-ids', { deviceId });
+    }).then(response => {
+      console.log('response', response);
+    }).catch(error => {
+      console.log('error', error);
+    });
     // Handle notifications that are received or selected while the app
     // is open. If the app was closed and then opened by tapping the
     // notification (rather than just tapping the app icon to open it),
@@ -35,7 +51,7 @@ export default class App extends React.Component {
     console.log('notification', notification);
     if (notification.origin === 'received') {
       Alert.alert(
-        'New Message',
+        notification.data.title || 'New Message',
         notification.data.message,
         [{ text: 'OK' }],
         { cancelable: false }
