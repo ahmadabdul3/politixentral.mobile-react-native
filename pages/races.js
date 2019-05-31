@@ -161,8 +161,8 @@ class Races extends PureComponent {
               }} />
           </View>
           <PageDataRow>
-            <PageDataLabel text='Primaries:' />
-            <PageDataValue text='Sept. 10th, 2019' />
+            <PageDataLabel text='Primary Election:' />
+            <PageDataValue text='Sept. 10, 2019' />
           </PageDataRow>
           <PageDataRow>
             <PageDataLabel text='Election Day:' />
