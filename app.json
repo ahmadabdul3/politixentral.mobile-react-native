@@ -17,6 +17,7 @@
     },
     "android": {
       "package": "com.politixentral.PolitiXentral",
+      "googleServicesFile": "./google-services.json",
       "versionCode": 26,
       "permissions": []
     }

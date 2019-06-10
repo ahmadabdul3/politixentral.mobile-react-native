@@ -211,13 +211,53 @@ class Settings extends PureComponent {
             <SectionTitlePrimary text='Voter Registration' />
             <View style={{ flexDirection: 'row', alignItems: 'baseline' }}>
               <LinkText
-                text='Click here'
+                text='Register to vote'
                 link='https://vote.gov/'
-                styles={{ marginTop: 10, marginRight: 4, }} />
-              <Text>
-                to easily register to vote online.
-              </Text>
+                styles={{
+                  marginTop: 10,
+                  padding: 10,
+                  paddingLeft: 15,
+                  paddingRight: 15,
+                  borderRadius: 3,
+                  overflow: 'hidden',
+                  backgroundColor: colors.secondary,
+                  color: 'white',
+                }} />
             </View>
+            {
+              [
+                { date: 'Jun 10, 2019', description: 'Changing your party affiliation (to vote in Primary)', valid: false },
+                { date: 'Sep 9, 2019', description: 'In-person voter registration deadline (Primary)', valid: true },
+                { date: 'Aug 27, 2019', description: 'Registrars', valid: true },
+              ].map((item, index) => {
+                return (
+                  <View key={index} style={{
+                    marginTop: 15,
+                  }}>
+                    <Text style={{
+                      flexGrow: 0,
+                      flexShrink: 0,
+                      fontWeight: 'bold',
+                      color: colors.textColor,
+                      textDecorationLine: !!item.valid === false ? 'line-through' : '',
+                      textDecorationStyle: !!item.valid === false ? 'solid' : '',
+                    }}>
+                      { item.date }
+                    </Text>
+                    <Text style={{
+                      flexGrow: 1,
+                      flexShrink: 1,
+                      color: colors.textColor,
+                      marginTop: 2,
+                      textDecorationLine: !!item.valid === false ? 'line-through' : '',
+                      textDecorationStyle: !!item.valid === false ? 'solid' : '',
+                    }}>
+                      { item.description }
+                    </Text>
+                  </View>
+                )
+              })
+            }
           </View>
         </ScrollView>
         <View

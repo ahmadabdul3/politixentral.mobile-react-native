@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "851618407856",
+    "firebase_url": "https://politixentral.firebaseio.com",
+    "project_id": "politixentral",
+    "storage_bucket": "politixentral.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:851618407856:android:f2a40dd593c6c71d",
+        "android_client_info": {
+          "package_name": "com.politixentral.PolitiXentral"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "851618407856-bpsqopr9o24vh0e3ahthft97lprqbuuf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGVtD-CIToEv6AwcIqUAVAHkCLN02vvHE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "851618407856-bpsqopr9o24vh0e3ahthft97lprqbuuf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

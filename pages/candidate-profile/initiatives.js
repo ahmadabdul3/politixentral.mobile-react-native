@@ -10,6 +10,7 @@ import {
   Feather,
   Entypo,
   Octicons,
+  AntDesign
 } from '@expo/vector-icons';
 import colors from 'px/styles/colors';
 import ShadowView from 'px/components/shadow-view';
@@ -21,40 +22,28 @@ export default class Initiatives extends PureComponent {
     return (
       <View style={styles.mainView}>
         <View style={styles.whatStandFor}>
-          <Text style={styles.sectionTitle}>
+          <Text style={[styles.sectionTitle, { color: colors.textColor }]}>
             {`what i stand for`.toUpperCase()}
           </Text>
           <View style={styles.initiativesWrapper}>
-            <Initiative
-              title='increase safety'
-              image={
-                <Image
-                  source={{ uri: 'https://pre00.deviantart.net/7aae/th/pre/i/2018/261/a/4/screen_shot_2018_09_18_at_1_14_49_pm_by_duxfox-dcn66hn.png' }}
-                  style={{ width: 40, height: 50, overflow: 'hidden' }}
-                  resizeMode='cover'
-                />
-              }
-            />
-            <Initiative
-              title='reduce taxes'
-              image={
-                <Image
-                  source={{ uri: 'https://pre00.deviantart.net/7b89/th/pre/i/2018/261/9/5/screen_shot_2018_09_18_at_1_15_29_pm_by_duxfox-dcn66hh.png' }}
-                  style={{ width: 40, height: 40, overflow: 'hidden' }}
-                  resizeMode='cover'
-                />
-              }
-            />
-            <Initiative
-              title='improve education'
-              image={
-                <Image
-                  source={{ uri: 'https://pre00.deviantart.net/7aa9/th/pre/i/2018/261/f/7/screen_shot_2018_09_18_at_1_14_08_pm_by_duxfox-dcn66hu.png' }}
-                  style={{ width: 45, height: 45, overflow: 'hidden' }}
-                  resizeMode='cover'
-                />
-              }
-            />
+            <View style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}>
+              <AntDesign
+                name='questioncircle'
+                style={{ width: 30, height: 30, overflow: 'hidden' }}
+                size={30}
+                color={colors.textColor}
+              />
+              <Text style={{
+                marginLeft: 15,
+                fontSize: 20,
+                color: colors.textColor,
+              }}>
+                Coming Soon
+              </Text>
+            </View>
           </View>
           <Committees politicianData={politicianData} />
         </View>
@@ -62,6 +51,17 @@ export default class Initiatives extends PureComponent {
     );
   }
 }
+
+// <Initiative
+//   title='Coming Soon'
+//   image={
+//     <Image
+//       source={{ uri: 'https://pre00.deviantart.net/7aae/th/pre/i/2018/261/a/4/screen_shot_2018_09_18_at_1_14_49_pm_by_duxfox-dcn66hn.png' }}
+//       style={{ width: 40, height: 50, overflow: 'hidden' }}
+//       resizeMode='cover'
+//     />
+//   }
+// />
 
 class Committees extends PureComponent {
   render() {

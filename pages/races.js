@@ -129,46 +129,39 @@ class Races extends PureComponent {
       <ScrollView>
         <PageHeader>
           <PageTitlePrimary text='RACES' />
-          <PageDescription text='Below are the current races that are coming up in your city and state.' />
-        </PageHeader>
-        <View style={{
-          marginRight: 10,
-          marginLeft: 10,
-          marginTop: 20,
-          marginBottom: 20,
-          paddingBottom: 25,
-          borderColor: colors.textColorLightest,
-          borderWidth: 1,
-          borderRadius: 5,
-        }}>
+          <PageDescription text='Below are the current races that are coming up in New Haven, CT.' />
           <View style={{
-            flexDirection: 'row',
-            alignItems: 'center',
+            marginTop: 10,
           }}>
-            <MaterialCommunityIcons
-              name='vote'
-              color={colors.textColor}
-              size={25}
-              style={{
-                marginTop: 13,
-                marginLeft: 20,
-              }} />
-            <PageHeaderSectionTitle
-              text='Election Dates'
-              customStyles={{
-                color: colors.textColor,
-                paddingLeft: 10,
-              }} />
+            <View style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}>
+              <MaterialCommunityIcons
+                name='vote'
+                color='white'
+                size={25}
+                style={{
+                  marginTop: 13,
+                  marginLeft: 20,
+                }} />
+              <PageHeaderSectionTitle
+                text='Election Dates'
+                customStyles={{
+                  color: 'white',
+                  paddingLeft: 10,
+                }} />
+            </View>
+            <PageDataRow>
+              <PageDataLabel text='Primary Election:' customStyles={{ color: colors.secondaryLighter }} />
+              <PageDataValue text='Sept. 10, 2019' customStyles={{ color: colors.secondaryLighter }} />
+            </PageDataRow>
+            <PageDataRow>
+              <PageDataLabel text='Election Day:' customStyles={{ color: colors.secondaryLighter }} />
+              <PageDataValue text='Nov. 5, 2019' customStyles={{ color: colors.secondaryLighter }} />
+            </PageDataRow>
           </View>
-          <PageDataRow>
-            <PageDataLabel text='Primary Election:' />
-            <PageDataValue text='Sept. 10, 2019' />
-          </PageDataRow>
-          <PageDataRow>
-            <PageDataLabel text='Election Day:' />
-            <PageDataValue text='Nov. 5, 2019' />
-          </PageDataRow>
-        </View>
+        </PageHeader>
         {
           !!loading ? (
             <View style={{

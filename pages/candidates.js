@@ -184,7 +184,7 @@ class Candidates extends PureComponent {
       <ScrollView>
         <PageHeader>
           <PageTitlePrimary text='MY OFFICIALS' />
-          <PageDescription text='Here are the elected individuals that currently hold office in your city and state.' />
+          <PageDescription text='Here are the elected individuals that currently hold office in New Haven, CT.' />
         </PageHeader>
           {
             !!loading ? (

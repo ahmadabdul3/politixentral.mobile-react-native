@@ -36,7 +36,7 @@ export default createMaterialBottomTabNavigator ({
     screen: CandidatesPageContainer,
     navigationOptions: {
       tabBarIcon: ({ tintColor, focused }) => {
-        const color = !!focused ? colors.primary : colors.textColorLightest;
+        const color = !!focused ? colors.orangeDark : colors.textColorLightest;
         return <Ionicons name="ios-people" size={22} color={color} />;
       },
     },
@@ -45,7 +45,7 @@ export default createMaterialBottomTabNavigator ({
     screen: RacesPageContainer,
     navigationOptions: {
       tabBarIcon: ({ tintColor, focused }) => {
-        const color = !!focused ? colors.primary : colors.textColorLightest;
+        const color = !!focused ? colors.orangeDark : colors.textColorLightest;
         return <FontAwesome name="flag-checkered" size={19} color={color} />;
       },
     },
@@ -54,7 +54,7 @@ export default createMaterialBottomTabNavigator ({
     screen: MessagesPage,
     navigationOptions: {
       tabBarIcon: ({ tintColor, focused }) => {
-        const color = !!focused ? colors.primary : colors.textColorLightest;
+        const color = !!focused ? colors.orangeDark : colors.textColorLightest;
         return <MaterialCommunityIcons name="message-text" size={19} color={color} />;
       },
     },
@@ -63,7 +63,7 @@ export default createMaterialBottomTabNavigator ({
     screen: SettingsPageContainer,
     navigationOptions: {
       tabBarIcon: ({ tintColor, focused }) => {
-        const color = !!focused ? colors.primary : colors.textColorLightest;
+        const color = !!focused ? colors.orangeDark : colors.textColorLightest;
         return <Ionicons name="ios-settings" size={19} color={color} />;
       },
     },
@@ -71,7 +71,7 @@ export default createMaterialBottomTabNavigator ({
 }, {
   tabBarPosition: 'bottom',
   lazy: true,
-  activeTintColor: colors.primary,
+  activeTintColor: colors.orangeDark,
   inactiveTintColor: colors.textColorLightest,
   barStyle: {
     backgroundColor: 'white',
